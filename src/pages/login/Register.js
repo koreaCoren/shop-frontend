@@ -1,44 +1,59 @@
 /* eslint-disable no-fallthrough */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import styled from "styled-components";
 
-import Input from "components/input/LoginInput";
+import Input from "components/input/Input";
 import { register } from "utils/axios";
 
 const Register = () => {
     const nav = useNavigate();
 
-    const [getId, setId] = useState("");
-    const [getPassword, setPassword] = useState("");
-    const [getTelll, setTell] = useState("");
-    const [getEamil, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+    const [telll, setTell] = useState("");
+    const [eamil, setEmail] = useState("");
+    const [address, setAddress] = useState("");
 
-    const { mutate, isLoading } = useMutation(register);
+    const { mutateAsync, isLoading } = useMutation(register);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        if (!emailRegex.test(getEamil)) {
+        if (!emailRegex.test(eamil)) {
             alert("이메일 형식이 아님 다시 적으셈");
             return;
         };
 
         const data = {
-            id: getId,
-            pw: getPassword,
-            tell: getTelll,
-            email: getEamil,
+            name: name,
+            id: id,
+            pw: password,
+            tell: telll,
+            email: eamil,
+            address: address,
         };
 
-        mutate(data);
+        mutateAsync(data);
+        // nav("/");
     };
+
+    useEffect(() => {
+        if (sessionStorage.getItem("loginCheck") === "success") {
+            alert("로그인중에는 접근 하실 수 없습니다.");
+            nav("/");
+        }
+    }, [])
 
     const onChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
         switch (name) {
+            case "name":
+                setName(value);
+                break;
             case "id":
                 setId(value);
                 break;
@@ -51,6 +66,9 @@ const Register = () => {
             case "email":
                 setEmail(value);
                 break;
+            case "address":
+                setAddress(value);
+                break;
             default:
                 break;
         }
@@ -62,11 +80,13 @@ const Register = () => {
                 <h1>회원가입창</h1>
 
                 <Form onSubmit={onSubmit}>
+                    <Input type="text" name="name" onChange={onChange} placeholder="이름" />
                     <Input type="text" name="id" onChange={onChange} placeholder="아이디" />
                     <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
                     <Input type="text" name="tell" onChange={onChange} placeholder="전화번호" />
                     <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
-                    <input type="button" className="buttonGary" onClick={() => { nav(-1); }} value="회원가입" />
+                    <Input type="text" name="address" onChange={onChange} placeholder="주소" />
+                    <input type="submit" value="회원가입" />
                 </Form>
             </div>
         </>
