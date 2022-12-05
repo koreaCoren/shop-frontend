@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { login } from "utils/axios";
 
-import LoginInput from 'components/input/LoginInput';
+import LoginInput from 'components/input/Input';
 
 const Login = () => {
     const nav = useNavigate();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-    const { mutate, isLoading, is } = useMutation(login);
+    const { mutateAsync, isLoading, is } = useMutation(login);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
             id: id,
             pw: password
         }
-        mutate(data);
+        await mutateAsync(data);
         if (sessionStorage.getItem("loginCheck") === "success") {
             nav("/");
         }
     }
+
+    useEffect(() => {
+        if (sessionStorage.getItem("loginCheck") === "success") {
+            alert("로그인중에는 접근 하실 수 없습니다.");
+            nav("/");
+        }
+    }, [])
 
     const onChange = (e) => {
         const name = e.target.name;
