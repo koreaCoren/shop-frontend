@@ -1,6 +1,27 @@
 import React from 'react';
 import styled from "styled-components";
 
+const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => {
+    return (
+        <Label>
+            <span>{title}</span>
+            <div>
+                <select type={type} name={name} placeholder={placeholder} onChange={onChange} >
+                    <option value="선택해주세요">선택해주세요</option>
+                    {
+                        option.map((a, i) => {
+                            return (
+                                <option key={i} value={a.value}>{a.content}</option>
+                            )
+                        })
+                    }
+                </select>
+                <i className="fa-solid fa-sort-down"></i>
+            </div>
+        </Label >
+    );
+};
+
 const Label = styled.label`
     display: flex;
     align-items: center;
@@ -29,26 +50,5 @@ const Label = styled.label`
         color: #757575;
     }
 `;
-
-const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => {
-    return (
-        <Label>
-            <span>{title}</span>
-            <div>
-                <select type={type} name={name} placeholder={placeholder} onChange={onChange} >
-                    <option value="선택해주세요">선택해주세요</option>
-                    {
-                        option.map((a, i) => {
-                            return (
-                                <option value={a.value}>{a.content}</option>
-                            )
-                        })
-                    }
-                </select>
-                <i className="fa-solid fa-sort-down"></i>
-            </div>
-        </Label >
-    );
-};
 
 export default ProductSelect;

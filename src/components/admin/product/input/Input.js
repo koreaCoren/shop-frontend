@@ -1,6 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
 
+const ProductInput = ({ title, type, name, placeholder, onChange }) => {
+    return (
+        <Label>
+            <span>{title}</span>
+            <input type={type} name={name} placeholder={placeholder} onChange={onChange} />
+        </Label>
+    );
+};
+
 const Label = styled.label`
     display: flex;
     align-items: center;
@@ -18,14 +27,4 @@ const Label = styled.label`
         width: 300px;
     }
 `;
-
-const ProductInput = ({ title, type, name, placeholder, onChange }) => {
-    return (
-        <Label>
-            <span>{title}</span>
-            <input type={type} name={name} placeholder={placeholder} onChange={onChange} />
-        </Label>
-    );
-};
-
 export default ProductInput;

@@ -1,8 +1,16 @@
-import { loginApi, logoutApi, registerApi, token, prodcutListApi, prodcutRegisterApi } from "./apis";
+import {
+    LOGIN_API,
+    LOGOUT_API,
+    REGISTER_API,
+    TOKEN,
+    PRODUCT_LIST_API,
+    PRODUCT_REGISTER_API,
+    PRODUCT_DELETE_API
+} from "./apis";
 
 //로그인
 export const login = async (data) => {
-    const api = await loginApi.post("", data).then((res) => {
+    const api = await LOGIN_API.post("", data).then((res) => {
         if (res.data.loginCheck === "success") {
             sessionStorage.setItem("loginCheck", "success");
             sessionStorage.setItem("userId", res.data.userId);
@@ -23,7 +31,7 @@ export const logout = async () => {
         userId: userId
     }
 
-    await logoutApi.post("", data).then((res) => {
+    await LOGOUT_API.post("", data).then((res) => {
 
     }).catch((error) => {
         console.log(error);
@@ -37,7 +45,7 @@ export const logout = async () => {
 
 //회원가입
 export const register = async (data) => {
-    const api = await registerApi.post("", data).then((res) => {
+    const api = await REGISTER_API.post("", data).then((res) => {
         if (res.data.id === false) {
             alert("중복된 아이디입니다.");
             return;
@@ -55,7 +63,7 @@ export const register = async (data) => {
 
 //토큰체크
 export const tokenCheck = async (data) => {
-    const api = await token.post("", data).then(async (res) => {
+    const api = await TOKEN.post("", data).then(async (res) => {
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -77,14 +85,27 @@ export const tokenCheck = async (data) => {
 
 //상품리스트
 export const productList = async () => {
-    const { data } = await prodcutListApi.get();
+    const { data } = await PRODUCT_LIST_API.get();
     return data;
 }
 
 //상품 등록
 export const productRegister = async (data) => {
-    const api = await prodcutRegisterApi.post("", data).then((res) => {
+    const api = await PRODUCT_REGISTER_API.post("", data).then((res) => {
+        if (res.data.result === "success") {
+            alert("등록완료");
+            window.location.replace("/admin/product");
+        } else if (res.data.result === "fail") {
+            alert("알 수 없는 에러로 등록실패 했습니다.");
+        }
+    }).catch((error) => {
+        console.log(error);
+    })
+    return api
+}
 
+export const productDelete = async (data) => {
+    const api = await PRODUCT_DELETE_API.post("", data).then((res) => {
     }).catch((error) => {
         console.log(error);
     })
