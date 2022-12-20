@@ -6,7 +6,7 @@ import Main from "./Main";
 import Login from "pages/login/Login";
 import Register from "pages/login/Register";
 import ProductRegister from "pages/product/Register";
-import Admin from "components/admin/Admin";
+import Admin from "routers/Admin";
 
 import "assets/css/common/common.css";
 import { useState } from "react";

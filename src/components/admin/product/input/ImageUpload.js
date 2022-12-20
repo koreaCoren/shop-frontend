@@ -1,7 +1,31 @@
 import React from 'react';
 import styled from "styled-components";
 
-const Label = styled.label`
+const ProductInput = ({ title, setThumbnail, thumbnail }) => {
+    const onFileChange = (event) => {
+        const { target: { files }, } = event;
+        const theFile = files[0];
+        const reader = new FileReader();
+        reader.onloadend = (finishedEvent) => {
+            const {
+                currentTarget: { result },
+            } = finishedEvent;
+            setThumbnail(result);
+        };
+        reader.readAsDataURL(theFile);
+    }
+    return (
+        <Div>
+            <span>{title}</span>
+            <div>
+                <input type="file" accept="image/*" onChange={onFileChange} />
+                <img src={thumbnail} />
+            </div>
+        </Div>
+    );
+};
+
+const Div = styled.div`
     display: flex;
     align-items: center;
     padding: 10px 0px;
@@ -13,31 +37,8 @@ const Label = styled.label`
     img{
         display: block;
         margin-top: 10px;
+        max-width: 300px;
     }
 `;
-
-const ProductInput = ({ title, setImageData, imageData }) => {
-    const onFileChange = (event) => {
-        const { target: { files }, } = event;
-        const theFile = files[0];
-        const reader = new FileReader();
-        reader.onloadend = (finishedEvent) => {
-            const {
-                currentTarget: { result },
-            } = finishedEvent;
-            setImageData(result);
-        };
-        reader.readAsDataURL(theFile);
-    }
-    return (
-        <Label>
-            <span>{title}</span>
-            <div>
-                <input type="file" accept="image/*" onChange={onFileChange} />
-                <img src={imageData} />
-            </div>
-        </Label>
-    );
-};
 
 export default ProductInput;

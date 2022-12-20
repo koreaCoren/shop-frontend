@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from "styled-components";
+import TextEditor from 'components/editor/Editor';
 
-const Label = styled.label`
+const Textarea = ({ title, setProductContent, setImageCode }) => {
+    return (
+        <Div>
+            <span>{title}</span>
+            <TextEditor setProductContent={setProductContent} setImageCode={setImageCode}></TextEditor>
+        </Div>
+    );
+};
+
+const Div = styled.div`
     display: flex;
     align-items: center;
     padding: 10px 0px;
@@ -20,14 +30,5 @@ const Label = styled.label`
         resize: none;;
     }
 `;
-
-const Textarea = ({ title, name, placeholder, onChange }) => {
-    return (
-        <Label>
-            <span>{title}</span>
-            <textarea name={name} placeholder={placeholder} onChange={onChange} />
-        </Label>
-    );
-};
 
 export default Textarea;
