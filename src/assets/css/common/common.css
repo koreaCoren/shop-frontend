@@ -133,6 +133,6 @@ button {
 
 @media only screen and (min-width:100px) and (max-width:600px) {}
 
-html {
-    font-family: var(--main-font);
+html *:not(i) {
+    font-family: var(--main-font) !important;
 }
