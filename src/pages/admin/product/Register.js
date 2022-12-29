@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { productRegister } from 'utils/axios';
 
-import ImageUpload from 'components/input/ImageUpload';
+import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
 import ProductSelect from 'components/admin/product/input/Select';
