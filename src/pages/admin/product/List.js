@@ -6,7 +6,7 @@ import { productDelete, productList } from 'utils/axios';
 
 
 const List = () => {
-    let result = useQuery("prodcutList", productList);
+    const result = useQuery("prodcutList", productList);
 
     const { mutateAsync, isLoading } = useMutation(productDelete);
 
