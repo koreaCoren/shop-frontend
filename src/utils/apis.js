@@ -37,10 +37,10 @@ export const PRODUCT_DELETE_API = axios.create({
 
 //카테고리 리스트
 export const CATEGORY_LIST_API = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/??`,
+    baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_category`,
 })
 
 //카테고리 저장
 export const CATEGORY_SAVE_API = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/??`,
+    baseURL: `${process.env.REACT_APP_API_URL}/goods/ins_category`,
 })
