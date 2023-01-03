@@ -11,18 +11,18 @@ import Register from './Register';
 const Category = () => {
     const nav = useNavigate();
     const [category, setCategory] = useState();
-    const [categorys, setcategorys] = useState([]);
+    const [categorys, setCategorys] = useState([]);
     const result = useQuery("categoryList", categoryList);
     const { mutateAsync, isLoading } = useMutation(categorySave);
 
     useEffect(() => {
-        // setcategorys(result.data);
+        // setCategorys(result.data);
     }, [])
 
     const createCategory = () => {
         let arr = categorys;
         let index = categorys.length + 1;
-        setcategorys([...arr, { cateCode: index * 10, categoryName: category, lowCategory: [] }]);
+        setCategorys([...arr, { cate_code: index * 10, cate: category, lowCategory: [] }]);
         setCategory("");
         nav("/admin/Category");
     }
@@ -30,10 +30,10 @@ const Category = () => {
     const createLowCategory = (index) => {
         let arr = categorys;
         arr[index].lowCategory.push({
-            cateCode: (arr[index].cateCode * 100) + ((arr[index].lowCategory.length + 1) * 10),
-            categoryName: category
+            cate_code: (arr[index].cate_code * 100) + ((arr[index].lowCategory.length + 1) * 10),
+            cate: category
         })
-        setcategorys([...arr]);
+        setCategorys([...arr]);
         setCategory("");
         nav("/admin/Category");
     }
@@ -44,14 +44,14 @@ const Category = () => {
         for (let i = 0; i < arr.length; i++) {
             const idx = i + 1;
             console.log(arr[i].lowCategory.length + 1);
-            arr[i].cateCode = idx * 10;
+            arr[i].cate_code = idx * 10;
             if (arr[i].lowCategory.length > 0) {
                 for (let j = 0; j < arr[i].lowCategory.length; j++) {
-                    arr[i].lowCategory[j].cateCode = (idx * 1000) + ((j + 1) * 10);
+                    arr[i].lowCategory[j].cate_code = (idx * 1000) + ((j + 1) * 10);
                 }
             }
         }
-        setcategorys([...arr]);
+        setCategorys([...arr]);
     }
 
     const deleteLowCategory = (index, lowIndex) => {
@@ -59,28 +59,29 @@ const Category = () => {
         arr[index].lowCategory.splice(lowIndex, 1);
         if (arr[index].lowCategory.length > 0) {
             for (let i = 0; i < arr[index].lowCategory.length; i++) {
-                arr[index].lowCategory[i].cateCode = ((arr[index].cateCode) * 100) + ((i + 1) * 10);
+                arr[index].lowCategory[i].cate_code = ((arr[index].cate_code) * 100) + ((i + 1) * 10);
             }
         }
-        setcategorys([...arr]);
+        setCategorys([...arr]);
     }
 
     const updateCategory = (index) => {
         let arr = categorys;
-        arr[index].categoryName = category;
+        arr[index].cate = category;
         setCategory("");
         nav("/admin/Category");
     }
 
     const updateLowCategory = (index, lowIndex) => {
         let arr = categorys;
-        arr[index].lowCategory[lowIndex].categoryName = category;
+        arr[index].lowCategory[lowIndex].cate = category;
         setCategory("");
         nav("/admin/Category");
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
+        console.log(categorys);
         mutateAsync(categorys);
     }
 
@@ -107,8 +108,8 @@ const Category = () => {
                             <Container key={i}>
                                 <Flex>
                                     <CateInfo>
-                                        <li>분류코드 : {a.cateCode}</li>
-                                        <li>카테고리명 : {a.categoryName}</li>
+                                        <li>분류코드 : {a.cate_code}</li>
+                                        <li>카테고리명 : {a.cate}</li>
                                     </CateInfo>
                                     <Buttons>
                                         <Link to={`registerLowCate?index=${i}`}>추가</Link>
@@ -122,8 +123,8 @@ const Category = () => {
                                             <Container key={j}>
                                                 <Flex>
                                                     <CateInfo>
-                                                        <li>분류코드 : {b.cateCode}</li>
-                                                        <li>카테고리명 : {b.categoryName}</li>
+                                                        <li>분류코드 : {b.cate_code}</li>
+                                                        <li>카테고리명 : {b.cate}</li>
                                                     </CateInfo>
                                                     <Buttons>
                                                         <button onClick={() => { deleteLowCategory(i, j) }}>삭제</button>
