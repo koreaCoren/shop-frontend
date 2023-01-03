@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { productRegister } from 'utils/axios';
 
-import ImageUpload from 'components/input/ImageUpload';
+import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
 import ProductSelect from 'components/admin/product/input/Select';
@@ -25,37 +25,6 @@ const Register = () => {
     const [productContent, setProductContent] = useState("");
     const [productOption, setProductOption] = useState("");
     const [imageCode, setImageCode] = useState([]);
-
-    const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
-        switch (name) {
-            case "prodctName":
-                setProductName(value);
-                break;
-            case "firstCategory":
-                setCate01(value);
-                break;
-            case "secondCategory":
-                setCate02(value);
-                break;
-            case "price":
-                setPrice(value);
-                break;
-            case "discount":
-                setDiscount(value);
-                break;
-            case "stock":
-                setStock(value);
-                break;
-            case "sell":
-                setSell(value);
-                break;
-
-            default:
-                break;
-        }
-    };
 
     const { mutateAsync, isLoading } = useMutation(productRegister);
     const onSubmit = (e) => {
@@ -114,6 +83,37 @@ const Register = () => {
         }
         mutateAsync(data);
     }
+
+    const onChange = (e) => {
+        const value = e.target.value;
+        const name = e.target.name;
+        switch (name) {
+            case "prodctName":
+                setProductName(value);
+                break;
+            case "firstCategory":
+                setCate01(value);
+                break;
+            case "secondCategory":
+                setCate02(value);
+                break;
+            case "price":
+                setPrice(value);
+                break;
+            case "discount":
+                setDiscount(value);
+                break;
+            case "stock":
+                setStock(value);
+                break;
+            case "sell":
+                setSell(value);
+                break;
+
+            default:
+                break;
+        }
+    };
     return (
         <>
             <form onSubmit={onSubmit}>

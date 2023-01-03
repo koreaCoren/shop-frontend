@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Product from 'pages/admin/product/Product';
 import SideMenu from 'components/admin/sideMenu/SideMenu';
+import Category from 'pages/admin/category/Category';
 
 const Admin = ({ setHeader }) => {
     useEffect(() => {
@@ -15,6 +16,7 @@ const Admin = ({ setHeader }) => {
             <div style={{ backgroundColor: "#eee" }}>
                 <Routes>
                     <Route path='/product/*' element={<Product />} />
+                    <Route path='/category/*' element={<Category />} />
                 </Routes>
             </div>
         </Div>

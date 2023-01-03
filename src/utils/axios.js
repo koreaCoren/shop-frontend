@@ -5,7 +5,9 @@ import {
     TOKEN,
     PRODUCT_LIST_API,
     PRODUCT_REGISTER_API,
-    PRODUCT_DELETE_API
+    PRODUCT_DELETE_API,
+    CATEGORY_LIST_API,
+    CATEGORY_SAVE_API
 } from "./apis";
 
 //로그인
@@ -104,8 +106,25 @@ export const productRegister = async (data) => {
     return api
 }
 
+//상품삭제
 export const productDelete = async (data) => {
     const api = await PRODUCT_DELETE_API.post("", data).then((res) => {
+    }).catch((error) => {
+        console.log(error);
+    })
+    return api
+}
+
+// 카테고리 리스트
+export const categoryList = async () => {
+    const { data } = await CATEGORY_LIST_API.get();
+    return data;
+}
+
+// 카테고리 저장
+export const categorySave = async (data) => {
+    const api = await CATEGORY_SAVE_API.post("", data).then(() => {
+
     }).catch((error) => {
         console.log(error);
     })
