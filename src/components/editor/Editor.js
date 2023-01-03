@@ -4,18 +4,6 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const Div = styled.div`
-    .ck.ck-reset.ck-editor.ck-rounded-corners{
-        width: 700px;
-    }
-    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-        min-height: 300px;
-        max-height: 300px;
-        overflow-y: scroll;
-        margin-bottom: 20px;
-    }
-`;
-
 const TextEditor = ({ setProductContent, setImageCode }) => {
     let arr = [];
     const API = `http://192.168.0.100/shop-backend/backend/goods/ins_goods`;
@@ -71,5 +59,17 @@ const TextEditor = ({ setProductContent, setImageCode }) => {
         </Div>
     );
 };
+
+const Div = styled.div`
+    .ck.ck-reset.ck-editor.ck-rounded-corners{
+        width: 700px;
+    }
+    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+        min-height: 300px;
+        max-height: 300px;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+    }
+`;
 
 export default TextEditor;
