@@ -16,7 +16,8 @@ const Register = () => {
     const [productName, setProductName] = useState("");
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
-    const [option, setOption] = useState();
+    const [firstCategory, setFirstCategory] = useState([]);
+    const [secondCategory, setSecondCategory] = useState([]);
     const [price, setPrice] = useState("");
     const [discount, setDiscount] = useState("");
     const [sell, setSell] = useState("");
@@ -31,9 +32,18 @@ const Register = () => {
 
     useEffect(() => {
         if (result.isLoading === false) {
-            setOption(result.data);
+            setFirstCategory(result.data);
         }
-    }, [result.isLoading])
+    }, [result.isLoading, cate01])
+
+    useEffect(() => {
+        for (let i = 0; i < firstCategory.length; i++) {
+            if (firstCategory[i].cate_code === Number(cate01)) {
+                setSecondCategory(firstCategory[i].lowCategory);
+            }
+        }
+        setCate02("");
+    }, [cate01])
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -75,11 +85,15 @@ const Register = () => {
             }
         }
 
+        if (cate01 === "선택해주세요" || cate01 === "") {
+            alert("카테고리 1번 선택해주세요");
+            return;
+        }
+
         const data = {
             goods_code: productCode,
             goods_nm: productName,
-            cate01: cate01,
-            cate02: cate02,
+            cate_code: cate02 === "" || cate02 === "선택해주세요" ? cate01 : cate02,
             goods_price: price,
             goods_sale: discount,
             goods_stock: stock,
@@ -128,8 +142,8 @@ const Register = () => {
                 <Container>
                     <h2>상품 기본 설정</h2>
                     <ProductInput title="상품이름" type="text" name="prodctName" placeholder="상품이름" onChange={onChange} />
-                    <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={option} />
-                    <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={option} />
+                    <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={firstCategory} />
+                    <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={secondCategory} />
                 </Container>
 
                 <Container>
