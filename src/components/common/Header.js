@@ -16,17 +16,16 @@ const Header = () => {
         mutate(data);
     }, [nav])
     return (
-        <Head>
-            <div className="wrap">
-                <div className="flexBox">
-                    <h1><a href="/">PKD</a></h1>
+        <header>
+            <Login>
+                <div className="wrap">
                     {
                         sessionStorage.getItem("loginCheck") === "success"
                             ? <ul>
                                 <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
                                 <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
                                 {
-                                    sessionStorage.getItem("userId") === "admin"
+                                    sessionStorage.getItem("userId") === "admin" || sessionStorage.getItem("userId") === "pkd"
                                         ? <li><Link to={"admin"}>관리자</Link></li>
                                         : null
                                 }
@@ -37,22 +36,46 @@ const Header = () => {
                             </ul>
                     }
                 </div>
-            </div>
-        </Head>
+            </Login>
+
+            <Head>
+                <div className="wrap">
+                    <div className="flexBox">
+                        <a href="/"><h1>로고</h1></a>
+                        <nav>
+                            <ul>
+                                <li><a href="#">메뉴1</a></li>
+                                <li><a href="#">메뉴2</a></li>
+                                <li><a href="#">메뉴3</a></li>
+                                <li><a href="#">메뉴4</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </Head>
+        </header>
     );
 };
 
-const Head = styled.header`
-    background-color: #eee;
-    h1 a{
-        line-height: 40px;
-    }
+const Login = styled.div`
+    border-bottom: 1px solid #ccc;
     ul{
         display: flex;
+        justify-content: end ;
         gap: 15px;
+        li{
+            padding: 10px 0px;
+        }
     }
     @media (max-width: 1200px) {
         padding: 0px 15px;
+    }
+`
+const Head = styled.div`
+    background-color: #eee;
+    nav ul li a{
+        padding: 15px;
+        margin: 0px 10px;
     }
 `
 
