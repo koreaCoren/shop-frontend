@@ -87,6 +87,7 @@ const Ul = styled.ul`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    
     li a,
     button{
         line-height: 24px;
