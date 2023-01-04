@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 
 const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => {
-    console.log(option);
     return (
         <Label>
             <span>{title}</span>
