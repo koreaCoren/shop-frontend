@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 
 const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => {
+    console.log(option);
     return (
         <Label>
             <span>{title}</span>
@@ -9,9 +10,9 @@ const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => 
                 <select type={type} name={name} placeholder={placeholder} onChange={onChange} >
                     <option value="선택해주세요">선택해주세요</option>
                     {
-                        option.map((a, i) => {
+                        option?.map((a, i) => {
                             return (
-                                <option key={i} value={a.value}>{a.content}</option>
+                                <option key={i} value={a.cate_code}>{a.cate}</option>
                             )
                         })
                     }

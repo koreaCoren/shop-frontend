@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
-import { productRegister } from 'utils/axios';
+import { categoryList, productRegister } from 'utils/axios';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
@@ -16,7 +16,7 @@ const Register = () => {
     const [productName, setProductName] = useState("");
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
-    const [option, setOption] = useState([{ value: "dasdsa", content: "dasdsa" }]);
+    const [option, setOption] = useState();
     const [price, setPrice] = useState("");
     const [discount, setDiscount] = useState("");
     const [sell, setSell] = useState("");
@@ -26,7 +26,15 @@ const Register = () => {
     const [productOption, setProductOption] = useState("");
     const [imageCode, setImageCode] = useState([]);
 
+    const result = useQuery("categoryList", categoryList);
     const { mutateAsync, isLoading } = useMutation(productRegister);
+
+    useEffect(() => {
+        if (result.isLoading === false) {
+            setOption(result.data);
+        }
+    }, [result.isLoading])
+
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -148,12 +156,13 @@ const Container = styled.div`
     padding: 15px;
     box-shadow: 2px 2px 6px 0 #00000044;
     margin: 15px 0px;
+
     h2{
         margin-bottom: 30px;
     }
 `
 const ProductRegister = styled.button`
-display: block;
+    display: block;
     line-height: 40px;
     background-color: #333;
     color: #fff;

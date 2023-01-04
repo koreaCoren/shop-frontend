@@ -33,11 +33,13 @@ const Box = styled.div`
     padding: 50px;
     background-color: #fff;
     border-radius: 5px;
+    
     h3{
         text-align: center;
         margin-bottom: 3px;
         font-size: 16px;
     }
+
     input{
         width: 100%;
         border: 1px solid #555;
@@ -45,6 +47,7 @@ const Box = styled.div`
         border-radius: 5px;
         margin: 3px 0px;
     }
+
     button,a{
         width: 100%;
         background-color: #1a6dff;

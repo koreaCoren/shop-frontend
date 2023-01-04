@@ -15,9 +15,12 @@ const Category = () => {
     const result = useQuery("categoryList", categoryList);
     const { mutateAsync, isLoading } = useMutation(categorySave);
 
+
     useEffect(() => {
-        // setCategorys(result.data);
-    }, [])
+        if (result.isLoading === false) {
+            setCategorys(result.data);
+        }
+    }, [result.isLoading])
 
     const createCategory = () => {
         let arr = categorys;
@@ -146,13 +149,13 @@ const Category = () => {
                     <Register onChange={onChange} category={createCategory} title="카테고리 추가" />
                 }></Route>
                 <Route path="registerLowCate" element={
-                    <Register onChange={onChange} category={createLowCategory} title="카테고리 추가" />
+                    <Register onChange={onChange} category={createLowCategory} title="하위 카테고리 추가" />
                 }></Route>
                 <Route path="updateCate" element={
                     <Register onChange={onChange} category={updateCategory} title="카테고리 수정" />
                 }></Route>
                 <Route path="updateLowCate" element={
-                    <Register onChange={onChange} category={updateLowCategory} title="카테고리 수정" />
+                    <Register onChange={onChange} category={updateLowCategory} title="하위 카테고리 수정" />
                 }></Route>
             </Routes>
 
