@@ -16,7 +16,6 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
         const data = {
             id: id,
             pw: password
