@@ -4,26 +4,30 @@ import { useState } from 'react';
 import styled from "styled-components";
 
 const ProductOption = ({ title, setProductOption }) => {
-    const [optionList, setOption] = useState([{ optionName: `productOption1`, priceName: `productPrice1` }]);
+    const [optionList, setOption] = useState([{ option_name: `productOption1`, option_price: `productPrice1` }]);
+
+    // 옵션 추가
     const createOption = () => {
         let arr = [];
         let index = optionList.length;
-        arr.push({ optionName: `productOption${index + 1}`, priceName: `productPrice${index + 1}` });
+        arr.push({ option_name: `productOption${index + 1}`, option_price: `productPrice${index + 1}` });
         setOption([...optionList, ...arr])
     }
 
+    // 옵션 삭제
     const deleteOption = (index) => {
         let arr = [...optionList];
         arr.splice(index, 1);
         setOption([...arr]);
     }
 
+    //옵션 저장
     const saveOption = () => {
         let arr = [];
         const optionName = document.querySelectorAll(".optionName");
-        const priceName = document.querySelectorAll(".priceName");
+        const price = document.querySelectorAll(".price");
         for (let i = 0; i < optionName.length; i++) {
-            arr.push({ optionName: optionName[i].value, price: priceName[i].value });
+            arr.push({ option_name: optionName[i].value, option_price: price[i].value });
         }
         setProductOption([...arr]);
     }
@@ -41,7 +45,7 @@ const ProductOption = ({ title, setProductOption }) => {
                         return (
                             <div key={i}>
                                 <input className="optionName" type="text" name={a.optionName} placeholder={`${i + 1}번 옵션명`} />
-                                <input className="priceName" type="text" name={a.priceName} placeholder={`${i + 1}번 옵션 가격`} />
+                                <input className="price" type="text" name={a.price} placeholder={`${i + 1}번 옵션 가격`} />
                                 <input type="button" value="삭제" onClick={() => {
                                     deleteOption(i);
                                 }} />

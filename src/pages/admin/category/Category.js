@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import * as Style from "assets/styleComponent/admin/category/category"
 import { categoryList, categorySave } from 'utils/axios';
 import Register from './Register';
 
@@ -22,6 +22,7 @@ const Category = () => {
         }
     }, [result.isLoading])
 
+    // 상위 카테고리 생성
     const createCategory = () => {
         let arr = categorys;
         let index = categorys.length + 1;
@@ -30,6 +31,7 @@ const Category = () => {
         nav("/admin/Category");
     }
 
+    // 하위 카테고리 생성
     const createLowCategory = (index) => {
         let arr = categorys;
         arr[index].lowCategory.push({
@@ -41,6 +43,7 @@ const Category = () => {
         nav("/admin/Category");
     }
 
+    // 상위 카테고리 삭제
     const deleteCategory = (index) => {
         let arr = categorys;
         arr.splice(index, 1);
@@ -57,6 +60,7 @@ const Category = () => {
         setCategorys([...arr]);
     }
 
+    // 하위 카테고리 삭제
     const deleteLowCategory = (index, lowIndex) => {
         let arr = categorys;
         arr[index].lowCategory.splice(lowIndex, 1);
@@ -68,6 +72,7 @@ const Category = () => {
         setCategorys([...arr]);
     }
 
+    // 상위 카테고리 수정
     const updateCategory = (index) => {
         let arr = categorys;
         arr[index].cate = category;
@@ -75,6 +80,7 @@ const Category = () => {
         nav("/admin/Category");
     }
 
+    // 하위 카테고리 수정
     const updateLowCategory = (index, lowIndex) => {
         let arr = categorys;
         arr[index].lowCategory[lowIndex].cate = category;
@@ -84,7 +90,6 @@ const Category = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(categorys);
         mutateAsync(categorys);
     }
 
@@ -103,46 +108,46 @@ const Category = () => {
     return (
         <>
             <Top title={"카테고리"} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
-            <Save onClick={onSubmit}>저장</Save>
-            <Padding>
+            <Style.Save onClick={onSubmit}>저장</Style.Save>
+            <Style.Padding>
                 {
                     categorys.map((a, i) => {
                         return (
-                            <Container key={i}>
-                                <Flex>
-                                    <CateInfo>
+                            <Style.Container key={i}>
+                                <Style.Flex>
+                                    <Style.CateInfo>
                                         <li>분류코드 : {a.cate_code}</li>
                                         <li>카테고리명 : {a.cate}</li>
-                                    </CateInfo>
-                                    <Buttons>
+                                    </Style.CateInfo>
+                                    <Style.Buttons>
                                         <Link to={`registerLowCate?index=${i}`}>추가</Link>
                                         <button onClick={() => { deleteCategory(i) }}>삭제</button>
                                         <Link to={`updateCate?index=${i}`}>수정</Link>
-                                    </Buttons>
-                                </Flex>
+                                    </Style.Buttons>
+                                </Style.Flex>
                                 {
                                     a.lowCategory?.map((b, j) => {
                                         return (
-                                            <Container key={j}>
-                                                <Flex>
-                                                    <CateInfo>
+                                            <Style.Container key={j}>
+                                                <Style.Flex>
+                                                    <Style.CateInfo>
                                                         <li>분류코드 : {b.cate_code}</li>
                                                         <li>카테고리명 : {b.cate}</li>
-                                                    </CateInfo>
-                                                    <Buttons>
+                                                    </Style.CateInfo>
+                                                    <Style.Buttons>
                                                         <button onClick={() => { deleteLowCategory(i, j) }}>삭제</button>
                                                         <Link to={`updateLowCate?index=${i}&lowIndex=${j}`}>수정</Link>
-                                                    </Buttons>
-                                                </Flex>
-                                            </Container>
+                                                    </Style.Buttons>
+                                                </Style.Flex>
+                                            </Style.Container>
                                         )
                                     })
                                 }
-                            </Container>
+                            </Style.Container>
                         )
                     })
                 }
-            </Padding>
+            </Style.Padding>
 
             <Routes>
                 <Route path="registerCate" element={
@@ -164,69 +169,6 @@ const Category = () => {
     );
 };
 
-const Save = styled.div`
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    background-color: #1a6dff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    cursor: pointer;
-`
 
-const Padding = styled.div`
-    padding: 0px 15px;
-`
-
-const Container = styled.div`
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 2px 2px 6px 0 #00000044;
-    margin: 15px 0px;
-`
-
-const Flex = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-content: center;
-    gap: 10px;
-`
-
-const CateInfo = styled.ul`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 100%;
-    li{
-        width: 100%;
-        background-color: #f5f5f5;
-        padding: 10px;
-        font-size: 18px;
-        border-radius: 5px;
-    }
-`
-
-const Buttons = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    *{
-        line-height: 24px;
-        background-color: #1a6dff;
-        color: #fff;
-        padding: 0px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        white-space: nowrap;
-    }
-`
 
 export default Category;

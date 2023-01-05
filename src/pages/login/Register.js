@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import styled from "styled-components";
+import * as Style from "assets/styleComponent/login/register";
 
 import Input from "components/input/Input";
 import { register } from "utils/axios";
@@ -79,7 +79,7 @@ const Register = () => {
             <div className="loginContainer">
                 <h1>회원가입창</h1>
 
-                <Form onSubmit={onSubmit}>
+                <Style.Form onSubmit={onSubmit}>
                     <Input type="text" name="name" onChange={onChange} placeholder="이름" />
                     <Input type="text" name="id" onChange={onChange} placeholder="아이디" />
                     <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
@@ -87,15 +87,10 @@ const Register = () => {
                     <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
                     <Input type="text" name="address" onChange={onChange} placeholder="주소" />
                     <input type="submit" value="회원가입" />
-                </Form>
+                </Style.Form>
             </div>
         </>
     );
 };
-
-const Form = styled.form`
-    display: inline-flex;
-    flex-direction: column;
-`;
 
 export default Register;
