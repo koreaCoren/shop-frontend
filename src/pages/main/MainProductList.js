@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from "react-query";
-import styled from 'styled-components';
+import * as Style from "assets/styleComponent/main/mainProductList";
 
 import { productList } from 'utils/axios';
 
@@ -9,7 +9,7 @@ const MainProductList = () => {
     let result = useQuery("prodcutList", productList);
 
     return (
-        <ProductList>
+        <Style.ProductList>
             <h2>비싼상품</h2>
             <ul>
                 {
@@ -26,44 +26,8 @@ const MainProductList = () => {
                     })
                 }
             </ul>
-        </ProductList>
+        </Style.ProductList>
     );
 };
-
-const ProductList = styled.div`
-    padding: 50px 0px;
-    h2{
-        text-align: center;
-        font-size: 30px;
-        margin-bottom: 50px;
-    }
-
-    ul{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-gap: 15px;
-    }
-
-    ul li{
-        text-align: center;
-    }
-
-    ul li a{
-        width: 100%;
-    }
-
-    ul li img{
-        width: 100%;
-        height: 250px;
-    }
-
-    ul li h3{
-        font-size: 24px;
-        margin: 5px 0px;
-    }
-    ul li h4{
-        font-size: 16px;
-    }
-`
 
 export default MainProductList;

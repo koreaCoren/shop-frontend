@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { login } from "utils/axios";
+import * as Style from "assets/styleComponent/login/login"
 
 import LoginInput from 'components/input/Input';
 
@@ -49,18 +50,13 @@ const Login = () => {
     return (
         <>
             <h1>로그인창</h1>
-            <Form onSubmit={onSubmit}>
+            <Style.Form onSubmit={onSubmit}>
                 <LoginInput type="text" name='id' placeholder='아이디' onChange={onChange}></LoginInput>
                 <LoginInput type="password" name='password' placeholder='비밀번호' onChange={onChange}></LoginInput>
                 <input type="submit" value="로그인하기" />
-            </Form>
+            </Style.Form>
         </>
     );
 };
-
-const Form = styled.form`
-    display: inline-flex;
-    flex-direction: column;
-`;
 
 export default Login;

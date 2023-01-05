@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import styled from 'styled-components';
+import * as Style from "assets/styleComponent/admin/product/register"
 
 import { categoryList, productRegister } from 'utils/axios';
 
@@ -31,12 +31,14 @@ const Register = () => {
     const { mutateAsync, isLoading } = useMutation(productRegister);
 
     useEffect(() => {
+        // 카테고리 가져오기
         if (result.isLoading === false) {
             setFirstCategory(result.data);
         }
-    }, [result.isLoading, cate01])
+    }, [result.isLoading])
 
     useEffect(() => {
+        // 카테고리 1번 선택하면 2번에 카테고리 1번 하위 카테고리 가져오기
         for (let i = 0; i < firstCategory.length; i++) {
             if (firstCategory[i].cate_code === Number(cate01)) {
                 setSecondCategory(firstCategory[i].lowCategory);
@@ -50,6 +52,9 @@ const Register = () => {
 
         if (productName === "") {
             alert("상품 이름 입력해주세요");
+            return;
+        } else if (cate01 === "선택해주세요" || cate01 === "") {
+            alert("카테고리 1번 선택해주세요");
             return;
         } else if (price === "") {
             alert("상품 가격 입력해주세요");
@@ -85,11 +90,6 @@ const Register = () => {
             }
         }
 
-        if (cate01 === "선택해주세요" || cate01 === "") {
-            alert("카테고리 1번 선택해주세요");
-            return;
-        }
-
         const data = {
             goods_code: productCode,
             goods_nm: productName,
@@ -103,6 +103,8 @@ const Register = () => {
             goods_imageCode: imageCode,
             goods_option: productOption,
         }
+        console.log(data.goods_option);
+        return;
         mutateAsync(data);
     }
 
@@ -139,51 +141,29 @@ const Register = () => {
     return (
         <>
             <form onSubmit={onSubmit}>
-                <Container>
+                <Style.Container>
                     <h2>상품 기본 설정</h2>
                     <ProductInput title="상품이름" type="text" name="prodctName" placeholder="상품이름" onChange={onChange} />
                     <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={firstCategory} />
                     <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={secondCategory} />
-                </Container>
+                </Style.Container>
 
-                <Container>
+                <Style.Container>
                     <h2>상품 상세 설정</h2>
                     <ProductInput title="가격" type="text" name="price" placeholder="상품가격" onChange={onChange} />
-                    <ProductInput title="할인률" type="text" name="discount" placeholder="할인률" onChange={onChange} />
+                    <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} />
                     <ProductInput title="수량" type="text" name="sell" placeholder="수량" onChange={onChange} />
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} />
                     <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
-                    <ProductRegister type='submit'>상품 등록</ProductRegister>
-                </Container>
+                    <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
+                </Style.Container>
             </form>
 
             {isLoading && <Loading />}
         </>
     );
 };
-
-const Container = styled.div`
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 15px;
-    box-shadow: 2px 2px 6px 0 #00000044;
-    margin: 15px 0px;
-
-    h2{
-        margin-bottom: 30px;
-    }
-`
-const ProductRegister = styled.button`
-    display: block;
-    line-height: 40px;
-    background-color: #333;
-    color: #fff;
-    padding: 0px 30px;
-    margin: 15px auto 0px;
-    border-radius: 5px;
-    cursor: pointer;
-`;
 
 export default Register;
