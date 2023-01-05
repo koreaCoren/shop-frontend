@@ -20,7 +20,7 @@ const Category = () => {
         if (result.isLoading === false) {
             setCategorys(result.data);
         }
-    }, [result.isLoading])
+    }, [result.isLoading]);
 
     // 상위 카테고리 생성
     const createCategory = () => {
@@ -37,11 +37,11 @@ const Category = () => {
         arr[index].lowCategory.push({
             cate_code: (arr[index].cate_code * 100) + ((arr[index].lowCategory.length + 1) * 10),
             cate: category
-        })
+        });
         setCategorys([...arr]);
         setCategory("");
         nav("/admin/Category");
-    }
+    };
 
     // 상위 카테고리 삭제
     const deleteCategory = (index) => {
@@ -54,11 +54,11 @@ const Category = () => {
             if (arr[i].lowCategory.length > 0) {
                 for (let j = 0; j < arr[i].lowCategory.length; j++) {
                     arr[i].lowCategory[j].cate_code = (idx * 1000) + ((j + 1) * 10);
-                }
-            }
-        }
+                };
+            };
+        };
         setCategorys([...arr]);
-    }
+    };
 
     // 하위 카테고리 삭제
     const deleteLowCategory = (index, lowIndex) => {
@@ -70,7 +70,7 @@ const Category = () => {
             }
         }
         setCategorys([...arr]);
-    }
+    };
 
     // 상위 카테고리 수정
     const updateCategory = (index) => {
@@ -78,7 +78,7 @@ const Category = () => {
         arr[index].cate = category;
         setCategory("");
         nav("/admin/Category");
-    }
+    };
 
     // 하위 카테고리 수정
     const updateLowCategory = (index, lowIndex) => {
@@ -86,12 +86,12 @@ const Category = () => {
         arr[index].lowCategory[lowIndex].cate = category;
         setCategory("");
         nav("/admin/Category");
-    }
+    };
 
     const onSubmit = (e) => {
         e.preventDefault();
         mutateAsync(categorys);
-    }
+    };
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -102,8 +102,8 @@ const Category = () => {
                 break;
             default:
                 break;
-        }
-    }
+        };
+    };
 
     return (
         <>

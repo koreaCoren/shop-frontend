@@ -9,7 +9,7 @@ import MainProductList from 'pages/main/MainProductList';
 const Main = ({ setHeader }) => {
     useEffect(() => {
         setHeader(true);
-    }, [])
+    }, []);
     return (
         <main>
             <Style.Slide>배너~~~~</Style.Slide>
