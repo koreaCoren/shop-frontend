@@ -19,19 +19,19 @@ const Login = () => {
         const data = {
             id: id,
             pw: password
-        }
+        };
         await mutateAsync(data);
         if (sessionStorage.getItem("loginCheck") === "success") {
             nav("/");
-        }
-    }
+        };
+    };
 
     useEffect(() => {
         if (sessionStorage.getItem("loginCheck") === "success") {
             alert("로그인중에는 접근 하실 수 없습니다.");
             nav("/");
         }
-    }, [])
+    }, []);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -46,7 +46,7 @@ const Login = () => {
             default:
                 break;
         }
-    }
+    };
     return (
         <>
             <h1>로그인창</h1>

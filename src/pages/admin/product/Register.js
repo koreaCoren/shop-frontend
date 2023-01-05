@@ -103,8 +103,6 @@ const Register = () => {
             goods_imageCode: imageCode,
             goods_option: productOption,
         }
-        console.log(data.goods_option);
-        return;
         mutateAsync(data);
     }
 

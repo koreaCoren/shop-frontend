@@ -11,6 +11,7 @@ export const Container = styled.div`
         margin-bottom: 30px;
     }
 `
+
 export const ProductRegister = styled.button`
     display: block;
     line-height: 40px;

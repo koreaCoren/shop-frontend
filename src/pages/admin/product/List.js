@@ -10,10 +10,10 @@ const List = () => {
 
     const { mutateAsync, isLoading } = useMutation(productDelete);
 
-    const onDelete = (code) => {
+    const onDelete = (data) => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
         if (ok) {
-            mutateAsync({ goods_code: code });
+            mutateAsync({ goods_code: data.goods_code, goods_img: data.goods_img });
             window.location.reload();
         }
     }
@@ -38,7 +38,7 @@ const List = () => {
                             </Style.Div>
                             <Style.Ul>
                                 <li><Link to="" >수정</Link></li>
-                                <li><button type='button' onClick={() => { onDelete(a.goods_code) }}>삭제</button></li>
+                                <li><button type='button' onClick={() => { onDelete(a) }}>삭제</button></li>
                             </Style.Ul>
                         </Style.ProductList>
                     </ul>

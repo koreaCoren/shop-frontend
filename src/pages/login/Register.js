@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import * as Style from "assets/styleComponent/login/register";
+import * as Style from "assets/styleComponent/login/login";
 
 import Input from "components/input/Input";
 import { register } from "utils/axios";
@@ -45,7 +45,7 @@ const Register = () => {
             alert("로그인중에는 접근 하실 수 없습니다.");
             nav("/");
         }
-    }, [])
+    }, []);
 
     const onChange = (e) => {
         const value = e.target.value;

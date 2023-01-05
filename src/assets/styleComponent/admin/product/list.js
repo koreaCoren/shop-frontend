@@ -7,6 +7,7 @@ export const Container = styled.div`
     box-shadow: 2px 2px 6px 0 #00000044;
     margin: 15px 0px;
 `
+
 export const ProductList = styled.li`
     display: flex;
     flex-direction: row;
@@ -19,6 +20,7 @@ export const ProductList = styled.li`
         border-radius: 5px;
     }
 `
+
 export const Div = styled.div`
     display: flex;
     flex: 1;
@@ -35,6 +37,7 @@ export const Div = styled.div`
         }
     }
 `
+
 export const Ul = styled.ul`
     display: flex;
     flex-direction: column;
