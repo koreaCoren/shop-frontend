@@ -15,9 +15,7 @@ function App() {
     const [header, setHeader] = useState(true);
     return (
         <>
-            {
-                header && <Header></Header>
-            }
+            {header && <Header></Header>}
             <Routes>
                 <Route path="/" element={<Main setHeader={setHeader} />} />
                 <Route path="/admin/*" element={<Admin setHeader={setHeader} />} />
@@ -25,10 +23,7 @@ function App() {
                 <Route path='/loginRegister' element={<Register />} />
                 <Route path="/product/*" element={<Product />} />
             </Routes>
-
-            {
-                header && <Footer></Footer>
-            }
+            {header && <Footer></Footer>}
         </>
     );
 }

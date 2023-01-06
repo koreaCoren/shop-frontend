@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Padding = styled.div`
@@ -8,12 +9,12 @@ export const Info = styled.div`
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     grid-gap: 50px;
+`
 
-    .imageInfo {
-        width: 100%;
-    }
+export const ImageInfo = styled.div`
+    width: 100%;
 
-    .imageInfo>img {
+    img {
         border: 1px solid #ccc;
         display: flex;
         align-items: center;
@@ -23,24 +24,24 @@ export const Info = styled.div`
         height: 450px;
     }
 
-    .imageInfo ul {
+    ul {
         display: flex;
         margin-top: 10px;
         gap: 10px;
     }
 
-    .imageInfo ul li {
+    ul li {
         max-width: 80px;
         border: 1px solid #ccc;
         padding: 10px;
         cursor: pointer;
     }
 
-    .imageInfo ul li img {
+    ul li img {
         width: 100%;
     }
 
-    .imageInfo button {
+    button {
         width: 100%;
         border: 1px solid #ccc;
         background-color: #f5f5f5;
@@ -52,120 +53,112 @@ export const Info = styled.div`
         margin-top: 10px;
     }
 
-    .imageInfo button i {
+    button i {
         margin-right: 5px;
     }
+`
 
-    .content {}
-
-    .content h2 {
+export const Content = styled.div`
+    h2 {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
     }
 
-    .content h3 {
+    h3 {
         font-size: 16px;
         color: #ccc;
         line-height: 1.2;
         margin-bottom: 20px;
     }
 
-    .content .info {}
-
-    .content .info ul {
-        border-top: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        padding: 20px 0px;
-    }
-
-    .content .info ul li {
-        display: grid;
-        grid-template-columns: 150px 1fr;
-    }
-
-    .content .info ul li:not(:last-child) {
-        margin-bottom: 20px;
-    }
-
-    .content .info ul li b {
-        font-size: 20px;
-        color: #ccc;
-    }
-
-    .content .info ul li span {
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .content .info ul li span.pay {
-        color: #d1b064;
-    }
-
-    .content .info p {
+    .info p {
         color: #ccc;
         font-size: 18px;
         margin: 20px 0px 50px;
         font-weight: bold;
     }
+`
 
-    .content .info .quantity {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #f5f5f5;
-        padding: 30px 20px;
+export const DetailInfo = styled.ul`
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 20px 0px;
+
+     li {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+    }
+
+     li:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+     li b {
+        font-size: 20px;
+        color: #ccc;
+    }
+
+     li span {
+        font-size: 20px;
         font-weight: bold;
     }
 
-    .content .info .quantity .name {
+     li span.pay {
+        color: #d1b064;
+    }
+`
+
+export const Quantity = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 30px 20px;
+    font-weight: bold;
+
+     .name {
         font-size: 16px;
     }
 
-    .content .info .quantity .num {}
-
-    .content .info .quantity .money {
+     .money {
         font-size: 16px;
     }
 
-    .content .info .total {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        margin: 30px 0px;
-    }
+`
 
-    .content .info .total span {
+export const Total = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 30px 0px;
+
+    span {
         font-size: 22px;
     }
 
-    .content .info .total span b {
-        font-weight: bold;
+    span b {
         font-size: 22px;
     }
 
-    .content .info .total>b {
-        font-weight: bold;
+    >b {
         font-size: 28px;
         margin: 0px 10px;
     }
+`
 
-    .content .info .button {
-        display: flex;
-        gap: 5px;
-    }
+export const ButtonBox = styled.div`
+    display: flex;
+    gap: 5px;
+`
 
-    .content .info .button a {
-        flex: 1;
-        text-align: center;
-        border: 1px solid #ccc;
-        font-weight: bold;
-        font-size: 20px;
-        padding: 20px 0px;
-    }
-
-    .content .info .button a.black {
-        color: #fff;
-        background-color: #333333;
-    }
+export const Button = styled(Link)`
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 20px 0px;
+    color: ${props => props.color !== "black" ? "#333" : "#fff"};
+    background-color: ${props => props.color !== "black" ? "#fff" : "#333"};
 `

@@ -8,7 +8,7 @@ import {
     PRODUCT_DELETE_API,
     CATEGORY_LIST_API,
     CATEGORY_SAVE_API
-} from "./apis";
+} from "../api/apis";
 
 //로그인
 export const login = async (data) => {
@@ -21,7 +21,7 @@ export const login = async (data) => {
             alert("아이디 또는 비밀번호 틀립니다.");
         }
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     })
     return api;
 }
@@ -36,7 +36,7 @@ export const logout = async () => {
     await LOGOUT_API.post("", data).then((res) => {
 
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     })
 
     sessionStorage.removeItem("loginCheck");
@@ -58,7 +58,7 @@ export const register = async (data) => {
             alert("회원가입 완료되었습니다.");
         }
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     });
     return api;
 }
@@ -80,7 +80,7 @@ export const tokenCheck = async (data) => {
             sessionStorage.removeItem('token');
         }
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     });
     return api
 }
@@ -101,7 +101,7 @@ export const productRegister = async (data) => {
             alert("알 수 없는 에러로 등록실패 했습니다.");
         }
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     })
     return api
 }
@@ -110,7 +110,7 @@ export const productRegister = async (data) => {
 export const productDelete = async (data) => {
     const api = await PRODUCT_DELETE_API.post("", data).then((res) => {
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     })
     return api
 }
@@ -126,7 +126,7 @@ export const categorySave = async (data) => {
     const api = await CATEGORY_SAVE_API.post("", data).then(() => {
 
     }).catch((error) => {
-        console.log(error);
+        alert("서버와 통신 실패했습니다.\n" + error);
     })
     return api
 }
