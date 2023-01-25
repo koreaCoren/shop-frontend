@@ -44,3 +44,8 @@ export const CATEGORY_LIST_API = axios.create({
 export const CATEGORY_SAVE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/ins_category`,
 })
+
+//주문하기
+export const ORDER = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/ins_orders`,
+})
