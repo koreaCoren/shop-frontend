@@ -129,17 +129,18 @@ export const Quantity = styled.div`
     }
 
     .num *{
-        width: 30px;
         text-align: center;
         padding: 5px;
     }
 
     .num span{
+        width: 50px;
         border-right: 1px solid #aaa;
         border-left: 1px solid #aaa;
     }
 
     .num i{
+        width: 30px;
         background-color: #eee;
         cursor: pointer;
     }
