@@ -5,12 +5,12 @@ import { useQuery } from 'react-query';
 import { productList } from 'utils/axios';
 import Detail from 'pages/product/Detail';
 
-const Product = () => {
+const Product = ({ setOrderData }) => {
     let result = useQuery("prodcutList", productList);
     return (
         <>
             <Routes>
-                <Route path='detail/:productCode' element={<Detail result={result} />}></Route>
+                <Route path='detail/:productCode' element={<Detail result={result} setOrderData={setOrderData} />}></Route>
             </Routes>
         </>
     );

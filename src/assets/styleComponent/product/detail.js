@@ -121,6 +121,29 @@ export const Quantity = styled.div`
         font-size: 16px;
     }
 
+    .num{
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        border: 1px solid #aaa;
+    }
+
+    .num *{
+        width: 30px;
+        text-align: center;
+        padding: 5px;
+    }
+
+    .num span{
+        border-right: 1px solid #aaa;
+        border-left: 1px solid #aaa;
+    }
+
+    .num i{
+        background-color: #eee;
+        cursor: pointer;
+    }
+
      .money {
         font-size: 16px;
     }

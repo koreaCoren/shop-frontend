@@ -1,4 +1,3 @@
-import Top from 'components/admin/Top';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import * as Style from "assets/styleComponent/admin/category/register"

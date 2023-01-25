@@ -1,18 +1,8 @@
-import {
-    LOGIN_API,
-    LOGOUT_API,
-    REGISTER_API,
-    TOKEN,
-    PRODUCT_LIST_API,
-    PRODUCT_REGISTER_API,
-    PRODUCT_DELETE_API,
-    CATEGORY_LIST_API,
-    CATEGORY_SAVE_API
-} from "../api/apis";
+import * as API from "../api/apis";
 
 //로그인
 export const login = async (data) => {
-    const api = await LOGIN_API.post("", data).then((res) => {
+    const api = await API.LOGIN_API.post("", data).then((res) => {
         if (res.data.loginCheck === "success") {
             sessionStorage.setItem("loginCheck", "success");
             sessionStorage.setItem("userId", res.data.userId);
@@ -33,7 +23,7 @@ export const logout = async () => {
         userId: userId
     }
 
-    await LOGOUT_API.post("", data).then((res) => {
+    await API.LOGOUT_API.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -47,7 +37,7 @@ export const logout = async () => {
 
 //회원가입
 export const register = async (data) => {
-    const api = await REGISTER_API.post("", data).then((res) => {
+    const api = await API.REGISTER_API.post("", data).then((res) => {
         if (res.data.id === false) {
             alert("중복된 아이디입니다.");
             return;
@@ -65,7 +55,7 @@ export const register = async (data) => {
 
 //토큰체크
 export const tokenCheck = async (data) => {
-    const api = await TOKEN.post("", data).then(async (res) => {
+    const api = await API.TOKEN.post("", data).then(async (res) => {
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -87,13 +77,13 @@ export const tokenCheck = async (data) => {
 
 //상품리스트
 export const productList = async () => {
-    const { data } = await PRODUCT_LIST_API.get();
+    const { data } = await API.PRODUCT_LIST_API.get();
     return data;
 }
 
 //상품 등록
 export const productRegister = async (data) => {
-    const api = await PRODUCT_REGISTER_API.post("", data).then((res) => {
+    const api = await API.PRODUCT_REGISTER_API.post("", data).then((res) => {
         if (res.data.result === "success") {
             alert("등록완료");
             window.location.replace("/admin/product");
@@ -108,7 +98,7 @@ export const productRegister = async (data) => {
 
 //상품삭제
 export const productDelete = async (data) => {
-    const api = await PRODUCT_DELETE_API.post("", data).then((res) => {
+    const api = await API.PRODUCT_DELETE_API.post("", data).then((res) => {
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
     })
@@ -117,16 +107,25 @@ export const productDelete = async (data) => {
 
 // 카테고리 리스트
 export const categoryList = async () => {
-    const { data } = await CATEGORY_LIST_API.get();
+    const { data } = await API.CATEGORY_LIST_API.get();
     return data;
 }
 
 // 카테고리 저장
 export const categorySave = async (data) => {
-    const api = await CATEGORY_SAVE_API.post("", data).then(() => {
+    const api = await API.CATEGORY_SAVE_API.post("", data).then(() => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
     })
     return api
+}
+
+// 주문하기
+export const order = async (data) => {
+    const api = await API.ORDER.post("", data).then(() => {
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+    })
 }
