@@ -9,10 +9,12 @@ import Login from "pages/login/Login";
 import Register from "pages/login/Register";
 import Admin from "routers/Admin";
 import Product from "./Product";
+import Order from "./Order";
 
 function App() {
     const location = useLocation();
     const [header, setHeader] = useState(true);
+    const [orderData, setOrderData] = useState();
     return (
         <>
             {header && <Header></Header>}
@@ -21,7 +23,8 @@ function App() {
                 <Route path="/admin/*" element={<Admin setHeader={setHeader} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/loginRegister' element={<Register />} />
-                <Route path="/product/*" element={<Product />} />
+                <Route path="/product/*" element={<Product setOrderData={setOrderData} />} />
+                <Route path="/order/*" element={<Order orderData={orderData} />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
