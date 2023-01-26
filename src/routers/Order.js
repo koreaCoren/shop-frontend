@@ -56,16 +56,19 @@ const Order = ({ orderData }) => {
         })
 
         const data = {
-            date: `${yy}/${mm}/${dd}`,
             order_code: orderData.product_code,
+            gopaymethod: '',
+            mid: '',
+            mKey: '',
             user_id: sessionStorage.getItem("userId"),
             goods_code: orderData.product_code,
             goods_name: orderData.product_name,
             order_pay: orderData.total_price,
-            recipient: orderName,
-            recipient_addr: address + "\n" + orderDetailAddress,
-            recipient_phone: orderTel,
+            buyer_name: orderName,
+            buyer_addr: address + "\n" + orderDetailAddress,
+            buyer_tel: orderTel,
             order_count: orderData.prodcut_count,
+            return_url: '',
             refund: "ㄴ",
         }
 
