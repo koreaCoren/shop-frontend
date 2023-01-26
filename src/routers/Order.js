@@ -3,7 +3,7 @@ import * as Style from "assets/styleComponent/order/order"
 import { order } from 'utils/axios';
 import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
-import * as INIpayTest from "https://stdpay.inicis.com/stdjs/INIStdPay.js";
+import Inicis from 'components/inicis/Inicis';
 
 const Order = ({ orderData }) => {
     const [orderName, setOrderName] = useState("");
@@ -12,6 +12,18 @@ const Order = ({ orderData }) => {
     const [address, setAddress] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
+    const [isPurchase, setIsPurchase] = useState(0);
+    const [payData, setPayData] = useState({
+        productName: "",
+        buyerName: "",
+        buyerTel: 0,
+        buyerEmail: "",
+        productPrice: 0,
+        payStatus: 0,
+        returnUrl: "http://localhost:3000/order/info",
+        closeUrl: "http://localhost:3000/close",
+    })
+
     const { mutateAsync, isLoading } = useMutation(order);
 
     const onChange = (e) => {
@@ -33,8 +45,18 @@ const Order = ({ orderData }) => {
         }
     }
 
-    const onSubmit = (e) => {
+    const payment = (e) => {
         e.preventDefault();
+        setPayData({
+            productName: orderData.product_name,
+            buyerName: orderName,
+            buyerTel: Number(orderTel),
+            buyerEmail: "",
+            productPrice: Number(orderData.total_price),
+            payStatus: 0,
+            returnUrl: "http://localhost:3000/order/info",
+            closeUrl: "http://localhost:3000/close",
+        })
         const data = {
             order_code: orderData.product_code,
             user_id: sessionStorage.getItem("userId"),
@@ -47,12 +69,11 @@ const Order = ({ orderData }) => {
             order_count: orderData.prodcut_count,
             refund: "ㄴ",
         }
-        INIpayTest.INIStdPay.pay(data);
-        // mutateAsync(data);
+        mutateAsync(data);
+        setIsPurchase(isPurchase + 1);
     }
     return (
         <Style.Order>
-            <button onClick={onSubmit}>귀찮네</button>
             <div className="wrap">
                 <Style.Title>주문/결제</Style.Title>
                 <Style.Purchase>
@@ -79,7 +100,7 @@ const Order = ({ orderData }) => {
 
                 <Style.Info>
                     <Style.SubTitle>배송 정보</Style.SubTitle>
-                    <Style.Form onSubmit={onSubmit}>
+                    <Style.Form>
                         <div>
                             <span>주문자</span>
                             <input type="text" onChange={onChange} name='orderName' />
@@ -100,11 +121,13 @@ const Order = ({ orderData }) => {
                                 setAddress={setAddress}
                             >test</DaumPost>
                         }
-                        <button className='submit'>결제하기</button>
+                        <button className='submit' onClick={payment}>결제하기</button>
                     </Style.Form>
                 </Style.Info>
+
+                <Inicis payData={payData} isPurchase={isPurchase} />
             </div>
-        </Style.Order>
+        </Style.Order >
     );
 };
 export default Order;
