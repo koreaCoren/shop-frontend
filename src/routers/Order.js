@@ -6,9 +6,9 @@ import DaumPost from 'components/daumPost/DaumPost';
 import Inicis from 'components/inicis/Inicis';
 
 const Order = ({ orderData }) => {
-    const [orderName, setOrderName] = useState("");
-    const [orderTel, setOrderTel] = useState("");
-    const [orderDetailAddress, setOrderDetailAddress] = useState("");
+    const [buyerName, setBuyerName] = useState("");
+    const [buyerTel, setBuyerTel] = useState("");
+    const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
     const [address, setAddress] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
@@ -21,14 +21,14 @@ const Order = ({ orderData }) => {
         const name = e.target.name;
         const value = e.target.value;
         switch (name) {
-            case "orderName":
-                setOrderName(value);
+            case "buyerName":
+                setBuyerName(value);
                 break;
-            case "orderTel":
-                setOrderTel(value);
+            case "buyerTel":
+                setBuyerTel(value);
                 break;
-            case "orderDetailAddress":
-                setOrderDetailAddress(value);
+            case "buyerDetailAddress":
+                setBuyerDetailAddress(value);
                 break;
 
             default:
@@ -39,15 +39,10 @@ const Order = ({ orderData }) => {
     const payment = (e) => {
         e.preventDefault();
 
-        const date = new Date();
-        const yy = date.getFullYear().toString().substring(2);
-        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
-        const dd = (("00" + date.getDate()).slice(-2));
-
         setPayData({
             productName: orderData.product_name,
-            buyerName: orderName,
-            buyerTel: Number(orderTel),
+            buyerName: buyerName,
+            buyerTel: Number(buyerTel),
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
@@ -56,20 +51,20 @@ const Order = ({ orderData }) => {
         })
 
         const data = {
-            order_code: orderData.product_code,
-            gopaymethod: '',
-            mid: '',
-            mKey: '',
-            user_id: sessionStorage.getItem("userId"),
-            goods_code: orderData.product_code,
-            goods_name: orderData.product_name,
-            order_pay: orderData.total_price,
-            buyer_name: orderName,
-            buyer_addr: address + "\n" + orderDetailAddress,
-            buyer_tel: orderTel,
-            order_count: orderData.prodcut_count,
-            return_url: '',
-            refund: "ㄴ",
+            mid: "", // 이니시스 mid
+            mKey: "", // 이니시스 mkey
+            gopaymethod: 0, // 결제방법
+            order_code: "123123", // 주문코드
+            user_id: sessionStorage.getItem("userId"), // 유저 아이디
+            goods_code: orderData.product_code, // 상품코드
+            goods_name: orderData.product_name, // 상품이름
+            order_pay: orderData.total_price, // 총 상품가격
+            buyer_name: buyerName, // 주문자 이름
+            buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
+            buyer_tel: buyerTel, // 주문자 번호
+            order_count: orderData.prodcut_count, //상품 갯수
+            return_url: "http://localhost:3000/shop-backend/backend/order/inii_orders", // 백엔드 리턴 url
+            refund: "ㄴ", //환불여부
         }
 
         mutateAsync(data);
@@ -106,16 +101,16 @@ const Order = ({ orderData }) => {
                     <Style.Form>
                         <div>
                             <span>주문자</span>
-                            <input type="text" onChange={onChange} name='orderName' />
+                            <input type="text" onChange={onChange} name='buyerName' />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input type="text" onChange={onChange} name='orderTel' />
+                            <input type="text" onChange={onChange} name='buyerTel' />
                         </div>
                         <div>
                             <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
                             <input readOnly value={address === "" ? "" : address} name='orderAddress' />
-                            <input type="text" onChange={onChange} placeholder='상세주소입력' name='orderDetailAddress' />
+                            <input type="text" onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
                         </div>
                         {
                             isPostOpen && <DaumPost
