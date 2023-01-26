@@ -10,6 +10,8 @@ import Register from "pages/login/Register";
 import Admin from "routers/Admin";
 import Product from "./Product";
 import Order from "./Order";
+import Inicis from "components/inicis/Inicis";
+import Close from "components/inicis/Close";
 
 function App() {
     const location = useLocation();
@@ -19,6 +21,7 @@ function App() {
         <>
             {header && <Header></Header>}
             <Routes>
+                <Route path="/close" element={<Close />} />
                 <Route path="/" element={<Main setHeader={setHeader} />} />
                 <Route path="/admin/*" element={<Admin setHeader={setHeader} />} />
                 <Route path='/login' element={<Login />} />
