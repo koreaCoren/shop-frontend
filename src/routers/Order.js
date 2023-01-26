@@ -32,7 +32,8 @@ const Order = ({ orderData }) => {
         }
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault();
         const data = {
             order_code: orderData.product_code,
             user_id: sessionStorage.getItem("userId"),
@@ -86,7 +87,7 @@ const Order = ({ orderData }) => {
                             <input type="text" onChange={onChange} name='orderTel' />
                         </div>
                         <div>
-                            <span onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                            <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
                             <input readOnly value={address === "" ? "" : address} name='orderAddress' />
                             <input type="text" onChange={onChange} placeholder='상세주소입력' name='orderDetailAddress' />
                         </div>
