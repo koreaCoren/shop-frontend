@@ -54,7 +54,7 @@ const Order = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
-            returnUrl: "http://localhost:3000/order/info",
+            returnUrl: "http://localhost:3000/shop-backend/backend/order/ini_orders",
             closeUrl: "http://localhost:3000/close",
         })
         const data = {
