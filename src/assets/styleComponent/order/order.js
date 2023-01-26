@@ -66,6 +66,13 @@ export const Form = styled.form`
         flex-direction: column;
         gap: 5px;
     }
+    div .address{
+        background-color: #ddd;
+        width: 80px;
+        text-align: center;
+        cursor: pointer;
+        padding: 7px 0px;
+    }
     div input{
         width: 400px;
         border: 1px solid #ddd;
