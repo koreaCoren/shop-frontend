@@ -13,8 +13,8 @@ const Order = ({ orderData }) => {
             goods_name: "pkd",
             order_pay: "100",
             recipient: "박경도",
-            receipt_addr: "코랜",
-            receipt_phone: "01000000000",
+            recipient_addr: "코랜",
+            recipient_phone: "01000000000",
             order_count: "2",
             refund: "ㄴ",
         }
