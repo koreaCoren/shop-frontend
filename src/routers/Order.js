@@ -13,16 +13,7 @@ const Order = ({ orderData }) => {
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
-    const [payData, setPayData] = useState({
-        productName: "",
-        buyerName: "",
-        buyerTel: 0,
-        buyerEmail: "",
-        productPrice: 0,
-        payStatus: 0,
-        returnUrl: "http://localhost:3000/order/info",
-        closeUrl: "http://localhost:3000/close",
-    })
+    const [payData, setPayData] = useState({})
 
     const { mutateAsync, isLoading } = useMutation(order);
 
@@ -47,6 +38,12 @@ const Order = ({ orderData }) => {
 
     const payment = (e) => {
         e.preventDefault();
+
+        const date = new Date();
+        const yy = date.getFullYear().toString().substring(2);
+        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
+        const dd = (("00" + date.getDate()).slice(-2));
+
         setPayData({
             productName: orderData.product_name,
             buyerName: orderName,
@@ -54,10 +51,12 @@ const Order = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
-            returnUrl: "http://localhost:3000/shop-backend/backend/order/ini_orders",
+            returnUrl: "http://localhost:3000/shop-backend/backend/order/inii_orders",
             closeUrl: "http://localhost:3000/close",
         })
+
         const data = {
+            date: `${yy}/${mm}/${dd}`,
             order_code: orderData.product_code,
             user_id: sessionStorage.getItem("userId"),
             goods_code: orderData.product_code,
@@ -69,6 +68,7 @@ const Order = ({ orderData }) => {
             order_count: orderData.prodcut_count,
             refund: "ㄴ",
         }
+
         mutateAsync(data);
         setIsPurchase(isPurchase + 1);
     }
