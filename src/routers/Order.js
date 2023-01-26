@@ -3,6 +3,7 @@ import * as Style from "assets/styleComponent/order/order"
 import { order } from 'utils/axios';
 import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
+import * as INIpayTest from "https://stdpay.inicis.com/stdjs/INIStdPay.js";
 
 const Order = ({ orderData }) => {
     const [orderName, setOrderName] = useState("");
@@ -46,7 +47,8 @@ const Order = ({ orderData }) => {
             order_count: orderData.prodcut_count,
             refund: "ㄴ",
         }
-        mutateAsync(data);
+        INIpayTest.INIStdPay.pay(data);
+        // mutateAsync(data);
     }
     return (
         <Style.Order>
