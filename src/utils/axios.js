@@ -60,7 +60,6 @@ export const tokenCheck = async (data) => {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
             sessionStorage.removeItem('token');
-            alert("토큰만료되서 로그아웃됨");
         }
         if (sessionStorage.getItem("token") === null ||
             sessionStorage.getItem("loginCheck") === null ||
