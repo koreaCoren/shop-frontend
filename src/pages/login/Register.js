@@ -76,10 +76,9 @@ const Register = () => {
 
     return (
         <>
-            <div className="loginContainer">
-                <h1>회원가입창</h1>
-
-                <Style.Form onSubmit={onSubmit}>
+            <Style.Form onSubmit={onSubmit}>
+                <div>
+                    <h1>회원가입</h1>
                     <Input type="text" name="name" onChange={onChange} placeholder="이름" />
                     <Input type="text" name="id" onChange={onChange} placeholder="아이디" />
                     <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
@@ -87,8 +86,8 @@ const Register = () => {
                     <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
                     <Input type="text" name="address" onChange={onChange} placeholder="주소" />
                     <input type="submit" value="회원가입" />
-                </Style.Form>
-            </div>
+                </div>
+            </Style.Form>
         </>
     );
 };

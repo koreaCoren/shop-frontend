@@ -22,6 +22,7 @@ const DaumPost = ({ setAddress, setZoneCode, setIsPostOpen }) => {
         setAddress(fullAddress);
         setIsPostOpen(false);
     };
+
     return (
         <Container>
             <div style={{

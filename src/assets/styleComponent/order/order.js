@@ -61,11 +61,13 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 10px;
+
     div{
         display: flex;
         flex-direction: column;
         gap: 5px;
     }
+
     div .address{
         background-color: #ddd;
         width: 80px;
@@ -73,11 +75,13 @@ export const Form = styled.form`
         cursor: pointer;
         padding: 7px 0px;
     }
+
     div input{
         width: 400px;
         border: 1px solid #ddd;
         padding: 5px;
     }
+    
     .submit{
         background-color: #ddd;
         padding: 10px 0px;

@@ -145,7 +145,7 @@ export const Quantity = styled.div`
         cursor: pointer;
     }
 
-     .money {
+    .money {
         font-size: 16px;
     }
 

@@ -10,7 +10,6 @@ import Register from "pages/login/Register";
 import Admin from "routers/Admin";
 import Product from "./Product";
 import Order from "./Order";
-import Inicis from "components/inicis/Inicis";
 import Close from "components/inicis/Close";
 
 function App() {
@@ -21,13 +20,13 @@ function App() {
         <>
             {header && <Header></Header>}
             <Routes>
-                <Route path="/close" element={<Close />} />
                 <Route path="/" element={<Main setHeader={setHeader} />} />
                 <Route path="/admin/*" element={<Admin setHeader={setHeader} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/loginRegister' element={<Register />} />
                 <Route path="/product/*" element={<Product setOrderData={setOrderData} />} />
                 <Route path="/order/*" element={<Order orderData={orderData} />} />
+                <Route path="/close" element={<Close />} />
             </Routes>
             {header && <Footer></Footer>}
         </>

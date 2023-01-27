@@ -20,7 +20,6 @@ const Detail = ({ result, setOrderData }) => {
                 };
             };
         };
-        console.log(productDetail);
     }, [result.isLoading]);
 
     //상품갯수증가
