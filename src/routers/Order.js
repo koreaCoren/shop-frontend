@@ -46,14 +46,14 @@ const Order = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
-            returnUrl: "http://localhost:3000/shop-backend/backend/order/inii_orders",
+            returnUrl: "http://localhost:3000/shop-backend/backend/order/ini_transaction",
             closeUrl: "http://localhost:3000/close",
         })
 
         const data = {
             mid: "", // 이니시스 mid
             mKey: "", // 이니시스 mkey
-            gopaymethod: 0, // 결제방법
+            gopaymethod: '0', // 결제방법
             order_code: "123123", // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
             goods_code: orderData.product_code, // 상품코드
@@ -63,7 +63,7 @@ const Order = ({ orderData }) => {
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
             buyer_tel: buyerTel, // 주문자 번호
             order_count: orderData.prodcut_count, //상품 갯수
-            return_url: "http://localhost:3000/shop-backend/backend/order/inii_orders", // 백엔드 리턴 url
+            return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "ㄴ", //환불여부
         }
 
