@@ -2,10 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import * as Style from "assets/styleComponent/login/login";
 
 import Input from "components/input/Input";
 import { register } from "utils/axios";
+
+import * as Style from "assets/styleComponent/login/login";
 
 const Register = () => {
     const nav = useNavigate();

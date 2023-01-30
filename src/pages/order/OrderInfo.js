@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import * as Style from "assets/styleComponent/order/order"
-import { order } from 'utils/axios';
 import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
+
 import Inicis from 'components/inicis/Inicis';
+import { order } from 'utils/axios';
+
+import * as Style from "assets/styleComponent/order/order"
 
 const OrderInfo = ({ orderData }) => {
     const [buyerName, setBuyerName] = useState("");

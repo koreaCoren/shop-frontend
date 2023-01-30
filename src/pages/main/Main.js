@@ -1,8 +1,9 @@
 import React from 'react';
 import { useEffect } from 'react';
-import * as Style from "assets/styleComponent/main/main"
 
 import MainProductList from 'pages/main/MainProductList';
+
+import * as Style from "assets/styleComponent/main/main"
 
 const Main = ({ setHeader }) => {
     useEffect(() => {

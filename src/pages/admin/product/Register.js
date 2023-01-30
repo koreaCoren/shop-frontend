@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
-import * as Style from "assets/styleComponent/admin/product/register"
 
 import { categoryList, productRegister } from 'utils/axios';
-
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
 import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
 import Loading from 'components/loding/Loading';
+
+import * as Style from "assets/styleComponent/admin/product/register"
 
 const Register = () => {
     const [productName, setProductName] = useState("");
@@ -47,7 +47,7 @@ const Register = () => {
         setCate02("");
     }, [cate01])
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         if (productName === "") {
@@ -103,7 +103,7 @@ const Register = () => {
             goods_imageCode: imageCode,
             goods_option: productOption,
         }
-        mutateAsync(data);
+        await mutateAsync(data);
     }
 
     const onChange = (e) => {

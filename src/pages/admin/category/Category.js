@@ -1,12 +1,14 @@
-import Top from 'components/admin/Top';
-import Loading from 'components/loding/Loading';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
-import * as Style from "assets/styleComponent/admin/category/category"
+
 import { categoryList, categorySave } from 'utils/axios';
+import Top from 'components/admin/Top';
+import Loading from 'components/loding/Loading';
 import Register from './Register';
+
+import * as Style from "assets/styleComponent/admin/category/category"
 
 const Category = () => {
     const nav = useNavigate();
