@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
-import "assets/css/common/common.css";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
 
+import { tokenCheck } from "utils/axios";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
 import Main from "../pages/main/Main";
@@ -12,10 +13,22 @@ import Product from "./Product";
 import Order from "./Order";
 import Close from "components/inicis/Close";
 
+import "assets/css/common/common.css";
+
 function App() {
-    const location = useLocation();
+    const nav = useNavigate();
     const [header, setHeader] = useState(true);
     const [orderData, setOrderData] = useState();
+    const { mutate, isLoading } = useMutation(tokenCheck);
+
+    useEffect(() => {
+        const data = {
+            token: sessionStorage.getItem("token"),
+            userId: sessionStorage.getItem("userId"),
+        }
+        mutate(data);
+    }, [nav])
+
     return (
         <>
             {header && <Header></Header>}

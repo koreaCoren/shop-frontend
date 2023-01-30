@@ -16,7 +16,7 @@ const Div = styled.div`
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #fff;
+    background-color: #eee;
     z-index: 100;
 `
 
@@ -26,6 +26,7 @@ const Img = styled.img`
     left: 50%;
     transform: translate(-50%,-50%);
     width: 300px;
+    z-index: 10;
 `;
 
 export default Loading;

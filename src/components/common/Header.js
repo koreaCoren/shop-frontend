@@ -5,16 +5,6 @@ import { tokenCheck, logout } from 'utils/axios';
 import styled from 'styled-components';
 
 const Header = () => {
-    const nav = useNavigate();
-    const { mutate, isLoading } = useMutation(tokenCheck);
-
-    useEffect(() => {
-        const data = {
-            token: sessionStorage.getItem("token"),
-            userId: sessionStorage.getItem("userId"),
-        }
-        mutate(data);
-    }, [nav])
     return (
         <header>
             <Login>

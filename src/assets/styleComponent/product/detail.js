@@ -176,7 +176,7 @@ export const ButtonBox = styled.div`
     gap: 5px;
 `
 
-export const Button = styled(Link)`
+export const Button = styled.div`
     flex: 1;
     text-align: center;
     border: 1px solid #ccc;
@@ -185,4 +185,5 @@ export const Button = styled(Link)`
     padding: 20px 0px;
     color: ${props => props.color !== "black" ? "#333" : "#fff"};
     background-color: ${props => props.color !== "black" ? "#fff" : "#333"};
+    cursor: pointer;
 `

@@ -11,20 +11,21 @@ const OrderComplete = () => {
     const [success, setSuccess] = useState();
     const { mutateAsync, isLoading, isSuccess } = useMutation(orderSuccess);
 
-    useEffect(() => {
+    const getSuccsssData = async () => {
         const location = window.location;
         const params = new URLSearchParams(location.search);
         const data = {
             orderCode: params.get("orderCode"),
         };
 
-        async function getSuccsssData() {
-            await mutateAsync(data);
-            setSuccess(data.result);
-        }
+        await mutateAsync(data);
+        setSuccess(data.result);
+    }
 
+    useEffect(() => {
         getSuccsssData();
     }, [])
+
     return (
         <>
             {
