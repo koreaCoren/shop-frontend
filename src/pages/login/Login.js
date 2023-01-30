@@ -48,11 +48,13 @@ const Login = () => {
     };
     return (
         <>
-            <h1>로그인창</h1>
             <Style.Form onSubmit={onSubmit}>
-                <LoginInput type="text" name='id' placeholder='아이디' onChange={onChange}></LoginInput>
-                <LoginInput type="password" name='password' placeholder='비밀번호' onChange={onChange}></LoginInput>
-                <input type="submit" value="로그인하기" />
+                <div>
+                    <h1>로그인</h1>
+                    <LoginInput type="text" name='id' placeholder='아이디' onChange={onChange}></LoginInput>
+                    <LoginInput type="password" name='password' placeholder='비밀번호' onChange={onChange}></LoginInput>
+                    <input type="submit" value="로그인하기" />
+                </div>
             </Style.Form>
         </>
     );

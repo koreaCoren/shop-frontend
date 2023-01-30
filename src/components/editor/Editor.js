@@ -33,6 +33,7 @@ const TextEditor = ({ setProductContent, setImageCode }) => {
             return uploadAdapter(loader);
         }
     }
+
     return (
         <Div>
             <CKEditor
