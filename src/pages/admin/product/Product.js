@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import * as Style from "assets/styleComponent/admin/product/product"
+
 import List from 'pages/admin/product/List';
 import Register from 'pages/admin/product/Register';
 import Top from "components/admin/Top";
+
+import * as Style from "assets/styleComponent/admin/product/product"
 
 const Product = () => {
     const nav = useLocation();

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from "react-query";
-import * as Style from "assets/styleComponent/main/mainProductList";
 
 import { productList } from 'utils/axios';
+
+import * as Style from "assets/styleComponent/main/mainProductList";
 
 const MainProductList = () => {
     let result = useQuery("prodcutList", productList);

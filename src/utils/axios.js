@@ -12,6 +12,7 @@ export const login = async (data) => {
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
     return api;
 }
@@ -27,13 +28,13 @@ export const logout = async () => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
-
     sessionStorage.removeItem("loginCheck");
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('token');
     window.location.replace("/");
-};
+}
 
 //회원가입
 export const register = async (data) => {
@@ -49,6 +50,7 @@ export const register = async (data) => {
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     });
     return api;
 }
@@ -70,8 +72,9 @@ export const tokenCheck = async (data) => {
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     });
-    return api
+    return api;
 }
 
 //상품리스트
@@ -91,8 +94,9 @@ export const productRegister = async (data) => {
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
-    return api
+    return api;
 }
 
 //상품삭제
@@ -100,8 +104,9 @@ export const productDelete = async (data) => {
     const api = await API.PRODUCT_DELETE_API.post("", data).then((res) => {
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
-    return api
+    return api;
 }
 
 // 카테고리 리스트
@@ -116,15 +121,34 @@ export const categorySave = async (data) => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
-    return api
+    return api;
 }
 
 // 주문하기
 export const order = async (data) => {
-    const api = await API.ORDER.post("", data).then(() => {
+    const api = await API.ORDER.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
+    return api;
+}
+
+// 결제완료
+export const orderSuccess = async (data) => {
+    const api = await API.ORDER_SUCCESS.post("", data).then((res) => {
+        if (String(res.data[0].resultCode) === "0000") {
+            data.result = { ...res.data[0] };
+        } else {
+            alert("알수없는 에러로 실패하였습니다. \n관리자에게 문의 부탁드립니다.");
+            window.location.replace("/");
+        }
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
 }
