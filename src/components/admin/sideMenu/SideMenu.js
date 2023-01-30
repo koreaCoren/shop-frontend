@@ -15,31 +15,37 @@ const SideMenu = () => {
             {
                 menus.map((a, i) => {
                     return (
-                        <li key={i}
-                            onClick={() => {
-                                setMenuList(i);
-                                setIsMenu(true);
-                                menuList === i && setIsMenu(!isMenu)
-                            }}>
-                            <span><i className="fa-solid fa-gift"></i>{a.mainTitle}</span>
-                            <ol
-                                className={
-                                    isMenu === true
-                                        ? menuList === i
-                                            ? "on"
+                        a.subList.length !== 0
+                            ? <li key={i}
+                                onClick={() => {
+                                    setMenuList(i);
+                                    setIsMenu(true);
+                                    menuList === i && setIsMenu(!isMenu)
+                                }}>
+                                <span><i className={a.icon}></i>{a.mainTitle}</span>
+                                <ol
+                                    className={
+                                        isMenu === true
+                                            ? menuList === i
+                                                ? "on"
+                                                : ""
                                             : ""
-                                        : ""
-                                }
-                            >
-                                {
-                                    a.subList.map((b, j) => {
-                                        return (
-                                            <li key={j}><Link to={b.url}>{b.title}</Link></li>
-                                        )
-                                    })
-                                }
-                            </ol>
-                        </li>
+                                    }
+                                >
+                                    {
+                                        a.subList.map((b, j) => {
+                                            return (
+                                                <li key={j}><Link to={b.url}>{b.title}</Link></li>
+                                            )
+                                        })
+                                    }
+                                </ol>
+                            </li>
+                            : <li>
+                                <Link to={a.url}>
+                                    <i className={a.icon}></i>{a.mainTitle}
+                                </Link>
+                            </li>
                     )
                 })
             }

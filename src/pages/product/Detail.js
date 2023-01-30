@@ -1,11 +1,15 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import * as Style from "assets/styleComponent/product/detail"
+import { useNavigate, useParams } from 'react-router-dom';
+
 import Loading from 'components/loding/Loading';
+import loginCheck from 'utils/loginCheck';
+
+import * as Style from "assets/styleComponent/product/detail"
 
 const Detail = ({ result, setOrderData }) => {
+    const nav = useNavigate();
     const { productCode } = useParams();
     const [productDetail, setProductDetail] = useState();
     const [count, setCount] = useState(1);
@@ -38,6 +42,9 @@ const Detail = ({ result, setOrderData }) => {
 
     //구매 클릭
     const orderClick = () => {
+        if (loginCheck() === true) {
+            return;
+        }
         const data = {
             product_code: productCode,
             product_name: productDetail?.goods_nm,
@@ -49,6 +56,7 @@ const Detail = ({ result, setOrderData }) => {
             total_price: Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count
         }
         setOrderData(data);
+        nav("/order/info");
     }
 
     return (
