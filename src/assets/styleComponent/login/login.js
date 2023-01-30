@@ -4,8 +4,8 @@ export const Form = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 70vh;
-
+    min-height: 70vh;
+    padding: 50px 0px;
     div{
         display: flex;
         flex-direction: column;

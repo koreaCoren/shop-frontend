@@ -50,6 +50,14 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
+        const date = new Date();
+        const yy = date.getFullYear().toString().substring(2);
+        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
+        const dd = (("00" + date.getDate()).slice(-2));
+        const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
+        const serialNumber = Math.floor((Math.random() * (999 - 100) + 100));
+        const orderCode = yy + mm + dd + time + serialNumber;
+
         setPayData({
             productName: orderData.product_name,
             buyerName: buyerName,
@@ -57,16 +65,15 @@ const OrderInfo = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
-            returnUrl: "http://localhost:3000/shop-backend/backend/order/ini_orders",
+            returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_orders?odrderCode=${orderCode}`,
             closeUrl: "http://localhost:3000/close",
-            oid: "12312412412321",
         })
 
         const data = {
             mid: "", // 이니시스 mid
             mKey: "", // 이니시스 mkey
             gopaymethod: "0", // 결제방법
-            order_code: "123123", // 주문코드
+            order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
             goods_code: orderData.product_code, // 상품코드
             goods_name: orderData.product_name, // 상품이름
@@ -129,7 +136,7 @@ const OrderInfo = ({ orderData }) => {
                                 setIsPostOpen={setIsPostOpen}
                                 setZoneCode={setZoneCode}
                                 setAddress={setAddress}
-                            >test</DaumPost>
+                            ></DaumPost>
                         }
                         <button className='submit' onClick={payment}>결제하기</button>
                     </Style.Form>
