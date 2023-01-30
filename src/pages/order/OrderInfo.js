@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import * as Style from "assets/styleComponent/order/order"
-import { order } from 'utils/axios';
 import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
+
 import Inicis from 'components/inicis/Inicis';
+import { order } from 'utils/axios';
+
+import * as Style from "assets/styleComponent/order/order"
 
 const OrderInfo = ({ orderData }) => {
     const [buyerName, setBuyerName] = useState("");
@@ -65,7 +67,7 @@ const OrderInfo = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderData.total_price),
             payStatus: 0,
-            returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_orders?odrderCode=${orderCode}`,
+            returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
             closeUrl: "http://localhost:3000/close",
         })
 
@@ -82,7 +84,7 @@ const OrderInfo = ({ orderData }) => {
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
             buyer_tel: buyerTel, // 주문자 번호
             order_count: orderData.prodcut_count, //상품 갯수
-            return_url: "http://localhost:3000/shop-backend/backend/order/ini_orders", // 백엔드 리턴 url
+            return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "ㄴ", //환불여부
         }
 

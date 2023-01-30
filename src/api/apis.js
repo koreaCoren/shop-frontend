@@ -49,3 +49,8 @@ export const CATEGORY_SAVE_API = axios.create({
 export const ORDER = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/ins_orders`,
 })
+
+//주문 완료
+export const ORDER_SUCCESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders `,
+})
