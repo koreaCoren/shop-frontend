@@ -10,8 +10,8 @@ const menus = [
     {
         mainTitle: "주문 관리",
         subList: [],
-        url: "order",
-        icon: "fa-solid fa-folder-tree",
+        url: "order/1",
+        icon: "fa-solid fa-file-invoice-dollar",
     },
     {
         mainTitle: "배송 관리",

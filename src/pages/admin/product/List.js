@@ -5,6 +5,7 @@ import { useMutation, useQuery } from 'react-query';
 import { productDelete, productList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/admin/product/list"
+import Loading from 'components/loding/Loading';
 
 
 const List = () => {
@@ -21,32 +22,37 @@ const List = () => {
     }
 
     return (
-        result.data?.map((a, i) => {
-            return (
-                <Style.Container key={i}>
-                    <ul>
-                        <Style.ProductList>
-                            <img src={a.goods_img} alt="" />
-                            <Style.Div>
-                                <ul>
-                                    <li>상품이름 : {a.goods_nm}</li>
-                                    <li>가격 : {a.goods_price}원</li>
-                                    <li>할인률 : {a.goods_sale}%</li>
-                                </ul>
-                                <ul>
-                                    <li>수량 : {a.goods_sell}</li>
-                                    <li>재고 : {a.goods_stock}</li>
-                                </ul>
-                            </Style.Div>
-                            <Style.Ul>
-                                <li><Link to="" >수정</Link></li>
-                                <li><button type='button' onClick={() => { onDelete(a) }}>삭제</button></li>
-                            </Style.Ul>
-                        </Style.ProductList>
-                    </ul>
-                </Style.Container>
-            )
-        })
+        <>
+            {
+                result.data?.map((a, i) => {
+                    return (
+                        <Style.Container key={i}>
+                            <ul>
+                                <Style.ProductList>
+                                    <img src={a.goods_img} alt="" />
+                                    <Style.Div>
+                                        <ul>
+                                            <li>상품이름 : {a.goods_nm}</li>
+                                            <li>가격 : {a.goods_price}원</li>
+                                            <li>할인률 : {a.goods_sale}%</li>
+                                        </ul>
+                                        <ul>
+                                            <li>수량 : {a.goods_sell}</li>
+                                            <li>재고 : {a.goods_stock}</li>
+                                        </ul>
+                                    </Style.Div>
+                                    <Style.Ul>
+                                        <li><Link to="" >수정</Link></li>
+                                        <li><button type='button' onClick={() => { onDelete(a) }}>삭제</button></li>
+                                    </Style.Ul>
+                                </Style.ProductList>
+                            </ul>
+                        </Style.Container>
+                    )
+                })
+            }
+            {result.isLoading && <Loading />}
+        </>
     );
 };
 

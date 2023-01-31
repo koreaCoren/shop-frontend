@@ -77,13 +77,15 @@ export const tokenCheck = async (data) => {
     return api;
 }
 
-//상품리스트
+//--------- 어드민 관련 시작 ---------
+
+// 어드민 상품리스트
 export const productList = async () => {
     const { data } = await API.PRODUCT_LIST_API.get();
     return data;
 }
 
-//상품 등록
+// 어드민 상품 등록
 export const productRegister = async (data) => {
     const api = await API.PRODUCT_REGISTER_API.post("", data).then((res) => {
         if (res.data.result === "success") {
@@ -99,7 +101,7 @@ export const productRegister = async (data) => {
     return api;
 }
 
-//상품삭제
+// 어드민 상품삭제
 export const productDelete = async (data) => {
     const api = await API.PRODUCT_DELETE_API.post("", data).then((res) => {
     }).catch((error) => {
@@ -109,13 +111,13 @@ export const productDelete = async (data) => {
     return api;
 }
 
-// 카테고리 리스트
+// 어드민 카테고리 리스트
 export const categoryList = async () => {
     const { data } = await API.CATEGORY_LIST_API.get();
     return data;
 }
 
-// 카테고리 저장
+// 어드민 카테고리 저장
 export const categorySave = async (data) => {
     const api = await API.CATEGORY_SAVE_API.post("", data).then(() => {
 
@@ -125,6 +127,14 @@ export const categorySave = async (data) => {
     })
     return api;
 }
+
+// 어드민 주문 관리
+export const orderManagement = async () => {
+    const { data } = await API.ORDER_MANAGEMENT.get();
+    return data;
+}
+
+//--------- 어드민 관련 끝 ---------
 
 // 주문하기
 export const order = async (data) => {

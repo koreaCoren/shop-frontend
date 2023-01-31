@@ -12,7 +12,7 @@ const Product = () => {
     return (
         <>
             {
-                nav.pathname === "/admin/product" && <Top title={"상품등록"} buttonTitle={"상품등록"} buttonLink={"register"} />
+                nav.pathname === "/admin/product" && <Top title={"상품등록"} isButton={true} buttonTitle={"상품등록"} buttonLink={"register"} />
             }
             <Style.Padding>
                 <Routes>
