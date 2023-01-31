@@ -8,29 +8,44 @@ import * as Style from "assets/styleComponent/product/products"
 
 const Products = ({result, setOrderData}) => {
     const nav = useNavigate();
+    const {categoryCode} = useParams();
+    const [productList, setProductList] = useState();
+
+    const reset = () => {
+        const arr = [];
+        for (let i = 0; i < result.data?.length; i++) {
+            if(result?.data[i].cate_code === Number(categoryCode)){
+                arr.push(result?.data[i]);
+            }
+        }
+        setProductList(arr);
+    }
+
     useEffect(()=>{
-        console.log(result.data); 
-        console.log(nav);
-    },[]);
+        reset();
+    },[result.isLoading,nav]);
     
     return (
-        <Style.Products>
-            <ul>
-                {
-                    result.data?.map((a, i) => {
-                        return (
-                            <li key={i}>
-                                <Link to={`/product/detail/${a.goods_code}`}>
-                                    <img src={a.goods_img} alt="" />
-                                    <h3>{a.goods_nm}</h3>
-                                    <h4>{a.goods_price} 원</h4>
-                                </Link>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        </Style.Products>
+        <>
+            <Style.Products>
+                <ul>
+                    {
+                    productList?.map((a, i) => {
+                            return (
+                                <li key={i}>
+                                    <Link to={`/product/detail/${a.goods_code}`}>
+                                        <img src={a.goods_img} alt="" />
+                                        <h3>{a.goods_nm}</h3>
+                                        <h4>{a.goods_price} 원</h4>
+                                    </Link>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </Style.Products>
+            {result.isLoading && <Loading/>}
+        </>
     );
 };
 
