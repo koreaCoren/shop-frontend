@@ -22,7 +22,6 @@ const Detail = ({ result, setOrderData }) => {
             for (let i = 0; i < result.data.length; i++) {
                 if (result.data[i].goods_code === productCode) {
                     setProductDetail(result.data[i]);
-                    console.log(productDetail);
                 };
             };
         };

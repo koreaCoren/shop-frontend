@@ -13,9 +13,7 @@ const Header = () => {
     const result = useQuery("categoryList", categoryList);
     
     useEffect(() => {
-        console.log(result.data);
         setCategorys(result.data);
-        console.log(categorys);
     },[result.isLoading])
 
     return (
