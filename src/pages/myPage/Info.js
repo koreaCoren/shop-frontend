@@ -8,7 +8,7 @@ const Info = ({ }) => {
 
 
     return (
-        <Style.Slide>마이페이지 배너</Style.Slide>
+        <Style.Slide>개인 정보 수정</Style.Slide>
     );
 };
 export default Info;

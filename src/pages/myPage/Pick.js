@@ -8,7 +8,7 @@ const Pick = ({ }) => {
 
 
     return (
-        <Style.Slide>마이페이지 배너</Style.Slide>
+        <Style.Slide>찜한 상품</Style.Slide>
     );
 };
 export default Pick;

@@ -8,7 +8,7 @@ const Order = ({ }) => {
 
 
     return (
-        <Style.Slide>마이페이지 배너</Style.Slide>
+        <Style.Slide>주문 내역</Style.Slide>
     );
 };
 export default Order;

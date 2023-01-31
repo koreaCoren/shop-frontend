@@ -8,7 +8,7 @@ const Address = ({ }) => {
 
 
     return (
-        <Style.Slide>마이페이지 배너</Style.Slide>
+        <Style.Slide>배송지 관리</Style.Slide>
     );
 };
 export default Address;
