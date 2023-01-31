@@ -8,4 +8,7 @@ export const Slide = styled.div`
     align-items: center;
     justify-content: center;
     font-size: 60px;
+    img{
+        width: 1200px;
+    }
 `
