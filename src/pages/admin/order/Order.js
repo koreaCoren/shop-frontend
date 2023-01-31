@@ -7,55 +7,25 @@ import Top from 'components/admin/Top';
 
 import * as Style from 'assets/styleComponent/admin/order/order';
 import Loading from 'components/loding/Loading';
+import Pageing from 'components/board/Pageing';
 
 const Order = () => {
     const nav = useNavigate();
     const { boardPage } = useParams();
-    const result = useQuery("orderManagement", orderManagement);
     const [board, setBoard] = useState();
+    const [boardCount, setBoardCount] = useState(4)
+    const result = useQuery("orderManagement", orderManagement);
 
-    const pageing = () => {
-        let page = [];
-        const viewCount = 1;
-        const minPage = 1;
-        const maxPage = Math.ceil(result.data?.length / viewCount);
-        const minNav = Number(boardPage) - 2 < 1 ? 1 : Number(boardPage) - 2;
-        const maxNav = Number(boardPage) + 2 > maxPage ? Number(boardPage) : Number(boardPage) + 2;
-        const totalNav = 5;
+    useEffect(() => {
+        setBoard(result.data?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
+    }, [result.isLoading, nav])
 
-        const pageLoop = (min, max) => {
-            if (Number(boardPage) === 1) {
-                max = totalNav <= maxPage ? max + 1 : max;
-            } else if (Number(boardPage) === maxPage) {
-                min = totalNav > maxPage ? min : maxPage - 2;
-            }
-
-            for (let i = min; i <= max; i++) {
-                page.push(
-                    <li key={i}><Link>{i}</Link></li>
-                )
-            }
-        }
-
-        if (minPage === maxPage) {
-            page.push(
-                <li><Link>{minPage}</Link></li>
-            )
-        } else {
-            pageLoop(minNav, maxNav);
-        }
-
-        console.log(maxNav);
-        return page;
-    }
-
-    useEffect(() => { }, [result.isLoading, nav])
     return (
         <>
             <Top title={"주문 관리"} isButton={false} />
             <Style.Padding>
                 {
-                    result.data?.map((a, i) => {
+                    board?.map((a, i) => {
                         return (
                             <Style.Container key={i}>
                                 <Style.Div>
@@ -76,15 +46,7 @@ const Order = () => {
                     })
                 }
             </Style.Padding>
-            <Style.Pageing>
-                <ul>
-                    <li><Link><i className="fa-solid fa-angles-left"></i></Link></li>
-                    <li><Link><i className="fa-solid fa-angle-left"></i></Link></li>
-                    {pageing()}
-                    <li><Link><i className="fa-solid fa-angle-right"></i></Link></li>
-                    <li><Link><i className="fa-solid fa-angles-right"></i></Link></li>
-                </ul>
-            </Style.Pageing>
+            <Pageing count={boardCount} boardPage={boardPage} boardLength={result.data?.length} url={"/admin/order"} />
             {result.isLoading && <Loading />}
         </>
     );
