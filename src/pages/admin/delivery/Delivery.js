@@ -1,9 +1,10 @@
+import Top from 'components/admin/Top';
 import React from 'react';
 
 const Delivery = () => {
     return (
         <>
-            배송관리
+            <Top title={"배송 관리"} isButton={false} />
         </>
     );
 };

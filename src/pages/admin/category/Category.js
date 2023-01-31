@@ -109,7 +109,7 @@ const Category = () => {
 
     return (
         <>
-            <Top title={"카테고리"} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
+            <Top title={"카테고리"} isButton={true} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
             <Style.Save onClick={onSubmit}>저장</Style.Save>
             <Style.Padding>
                 {
@@ -166,7 +166,7 @@ const Category = () => {
                 }></Route>
             </Routes>
 
-            {isLoading && <Loading />}
+            {result.isLoading && <Loading />}
         </>
     );
 };

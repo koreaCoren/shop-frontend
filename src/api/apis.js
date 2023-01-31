@@ -20,32 +20,41 @@ export const LOGOUT_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/break_token`,
 });
 
-//상품리스트
+//--------- 어드민 관련 시작 ---------
+
+// 어드민 상품리스트
 export const PRODUCT_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_goods`,
 })
 
-//상품등록
+// 어드민 상품등록
 export const PRODUCT_REGISTER_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/ins_goods`,
 })
 
-//상품삭제
+// 어드민 상품삭제
 export const PRODUCT_DELETE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/del_goods`,
 })
 
-//카테고리 리스트
+// 어드민 카테고리 리스트
 export const CATEGORY_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_category`,
 })
 
-//카테고리 저장
+// 어드민 카테고리 저장
 export const CATEGORY_SAVE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/ins_category`,
 })
 
-//주문하기
+// 어드민 주문 관리
+export const ORDER_MANAGEMENT = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_admin_orders`
+})
+
+//--------- 어드민 관련 끝 ---------
+
+// 주문하기
 export const ORDER = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/ins_orders`,
 })

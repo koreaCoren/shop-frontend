@@ -29,7 +29,7 @@ const Admin = ({ setHeader }) => {
                 <Routes>
                     <Route path='/product/*' element={<Product />} />
                     <Route path='/category/*' element={<Category />} />
-                    <Route path='/order/*' element={<Order />} />
+                    <Route path='/order/:boardPage' element={<Order />} />
                     <Route path='/delivery/*' element={<Delivery />} />
                 </Routes>
             </div>
