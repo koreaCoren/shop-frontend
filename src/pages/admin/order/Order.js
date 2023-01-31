@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 import { orderManagement } from 'utils/axios';
@@ -9,7 +9,47 @@ import * as Style from 'assets/styleComponent/admin/order/order';
 import Loading from 'components/loding/Loading';
 
 const Order = () => {
+    const nav = useNavigate();
+    const { boardPage } = useParams();
     const result = useQuery("orderManagement", orderManagement);
+    const [board, setBoard] = useState();
+
+    const pageing = () => {
+        let page = [];
+        const viewCount = 1;
+        const minPage = 1;
+        const maxPage = Math.ceil(result.data?.length / viewCount);
+        const minNav = Number(boardPage) - 2 < 1 ? 1 : Number(boardPage) - 2;
+        const maxNav = Number(boardPage) + 2 > maxPage ? Number(boardPage) : Number(boardPage) + 2;
+        const totalNav = 5;
+
+        const pageLoop = (min, max) => {
+            if (Number(boardPage) === 1) {
+                max = totalNav <= maxPage ? max + 1 : max;
+            } else if (Number(boardPage) === maxPage) {
+                min = totalNav > maxPage ? min : maxPage - 2;
+            }
+
+            for (let i = min; i <= max; i++) {
+                page.push(
+                    <li key={i}><Link>{i}</Link></li>
+                )
+            }
+        }
+
+        if (minPage === maxPage) {
+            page.push(
+                <li><Link>{minPage}</Link></li>
+            )
+        } else {
+            pageLoop(minNav, maxNav);
+        }
+
+        console.log(maxNav);
+        return page;
+    }
+
+    useEffect(() => { }, [result.isLoading, nav])
     return (
         <>
             <Top title={"주문 관리"} isButton={false} />
@@ -38,15 +78,11 @@ const Order = () => {
             </Style.Padding>
             <Style.Pageing>
                 <ul>
-                    <li><Link>처음</Link></li>
-                    <li><Link>이전</Link></li>
-                    <li><Link className='now'>1</Link></li>
-                    <li><Link>2</Link></li>
-                    <li><Link>3</Link></li>
-                    <li><Link>4</Link></li>
-                    <li><Link>5</Link></li>
-                    <li><Link>다음</Link></li>
-                    <li><Link>끝</Link></li>
+                    <li><Link><i className="fa-solid fa-angles-left"></i></Link></li>
+                    <li><Link><i className="fa-solid fa-angle-left"></i></Link></li>
+                    {pageing()}
+                    <li><Link><i className="fa-solid fa-angle-right"></i></Link></li>
+                    <li><Link><i className="fa-solid fa-angles-right"></i></Link></li>
                 </ul>
             </Style.Pageing>
             {result.isLoading && <Loading />}
