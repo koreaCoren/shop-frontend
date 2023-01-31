@@ -41,7 +41,7 @@ const SideMenu = () => {
                                     }
                                 </ol>
                             </li>
-                            : <li>
+                            : <li key={i}>
                                 <Link to={a.url}>
                                     <i className={a.icon}></i>{a.mainTitle}
                                 </Link>
