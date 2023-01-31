@@ -15,6 +15,11 @@ const Header = () => {
                                 <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
                                 <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
                                 {
+                                    sessionStorage.getItem("userId")
+                                        ? <li><Link to={"myPage"}>마이페이지</Link></li>
+                                        : null
+                                }
+                                {
                                     sessionStorage.getItem("userId") === "admin" || sessionStorage.getItem("userId") === "pkd"
                                         ? <li><Link to={"admin"}>관리자</Link></li>
                                         : null
