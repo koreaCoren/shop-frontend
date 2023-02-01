@@ -223,3 +223,16 @@ export const OrderMenu = styled.div`
 export const DescriptionShow = styled.div`
     margin-top: 20px;
 `
+
+export const Review = styled.div`
+    h2{
+        font-size: 24px;
+    }
+    .flex{
+        display: grid;
+        
+
+    }
+    `
+
+export const QnA = styled.div``
