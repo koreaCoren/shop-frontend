@@ -119,14 +119,13 @@ const Detail = ({ result, setOrderData }) => {
                         <div></div>
                     </Style.OrderMenu>
                     <Style.DescriptionShow>
-                            <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}>
-                            </div>
+                        <div dangerouslySetInnerHTML={{ __html: productDetail?.goods_detail }}></div>
                     </Style.DescriptionShow>
                 </Style.Description>
             </div>
 
             {result.isLoading && <Loading />}
-        </Style.Padding>
+        </Style.Padding >
     );
 };
 

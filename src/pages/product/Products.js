@@ -6,34 +6,34 @@ import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/products"
 
-const Products = ({result, setOrderData}) => {
+const Products = ({ result, setOrderData }) => {
     const nav = useNavigate();
-    const {categoryCode} = useParams();
+    const { categoryCode } = useParams();
     const [productList, setProductList] = useState();
 
     const reset = () => {
         const arr = [];
         for (let i = 0; i < result.data?.length; i++) {
             let get_cate_code = String(result?.data[i].cate_code);
-            if(get_cate_code === categoryCode){
+            if (get_cate_code === categoryCode) {
                 arr.push(result?.data[i]);
-            } else if(get_cate_code.substring(0,2) === categoryCode){
+            } else if (get_cate_code.substring(0, 2) === categoryCode) {
                 arr.push(result?.data[i]);
             }
         }
         setProductList(arr);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         reset();
-    },[result.isLoading,nav]);
-    
+    }, [result.isLoading, nav]);
+
     return (
         <>
             <Style.Products>
                 <ul>
                     {
-                    productList?.map((a, i) => {
+                        productList?.map((a, i) => {
                             return (
                                 <li key={i}>
                                     <Link to={`/product/detail/${a.goods_code}`}>
@@ -47,7 +47,7 @@ const Products = ({result, setOrderData}) => {
                     }
                 </ul>
             </Style.Products>
-            {result.isLoading && <Loading/>}
+            {result.isLoading && <Loading />}
         </>
     );
 };
