@@ -60,6 +60,28 @@ const Detail = ({ result, setOrderData }) => {
         nav("/order/info");
     }
 
+    // 장바구니 추가
+    const addBasket = () => {
+        let arr = productDetail;
+        if (sessionStorage.getItem("basket") !== null) {
+            arr.prodcut_count = count;
+            let getBasket = JSON.parse(sessionStorage.getItem("basket"));
+            for (let i = 0; i < getBasket.length; i++) {
+                if (getBasket[i].goods_code === productDetail.goods_code) {
+                    alert("이미 장바구니에 등록되있는 상품입니다.");
+                    return;
+                }
+            }
+            getBasket.push(productDetail);
+            sessionStorage.setItem("basket", JSON.stringify(getBasket));
+            alert("장바구니에 등록되었습니다.");
+        } else {
+            arr.prodcut_count = count;
+            sessionStorage.setItem("basket", JSON.stringify([productDetail]));
+            alert("장바구니에 등록되었습니다.");
+        }
+    }
+
     return (
         <Style.Padding>
             <div className="wrap">
@@ -99,8 +121,8 @@ const Detail = ({ result, setOrderData }) => {
                             </Style.Total>
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
-                                {/* <Style.Button>장바구니</Style.Button>
-                                <Style.Button>관련상품</Style.Button> */}
+                                <Style.Button onClick={addBasket}>장바구니 담기</Style.Button>
+                                {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>
                     </Style.Content>

@@ -6,7 +6,7 @@ import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/products"
 
-const Products = ({ result, setOrderData }) => {
+const Products = ({ result }) => {
     const nav = useNavigate();
     const { categoryCode } = useParams();
     const [productList, setProductList] = useState();

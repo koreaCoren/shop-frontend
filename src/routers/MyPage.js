@@ -14,7 +14,6 @@ const MyPage = () => {
     const nav = useNavigate();
 
     useEffect(() => {
-
         if (!sessionStorage.getItem("userId")) {
             alert("접근불가능합니다.");
             nav("/");

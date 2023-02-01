@@ -230,8 +230,6 @@ export const Review = styled.div`
     }
     .flex{
         display: grid;
-        
-
     }
     `
 

@@ -58,7 +58,7 @@ const OrderInfo = ({ orderData }) => {
         const dd = (("00" + date.getDate()).slice(-2));
         const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
         const serialNumber = Math.floor((Math.random() * (999 - 100) + 100));
-        const orderCode = yy + mm + dd + time + serialNumber;
+        const orderCode = serialNumber + dd + mm + yy + time;
 
         setPayData({
             productName: orderData.product_name,
