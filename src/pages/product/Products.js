@@ -14,7 +14,10 @@ const Products = ({result, setOrderData}) => {
     const reset = () => {
         const arr = [];
         for (let i = 0; i < result.data?.length; i++) {
-            if(result?.data[i].cate_code === Number(categoryCode)){
+            let get_cate_code = String(result?.data[i].cate_code);
+            if(get_cate_code === categoryCode){
+                arr.push(result?.data[i]);
+            } else if(get_cate_code.substring(0,2) === categoryCode){
                 arr.push(result?.data[i]);
             }
         }
