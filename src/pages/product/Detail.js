@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
@@ -14,6 +14,7 @@ const Detail = ({ result, setOrderData }) => {
     const [productDetail, setProductDetail] = useState();
     const [count, setCount] = useState(1);
     const [deliveryPay, setDeliveryPay] = useState(2500);
+    const [lightOn, setLightOn] = useState();
 
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
@@ -104,6 +105,24 @@ const Detail = ({ result, setOrderData }) => {
                         </div>
                     </Style.Content>
                 </Style.Info>
+
+                <Style.Description>
+                    <Style.DescriptionMenu>
+                        <ul>
+                            <li className='lightOn'><a href="#">상품정보</a></li>
+                            <li className=''><a href="#">사용후기</a></li>
+                            <li className=''><a href="#">상품문의</a></li>
+                            <li className=''><a href="#">배송/교환</a></li>
+                        </ul>
+                    </Style.DescriptionMenu>
+                    <Style.OrderMenu>
+                        <div></div>
+                    </Style.OrderMenu>
+                    <Style.DescriptionShow>
+                            <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}>
+                            </div>
+                    </Style.DescriptionShow>
+                </Style.Description>
             </div>
 
             {result.isLoading && <Loading />}

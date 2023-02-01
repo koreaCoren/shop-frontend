@@ -9,6 +9,8 @@ export const Info = styled.div`
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
     grid-gap: 50px;
+    border-bottom: 1px solid rgb(230,230,230);
+    padding-bottom: 20px;
 `
 
 export const ImageInfo = styled.div`
@@ -79,6 +81,7 @@ export const Content = styled.div`
         font-weight: bold;
     }
 `
+
 
 export const DetailInfo = styled.ul`
     border-top: 1px solid #ccc;
@@ -186,4 +189,37 @@ export const Button = styled.div`
     color: ${props => props.color !== "black" ? "#333" : "#fff"};
     background-color: ${props => props.color !== "black" ? "#fff" : "#333"};
     cursor: pointer;
+`
+
+export const Description = styled.div`
+
+`
+export const DescriptionMenu = styled.div`
+    ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin-top: 20px;
+        border: 1px solid rgb(230,230,230);
+    }
+    ul li{
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+    ul li a{
+        font-size:18px;
+        letter-spacing: 3px;
+    }
+    ul .lightOn{
+        background-color: rgb(50,50,50);
+    }
+    ul .lightOn a{
+        color: white;
+    }
+`
+export const OrderMenu = styled.div`
+`
+
+export const DescriptionShow = styled.div`
+    margin-top: 20px;
 `
