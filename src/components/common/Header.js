@@ -11,10 +11,10 @@ import styled from 'styled-components';
 const Header = () => {
     const [categorys, setCategorys] = useState([]);
     const result = useQuery("categoryList", categoryList);
-    
+
     useEffect(() => {
         setCategorys(result.data);
-    },[result.isLoading])
+    }, [result.isLoading])
 
     return (
         <header>
@@ -25,6 +25,11 @@ const Header = () => {
                             ? <ul>
                                 <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
                                 <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
+                                {
+                                    sessionStorage.getItem("userId")
+                                        ? <li><Link to={"myPage"}>마이페이지</Link></li>
+                                        : null
+                                }
                                 {
                                     sessionStorage.getItem("userId") === "admin" || sessionStorage.getItem("userId") === "pkd" || sessionStorage.getItem("userId") === "asd"
                                         ? <li><Link to={"admin"}>관리자</Link></li>
@@ -51,24 +56,24 @@ const Header = () => {
                                 <li><a href="#">메뉴4</a></li>
                             </ul> */}
                             <TopMenu>
-                            {
-                                categorys?.map((a,i) => {
-                                    return(
-                                        <li key={i}>
-                                            <Link to={`/product/products/${(i+1)}0`}>{a.cate}</Link> 
-                                            <ol>
-                                            {
-                                                a.lowCategory?.map((b, j) => {
-                                                    return(
-                                                        <li key={j}><Link to={`/product/products/${(i+1)}0${(j+1)}0`}>{b.cate}</Link></li>
-                                                    )
-                                                })
-                                            }
-                                            </ol>
-                                        </li>
-                                    )
-                                })
-                            }
+                                {
+                                    categorys?.map((a, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <Link to={`/product/products/${(i + 1)}0`}>{a.cate}</Link>
+                                                <ol>
+                                                    {
+                                                        a.lowCategory?.map((b, j) => {
+                                                            return (
+                                                                <li key={j}><Link to={`/product/products/${(i + 1)}0${(j + 1)}0`}>{b.cate}</Link></li>
+                                                            )
+                                                        })
+                                                    }
+                                                </ol>
+                                            </li>
+                                        )
+                                    })
+                                }
                             </TopMenu>
                         </nav>
                     </div>
