@@ -4,10 +4,10 @@ import { useQuery } from 'react-query';
 
 import { orderManagement } from 'utils/axios';
 import Top from 'components/admin/Top';
-
-import * as Style from 'assets/styleComponent/admin/order/order';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
+
+import * as Style from 'assets/styleComponent/admin/order/order';
 
 const Order = () => {
     const nav = useNavigate();
@@ -40,7 +40,7 @@ const Order = () => {
                                         <li>주문일자 : {a?.order_date}</li>
                                     </ul>
                                 </Style.Div>
-                                <Style.DetailButton>자세히 보기</Style.DetailButton>
+                                <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>자세히 보기</Style.DetailButton>
                             </Style.Container>
                         )
                     })

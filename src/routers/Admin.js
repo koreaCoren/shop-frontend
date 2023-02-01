@@ -9,6 +9,7 @@ import Order from 'pages/admin/order/Order';
 import Delivery from 'pages/admin/delivery/Delivery';
 
 import styled from 'styled-components';
+import OrderDetail from 'pages/admin/order/OrderDetail';
 
 const Admin = ({ setHeader }) => {
     const nav = useNavigate();
@@ -31,6 +32,7 @@ const Admin = ({ setHeader }) => {
                     <Route path='/product/*' element={<Product />} />
                     <Route path='/category/*' element={<Category />} />
                     <Route path='/order/:boardPage' element={<Order />} />
+                    <Route path='/orderDetail/:orderCode' element={<OrderDetail />} />
                     <Route path='/delivery/*' element={<Delivery />} />
                 </Routes>
             </div>
