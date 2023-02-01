@@ -13,6 +13,8 @@ padding: 30px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1.5px solid black;
+    padding-bottom: 30px;
 }
 .subTitle > div{
     display: flex;
@@ -33,7 +35,7 @@ h2{
 .contents{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px 20px;
 }
 .column{
     border-top: 2px solid black;
@@ -51,6 +53,6 @@ min-height: 70vh;
 `
 export const Line = styled.div`
 width: 100%;
-border-top: 1px solid gray;
+border-top: 1px solid #DDDFE1;
 margin-top: 20px;
 `
