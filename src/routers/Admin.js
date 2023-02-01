@@ -16,7 +16,8 @@ const Admin = ({ setHeader }) => {
     useEffect(() => {
         setHeader(false);
         if (sessionStorage.getItem("userId") !== "admin" &&
-            sessionStorage.getItem("userId") !== "pkd") {
+            sessionStorage.getItem("userId") !== "pkd" &&
+            sessionStorage.getItem("userId") !== "asd") {
             alert("접근불가능합니다.");
             nav("/");
         }
