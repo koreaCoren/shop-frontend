@@ -109,19 +109,28 @@ const Detail = ({ result, setOrderData }) => {
                 <Style.Description>
                     <Style.DescriptionMenu>
                         <ul>
-                            <li className='lightOn'><a href="#">상품정보</a></li>
-                            <li className=''><a href="#">사용후기</a></li>
-                            <li className=''><a href="#">상품문의</a></li>
-                            <li className=''><a href="#">배송/교환</a></li>
+                            <li className='lightOn'><a href="#">상품설명</a></li>
+                            <li className=''><a href="#">상세설명</a></li>
+                            <li className=''><a href="#">후기</a></li>
+                            <li className=''><a href="#">문의</a></li>
                         </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
                         <div></div>
                     </Style.OrderMenu>
                     <Style.DescriptionShow>
-                            <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}>
-                            </div>
+                            <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}></div>
                     </Style.DescriptionShow>
+                    <Style.Review>
+                        <div>
+                            <h2>상품후기</h2>
+                            <div className='flex'>
+                                <div>아이디</div>
+                                <div><p>후기내용</p></div>
+                            </div>
+                        </div>
+                    </Style.Review>
+                    <Style.QnA></Style.QnA>
                 </Style.Description>
             </div>
 
