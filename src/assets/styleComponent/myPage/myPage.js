@@ -32,6 +32,8 @@ h2{
 }
 .contents{
     display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 .column{
     border-top: 2px solid black;
@@ -39,4 +41,16 @@ h2{
     width: 100%;
     margin-top: 35px;
 }
+`
+
+export const Div = styled.div`
+display: grid;
+grid-template-columns: 200px 1fr;
+min-width: 1200px;
+min-height: 70vh;
+`
+export const Line = styled.div`
+width: 100%;
+border-top: 1px solid gray;
+margin-top: 20px;
 `
