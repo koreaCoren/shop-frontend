@@ -27,11 +27,12 @@ const Header = () => {
                                 <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
                                 {
                                     sessionStorage.getItem("userId")
-                                        ? <li><Link to={"myPage"}>마이페이지</Link></li>
-                                        : null
+                                    && <li><Link to={"myPage"}>마이페이지</Link></li>
                                 }
                                 {
-                                    sessionStorage.getItem("userId") === "admin" || sessionStorage.getItem("userId") === "pkd" || sessionStorage.getItem("userId") === "asd"
+                                    sessionStorage.getItem("userId") === "admin"
+                                        || sessionStorage.getItem("userId") === "pkd"
+                                        || sessionStorage.getItem("userId") === "asd"
                                         ? <li><Link to={"admin"}>관리자</Link></li>
                                         : null
                                 }
@@ -49,12 +50,6 @@ const Header = () => {
                     <div className="flexBox">
                         <a href="/"><h1>로고</h1></a>
                         <nav>
-                            {/* <ul>
-                                <li><a href="#">메뉴1</a></li>
-                                <li><a href="#">메뉴2</a></li>
-                                <li><a href="#">메뉴3</a></li>
-                                <li><a href="#">메뉴4</a></li>
-                            </ul> */}
                             <TopMenu>
                                 {
                                     categorys?.map((a, i) => {
