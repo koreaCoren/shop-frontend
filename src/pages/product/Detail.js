@@ -110,11 +110,15 @@ const Detail = ({ result, setOrderData }) => {
                 
                 <Style.Description>
                     <Style.DescriptionMenu>
-                            <ul>
+                            {/* <ul>
                                 <li className='lightOn'><span>상품설명</span></li>
                                 <li className=''><span>상품후기</span></li>
                                 <li className=''><span>상품문의</span></li>
                                 <li className=''><span>교환/반품</span></li>
+                            </ul> */}
+                            <ul>
+                                <li>상세정보</li>
+                                <li>교환/반품</li>
                             </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
@@ -123,7 +127,7 @@ const Detail = ({ result, setOrderData }) => {
                     <Style.DescriptionShow>
                             <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}></div>
                     </Style.DescriptionShow>
-                    <Style.Review>
+                    {/* <Style.Review>
                         <h2>상품 후기</h2>
                         <div className='grid'>
                             <div className='userId'>PKD</div>
@@ -145,8 +149,8 @@ const Detail = ({ result, setOrderData }) => {
                                 <p>2023-01-29</p>
                             </div>
                         </div>
-                    </Style.Review>
-                    <Style.QnA>
+                    </Style.Review> */}
+                    {/* <Style.QnA>
                         <h2>상품 문의</h2>
                         <span>배송관련, 주문(취소/교환/환불/관련) 문의 및 요청사항은 마이페이지 1:1문의에 남겨주세요.</span>
                         <table className='QnATable'>
@@ -187,7 +191,7 @@ const Detail = ({ result, setOrderData }) => {
                                 </tr>
                             </tbody>
                         </table>
-                    </Style.QnA>
+                    </Style.QnA> */}
                 </Style.Description>
             </div>
 

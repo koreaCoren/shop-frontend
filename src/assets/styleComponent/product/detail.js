@@ -195,20 +195,18 @@ export const Description = styled.div`
 
 `
 export const DescriptionMenu = styled.div`
-   position: sticky;
-   top: 0;
-   opacity: 90%;
 
     ul{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        margin-top: 20px;
+        text-align: center;
     }
     ul li{
-        width: 100%;
+        display: inline-block;
         text-align: center;
-        padding: 20px;
-        background: rgb(250,250,250);
+        padding: 30px;
+        font-size: 16px;
+    }
+    ul li:nth-child(2) {
+        color: rgb(180,180,180);
     }
     ul li span{
         font-size:18px;
