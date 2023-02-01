@@ -103,6 +103,9 @@ const Ul = styled.ul`
         font-size: 12px;
         line-height: 2;
     }
+    i {
+        width: 20px;
+    }
 `
 
 export default SideMenu;

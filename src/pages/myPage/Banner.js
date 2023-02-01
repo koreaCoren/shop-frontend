@@ -3,15 +3,27 @@ import { useMutation } from 'react-query';
 import { order } from 'utils/axios';
 import bgImg from "../../assets/images/myPage.jpg";
 
-import * as Style from "assets/styleComponent/myPage/myPage"
+import styled from 'styled-components';
 
 const Banner = ({ }) => {
 
 
     return (
-        <Style.Slide>
+        <Slide>
             <img src={bgImg} alt="" />
-        </Style.Slide>
+        </Slide>
     );
 };
+
+const Slide = styled.div`
+    height: 350px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    img{
+        width: 1200px;
+    }
+`
 export default Banner;

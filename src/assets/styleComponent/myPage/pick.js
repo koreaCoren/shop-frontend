@@ -11,8 +11,12 @@ export const Div = styled.div`
     .subTitle{
         display: flex;
         width: 100%;
+        justify-content: space-between;
         align-items: center;
-        justify-content: baseline;
+    }
+    .subTitle > div{
+        display: flex;
+        align-items: center;
     }
     h2{        
         font-size: 24px;
@@ -33,6 +37,6 @@ export const Div = styled.div`
         border-top: 2px solid black;
         height: 20px;
         width: 100%;
-        margin-top: 40px;
+        margin-top: 35px;
     }
 `

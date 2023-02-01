@@ -14,6 +14,10 @@ export const Div = styled.div`
         justify-content: space-between;
         align-items: center;
     }
+    .subTitle > div{
+        display: flex;
+        align-items: center;
+    }
     h2{        
         font-size: 24px;
     }
