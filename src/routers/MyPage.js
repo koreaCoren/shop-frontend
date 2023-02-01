@@ -8,8 +8,8 @@ import Address from 'pages/myPage/Address';
 import Info from 'pages/myPage/Info';
 import Order from 'pages/myPage/Order';
 import Pick from 'pages/myPage/Pick';
+import * as Style from "assets/styleComponent/myPage/myPage"
 
-import styled from 'styled-components';
 const MyPage = () => {
     const nav = useNavigate();
 
@@ -23,7 +23,7 @@ const MyPage = () => {
     return (
         <main>
             <Banner></Banner>
-            <Div className="wrap" style={{ backgroundColor: "#eee" }}>
+            <Style.Div className="wrap" style={{ backgroundColor: "#eee" }}>
                 <SideMenu></SideMenu>
                 <Routes>
                     <Route path="/info" element={<Info />} />
@@ -31,16 +31,11 @@ const MyPage = () => {
                     <Route path="/pick" element={<Pick />} />
                     <Route path="/address" element={<Address />} />
                 </Routes>
-            </Div>
+            </Style.Div>
         </main>
 
     );
 };
 
-const Div = styled.div`
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    min-width: 1200px;
-    min-height: 70vh;
-`
+
 export default MyPage;
