@@ -40,31 +40,3 @@ export const DetailButton = styled(Link)`
     padding: 0px 50px;
     border-radius: 5px;
 `
-
-export const Pageing = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 15px 0px;
-
-    ul{
-        display: flex;
-        gap: 10px;
-    }
-
-    ul li a{
-        /* background-color: #1a6dff; */
-        background-color: #aaa;
-        color: #fff;
-        border-radius: 5px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    ul li a.now{
-        background-color: #1a6dff;
-    }
-`
