@@ -195,25 +195,29 @@ export const Description = styled.div`
 
 `
 export const DescriptionMenu = styled.div`
+   position: sticky;
+   top: 0;
+   opacity: 90%;
+
     ul{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         margin-top: 20px;
-        border: 1px solid rgb(230,230,230);
     }
     ul li{
         width: 100%;
         text-align: center;
         padding: 20px;
+        background: rgb(250,250,250);
     }
-    ul li a{
+    ul li span{
         font-size:18px;
         letter-spacing: 3px;
     }
     ul .lightOn{
         background-color: rgb(50,50,50);
     }
-    ul .lightOn a{
+    ul .lightOn span{
         color: white;
     }
 `
@@ -221,18 +225,77 @@ export const OrderMenu = styled.div`
 `
 
 export const DescriptionShow = styled.div`
-    margin-top: 20px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgb(230,230,230);
 `
 
 export const Review = styled.div`
+        padding: 20px 0;
+        border-bottom: 1px solid rgb(230,230,230);
     h2{
         font-size: 24px;
+        padding-bottom: 20px;
     }
-    .flex{
+    .grid{
         display: grid;
-        
-
+        grid-template-columns: 1fr 4fr;
+        padding: 20px;
     }
+    .grid .reviewDetail .optionList{
+        color: rgb(140,140,140);
+        padding-bottom: 20px;
+    }
+    .grid .reviewDetail p:nth-child(2){
+        padding-bottom: 20px;
+    }
+    .grid .reviewDetail p:nth-child(3){
+        color: rgb(140,140,140);
+        font-size: 12px;
+    }   
+    
     `
 
-export const QnA = styled.div``
+export const QnA = styled.div`
+    padding: 20px 0;
+    h2{
+        font-size: 24px;
+        padding-bottom: 20px;
+    }
+    span{
+        color: gray;
+    }
+    table{
+        padding: 20px 0;
+    }
+    table thead{
+        border-top: 2px solid black;
+        border-bottom: 1px solid black;
+    }
+    table .bold{
+        font-size: 16px;
+        font-weight: bold;
+    }
+    table .title{
+        width: 600px;
+        font-size: 16px;
+    }
+    table .user, .date, .QnA{
+        width: 160px;
+        
+        text-align: center;
+    }
+    table th, td{
+        padding: 10px 0;
+        padding-bottom: 1px solid;
+    }
+
+    table td{
+        border-bottom: 1px solid rgb(230,230,230);
+    }
+    table td:first-child{
+        padding-left: 10px;
+        cursor: pointer;
+    }
+
+    
+`

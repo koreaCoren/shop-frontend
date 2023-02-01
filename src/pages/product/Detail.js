@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
+
+import userTest from 'assets/images/userTest.png';
 
 import * as Style from "assets/styleComponent/product/detail"
 
@@ -105,15 +107,15 @@ const Detail = ({ result, setOrderData }) => {
                         </div>
                     </Style.Content>
                 </Style.Info>
-
+                
                 <Style.Description>
                     <Style.DescriptionMenu>
-                        <ul>
-                            <li className='lightOn'><a href="#">상품설명</a></li>
-                            <li className=''><a href="#">상세설명</a></li>
-                            <li className=''><a href="#">후기</a></li>
-                            <li className=''><a href="#">문의</a></li>
-                        </ul>
+                            <ul>
+                                <li className='lightOn'><span>상품설명</span></li>
+                                <li className=''><span>상품후기</span></li>
+                                <li className=''><span>상품문의</span></li>
+                                <li className=''><span>교환/반품</span></li>
+                            </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
                         <div></div>
@@ -122,15 +124,70 @@ const Detail = ({ result, setOrderData }) => {
                             <div dangerouslySetInnerHTML={{__html: productDetail?.goods_detail}}></div>
                     </Style.DescriptionShow>
                     <Style.Review>
-                        <div>
-                            <h2>상품후기</h2>
-                            <div className='flex'>
-                                <div>아이디</div>
-                                <div><p>후기내용</p></div>
+                        <h2>상품 후기</h2>
+                        <div className='grid'>
+                            <div className='userId'>PKD</div>
+                            <div className='reviewDetail'>
+                                <p className='optionList'>노르웨이숲 + 캣타워</p>
+                                <p>
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae labore, quaerat illo quis suscipit vel quos nesciunt rerum voluptatem iste dolorem placeat nihil atque ipsum corrupti, autem quo nulla? Totam?
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti magnam recusandae nulla officia eveniet cumque quidem exercitationem, rerum nostrum, culpa sed veniam impedit pariatur aperiam sapiente, laboriosam molestiae nesciunt. Libero!
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum ipsum praesentium placeat fuga repellendus, atque ab est optio adipisci ullam eligendi unde hic magni dolore neque numquam perferendis voluptate odio?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae magni ipsa atque repellendus ut omnis non debitis vitae. Beatae pariatur, aut illum asperiores nostrum quas veritatis id ea quaerat maxime!
+                                </p>
+                                <p>2023-02-01</p>
+                            </div>
+                        </div>
+                        <div className='grid'>
+                            <div className='userId'>Admin</div>
+                            <div className='reviewDetail'>
+                                <p className='optionList'>옵션명</p>
+                                <p>애용애용애요오옹애용애요오옹애용</p>
+                                <p>2023-01-29</p>
                             </div>
                         </div>
                     </Style.Review>
-                    <Style.QnA></Style.QnA>
+                    <Style.QnA>
+                        <h2>상품 문의</h2>
+                        <span>배송관련, 주문(취소/교환/환불/관련) 문의 및 요청사항은 마이페이지 1:1문의에 남겨주세요.</span>
+                        <table className='QnATable'>
+                            <thead>
+                                <tr>
+                                    <th className='title bold'>제     목</th>
+                                    <th className='user bold'>작 성 자</th>
+                                    <th className='date bold'>작 성 일</th>
+                                    <th className='QnA bold'>답변상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td onClick={() => {alert("애요옹~~??");}}>애용</td>
+                                    <td className='user'>asd</td>
+                                    <td className='date'>2023.02.01</td>
+                                    <td className='QnA'>답변완료</td>
+                                </tr>
+                                <tr>
+                                    <td onClick={() => {alert("애옹~~??");}}>재입고</td>
+                                    <td className='user'>PKD</td>
+                                    <td className='date'>2023.02.01</td>
+                                    <td className='QnA'>-</td>
+                                </tr>
+                                <tr>
+                                    <td onClick={() => {alert("애~~~~요옹??");}}>고영희씨</td>
+                                    <td className='user'>PKD</td>
+                                    <td className='date'>2023.01.23</td>
+                                    <td className='QnA'>답변완료</td>
+                                </tr>
+                                <tr>
+                                    <td onClick={() => {
+                                        alert("애옹!!!");
+                                        }}>안녕?</td>
+                                    <td className='user'>PKD</td>
+                                    <td className='date'>2023.01.31</td>
+                                    <td className='QnA'>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </Style.QnA>
                 </Style.Description>
             </div>
 
