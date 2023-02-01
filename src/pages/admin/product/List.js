@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import { productDelete, productList } from 'utils/axios';
+import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/admin/product/list"
-import Loading from 'components/loding/Loading';
 
 
 const List = () => {

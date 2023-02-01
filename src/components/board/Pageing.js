@@ -11,6 +11,7 @@ const Pageing = ({ count, boardPage, boardLength, url }) => {
     const MAX_NAV = NOW_PAGE + 2 >= MAX_PAGE ? MAX_PAGE : NOW_PAGE + 2;
     const TOTAL_NAV = 5;
 
+    // 페이징 출력
     const pageLoop = (min, max) => {
         if (NOW_PAGE === 1) {
             max = TOTAL_NAV <= MAX_PAGE ? max + 2 : MAX_PAGE;
@@ -27,6 +28,7 @@ const Pageing = ({ count, boardPage, boardLength, url }) => {
         }
     }
 
+    // 페이지가 한개일때
     if (MIN_PAGE === MAX_PAGE) {
         page.push(
             <li><Link className='now' to={`${url}/1`}>{MIN_PAGE}</Link></li>
@@ -58,7 +60,6 @@ export const PageingContainer = styled.div`
     }
 
     ul li a{
-        /* background-color: #1a6dff; */
         background-color: #aaa;
         color: #fff;
         border-radius: 5px;
