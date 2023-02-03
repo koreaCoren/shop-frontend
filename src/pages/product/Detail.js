@@ -6,8 +6,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
 
-import userTest from 'assets/images/userTest.png';
-
 import * as Style from "assets/styleComponent/product/detail"
 
 const Detail = ({ result, setOrderData }) => {

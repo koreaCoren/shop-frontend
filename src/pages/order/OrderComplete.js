@@ -35,7 +35,7 @@ const OrderComplete = () => {
                     <h2>고객님, 주문이 완료되었습니다.</h2>
                     <p>
                         고객님이 주문하신 주문번호는 <br />
-                        <span>{success?.orderCode}</span> 입니다.
+                        <span>{success.orderCode}</span> 입니다.
                     </p>
                     <p>
                         주문내역 확인은  <br />
