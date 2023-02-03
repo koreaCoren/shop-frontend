@@ -4,10 +4,12 @@ import { useQuery, useMutation } from 'react-query';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
+import Loading from 'components/loding/Loading';
+import Pageing from 'components/board/Pageing';
 
 const Order = ({ }) => {
     const [list, setBoard] = useState();
-    const { mutateAsync, isSuccess } = useMutation(orderList);
+    const { mutateAsync, isSuccess, isLoading } = useMutation(orderList);
 
     const getOrderData = async () => {
         const data = {
@@ -30,9 +32,7 @@ const Order = ({ }) => {
                 </OrderStyle.Div>
                 <div className='new'>3개월</div>
             </div>
-
             {
-
                 isSuccess &&
                 list?.map((a, i) => {
                     return (
@@ -58,6 +58,8 @@ const Order = ({ }) => {
                     )
                 })
             }
+
+            {isLoading && <Loading />}
         </Style.InDiv >
 
     );
