@@ -20,7 +20,7 @@ export const Purchase = styled.div`
     margin: 15px 0px;
     ul{
         display: grid;
-        grid-template-columns: 50% 1fr 1fr 1fr 1fr;
+        grid-template-columns: 50% 1fr 1fr 1fr ;
     }
 
     ul.title{
