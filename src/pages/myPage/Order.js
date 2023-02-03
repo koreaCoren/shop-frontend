@@ -20,8 +20,7 @@ const Order = ({ }) => {
     useEffect(() => {
         getOrderData();
     }, [])
-    console.log(list);
-    // const list = data.result;
+
     return (
         <Style.InDiv>
             <div className='subTitle'>
