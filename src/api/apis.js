@@ -52,6 +52,11 @@ export const ORDER_MANAGEMENT = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_admin_orders`
 })
 
+// 어드민 주문 관리 디테일
+export const ORDER_MANAGEMENT_DETAIL = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_code_orders`
+})
+
 //--------- 어드민 관련 끝 ---------
 
 //--------- 주문 관련 시작 ---------
