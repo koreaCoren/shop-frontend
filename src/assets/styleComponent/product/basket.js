@@ -18,9 +18,14 @@ export const SubTitle = styled.h3`
 export const Purchase = styled.div`
     border: 1px solid #ddd;
     margin: 15px 0px;
+    p{
+        text-align: center;
+        line-height: 250px;
+    }
+
     ul{
         display: grid;
-        grid-template-columns: 50% 1fr 1fr 1fr 1fr;
+        grid-template-columns: 50% 1fr 1fr 1fr ;
     }
 
     ul.title{
@@ -52,5 +57,18 @@ export const Purchase = styled.div`
         height: 110px;
         border-radius: 15px;
     }
+
     ul.productInfo li .content{}
+`
+
+export const Button = styled.div`
+    text-align: center;
+
+    button{
+        background-color: #444;
+        color: #fff;
+        padding: 10px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 `

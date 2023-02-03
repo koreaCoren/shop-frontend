@@ -40,6 +40,18 @@ const OrderInfo = ({ orderData }) => {
 
     const payment = (e) => {
         e.preventDefault();
+        let orderDatas = [];
+        let orderTotalPrice = 0;
+
+        for (let i = 0; i < orderData.length; i++) {
+            orderDatas.push({
+                goods_code: orderData[i].product_code, // 상품코드
+                goods_name: orderData[i].product_name, // 상품이름
+                order_pay: orderData[i].total_price, // 총 상품가격
+                order_count: orderData[i].prodcut_count, //상품 갯수
+            })
+            orderTotalPrice = orderTotalPrice + orderData[i].total_price;
+        }
 
         if (buyerName === "") {
             alert("주문자 입력해주세요");
@@ -61,11 +73,11 @@ const OrderInfo = ({ orderData }) => {
         const orderCode = serialNumber + dd + mm + yy + time;
 
         setPayData({
-            productName: orderData.product_name,
+            productName: orderData[0].product_name,
             buyerName: buyerName,
             buyerTel: Number(buyerTel),
             buyerEmail: "",
-            productPrice: Number(orderData.total_price),
+            productPrice: Number(orderTotalPrice) > 50000 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
             payStatus: 0,
             returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
             closeUrl: "http://localhost:3000/close",
@@ -77,45 +89,48 @@ const OrderInfo = ({ orderData }) => {
             gopaymethod: "0", // 결제방법
             order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
-            goods_code: orderData.product_code, // 상품코드
-            goods_name: orderData.product_name, // 상품이름
-            order_pay: orderData.total_price, // 총 상품가격
+            order_data: orderDatas,
+            order_total_price: String(orderTotalPrice),
             buyer_name: buyerName, // 주문자 이름
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
             buyer_tel: buyerTel, // 주문자 번호
-            order_count: orderData.prodcut_count, //상품 갯수
             return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "ㄴ", //환불여부
         }
 
-        mutateAsync(data);
-        setIsPurchase(isPurchase + 1);
+        console.log(data);
+        // mutateAsync(data);
+        // setIsPurchase(isPurchase + 1);
     }
     return (
         <Style.Order>
             <div className="wrap">
                 <Style.Title>주문/결제</Style.Title>
-                <Style.Purchase>
-                    <ul className='title'>
-                        <li>상품정보</li>
-                        <li>배송비 <br />(5만원이상 무료)</li>
-                        <li>수량</li>
-                        <li>할인율</li>
-                        <li>상품금액 <br />(할인적용)</li>
-                    </ul>
-                    <ul className="productInfo">
-                        <li>
-                            <img src={orderData.product_img} alt="" />
-                            <div className="content">
-                                <div className="title">{orderData.product_name}</div>
-                            </div>
-                        </li>
-                        <li>{Number(orderData.total_price) >= 50000 ? 0 : orderData.deliveryPay}원</li>
-                        <li>{orderData.prodcut_count}개</li>
-                        <li>{orderData.sale}%</li>
-                        <li>{orderData.total_price}원</li>
-                    </ul>
-                </Style.Purchase>
+                {
+                    orderData.map((a, i) => {
+                        return (
+                            <Style.Purchase>
+                                <ul className='title'>
+                                    <li>상품정보</li>
+                                    <li>수량</li>
+                                    <li>할인율</li>
+                                    <li>상품금액 <br />(할인적용)</li>
+                                </ul>
+                                <ul className="productInfo">
+                                    <li>
+                                        <img src={a.product_img} alt="" />
+                                        <div className="content">
+                                            <div className="title">{a.product_name}</div>
+                                        </div>
+                                    </li>
+                                    <li>{a.prodcut_count}개</li>
+                                    <li>{a.sale}%</li>
+                                    <li>{a.total_price}원</li>
+                                </ul>
+                            </Style.Purchase>
+                        )
+                    })
+                }
 
                 <Style.Info>
                     <Style.SubTitle>배송 정보</Style.SubTitle>
