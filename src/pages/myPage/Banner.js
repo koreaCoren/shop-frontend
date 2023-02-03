@@ -24,6 +24,9 @@ const Slide = styled.div`
     font-size: 60px;
     img{
         width: 1200px;
+        height: 300px;
+        padding: 10px 0;
     }
 `
+
 export default Banner;
