@@ -8,6 +8,7 @@ import Address from 'pages/myPage/Address';
 import Info from 'pages/myPage/Info';
 import Order from 'pages/myPage/Order';
 import Pick from 'pages/myPage/Pick';
+import Relogin from 'pages/myPage/Relogin';
 import * as Style from "assets/styleComponent/myPage/myPage"
 
 const MyPage = () => {
@@ -30,6 +31,7 @@ const MyPage = () => {
                     <Route path="/order" element={<Order />} />
                     <Route path="/pick" element={<Pick />} />
                     <Route path="/address" element={<Address />} />
+                    <Route path="/relogin" element={<Relogin />} />
                 </Routes>
             </Style.Div>
         </main>
