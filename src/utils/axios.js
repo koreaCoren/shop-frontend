@@ -136,6 +136,8 @@ export const orderManagement = async () => {
 
 //--------- 어드민 관련 끝 ---------
 
+// -------- 주문 시작 --------------
+
 // 주문확인
 export const orderList = async (data) => {
     const api = await API.ORDER_List.post("", data).then((res) => {
@@ -173,3 +175,22 @@ export const orderSuccess = async (data) => {
     })
     return api;
 }
+
+// -------- 주문 끝 --------------
+
+// -------- 개인정보 시작 ------------
+
+// 주문하기
+export const address = async (data) => {
+    const api = await API.USER_ADDRESS.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+
+// -------- 개인정보 끝 --------------
+

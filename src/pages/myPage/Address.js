@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { order } from 'utils/axios';
+import { address } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
+import * as AddressStyle from "assets/styleComponent/myPage/address"
 
 const Address = ({ }) => {
+    const [list, setBoard] = useState();
+    const { mutateAsync, isSuccess } = useMutation(address);
 
+    const getOrderData = async () => {
+        const data = {
+            userId: sessionStorage.getItem('userId'),
+            token: sessionStorage.getItem("token")
+        };
+        await mutateAsync(data);
+        setBoard(data.result);
+        console.log(data.result.user_addr);
+    }
+
+    useEffect(() => {
+        getOrderData();
+    }, [])
 
     return (
         <Style.InDiv>
@@ -16,9 +32,17 @@ const Address = ({ }) => {
                 </div>
                 <div className='new'>+ 새 배송지 추가</div>
             </div>
-            <div className='contents'>
-                <div className='column'></div>
-            </div>
+            {
+
+                isSuccess &&
+
+                <div className='contents'>
+
+                </div>
+
+
+            }
+
         </Style.InDiv>
 
     );

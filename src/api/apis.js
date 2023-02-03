@@ -54,6 +54,9 @@ export const ORDER_MANAGEMENT = axios.create({
 
 //--------- 어드민 관련 끝 ---------
 
+//--------- 주문 관련 시작 ---------
+
+
 // 주문확인
 export const ORDER_List = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_orders`
@@ -68,3 +71,13 @@ export const ORDER = axios.create({
 export const ORDER_SUCCESS = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders `,
 })
+
+//--------- 주문 관련 끝 ---------
+
+//--------- 개인정보 시작 -------
+
+//배송지 확인
+export const USER_ADDRESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/user_address `,
+})
+//--------- 개인정보 끝 ---------
