@@ -18,6 +18,7 @@ const OrderInfo = ({ orderData }) => {
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({})
 
+    const { mutateAsync, isLoading } = useMutation(order);
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -97,9 +98,8 @@ const OrderInfo = ({ orderData }) => {
             refund: "ㄴ", //환불여부
         }
 
-        console.log(data);
-        // mutateAsync(data);
-        // setIsPurchase(isPurchase + 1);
+        mutateAsync(data);
+        setIsPurchase(isPurchase + 1);
     }
     return (
         <Style.Order>
