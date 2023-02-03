@@ -8,6 +8,7 @@ import { order } from 'utils/axios';
 import * as Style from "assets/styleComponent/order/order"
 
 const OrderInfo = ({ orderData }) => {
+    const [orderMap, setOrderMap] = useState([...orderData]);
     const [buyerName, setBuyerName] = useState("");
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
@@ -16,8 +17,6 @@ const OrderInfo = ({ orderData }) => {
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({})
-
-    const { mutateAsync, isLoading } = useMutation(order);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -107,9 +106,9 @@ const OrderInfo = ({ orderData }) => {
             <div className="wrap">
                 <Style.Title>주문/결제</Style.Title>
                 {
-                    orderData.map((a, i) => {
+                    orderMap.map((a, i) => {
                         return (
-                            <Style.Purchase>
+                            <Style.Purchase key={i}>
                                 <ul className='title'>
                                     <li>상품정보</li>
                                     <li>수량</li>
