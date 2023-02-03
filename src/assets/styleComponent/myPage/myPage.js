@@ -6,7 +6,6 @@ export const InDiv = styled.div`
 background-color: white;
 width: 100%;
 height: 100%;
-border: 5px solid #F7F7F7;
 padding: 30px;
 .subTitle{
     display: flex;
@@ -37,12 +36,7 @@ h2{
     flex-direction: column;
     padding: 30px 20px;
 }
-.column{
-    border-top: 2px solid black;
-    height: 20px;
-    width: 100%;
-    margin-top: 35px;
-}
+
 `
 
 export const Div = styled.div`
@@ -50,6 +44,7 @@ display: grid;
 grid-template-columns: 200px 1fr;
 min-width: 1200px;
 min-height: 70vh;
+padding: 20px 0 50px 0;
 `
 export const Line = styled.div`
 width: 100%;
