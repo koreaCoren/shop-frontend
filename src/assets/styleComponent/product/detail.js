@@ -191,30 +191,32 @@ export const Button = styled.div`
     cursor: pointer;
 `
 
-export const Description = styled.div`
-
-`
+export const Description = styled.div``
 export const DescriptionMenu = styled.div`
-
     ul{
         text-align: center;
     }
+
     ul li{
         display: inline-block;
         text-align: center;
         padding: 30px;
         font-size: 16px;
     }
+
     ul li:nth-child(2) {
         color: rgb(180,180,180);
     }
+
     ul li span{
         font-size:18px;
         letter-spacing: 3px;
     }
+
     ul .lightOn{
         background-color: rgb(50,50,50);
     }
+
     ul .lightOn span{
         color: white;
     }
@@ -228,24 +230,29 @@ export const DescriptionShow = styled.div`
 `
 
 export const Review = styled.div`
-        padding: 20px 0;
-        border-bottom: 1px solid rgb(230,230,230);
+    padding: 20px 0;
+    border-bottom: 1px solid rgb(230,230,230);
+
     h2{
         font-size: 24px;
         padding-bottom: 20px;
     }
+
     .grid{
         display: grid;
         grid-template-columns: 1fr 4fr;
         padding: 20px;
     }
+
     .grid .reviewDetail .optionList{
         color: rgb(140,140,140);
         padding-bottom: 20px;
     }
+
     .grid .reviewDetail p:nth-child(2){
         padding-bottom: 20px;
     }
+
     .grid .reviewDetail p:nth-child(3){
         color: rgb(140,140,140);
         font-size: 12px;
@@ -255,33 +262,41 @@ export const Review = styled.div`
 
 export const QnA = styled.div`
     padding: 20px 0;
+
     h2{
         font-size: 24px;
         padding-bottom: 20px;
     }
+
     span{
         color: gray;
     }
+
     table{
         padding: 20px 0;
     }
+
     table thead{
         border-top: 2px solid black;
         border-bottom: 1px solid black;
     }
+
     table .bold{
         font-size: 16px;
         font-weight: bold;
     }
+
     table .title{
         width: 600px;
         font-size: 16px;
     }
+
     table .user, .date, .QnA{
         width: 160px;
         
         text-align: center;
     }
+
     table th, td{
         padding: 10px 0;
         padding-bottom: 1px solid;
@@ -290,6 +305,7 @@ export const QnA = styled.div`
     table td{
         border-bottom: 1px solid rgb(230,230,230);
     }
+
     table td:first-child{
         padding-left: 10px;
         cursor: pointer;
