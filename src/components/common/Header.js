@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useMutation, useQueries } from "react-query";
-import { tokenCheck, logout } from 'utils/axios';
-
 import { useQuery } from 'react-query';
-import { categoryList, categorySave } from 'utils/axios';
+import { Link } from 'react-router-dom';
+
+import { categoryList, logout } from 'utils/axios';
+import Loading from 'components/loding/Loading';
 
 import styled from 'styled-components';
 
@@ -76,6 +75,8 @@ const Header = () => {
                     </div>
                 </div>
             </Head>
+
+            {result.isLoading && <Loading />}
         </header>
     );
 };

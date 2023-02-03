@@ -31,14 +31,14 @@ const Order = () => {
                             <Style.Container key={i}>
                                 <Style.Div>
                                     <ul>
-                                        <li>주문번호 : {a?.orderCode}</li>
-                                        <li>회원 ID : {a?.user_id}</li>
-                                        <li>주문자 : {a?.buyer_name}</li>
-                                        <li>주문자 번호 : {a?.buyer_tel}</li>
-                                        <li>총 상품 금액 : {a?.total_price}</li>
-                                        <li>총 상품수 : {a?.total_count}</li>
+                                        <li>주문번호 : {a.orderCode}</li>
+                                        <li>회원 ID : {a.user_id}</li>
+                                        <li>주문자 : {a.buyer_name}</li>
+                                        <li>주문자 번호 : {a.buyer_tel}</li>
+                                        <li>총 상품 금액 : {a.total_price}</li>
+                                        <li>총 상품수 : {a.total_count}</li>
                                         <li>송장번호 : 123123</li>
-                                        <li>주문일자 : {a?.order_date}</li>
+                                        <li>주문일자 : {a.order_date}</li>
                                     </ul>
                                 </Style.Div>
                                 <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>자세히 보기</Style.DetailButton>

@@ -134,6 +134,17 @@ export const orderManagement = async () => {
     return data;
 }
 
+// 어드민 주문관리 디테일
+export const orderManagementDetail = async (data) => {
+    const api = await API.ORDER_MANAGEMENT_DETAIL.post("", data).then((res) => {
+        data.detail = res.data;
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 //--------- 어드민 관련 끝 ---------
 
 // -------- 주문 시작 --------------
