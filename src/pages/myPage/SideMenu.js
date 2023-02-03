@@ -10,7 +10,7 @@ const SideMenu = () => {
     const [menuList, setMenuList] = useState(0);
     return (
         <Ul>
-            <li><a href="/">코랜 마이페이지</a></li>
+            <li><a href="/myPage/order">마이페이지</a></li>
             {
                 menus.map((a, i) => {
                     return (
@@ -56,26 +56,24 @@ const SideMenu = () => {
 const Ul = styled.ul`
     display: flex;
     flex-direction: column;
-    background-color: #333;
     height: 100%;
     > li{
-        cursor: pointer;
+        cursor: pointer;        
+        padding: 5px;
     }
-    > li:nth-child(1){
-        border-bottom: 1px solid #999;
+    > li:not(:first-child){
+        border: 1px solid #DDDFE170;
     }
     > li:nth-child(1) > a{
-        color: #fff;
         line-height: 40px;
-        padding: 0px 15px;
+        padding: 15px;
+        font-size: 24px;
     }
     > li:not(:nth-child(1)) > a{
-        color: #fff;
         padding: 15px;
         width: 100%;
     }
     > li span{
-        color: #fff;
         padding: 15px 15px;
         display: inline-block;
     }

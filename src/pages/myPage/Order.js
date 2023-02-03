@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { orderList } from 'utils/axios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
 
 const Order = ({ }) => {
-    const nav = useNavigate();
     const [list, setBoard] = useState();
     const { mutateAsync, isSuccess } = useMutation(orderList);
 
@@ -17,7 +15,6 @@ const Order = ({ }) => {
         };
         await mutateAsync(data);
         setBoard(data.result);
-
     }
 
     useEffect(() => {

@@ -23,7 +23,7 @@ const MyPage = () => {
     return (
         <main>
             <Banner></Banner>
-            <Style.Div className="wrap" style={{ backgroundColor: "#eee" }}>
+            <Style.Div className="wrap">
                 <SideMenu></SideMenu>
                 <Routes>
                     <Route path="/info" element={<Info />} />

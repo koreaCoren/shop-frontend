@@ -28,7 +28,7 @@ const Header = () => {
                                 <li><Link to={"/product/basket"}>장바구니</Link></li>
                                 {
                                     sessionStorage.getItem("userId")
-                                    && <li><Link to={"myPage"}>마이페이지</Link></li>
+                                    && <li><Link to={"myPage/order"}>마이페이지</Link></li>
                                 }
                                 {
                                     sessionStorage.getItem("userId") === "admin"
