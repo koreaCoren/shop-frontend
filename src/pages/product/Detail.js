@@ -58,7 +58,7 @@ const Detail = ({ result, setOrderData }) => {
             prodcut_count: count,
             total_price: Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count
         }
-        setOrderData(data);
+        setOrderData([data]);
         nav("/order/info");
     }
 
@@ -129,19 +129,19 @@ const Detail = ({ result, setOrderData }) => {
                         </div>
                     </Style.Content>
                 </Style.Info>
-                
+
                 <Style.Description>
                     <Style.DescriptionMenu>
-                            {/* <ul>
+                        {/* <ul>
                                 <li className='lightOn'><span>상품설명</span></li>
                                 <li className=''><span>상품후기</span></li>
                                 <li className=''><span>상품문의</span></li>
                                 <li className=''><span>교환/반품</span></li>
                             </ul> */}
-                            <ul>
-                                <li>상세정보</li>
-                                <li>교환/반품</li>
-                            </ul>
+                        <ul>
+                            <li>상세정보</li>
+                            <li>교환/반품</li>
+                        </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
                         <div></div>
