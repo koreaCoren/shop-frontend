@@ -1,27 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
-import { address } from 'utils/axios';
-import styled from 'styled-components';
-import * as Style from "assets/styleComponent/myPage/myPage"
+import * as Style from "assets/styleComponent/myPage/myPage";
+import * as Info from "assets/styleComponent/myPage/info";
 import LoginInput from 'components/input/Input';
+import { useMutation } from "react-query";
+import { useNavigate } from 'react-router-dom';
+import { login } from "utils/axios";
+
 
 const Relogin = ({ }) => {
-    const [list, setBoard] = useState();
-    const { mutateAsync, isSuccess } = useMutation(address);
+    const nav = useNavigate();
+    const [password, setPassword] = useState("");
 
-    const getAddrData = async () => {
+    const { mutateAsync, isLoading } = useMutation(login);
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
         const data = {
-            userId: sessionStorage.getItem('userId'),
-            token: sessionStorage.getItem("token")
+            id: sessionStorage.getItem("userId"),
+            pw: password
         };
-        await mutateAsync(data);
-        setBoard(data.result);
-        console.log(data.result);
-    }
+        const confirm = await mutateAsync(data);
+        if (confirm === "ok") {
+            nav("/myPage/info");
+        } else {
+            nav("/myPage/relogin");
+        };
+    };
 
     useEffect(() => {
-        getAddrData();
-    }, [])
+        if (sessionStorage.getItem("loginCheck") !== "success") {
+            alert("먼저 로그인이 필요합니다.");
+            nav("/login");
+        }
+    }, []);
+
+    const onChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        switch (name) {
+            case "password":
+                setPassword(value);
+                break;
+            default:
+                break;
+        }
+    };
+
 
     return (
         <Style.InDiv>
@@ -36,21 +60,16 @@ const Relogin = ({ }) => {
             </div>
             {
 
-                isSuccess &&
-                <Div>
-                    <Form>
-                        <div>
-                            <div className='inputTitle'>아이디</div>
-                            <div><LoginInput type="text"></LoginInput></div>
 
-                        </div>
+                <Info.Div>
+                    <Info.Form onSubmit={onSubmit}>
                         <div>
                             <div className='inputTitle'>비밀번호</div>
-                            <div><LoginInput type="password"></LoginInput></div>
+                            <div><LoginInput type="password" name='password' onChange={onChange}></LoginInput></div>
                         </div>
-                    </Form>
-
-                </Div>
+                        <input type='submit' value='확인'></input>
+                    </Info.Form>
+                </Info.Div>
 
             }
 
@@ -59,52 +78,5 @@ const Relogin = ({ }) => {
     );
 };
 
-const Div = styled.div`
-    border-top: 2px solid black;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    `
-const Form = styled.form`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 520px;
-    height: 170px;
-    flex-direction: column;
-    border: 1px solid #ddd;
-    border-radius: 15px;    
 
-    >div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        padding: 10px 0px;
-    }
-
-    h1{
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    input{
-        width: 320px;
-        line-height: 24px;
-    }
-
-    input[type="submit"]{
-        border: none;
-        background-color: #444;
-        color: #fff;
-        line-height: 24px;
-        padding: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-
-    .inputTitle{
-        width: 100px;
-    }
-`
 export default Relogin;

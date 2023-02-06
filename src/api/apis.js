@@ -74,7 +74,7 @@ export const ORDER = axios.create({
 
 //주문 완료
 export const ORDER_SUCCESS = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders `,
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders`,
 })
 
 //--------- 주문 관련 끝 ---------
@@ -83,6 +83,10 @@ export const ORDER_SUCCESS = axios.create({
 
 //배송지 확인
 export const USER_ADDRESS = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/user/user_address `,
+    baseURL: `${process.env.REACT_APP_API_URL}/user/user_address`,
+})
+//유저 정보
+export const USER_INFO = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_data`,
 })
 //--------- 개인정보 끝 ---------

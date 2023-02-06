@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Contents = styled.div`
     
     color: rgb(51, 51, 51); 

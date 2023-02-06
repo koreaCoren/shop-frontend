@@ -1,70 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { productRegister } from "utils/axios";
+import { info } from "utils/axios";
 import Input from "components/input/Input";
 
 import * as Style from "assets/styleComponent/myPage/myPage"
+import * as InfoStyle from "assets/styleComponent/myPage/info"
 import * as Login from "assets/styleComponent/login/login";
 
 
 
 const Info = ({ }) => {
-    const [productName, setProductName] = useState("");
-    const [productPrice, setProductPrice] = useState("");
-    const [productImage, setProductImage] = useState("");
-    const [productDetail, setProductDetail] = useState("");
-    const [productStock, setProductStock] = useState("");
-    const [productSell, setProductSell] = useState("");
-    const [productSale, setProductSale] = useState("");
+    const id = sessionStorage.getItem("userId");
+    const [Name, setName] = useState("");
+    const [CurrentPW, setCurrentPW] = useState("");
+    const [ChangePW, setChangePW] = useState("");
+    const [Tell, setTell] = useState("");
+    const [Email, setEmail] = useState("");
+    const [Address, setAddress] = useState("");
 
-    const { mutateAsync, isLoading } = useMutation(productRegister);
+    const [UserData, setUser] = useState();
+
+    const { mutateAsync, isSuccess } = useMutation(info);
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
-            cate: "1",
-            goods_nm: productName,
-            goods_price: productPrice,
-            goods_img: productImage,
-            goods_detail: productDetail,
-            goods_stock: productStock,
-            goods_sell: productSell,
-            goods_sale: productSale,
+            user_id: id,
+            user_nm: Name,
+            current_pw: CurrentPW,
+            user_pw: ChangePW,
+            user_tell: Tell,
+            user_email: Email,
+            user_addr: Address,
         };
-        mutateAsync(data);
+        // mutateAsync(data);
     }
 
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         switch (name) {
-            case "productName":
-                setProductName(value);
+            // case "id":
+            //     setId(value);
+            //     break;
+            case "name":
+                setName(value);
                 break;
-            case "productPrice":
-                setProductPrice(value);
+            case "currentPW":
+                setCurrentPW(value);
                 break;
-            case "productImage":
-                setProductImage(value);
+            case "changePW":
+                setChangePW(value);
                 break;
-            case "productDetail":
-                setProductDetail(value);
+            case "tell":
+                setTell(value);
                 break;
-            case "productStock":
-                setProductStock(value);
+            case "email":
+                setEmail(value);
                 break;
-            case "productSell":
-                setProductSell(value);
-                break;
-            case "productSale":
-                setProductSale(value);
+            case "address":
+                setAddress(value);
                 break;
             default:
                 break;
         }
     }
 
+    const getUserData = async () => {
+        const data = {
+            id: sessionStorage.getItem('userId'),
+        };
+        await mutateAsync(data);
+        setUser(data.result);
+    }
+
+    useEffect(() => {
+        getUserData();
+    }, [])
+    console.log(UserData);
+
+
     return (
+        isSuccess &&
         <Style.InDiv>
             <div className='subTitle'>
                 <div>
@@ -73,21 +90,57 @@ const Info = ({ }) => {
                 </div>
             </div>
             <div className='contents'>
-                <>
-                    <Style.Form onSubmit={onSubmit}>
+                <InfoStyle.Div>
+                    <InfoStyle.Form onSubmit={onSubmit}>
                         <div>
-                            <Input type="text" name="name" onChange={onChange} placeholder="이름" />
-                            <Input type="text" name="id" onChange={onChange} placeholder="아이디" />
-                            <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
-                            <Input type="text" name="tell" onChange={onChange} placeholder="전화번호" />
-                            <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
-                            <Input type="text" name="address" onChange={onChange} placeholder="주소" />
-                            <input type="submit" value="회원가입" />
+                            <div className='inputTitle'>아이디</div>
+                            <div>
+                                <Input type="text" name="id" value={UserData.user_id} readOnly={true} />
+                            </div>
                         </div>
-                    </Style.Form>
-                </>
+                        <div>
+                            <div className='inputTitle'>이름</div>
+                            <div>
+                                <Input type="text" name="name" value={UserData.user_nm} onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='inputTitle'>현재 비밀번호</div>
+                            <div>
+                                <Input type="password" name="currentPW" onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='inputTitle'>새 비밀번호</div>
+                            <div>
+                                <Input type="password" name="changePW" onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='inputTitle'>휴대폰</div>
+                            <div>
+                                <Input type="text" name="tell" value={UserData.user_tel} onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='inputTitle'>이메일</div>
+                            <div>
+                                <Input type="text" name="email" value={UserData.user_email} onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <div className='inputTitle'>주소</div>
+                            <div>
+                                <Input type="text" name="address" value={UserData.user_addr} onChange={onChange} />
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="수정" />
+                        </div>
+                    </InfoStyle.Form>
+                </InfoStyle.Div>
             </div>
-        </Style.InDiv>
+        </Style.InDiv >
     );
 };
 export default Info;
