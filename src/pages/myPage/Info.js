@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { info } from "utils/axios";
+import { info, userUpdate } from "utils/axios";
 import Input from "components/input/Input";
 
 import * as Style from "assets/styleComponent/myPage/myPage"
@@ -20,7 +20,8 @@ const Info = ({ }) => {
 
     const [UserData, setUser] = useState();
 
-    const { mutateAsync, isSuccess } = useMutation(info);
+    const userInfo = useMutation(info);
+    const userUpd = useMutation(userUpdate);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +34,7 @@ const Info = ({ }) => {
             user_email: Email,
             user_addr: Address,
         };
-        // mutateAsync(data);
+        await userUpd.mutateAsync(data);
     }
 
     const onChange = (e) => {
@@ -70,18 +71,22 @@ const Info = ({ }) => {
         const data = {
             id: sessionStorage.getItem('userId'),
         };
-        await mutateAsync(data);
+        await userInfo.mutateAsync(data);
+
         setUser(data.result);
+        setTell(UserData?.user_tel);
+        setName(UserData?.user_nm);
+        setEmail(UserData?.user_email);
+        setAddress(UserData?.user_addr);
     }
 
     useEffect(() => {
         getUserData();
     }, [])
-    console.log(UserData);
 
 
     return (
-        isSuccess &&
+        userInfo.isSuccess &&
         <Style.InDiv>
             <div className='subTitle'>
                 <div>
@@ -101,7 +106,7 @@ const Info = ({ }) => {
                         <div>
                             <div className='inputTitle'>이름</div>
                             <div>
-                                <Input type="text" name="name" value={UserData.user_nm} onChange={onChange} />
+                                <Input type="text" name="name" value={Name} onChange={onChange} />
                             </div>
                         </div>
                         <div>
@@ -119,19 +124,19 @@ const Info = ({ }) => {
                         <div>
                             <div className='inputTitle'>휴대폰</div>
                             <div>
-                                <Input type="text" name="tell" value={UserData.user_tel} onChange={onChange} />
+                                <Input type="text" name="tell" value={Tell} onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>이메일</div>
                             <div>
-                                <Input type="text" name="email" value={UserData.user_email} onChange={onChange} />
+                                <Input type="text" name="email" value={Email} onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>주소</div>
                             <div>
-                                <Input type="text" name="address" value={UserData.user_addr} onChange={onChange} />
+                                <Input type="text" name="address" value={Address} onChange={onChange} />
                             </div>
                         </div>
                         <div>

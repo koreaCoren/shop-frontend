@@ -89,4 +89,8 @@ export const USER_ADDRESS = axios.create({
 export const USER_INFO = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_data`,
 })
+//유저 정보 업데이트
+export const USER_UPDATE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/upd_user`,
+})
 //--------- 개인정보 끝 ---------

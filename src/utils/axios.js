@@ -215,5 +215,17 @@ export const info = async (data) => {
     return api;
 }
 
+// 개인정보 수정
+export const userUpdate = async (data) => {
+    const api = await API.USER_UPDATE.post("", data).then((res) => {
+        data.result = res.data[0];
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+
+}
+
 // -------- 개인정보 끝 --------------
 
