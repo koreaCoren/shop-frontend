@@ -7,6 +7,8 @@ import Loading from 'components/loding/Loading';
 
 import styled from 'styled-components';
 
+import logo from "assets/images/logo.png"
+
 const Header = () => {
     const [categorys, setCategorys] = useState([]);
     const result = useQuery("categoryList", categoryList);
@@ -16,7 +18,7 @@ const Header = () => {
     }, [result.isLoading])
 
     return (
-        <header>
+        <header style={{ boxShadow: "0px 0px 5px #00000033" }}>
             <Login>
                 <div className="wrap">
                     {
@@ -49,9 +51,9 @@ const Header = () => {
             <Head>
                 <div className="wrap">
                     <div className="flexBox">
-                        <a href="/"><h1>로고</h1></a>
+                        <a href="/"><h1><img src={logo} alt="" /></h1></a>
                         <nav>
-                            <TopMenu>
+                            <ul>
                                 {
                                     categorys?.map((a, i) => {
                                         return (
@@ -70,7 +72,7 @@ const Header = () => {
                                         )
                                     })
                                 }
-                            </TopMenu>
+                            </ul>
                         </nav>
                     </div>
                 </div>
@@ -96,38 +98,50 @@ const Login = styled.div`
     }
 `
 const Head = styled.div`
-    background-color: #eee;
-    nav ul li a{
-        padding: 15px;
-        margin: 0px 10px;
+    background-color: #fff;
+    a > h1 > img{
+        width: 100px;
     }
-`
+    nav ul li{
+        position: relative;
+    }
 
-const TopMenu = styled.ul`
-    li{
-        
-    }
-    li a{
-        font-size: 20px;
-    }
-    li ol{
-        display: none;
-    }
-    li:hover ol{
-        display: block;
-        position: absolute;
-    }
-    li ol li{
-        display: block;
-        background-color: white;
-    }
-    li ol li:hover{
-        background-color: rgb(240,240,240);
-    }
-    li ol li a{
+    nav ul > li > a{
         font-size: 18px;
+        padding: 0px 15px;
+        line-height: 50px;
     }
-    
+
+    nav ul li ol{
+        position: absolute;
+        top: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 1px 1px 2px #00000077;
+        background-color: #fff;
+        max-height: 0px;
+        overflow-y: hidden;
+        transition: max-height .5s;
+        z-index: 5;
+    }
+
+    nav ul li:hover ol{
+        max-height: 300px;
+    }
+
+    nav ul  li ol li{
+    }
+
+    nav ul li ol li:hover{
+        background-color: #eee;
+    }
+
+    nav ul li ol li a{
+        font-size: 16px;
+        white-space:nowrap;
+        line-height: 40px;
+        padding: 0px 10px;
+    }
 `
 
 
