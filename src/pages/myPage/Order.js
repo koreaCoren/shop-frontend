@@ -13,8 +13,8 @@ const Order = ({ }) => {
     const nav = useNavigate();
     const { boardPage } = useParams();
     const [count, setCount] = useState(4);
-    const [boardLength, setBoardLength] = useState(0);
-    const [list, setBoard] = useState();
+    const [board, setBoard] = useState();
+    const [sliceBoard, setSliceBoard] = useState();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderList);
 
     const getOrderData = async () => {
@@ -22,13 +22,16 @@ const Order = ({ }) => {
             user_id: sessionStorage.getItem('userId'),
         };
         await mutateAsync(data);
-        setBoardLength(data.result.length);
-        setBoard(data.result?.slice((boardPage - 1) * count, (boardPage - 1) * count + count));
+        setBoard(data.result);
     }
 
     useEffect(() => {
         getOrderData();
-    }, [nav])
+    }, [])
+
+    useEffect(() => {
+        setSliceBoard(board?.slice((boardPage - 1) * count, (boardPage - 1) * count + count))
+    }, [isLoading, nav])
 
     return (
         <Style.InDiv>
@@ -41,7 +44,7 @@ const Order = ({ }) => {
             </div>
             {
                 isSuccess &&
-                list?.map((a, i) => {
+                sliceBoard?.map((a, i) => {
                     return (
                         <div className='contents' key={i}>
                             <OrderStyle.Div>
@@ -66,7 +69,7 @@ const Order = ({ }) => {
                 })
             }
 
-            <Pageing count={count} boardPage={boardPage} boardLength={boardLength} url={"/myPage/order"} />
+            <Pageing count={count} boardPage={boardPage} boardLength={board?.length} url={"/myPage/order"} />
             {isLoading && <Loading />}
         </Style.InDiv >
 
