@@ -7,8 +7,10 @@ export const login = async (data) => {
             sessionStorage.setItem("loginCheck", "success");
             sessionStorage.setItem("userId", res.data.userId);
             sessionStorage.setItem("token", res.data.token);
+            return 'ok';
         } else {
-            alert("아이디 또는 비밀번호 틀립니다.");
+            alert("아이디 또는 비밀번호가 틀렸습니다.");
+            return 'fail';
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -202,6 +204,35 @@ export const address = async (data) => {
     return api;
 }
 
+// 개인정보 읽기
+export const info = async (data) => {
+    const api = await API.USER_INFO.post("", data).then((res) => {
+        data.result = res.data[0];
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+// 개인정보 수정
+export const userUpdate = async (data) => {
+    const api = await API.USER_UPDATE.post("", data).then((res) => {
+        if (res.data.result[0] === 'fail') {
+            alert("비밀번호가 틀렸습니다.");
+            window.location.replace("/myPage/info");
+        } else {
+            alert("수정이 완료되었습니다.");
+            window.location.replace("/myPage/info");
+        }
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+
+}
 
 // -------- 개인정보 끝 --------------
 

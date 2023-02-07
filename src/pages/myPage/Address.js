@@ -9,18 +9,18 @@ const Address = ({ }) => {
     const [list, setBoard] = useState();
     const { mutateAsync, isSuccess } = useMutation(address);
 
-    const getOrderData = async () => {
+    const getAddrData = async () => {
         const data = {
             userId: sessionStorage.getItem('userId'),
             token: sessionStorage.getItem("token")
         };
         await mutateAsync(data);
         setBoard(data.result);
-        console.log(data.result.user_addr);
+        console.log(data.result);
     }
 
     useEffect(() => {
-        getOrderData();
+        getAddrData();
     }, [])
 
     return (
@@ -35,15 +35,28 @@ const Address = ({ }) => {
             {
 
                 isSuccess &&
+                <AddressStyle.Contents>
+                    <AddressStyle.Column>
+                        <div className='flex60'>선택</div>
+                        <div className='flex360'>주소</div>
+                        <div className='flex120'>받으실 분</div>
+                        <div className='flex100'>연락처</div>
+                        <div className='flex60'>수정</div>
+                    </AddressStyle.Column>
 
-                <div className='contents'>
 
-                </div>
-
+                    <AddressStyle.Ctnt>
+                        <div className='flex60'><i className="fa-regular fa-circle-check"></i></div>
+                        <div className='flex360'>{list.user_addr}</div>
+                        <div className='flex120'>{list.user_nm}</div>
+                        <div className='flex100'>{list.user_tel}</div>
+                        <div className='flex60'><i className="fa-solid fa-pen"></i></div>
+                    </AddressStyle.Ctnt>
+                </AddressStyle.Contents>
 
             }
 
-        </Style.InDiv>
+        </Style.InDiv >
 
     );
 };

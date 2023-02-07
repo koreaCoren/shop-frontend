@@ -2,7 +2,7 @@ const menus = [
     {
         mainTitle: "주문 내역",
         subList: [],
-        url: "order",
+        url: "order/1",
         icon: "fa-solid fa-file-invoice-dollar",
     },
 
@@ -24,11 +24,8 @@ const menus = [
     },
     {
         mainTitle: "개인 정보 수정",
-        subList: [
-            // { title: "카테고리 추가/삭제", url: "Category" },
-            // { title: "상품등록", url: "product" }
-        ],
-        url: "info",
+        subList: [],
+        url: "relogin",
         icon: "fa-solid fa-house",
     }
 ]

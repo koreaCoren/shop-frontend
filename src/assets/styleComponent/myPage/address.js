@@ -1,42 +1,40 @@
 import styled from "styled-components";
 
-
-export const Div = styled.div`
+export const Contents = styled.div`
     
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    border: 5px solid #F7F7F7;
-    padding: 30px;
-    .subTitle{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
+    color: rgb(51, 51, 51); 
+    .flex60 {
+        flex-basis: 60px;
     }
-    .subTitle > div{
-        display: flex;
-        align-items: center;
+    .flex360 {
+        flex-basis: 360px;
     }
-    h2{        
-        font-size: 24px;
+    .flex120 {
+        flex-basis: 120px;
     }
-    .grayTitle{
-        color: gray;
-        padding-right: 220px;
-
-    }
-    .new{
-        font-size: 20px;
-        text-align: right;
-    }
-    .contents{
-        display: flex;
-    }
-    .column{
-        border-top: 2px solid black;
-        height: 20px;
-        width: 100%;
-        margin-top: 40px;
+    .flex100 {
+        flex-basis: 100px;
     }
 `
+
+export const Column = styled.div`
+
+    display: flex;
+    padding: 20px;    
+    border-bottom: 1px solid black;
+    text-align: center;
+    line-height: 10px;
+    font-weight: 500;       
+    align-items: center;
+    justify-content: space-between;        
+    
+`
+
+export const Ctnt = styled.div`
+    text-align: center;
+    display: flex;
+    padding: 20px;  
+    align-items: center;
+    justify-content: space-between;     
+`
+

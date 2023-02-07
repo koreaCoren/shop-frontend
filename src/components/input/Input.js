@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 
-const LoginInput = ({ type, name, placeholder, onChange }) => {
+const LoginInput = ({ type, name, value, placeholder, onChange, readOnly }) => {
     return (
-        <Input type={type} name={name} placeholder={placeholder} onChange={onChange}></Input>
+        <Input type={type} name={name} value={value} placeholder={placeholder} onChange={onChange} readOnly={readOnly}></Input>
     );
 };
 
