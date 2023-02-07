@@ -10,7 +10,7 @@ const SideMenu = () => {
     const [menuList, setMenuList] = useState(0);
     return (
         <Ul>
-            <li><a href="/myPage/order">마이페이지</a></li>
+            <li><a href="/myPage/order/1">마이페이지</a></li>
             {
                 menus.map((a, i) => {
                     return (

@@ -2,7 +2,7 @@ const menus = [
     {
         mainTitle: "주문 내역",
         subList: [],
-        url: "order",
+        url: "order/1",
         icon: "fa-solid fa-file-invoice-dollar",
     },
 
