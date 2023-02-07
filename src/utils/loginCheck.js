@@ -1,3 +1,4 @@
+//로그인체크
 const loginCheck = () => {
     if (sessionStorage.getItem("userId") === null ||
         sessionStorage.getItem("token") === null ||

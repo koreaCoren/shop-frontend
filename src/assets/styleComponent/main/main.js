@@ -276,10 +276,11 @@ export const Best = styled.div`
     }
 
     .wrap>ul {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         justify-content: center;
-        gap: 150px;
+        gap: 15px;
     }
 
     .wrap>ul li .hoverBox {
@@ -287,6 +288,8 @@ export const Best = styled.div`
     }
 
     .wrap>ul li .hoverBox a img {
+        width: 100%;
+        height: 300px;
         margin-bottom: 30px;
     }
 
@@ -307,7 +310,7 @@ export const Best = styled.div`
         opacity: 1;
     }
 
-    .wrap>ul li .hoverBox ul li a i {
+    .wrap>ul li .hoverBox ul li i {
         background-color: #fff;
         color: #333333;
         width: 50px;
@@ -315,6 +318,7 @@ export const Best = styled.div`
         border-radius: 50%;
         text-align: center;
         font-size: 24px;
+        cursor: pointer;
     }
 
     .wrap>ul li .name {
