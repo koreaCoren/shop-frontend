@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { orderList } from 'utils/axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
-import * as Style from "assets/styleComponent/myPage/myPage"
-import * as OrderStyle from "assets/styleComponent/myPage/order"
+import { orderList } from 'utils/axios';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 
+import * as Style from "assets/styleComponent/myPage/myPage"
+import * as OrderStyle from "assets/styleComponent/myPage/order"
+
 const Order = ({ }) => {
+    const nav = useNavigate();
+    const { boardPage } = useParams();
+    const [count, setCount] = useState(4);
+    const [boardLength, setBoardLength] = useState(0);
     const [list, setBoard] = useState();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderList);
 
@@ -16,12 +22,13 @@ const Order = ({ }) => {
             user_id: sessionStorage.getItem('userId'),
         };
         await mutateAsync(data);
-        setBoard(data.result);
+        setBoardLength(data.result.length);
+        setBoard(data.result?.slice((boardPage - 1) * count, (boardPage - 1) * count + count));
     }
 
     useEffect(() => {
         getOrderData();
-    }, [])
+    }, [nav])
 
     return (
         <Style.InDiv>
@@ -59,6 +66,7 @@ const Order = ({ }) => {
                 })
             }
 
+            <Pageing count={count} boardPage={boardPage} boardLength={boardLength} url={"/myPage/order"} />
             {isLoading && <Loading />}
         </Style.InDiv >
 

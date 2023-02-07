@@ -27,7 +27,7 @@ const MyPage = () => {
                 <SideMenu></SideMenu>
                 <Routes>
                     <Route path="/info" element={<Info />} />
-                    <Route path="/order" element={<Order />} />
+                    <Route path="/order/:boardPage" element={<Order />} />
                     <Route path="/pick" element={<Pick />} />
                     <Route path="/address" element={<Address />} />
                 </Routes>
