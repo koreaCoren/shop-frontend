@@ -58,12 +58,12 @@ const Header = () => {
                                     categorys?.map((a, i) => {
                                         return (
                                             <li key={i}>
-                                                <Link to={`/product/products/${(i + 1)}0`}>{a.cate}</Link>
+                                                <Link to={`/product/products/${(a.cate_code)}`}>{a.cate}</Link>
                                                 <ol>
                                                     {
                                                         a.lowCategory?.map((b, j) => {
                                                             return (
-                                                                <li key={j}><Link to={`/product/products/${(i + 1)}0${(j + 1)}0`}>{b.cate}</Link></li>
+                                                                <li key={j}><Link to={`/product/products/${b.cate_code}`}>{b.cate}</Link></li>
                                                             )
                                                         })
                                                     }

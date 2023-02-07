@@ -1,15 +1,21 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+
+import { productList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/main/main"
 
 import mainbanner from "assets/images/main/mainBanner.jpg";
 import best from "assets/images/main/best.jpg";
+import { Link } from 'react-router-dom';
+import addBasket from 'utils/addBasket';
 
 const Main = ({ setHeader }) => {
+    let result = useQuery("prodcutList", productList);
     useEffect(() => {
         setHeader(true);
-    }, []);
+    }, [result.isLoading]);
     return (
         <main>
             <Style.Banner>
@@ -130,58 +136,78 @@ const Main = ({ setHeader }) => {
                 <div className="wrap">
                     <h3>라이프힘 베스트</h3>
                     <ul>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
+                        {
+                            result.data?.slice(0, 4).map((a, i) => {
+                                return (
+                                    <li key={i}>
+                                        <div className="hoverBox">
+                                            <Link to={`/product/detail/${a.goods_code}`}>
+                                                <img src={a.goods_img} alt="" />
+                                            </Link>
+                                            <ul>
+                                                <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
+                                            </ul>
+                                        </div>
+                                        <div className="name">{a.goods_nm}</div>
+                                        <div className="pay">{a.goods_price}원</div>
+                                    </li>
+                                )
+                            })
+                        }
                     </ul>
+                    {/* <ul>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                    </ul> */}
                 </div>
             </Style.Best>
 

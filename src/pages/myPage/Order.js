@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { orderList } from 'utils/axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
-import * as Style from "assets/styleComponent/myPage/myPage"
-import * as OrderStyle from "assets/styleComponent/myPage/order"
+import { orderList } from 'utils/axios';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 
+import * as Style from "assets/styleComponent/myPage/myPage"
+import * as OrderStyle from "assets/styleComponent/myPage/order"
+
 const Order = ({ }) => {
-    const [list, setBoard] = useState();
+    const nav = useNavigate();
+    const { boardPage } = useParams();
+    const [count, setCount] = useState(4);
+    const [board, setBoard] = useState();
+    const [sliceBoard, setSliceBoard] = useState();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderList);
 
     const getOrderData = async () => {
@@ -23,6 +29,10 @@ const Order = ({ }) => {
         getOrderData();
     }, [])
 
+    useEffect(() => {
+        setSliceBoard(board?.slice((boardPage - 1) * count, (boardPage - 1) * count + count))
+    }, [isLoading, nav])
+
     return (
         <Style.InDiv>
             <div className='subTitle'>
@@ -34,7 +44,7 @@ const Order = ({ }) => {
             </div>
             {
                 isSuccess &&
-                list?.map((a, i) => {
+                sliceBoard?.map((a, i) => {
                     return (
                         <div className='contents' key={i}>
                             <OrderStyle.Div>
@@ -59,6 +69,7 @@ const Order = ({ }) => {
                 })
             }
 
+            <Pageing count={count} boardPage={boardPage} boardLength={board?.length} url={"/myPage/order"} />
             {isLoading && <Loading />}
         </Style.InDiv >
 

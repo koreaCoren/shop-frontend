@@ -23,6 +23,7 @@ function App() {
     const { mutate, isLoading } = useMutation(tokenCheck);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         const data = {
             token: sessionStorage.getItem("token"),
             userId: sessionStorage.getItem("userId"),
