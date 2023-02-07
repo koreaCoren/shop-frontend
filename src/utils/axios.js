@@ -218,7 +218,14 @@ export const info = async (data) => {
 // 개인정보 수정
 export const userUpdate = async (data) => {
     const api = await API.USER_UPDATE.post("", data).then((res) => {
-        data.result = res.data[0];
+        if (res.data.result[0] === 'fail') {
+            alert("비밀번호가 틀렸습니다.");
+            window.location.replace("/myPage/info");
+        } else {
+            alert("수정이 완료되었습니다.");
+            window.location.replace("/myPage/info");
+        }
+
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");

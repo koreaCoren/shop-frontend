@@ -74,10 +74,10 @@ const Info = ({ }) => {
         await userInfo.mutateAsync(data);
 
         setUser(data.result);
-        setTell(UserData?.user_tel);
-        setName(UserData?.user_nm);
-        setEmail(UserData?.user_email);
-        setAddress(UserData?.user_addr);
+        setTell(data.result?.user_tel);
+        setName(data.result?.user_nm);
+        setEmail(data.result?.user_email);
+        setAddress(data.result?.user_addr);
     }
 
     useEffect(() => {
