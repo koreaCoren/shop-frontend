@@ -38,3 +38,23 @@ export const Ctnt = styled.div`
     justify-content: space-between;     
 `
 
+export const Shipping = styled.div`
+    padding: 20px 0;
+    form{
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
+    }
+    div{
+        padding-bottom: 10px;
+        display: grid;
+        grid-template-columns: 0.5fr 4fr;
+    }
+    input[type=text]{
+        border-radius: 5px;
+        border: 1px solid gray;
+    }
+`
