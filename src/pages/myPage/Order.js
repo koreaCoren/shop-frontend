@@ -60,7 +60,7 @@ const Order = ({ }) => {
                                 <ul>
                                     <li><OrderStyle.SubTitle>상품명</OrderStyle.SubTitle> {a.goods_name}</li>
                                     <li><OrderStyle.SubTitle>주문번호</OrderStyle.SubTitle> {a.orderCode}</li>
-                                    <li><OrderStyle.SubTitle>총 상품개수</OrderStyle.SubTitle> {a.total_count} 개</li>
+                                    <li><OrderStyle.SubTitle>총 상품개수</OrderStyle.SubTitle> {a.total_count}개</li>
                                     <li><OrderStyle.SubTitle>총 주문금액</OrderStyle.SubTitle> {a.total_price}원</li>
                                 </ul>
                             </OrderStyle.Div>
