@@ -13,6 +13,7 @@ import MyPage from "routers/MyPage";
 import Product from "./Product";
 import Order from "./Order";
 import Close from "components/inicis/Close";
+import Community from "./Community";
 
 import "assets/css/common/common.css";
 
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/product/*" element={<Product setOrderData={setOrderData} />} />
                 <Route path="/order/*" element={<Order orderData={orderData} />} />
                 <Route path="/close" element={<Close />} />
+                <Route path="/community/*" element={<Community />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
