@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { address, insertAddress } from 'utils/axios';
+import { address, insertAddress} from 'utils/axios';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as AddressStyle from "assets/styleComponent/myPage/address"
 
 const Address = ({ }) => {
     const id = sessionStorage.getItem("userId");
-    const [list, setBoard] = useState();
+    const [list, setBoard] = useState("");
     const [shipName, setShipName] = useState("");
     const [shipAddress, setShipAddress] = useState("");
     const [shipPhone, setShipPhone] = useState("");
@@ -25,7 +25,6 @@ const Address = ({ }) => {
         };
         await mutateAsync(data);
         setBoard(data.result);
-        console.log(data.result);
     }
 
     const onChange = (e) => {
@@ -34,19 +33,15 @@ const Address = ({ }) => {
         switch (name) {
             case "shipName":
                 setShipName(value);
-                console.log(value);
                 break;
             case "shipAddress":
                 setShipAddress(value);
-                console.log(value);
                 break;
             case "shipPhone":
                 setShipPhone(value);
-                console.log(value);
                 break;
             case "shipReceiver":
                 setShipReceiver(value);
-                console.log(value);
                 break;
             default:
                 break;
@@ -71,6 +66,7 @@ const Address = ({ }) => {
 
     useEffect(() => {
         getAddrData();
+        // console.log(list);
     }, [])
 
     return (
@@ -101,20 +97,27 @@ const Address = ({ }) => {
                 <AddressStyle.Contents>
                     <AddressStyle.Column>
                         <div className='flex60'>선택</div>
+                        <div className='flex60'>배송지명</div>
                         <div className='flex360'>주소</div>
                         <div className='flex120'>받으실 분</div>
                         <div className='flex100'>연락처</div>
                         <div className='flex60'>수정</div>
                     </AddressStyle.Column>
-
-
-                    <AddressStyle.Ctnt>
-                        <div className='flex60'><i className="fa-regular fa-circle-check"></i></div>
-                        <div className='flex360'>{list.user_addr}</div>
-                        <div className='flex120'>{list.user_nm}</div>
-                        <div className='flex100'>{list.user_tel}</div>
-                        <div className='flex60'><i className="fa-solid fa-pen"></i></div>
-                    </AddressStyle.Ctnt>
+                    
+                    {
+                        list.map((item, index) => {
+                            return(
+                                <AddressStyle.Ctnt>
+                                    <div className='flex60'><i className={(item.default_address === 1)?"fa-regular fa-circle-check":''}></i></div>
+                                    <div className='flex60'>{item.ship_name}</div>
+                                    <div className='flex360'>{item.ship_address}</div>
+                                    <div className='flex120'>{item.ship_receiver}</div>
+                                    <div className='flex100'>{item.ship_phone}</div>
+                                    <div className='flex60'><i className="fa-solid fa-pen"></i></div>
+                                    </AddressStyle.Ctnt>
+                            )
+                        })
+                    }
                 </AddressStyle.Contents>
 
             }
