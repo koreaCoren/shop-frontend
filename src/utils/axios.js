@@ -193,7 +193,7 @@ export const orderSuccess = async (data) => {
 
 // -------- 개인정보 시작 ------------
 
-// 주문하기
+// 주문하기, 배송지 불러오기
 export const address = async (data) => {
     const api = await API.USER_ADDRESS.post("", data).then((res) => {
         data.result = res.data;
@@ -238,6 +238,8 @@ export const insertAddress = async (data) => {
     const api = await API.ADD_ADDRESS.post("", data).then((res) => {
         data.result = res.data;
         alert("신규배송지가 추가되었습니다.");
+        window.location.replace("/myPage/address");
+
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
