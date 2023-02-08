@@ -14,6 +14,7 @@ padding: 30px;
     align-items: center;
     border-bottom: 1.5px solid black;
     padding-bottom: 30px;
+    font-weight: bold;
 }
 .subTitle > div{
     display: flex;
@@ -24,7 +25,7 @@ h2{
 }
 .grayTitle{
     color: gray;
-    padding-left: 10px;
+    padding: 0 10px;
 
 }
 .new{
@@ -65,6 +66,12 @@ padding: 20px 0 50px 0;
 export const Line = styled.div`
 width: 100%;
 border-top: 1px solid #DDDFE1;
+margin-top: 20px;
+`
+
+export const BoldLine = styled.div`
+width: 100%;
+border-top: 2px solid #000000;
 margin-top: 20px;
 `
 

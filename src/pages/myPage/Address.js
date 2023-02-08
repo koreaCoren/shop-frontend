@@ -13,7 +13,7 @@ const Address = ({ }) => {
     const [shipPhone, setShipPhone] = useState("");
     const [shipReceiver, setShipReceiver] = useState("");
     const [showShipping, setShowShipping] = useState(false);
-    
+
     const { mutateAsync, isSuccess } = useMutation(address);
     const userShipAdd = useMutation(insertAddress);
     const userShipDel = useMutation(deleteAddress);
@@ -57,7 +57,7 @@ const Address = ({ }) => {
     }
 
     //배송지 추가
-    const setShipping = async() => {
+    const setShipping = async () => {
         const data = {
             user_id: id,
             ship_address: shipAddress,
@@ -70,13 +70,13 @@ const Address = ({ }) => {
     }
 
     //배송지 삭제
-    const delShpping = async(addrValue) => {
-        if(window.confirm("지울거?")){
+    const delShpping = async (addrValue) => {
+        if (window.confirm("지울거?")) {
             const data = {
-                i_addr:addrValue
+                i_addr: addrValue
             }
             await userShipDel.mutateAsync(data);
-        } else{
+        } else {
             alert("그래...");
         }
     }
@@ -85,7 +85,7 @@ const Address = ({ }) => {
     const setDefaultAddr = async (addrValue) => {
         const data = {
             user_id: id,
-            i_addr:addrValue
+            i_addr: addrValue
         }
         await DefaultAddr.mutateAsync(data);
 
@@ -107,17 +107,17 @@ const Address = ({ }) => {
             </div>
             {showShipping && <AddressStyle.Shipping>
                 <form>
-                    <div>배송지명<input type="text" name='shipName' onChange={onChange}/></div> 
-                    <div>주소<input type="text" name='shipAddress'onChange={onChange}/></div>
-                    <div>받으실 분<input type="text" name='shipReceiver' onChange={onChange}/></div>
-                    <div>연락처 <input type="text" name='shipPhone' onChange={onChange}/></div>
+                    <div>배송지명<input type="text" name='shipName' onChange={onChange} /></div>
+                    <div>주소<input type="text" name='shipAddress' onChange={onChange} /></div>
+                    <div>받으실 분<input type="text" name='shipReceiver' onChange={onChange} /></div>
+                    <div>연락처 <input type="text" name='shipPhone' onChange={onChange} /></div>
                     <div><input type="button" value="추가" onClick={() => {
                         setShipping();
                     }} /></div>
-                    
+
                 </form>
             </AddressStyle.Shipping>}
-            
+
             {
 
                 isSuccess &&
@@ -131,16 +131,16 @@ const Address = ({ }) => {
                         {/* <div className='flex60'>수정</div> */}
                         <div className='flex60'>삭제</div>
                     </AddressStyle.Column>
-                    
+
                     {
                         list.map((item, index) => {
-                            return(
+                            return (
                                 <AddressStyle.Ctnt>
                                     <div className='flex60'
-                                    onClick={() => {
-                                        setDefaultAddr(item.i_addr);
-                                    }}>
-                                        <i className={(item.default_address === 1)?"fa-regular fa-circle-check":"fa-regular fa-circle"}></i></div>
+                                        onClick={() => {
+                                            setDefaultAddr(item.i_addr);
+                                        }}>
+                                        <i className={(item.default_address === 1) ? "fa-regular fa-circle-check" : "fa-regular fa-circle"}></i></div>
                                     <div className='flex60'>{item.ship_name}</div>
                                     <div className='flex360'>{item.ship_address}</div>
                                     <div className='flex120'>{item.ship_receiver}</div>
@@ -149,11 +149,11 @@ const Address = ({ }) => {
                                     <div className='flex60 del' onClick={() => {
                                         delShpping(item.i_addr);
                                     }}><i className="fa-sharp fa-solid fa-trash"></i></div>
-                                </AddressStyle.Ctnt>
+                                </AddressStyle.Ctnt >
                             )
                         })
                     }
-                </AddressStyle.Contents>
+                </AddressStyle.Contents >
 
             }
 
