@@ -66,6 +66,12 @@ border-top: 1px solid #DDDFE1;
 margin-top: 20px;
 `
 
+export const BoldLine = styled.div`
+width: 100%;
+border-top: 2px solid #000000;
+margin-top: 20px;
+`
+
 
 export const Form = styled.form`
     display: flex;

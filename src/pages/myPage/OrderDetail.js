@@ -3,8 +3,6 @@ import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import { orderCodeList } from 'utils/axios';
-import Loading from 'components/loding/Loading';
-import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -54,6 +52,7 @@ const OrderDetail = ({ }) => {
 
                             </OrderStyle.Div>
                             <Style.Line></Style.Line>
+
                             <OrderStyle.Div>
                                 <ul>
                                     {/* <li><OrderStyle.SubTitle>상품명</OrderStyle.SubTitle> {a.goods_name}</li> */}
@@ -65,6 +64,19 @@ const OrderDetail = ({ }) => {
                     )
                 })
             }
+            <OrderStyle.Div>
+                <h2 className='botTitle'>배송조회</h2>
+            </OrderStyle.Div>
+            <Style.BoldLine></Style.BoldLine>
+            <OrderStyle.ListDiv>
+                <ul>
+                    <li>
+                        <div>배송현황</div>
+                        <div>배송완료<div>배송조회</div></div>
+
+                    </li>
+                </ul>
+            </OrderStyle.ListDiv>
 
         </Style.InDiv >
 
