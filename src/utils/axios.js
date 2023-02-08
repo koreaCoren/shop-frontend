@@ -153,7 +153,17 @@ export const orderManagementDetail = async (data) => {
 
 // 주문확인
 export const orderList = async (data) => {
-    const api = await API.ORDER_List.post("", data).then((res) => {
+    const api = await API.ORDER_LIST.post("", data).then((res) => {
+        data.result = [...res.data];
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+// 주문확인
+export const orderCodeList = async (data) => {
+    const api = await API.ORDER_CODE_LIST.post("", data).then((res) => {
         data.result = [...res.data];
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);

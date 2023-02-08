@@ -61,10 +61,13 @@ export const ORDER_MANAGEMENT_DETAIL = axios.create({
 
 //--------- 주문 관련 시작 ---------
 
-
 // 주문확인
-export const ORDER_List = axios.create({
+export const ORDER_LIST = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_orders`
+})
+// 유저 주문번호 주문확인
+export const ORDER_CODE_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_user_code_orders`
 })
 
 // 주문하기

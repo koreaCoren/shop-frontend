@@ -16,7 +16,6 @@ const Address = ({ }) => {
         };
         await mutateAsync(data);
         setBoard(data.result);
-        console.log(data.result);
     }
 
     useEffect(() => {

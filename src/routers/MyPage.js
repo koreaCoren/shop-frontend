@@ -7,6 +7,7 @@ import SideMenu from 'pages/myPage/SideMenu';
 import Address from 'pages/myPage/Address';
 import Info from 'pages/myPage/Info';
 import Order from 'pages/myPage/Order';
+import OrderDetail from 'pages/myPage/OrderDetail';
 import Pick from 'pages/myPage/Pick';
 import Relogin from 'pages/myPage/Relogin';
 import * as Style from "assets/styleComponent/myPage/myPage"
@@ -29,6 +30,7 @@ const MyPage = () => {
                 <Routes>
                     <Route path="/info" element={<Info />} />
                     <Route path="/order/:boardPage" element={<Order />} />
+                    <Route path="/orderDetail/:orderCode" element={<OrderDetail />} />
                     <Route path="/pick" element={<Pick />} />
                     <Route path="/address" element={<Address />} />
                     <Route path="/relogin" element={<Relogin />} />
