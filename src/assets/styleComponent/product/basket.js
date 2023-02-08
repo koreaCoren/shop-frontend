@@ -25,13 +25,13 @@ export const Purchase = styled.div`
 
     ul{
         display: grid;
-        grid-template-columns: 50% 1fr 1fr 1fr ;
+        grid-template-columns: 30px 50% 1fr 1fr 1fr ;
     }
 
     ul.title{
         border-bottom: 1px solid #ddd;
         align-items: center;
-        padding: 5px 15px;
+        padding: 5px 0px;
     }
 
     ul.title li{
@@ -39,7 +39,11 @@ export const Purchase = styled.div`
     }
 
     ul.productInfo{
-        padding: 15px;
+        padding: 15px 0px;
+    }
+
+    ul.productInfo:not(:nth-child(2)){
+        border-top: 1px solid #ddd;
     }
 
     ul.productInfo li{
@@ -48,7 +52,7 @@ export const Purchase = styled.div`
         gap: 20px;
     }
 
-    ul.productInfo li:not(:first-child){
+    ul.productInfo li:not(:nth-child(2)){
         justify-content: center;
     }
 
@@ -68,6 +72,7 @@ export const Button = styled.div`
         background-color: #444;
         color: #fff;
         padding: 10px 30px;
+        margin: 0 5px;
         border-radius: 5px;
         cursor: pointer;
     }

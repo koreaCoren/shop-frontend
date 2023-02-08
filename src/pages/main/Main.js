@@ -75,7 +75,7 @@ const Main = ({ setHeader }) => {
                 </div>
             </Style.ViewMore>
 
-            <Style.LifeHim>
+            {/* <Style.LifeHim>
                 <div className="flexContainer">
                     <div className="content">
                         <h3>Life Him</h3>
@@ -130,7 +130,7 @@ const Main = ({ setHeader }) => {
                         </div>
                     </div>
                 </div>
-            </Style.LifeHim>
+            </Style.LifeHim> */}
 
             <Style.Best>
                 <div className="wrap">
