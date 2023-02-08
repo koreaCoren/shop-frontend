@@ -9,7 +9,7 @@ const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
     const [checkData, setCheckData] = useState([]);
-    const [reload, setReload] = useState(basketData.length);
+    const [reload, setReload] = useState(basketData === null ? 0 : basketData.length);
 
     const allCheck = (checked) => {
         if (checked) {
