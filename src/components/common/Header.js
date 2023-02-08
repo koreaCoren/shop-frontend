@@ -72,6 +72,7 @@ const Header = () => {
                                         )
                                     })
                                 }
+                                <li><Link to={"community/notice/1"}>공지사항</Link></li>
                             </ul>
                         </nav>
                     </div>
