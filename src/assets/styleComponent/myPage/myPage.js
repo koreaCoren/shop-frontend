@@ -31,6 +31,7 @@ h2{
 .new{
     font-size: 20px;
     text-align: right;
+    cursor: pointer;
 }
 .contents{
     display: flex;

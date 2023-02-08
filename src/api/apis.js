@@ -96,4 +96,8 @@ export const USER_INFO = axios.create({
 export const USER_UPDATE = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/upd_user`,
 })
+//신규 배송지 추가
+export const ADD_ADDRESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/add_address`,
+})
 //--------- 개인정보 끝 ---------

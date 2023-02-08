@@ -23,19 +23,19 @@ const Info = ({ }) => {
     const userInfo = useMutation(info);
     const userUpd = useMutation(userUpdate);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        const data = {
-            user_id: id,
-            user_nm: Name,
-            current_pw: CurrentPW,
-            user_pw: ChangePW,
-            user_tell: Tell,
-            user_email: Email,
-            user_addr: Address,
-        };
-        await userUpd.mutateAsync(data);
-    }
+    // const onSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const data = {
+    //         user_id: id,
+    //         user_nm: Name,
+    //         current_pw: CurrentPW,
+    //         user_pw: ChangePW,
+    //         user_tell: Tell,
+    //         user_email: Email,
+    //         user_addr: Address,
+    //     };
+    //     await userUpd.mutateAsync(data);
+    // }
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -67,6 +67,40 @@ const Info = ({ }) => {
         }
     }
 
+    const onSubmit = async (i) => {
+        // e.preventDefault();
+        let data ={};
+        switch(i){
+            case 1:
+                console.log("비밀번호 입력없이 변경");
+                data = {
+                    user_id: id,
+                    user_nm: Name,
+                    user_tell: Tell,
+                    user_email: Email,
+                    user_addr: Address,
+                };
+                await userUpd.mutateAsync(data);
+                break;
+            case 2:
+                console.log("비밀번호 입력하고 변경");
+                if(ChangePW === ""){
+                    alert("변경할 비밀번호를 입력해주세요");
+                }
+                data = {
+                    user_id: id,
+                    user_nm: Name,
+                    current_pw: CurrentPW,
+                    user_pw: ChangePW,
+                    user_tell: Tell,
+                    user_email: Email,
+                    user_addr: Address,
+                };
+                await userUpd.mutateAsync(data);
+                break;
+            }
+    };
+
     const getUserData = async () => {
         const data = {
             id: sessionStorage.getItem('userId'),
@@ -96,7 +130,7 @@ const Info = ({ }) => {
             </div>
             <div className='contents'>
                 <InfoStyle.Div>
-                    <InfoStyle.Form onSubmit={onSubmit}>
+                    <InfoStyle.Form>
                         <div>
                             <div className='inputTitle'>아이디</div>
                             <div>
@@ -140,7 +174,9 @@ const Info = ({ }) => {
                             </div>
                         </div>
                         <div>
-                            <input type="submit" value="수정" />
+                            <input type="button" value="수정" onClick={(() => {
+                                CurrentPW === "" ? onSubmit(1) : onSubmit(2);
+                            })} />
                         </div>
                     </InfoStyle.Form>
                 </InfoStyle.Div>
