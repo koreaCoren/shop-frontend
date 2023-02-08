@@ -1,13 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/basket"
-import { useState } from 'react';
-import loginCheck from 'utils/loginCheck';
-import { useNavigate } from 'react-router-dom';
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
+    const [checkData, setCheckData] = useState([]);
+    const [reload, setReload] = useState(basketData.length);
+
+    const allCheck = (checked) => {
+        if (checked) {
+            const arr = [];
+            basketData.forEach(el => {
+                arr.push(el.goods_code);
+            });
+            setCheckData(arr);
+        } else {
+            setCheckData([]);
+        }
+    }
+
+    const singCheck = (checked, code) => {
+        if (checked) {
+            setCheckData(prev => [...prev, code]);
+        } else {
+            setCheckData(checkData.filter((el) => el !== code));
+        }
+    }
+
+    const reset = () => {
+        const arr = basketData;
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = 0; j < checkData.length; j++) {
+                if (checkData[j] === arr[i].goods_code) {
+                    arr.splice(i, 1);
+                }
+            }
+        }
+        sessionStorage.setItem("basket", JSON.stringify(arr));
+        setBasketData(arr);
+        setReload(basketData.length);
+    }
+
     const basketOrder = () => {
         if (loginCheck() === true) {
             return;
@@ -29,31 +66,38 @@ const Basket = ({ setOrderData }) => {
         setOrderData(data);
         nav("/order/info");
     }
+
+    useEffect(() => { }, [reload])
+
     return (
         <Style.Basket>
             <div className="wrap">
                 <Style.Title>장바구니</Style.Title>
-                {
-                    basketData === null
-                        ? <Style.Purchase>
-                            <ul className='title'>
-                                <li>상품정보</li>
-                                <li>수량</li>
-                                <li>할인율</li>
-                                <li>상품금액 <br />(할인적용)</li>
-                            </ul>
-                            <p>현재 장바구니에 담긴 상품이 없습니다.</p>
-                        </Style.Purchase>
-                        : basketData.map((a, i) => {
-                            return (
-                                <Style.Purchase key={i}>
-                                    <ul className='title'>
-                                        <li>상품정보</li>
-                                        <li>수량</li>
-                                        <li>할인율</li>
-                                        <li>상품금액 <br />(할인적용)</li>
-                                    </ul>
-                                    <ul className="productInfo">
+                <Style.Purchase>
+                    <ul className='title'>
+                        <li>
+                            <input type="checkbox"
+                                onChange={(e) => { allCheck(e.target.checked) }}
+                                checked={checkData.length === basketData.length ? true : false}
+                            />
+                        </li>
+                        <li>상품정보</li>
+                        <li>수량</li>
+                        <li>할인율</li>
+                        <li>상품금액 <br />(할인적용)</li>
+                    </ul>
+                    {
+                        basketData === null || basketData.length === 0
+                            ? <p>현재 장바구니에 담긴 상품이 없습니다.</p>
+                            : basketData.map((a, i) => {
+                                return (
+                                    <ul className="productInfo" key={i}>
+                                        <li>
+                                            <input type="checkbox"
+                                                onChange={(e) => singCheck(e.target.checked, a.goods_code)}
+                                                checked={checkData.includes(a.goods_code) ? true : false}
+                                            />
+                                        </li>
                                         <li>
                                             <img src={a.goods_img} alt="" />
                                             <div className="content">
@@ -64,13 +108,14 @@ const Basket = ({ setOrderData }) => {
                                         <li>{a.goods_sale}%</li>
                                         <li>{Math.ceil(a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count}원</li>
                                     </ul>
-                                </Style.Purchase>
-                            )
-                        })
-                }
+                                )
+                            })
+                    }
+                </Style.Purchase>
 
-                <Style.Button onClick={basketOrder}>
-                    <button>구매하기</button>
+                <Style.Button>
+                    <button onClick={reset}>선택삭제</button>
+                    <button onClick={basketOrder}>구매하기</button>
                 </Style.Button>
             </div>
         </Style.Basket>
