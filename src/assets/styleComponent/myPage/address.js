@@ -1,42 +1,60 @@
 import styled from "styled-components";
 
-
-export const Div = styled.div`
+export const Contents = styled.div`
     
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    border: 5px solid #F7F7F7;
-    padding: 30px;
-    .subTitle{
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        align-items: center;
+    color: rgb(51, 51, 51); 
+    .flex60 {
+        flex-basis: 60px;
     }
-    .subTitle > div{
-        display: flex;
-        align-items: center;
+    .flex360 {
+        flex-basis: 360px;
     }
-    h2{        
-        font-size: 24px;
+    .flex120 {
+        flex-basis: 120px;
     }
-    .grayTitle{
-        color: gray;
-        padding-right: 220px;
+    .flex100 {
+        flex-basis: 100px;
+    }
+`
 
-    }
-    .new{
-        font-size: 20px;
-        text-align: right;
-    }
-    .contents{
+export const Column = styled.div`
+
+    display: flex;
+    padding: 20px;    
+    border-bottom: 1px solid black;
+    text-align: center;
+    line-height: 10px;
+    font-weight: 500;       
+    align-items: center;
+    justify-content: space-between;        
+    
+`
+
+export const Ctnt = styled.div`
+    text-align: center;
+    display: flex;
+    padding: 20px;  
+    align-items: center;
+    justify-content: space-between;     
+`
+
+export const Shipping = styled.div`
+    padding: 20px 0;
+    form{
         display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
     }
-    .column{
-        border-top: 2px solid black;
-        height: 20px;
-        width: 100%;
-        margin-top: 40px;
+    div{
+        padding-bottom: 10px;
+        display: grid;
+        grid-template-columns: 0.5fr 4fr;
+    }
+    input[type=text]{
+        border-radius: 5px;
+        border: 1px solid gray;
     }
 `

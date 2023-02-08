@@ -61,10 +61,13 @@ export const ORDER_MANAGEMENT_DETAIL = axios.create({
 
 //--------- 주문 관련 시작 ---------
 
-
 // 주문확인
-export const ORDER_List = axios.create({
+export const ORDER_LIST = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_orders`
+})
+// 유저 주문번호 주문확인
+export const ORDER_CODE_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_user_code_orders`
 })
 
 // 주문하기
@@ -74,7 +77,7 @@ export const ORDER = axios.create({
 
 //주문 완료
 export const ORDER_SUCCESS = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders `,
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders`,
 })
 
 //--------- 주문 관련 끝 ---------
@@ -83,6 +86,26 @@ export const ORDER_SUCCESS = axios.create({
 
 //배송지 확인
 export const USER_ADDRESS = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/user/user_address `,
+    baseURL: `${process.env.REACT_APP_API_URL}/user/user_address`,
+})
+//유저 정보
+export const USER_INFO = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_data`,
+})
+//유저 정보 업데이트
+export const USER_UPDATE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/upd_user`,
+})
+//신규 배송지 추가
+export const ADD_ADDRESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/add_address`,
+})
+//배송지 삭제
+export const DELETE_ADDRESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/del_address`,
+})
+//기본 배송지 설정
+export const SET_DEFAULT_ADDR = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
 })
 //--------- 개인정보 끝 ---------

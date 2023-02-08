@@ -7,8 +7,10 @@ export const login = async (data) => {
             sessionStorage.setItem("loginCheck", "success");
             sessionStorage.setItem("userId", res.data.userId);
             sessionStorage.setItem("token", res.data.token);
+            return 'ok';
         } else {
-            alert("아이디 또는 비밀번호 틀립니다.");
+            alert("아이디 또는 비밀번호가 틀렸습니다.");
+            return 'fail';
         }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -151,7 +153,17 @@ export const orderManagementDetail = async (data) => {
 
 // 주문확인
 export const orderList = async (data) => {
-    const api = await API.ORDER_List.post("", data).then((res) => {
+    const api = await API.ORDER_LIST.post("", data).then((res) => {
+        data.result = [...res.data];
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+// 주문확인
+export const orderCodeList = async (data) => {
+    const api = await API.ORDER_CODE_LIST.post("", data).then((res) => {
         data.result = [...res.data];
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -191,7 +203,7 @@ export const orderSuccess = async (data) => {
 
 // -------- 개인정보 시작 ------------
 
-// 주문하기
+// 주문하기, 배송지 불러오기
 export const address = async (data) => {
     const api = await API.USER_ADDRESS.post("", data).then((res) => {
         data.result = res.data;
@@ -202,6 +214,74 @@ export const address = async (data) => {
     return api;
 }
 
+// 개인정보 읽기
+export const info = async (data) => {
+    const api = await API.USER_INFO.post("", data).then((res) => {
+        data.result = res.data[0];
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+// 개인정보 수정
+export const userUpdate = async (data) => {
+    const api = await API.USER_UPDATE.post("", data).then((res) => {
+        if (res.data.result[0] === 'fail') {
+            alert("비밀번호가 틀렸습니다.");
+            window.location.replace("/myPage/info");
+        } else {
+            alert("수정이 완료되었습니다.");
+            window.location.replace("/myPage/info");
+        }
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+//신규배송지 추가
+export const insertAddress = async (data) => {
+    const api = await API.ADD_ADDRESS.post("", data).then((res) => {
+        data.result = res.data;
+        alert("신규배송지가 추가되었습니다.");
+        window.location.replace("/myPage/address");
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+//배송지 삭제
+export const deleteAddress = async (data) => {
+    const api = await API.DELETE_ADDRESS.post("", data).then((res) => {
+        data.result = res.data;
+        alert("배송지가 삭제되었습니다.");
+        window.location.replace("/myPage/address");
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+//기본 배송지로 설정
+export const insDefaultAddr = async (data) => {
+    const api = await API.SET_DEFAULT_ADDR.post("", data).then((res) => {
+        data.result = res.data;
+        alert("기본 배송지로 설정되었습니다.");
+        window.location.replace("/myPage/address");
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
 
 // -------- 개인정보 끝 --------------
 
