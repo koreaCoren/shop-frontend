@@ -231,7 +231,18 @@ export const userUpdate = async (data) => {
         window.location.replace("/");
     })
     return api;
+}
 
+//신규배송지 추가
+export const insertAddress = async (data) => {
+    const api = await API.ADD_ADDRESS.post("", data).then((res) => {
+        data.result = res.data;
+        alert("신규배송지가 추가되었습니다.");
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
 }
 
 // -------- 개인정보 끝 --------------
