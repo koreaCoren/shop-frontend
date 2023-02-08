@@ -97,4 +97,12 @@ export const USER_UPDATE = axios.create({
 export const ADD_ADDRESS = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/add_address`,
 })
+//배송지 삭제
+export const DELETE_ADDRESS = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/del_address`,
+})
+//기본 배송지 설정
+export const SET_DEFAULT_ADDR = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
+})
 //--------- 개인정보 끝 ---------
