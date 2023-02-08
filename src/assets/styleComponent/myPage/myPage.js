@@ -49,6 +49,9 @@ h2{
 h3{
     font-size: 18px;
 }
+.del{
+    cursor: pointer;
+}
 
 `
 

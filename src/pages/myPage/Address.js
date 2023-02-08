@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
-import { address, insertAddress} from 'utils/axios';
+import { address, insertAddress, deleteAddress, insDefaultAddr } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as AddressStyle from "assets/styleComponent/myPage/address"
@@ -16,6 +16,9 @@ const Address = ({ }) => {
     
     const { mutateAsync, isSuccess } = useMutation(address);
     const userShipAdd = useMutation(insertAddress);
+    const userShipDel = useMutation(deleteAddress);
+    const DefaultAddr = useMutation(insDefaultAddr);
+
 
 
     const getAddrData = async () => {
@@ -48,10 +51,12 @@ const Address = ({ }) => {
         }
     }
 
+    //새 배송지 추가시 보여줄 div
     const showShipDiv = () => {
         showShipping === false ? setShowShipping(true) : setShowShipping(false);
     }
 
+    //배송지 추가
     const setShipping = async() => {
         const data = {
             user_id: id,
@@ -62,6 +67,28 @@ const Address = ({ }) => {
         };
         await userShipAdd.mutateAsync(data);
         setShowShipping(false);
+    }
+
+    //배송지 삭제
+    const delShpping = async(addrValue) => {
+        if(window.confirm("지울거?")){
+            const data = {
+                i_addr:addrValue
+            }
+            await userShipDel.mutateAsync(data);
+        } else{
+            alert("그래...");
+        }
+    }
+
+    //기본 배송지 설정
+    const setDefaultAddr = async (addrValue) => {
+        const data = {
+            user_id: id,
+            i_addr:addrValue
+        }
+        await DefaultAddr.mutateAsync(data);
+
     }
 
     useEffect(() => {
@@ -101,20 +128,28 @@ const Address = ({ }) => {
                         <div className='flex360'>주소</div>
                         <div className='flex120'>받으실 분</div>
                         <div className='flex100'>연락처</div>
-                        <div className='flex60'>수정</div>
+                        {/* <div className='flex60'>수정</div> */}
+                        <div className='flex60'>삭제</div>
                     </AddressStyle.Column>
                     
                     {
                         list.map((item, index) => {
                             return(
                                 <AddressStyle.Ctnt>
-                                    <div className='flex60'><i className={(item.default_address === 1)?"fa-regular fa-circle-check":''}></i></div>
+                                    <div className='flex60'
+                                    onClick={() => {
+                                        setDefaultAddr(item.i_addr);
+                                    }}>
+                                        <i className={(item.default_address === 1)?"fa-regular fa-circle-check":"fa-regular fa-circle"}></i></div>
                                     <div className='flex60'>{item.ship_name}</div>
                                     <div className='flex360'>{item.ship_address}</div>
                                     <div className='flex120'>{item.ship_receiver}</div>
                                     <div className='flex100'>{item.ship_phone}</div>
-                                    <div className='flex60'><i className="fa-solid fa-pen"></i></div>
-                                    </AddressStyle.Ctnt>
+                                    {/* <div className='flex60'><i className="fa-solid fa-pen"></i></div> */}
+                                    <div className='flex60 del' onClick={() => {
+                                        delShpping(item.i_addr);
+                                    }}><i className="fa-sharp fa-solid fa-trash"></i></div>
+                                </AddressStyle.Ctnt>
                             )
                         })
                     }

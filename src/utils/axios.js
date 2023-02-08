@@ -247,5 +247,31 @@ export const insertAddress = async (data) => {
     return api;
 }
 
+//배송지 삭제
+export const deleteAddress = async (data) => {
+    const api = await API.DELETE_ADDRESS.post("", data).then((res) => {
+        data.result = res.data;
+        alert("배송지가 삭제되었습니다.");
+        window.location.replace("/myPage/address");
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+//기본 배송지로 설정
+export const insDefaultAddr = async (data) => {
+    const api = await API.SET_DEFAULT_ADDR.post("", data).then((res) => {
+        data.result = res.data;
+        alert("기본 배송지로 설정되었습니다.");
+        window.location.replace("/myPage/address");
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 // -------- 개인정보 끝 --------------
 
