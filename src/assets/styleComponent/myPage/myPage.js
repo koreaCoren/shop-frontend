@@ -50,7 +50,7 @@ h2{
 h3{
     font-size: 18px;
 }
-.del{
+.pointer{
     cursor: pointer;
 }
 

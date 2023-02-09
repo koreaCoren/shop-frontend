@@ -40,6 +40,8 @@ export const Ctnt = styled.div`
 
 export const Shipping = styled.div`
     padding: 20px 0;
+    display: flex;
+    justify-content: center;
     form{
         display: flex;
         flex-direction: column;
@@ -48,7 +50,11 @@ export const Shipping = styled.div`
         padding: 20px;
         width: 80%;
     }
-    div{
+    form div{
+        font-size: 16px;
+        line-height: 1.7;
+    }
+    div:not(.btn){
         padding-bottom: 10px;
         display: grid;
         grid-template-columns: 0.5fr 4fr;
@@ -56,5 +62,16 @@ export const Shipping = styled.div`
     input[type=text]{
         border-radius: 5px;
         border: 1px solid gray;
+        height: 25px;
+    }
+    .btn{
+        width: 100%;
+        text-align: center;
+    }
+    .btn input[type=button]{
+        background: black;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 5px;
     }
 `
