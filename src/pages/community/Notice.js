@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Pageing from 'components/board/Pageing';
 
@@ -23,7 +23,7 @@ const Notice = () => {
 
                     <ul className='list'>
                         <li>1</li>
-                        <li>제목</li>
+                        <li><Link to={"/community/noticeDetail/1"}>제목</Link></li>
                         <li>글쓴이</li>
                         <li>2023/02/08</li>
                         <li>123</li>
