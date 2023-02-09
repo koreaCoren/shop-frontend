@@ -69,10 +69,9 @@ const Info = ({ }) => {
 
     const onSubmit = async (i) => {
         // e.preventDefault();
-        let data ={};
-        switch(i){
+        let data = {};
+        switch (i) {
             case 1:
-                console.log("비밀번호 입력없이 변경");
                 data = {
                     user_id: id,
                     user_nm: Name,
@@ -83,8 +82,7 @@ const Info = ({ }) => {
                 await userUpd.mutateAsync(data);
                 break;
             case 2:
-                console.log("비밀번호 입력하고 변경");
-                if(ChangePW === ""){
+                if (ChangePW === "") {
                     alert("변경할 비밀번호를 입력해주세요");
                 }
                 data = {
@@ -98,7 +96,7 @@ const Info = ({ }) => {
                 };
                 await userUpd.mutateAsync(data);
                 break;
-            }
+        }
     };
 
     const getUserData = async () => {

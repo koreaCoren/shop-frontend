@@ -151,7 +151,7 @@ export const orderManagementDetail = async (data) => {
 
 // -------- 주문 시작 --------------
 
-// 주문확인
+// 유저 주문전체 그룹화하여 확인
 export const orderList = async (data) => {
     const api = await API.ORDER_LIST.post("", data).then((res) => {
         data.result = [...res.data];
@@ -161,7 +161,7 @@ export const orderList = async (data) => {
     })
     return api;
 }
-// 주문확인
+// 주문번호로 주문확인
 export const orderCodeList = async (data) => {
     const api = await API.ORDER_CODE_LIST.post("", data).then((res) => {
         data.result = [...res.data];
