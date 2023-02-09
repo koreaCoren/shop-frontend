@@ -50,8 +50,16 @@ h2{
 h3{
     font-size: 18px;
 }
-.del{
+.pointer{
     cursor: pointer;
+}
+.clickBox{
+    background-color: gray;
+    color: white;
+    text-align: center;
+    line-height: 1.7;
+    border-radius: 10px;
+    width: 80%;
 }
 
 `

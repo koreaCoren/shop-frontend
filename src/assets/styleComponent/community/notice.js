@@ -35,7 +35,7 @@ export const Board = styled.div`
         text-align: center;
     }
 
-    .list li{
+    .list li,.list a{
         line-height: 40px;
     }
 `

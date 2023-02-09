@@ -25,7 +25,7 @@ const DaumPost = ({ setAddress, setZoneCode, setIsPostOpen }) => {
 
     return (
         <Container>
-            <div style={{
+            <div className='daumPost' style={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",

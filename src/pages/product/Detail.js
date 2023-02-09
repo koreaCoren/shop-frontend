@@ -88,9 +88,9 @@ const Detail = ({ result, setOrderData }) => {
                             <Style.Quantity>
                                 <div className="name">{productDetail?.goods_nm}</div>
                                 <div className="num">
-                                    <i className="fa-solid fa-caret-up" onClick={countUp}></i>
+                                    <i className="fa-solid fa-minus" onClick={countDown}></i>
                                     <span>{count}</span>
-                                    <i className="fa-solid fa-caret-down" onClick={countDown}></i>
+                                    <i className="fa-solid fa-plus" onClick={countUp}></i>
                                 </div>
                                 <div className="money">{Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01)))}원</div>
                             </Style.Quantity>
