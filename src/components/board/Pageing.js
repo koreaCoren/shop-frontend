@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 /**
- * 
- * @param {*} count 페이지 표시되는 게시글
+ *  @param {*} count 페이지 표시되는 게시글
  * @param {*} boardPage 현재 페이지
  * @param {*} boardLength  게시글 총 갯수
  * @param {*} url /이동할페이지위치/(변수)

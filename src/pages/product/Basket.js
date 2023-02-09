@@ -9,7 +9,7 @@ const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
     const [checkData, setCheckData] = useState([]);
-    const [reload, setReload] = useState(basketData === null ? 0 : basketData.length);
+    const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
     //전체 선택
     const allCheck = (checked) => {
@@ -104,7 +104,7 @@ const Basket = ({ setOrderData }) => {
                         <li>
                             <input type="checkbox"
                                 onChange={(e) => { allCheck(e.target.checked) }}
-                                checked={checkData.length === basketData.length ? true : false}
+                                checked={checkData.length === basketData?.length ? true : false}
                             />
                         </li>
                         <li>상품정보</li>
@@ -113,7 +113,7 @@ const Basket = ({ setOrderData }) => {
                         <li>상품금액 <br />(할인적용)</li>
                     </ul>
                     {
-                        basketData === null || basketData.length === 0
+                        basketData === null || basketData?.length === 0
                             ? <p>현재 장바구니에 담긴 상품이 없습니다.</p>
                             : basketData.map((a, i) => {
                                 return (
