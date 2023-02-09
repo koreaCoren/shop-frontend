@@ -35,11 +35,11 @@ input{
     line-height: 24px;
 }
 
-input[type="submit"]{
+input[type="button"]{
     border: 1px solid #70707070;
     background-color: white;
     color: #444;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 18px;
     padding: 5px;
     width: 100%;
