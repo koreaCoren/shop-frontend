@@ -24,6 +24,10 @@ const Address = ({ }) => {
     const userShipDel = useMutation(deleteAddress);
     const DefaultAddr = useMutation(insDefaultAddr);
 
+    useEffect(() => {
+        getAddrData();
+    }, [])
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -95,10 +99,6 @@ const Address = ({ }) => {
         await DefaultAddr.mutateAsync(data);
     }
 
-    useEffect(() => {
-        getAddrData();
-    }, [])
-
     return (
         <Style.InDiv>
             <div className='subTitle'>
@@ -108,45 +108,66 @@ const Address = ({ }) => {
                 </div>
                 <div className='new' onClick={showShipDiv}>+ 새 배송지 추가</div>
             </div>
-            {showShipping && <AddressStyle.Shipping>
-                <form>
-                    <div>
-                        <span>배송지명</span>
-                        <input type="text" name='shipName' onChange={onChange} /></div>
-                    <div>
-                        <span>주소</span>
-                        <input type="text" readOnly value={insetAddress === "" ? "" : insetAddress} name='AddAddress' />
-                    </div>
-                    <div>
-                        <span 
-                            onClick={() => {
-                                setIsPostOpen(true);}}
-                            className='pointer clickBox'>주소찾기</span>
-                        <input type="text" name='shipAddress' placeholder='상세주소' onChange={onChange} />
-                    </div>
-                    {
-                        isPostOpen && <DaumPost
-                            setIsPostOpen={setIsPostOpen}
-                            setZoneCode={setZoneCode}
-                            setAddress={setinsetAddress}
-                        ></DaumPost>
-                    }
-                    <div>
-                        <span>받으실 분</span>
-                        <input type="text" name='shipReceiver' onChange={onChange} />
-                    </div>
-                    <div>
-                        <span>연락처</span> 
-                        <input type="text" name='shipPhone' onChange={onChange} />
-                    </div>
-                    <div className='btn'>
-                        <input className='pointer' type="button" value="추가"
-                        onClick={() => {
-                            setShipping();
-                        }} />
-                    </div>
-                </form>
-            </AddressStyle.Shipping>}
+            {
+                showShipping && <AddressStyle.Shipping>
+                    <form>
+                        <div>
+                            <span>배송지명</span>
+                            <input type="text" name='shipName' onChange={onChange} /></div>
+                        <div>
+                            <span>주소</span>
+                            <input 
+                                type="text" 
+                                readOnly 
+                                value={insetAddress === "" 
+                                    ? ""
+                                    : insetAddress} 
+                                name='AddAddress' />
+                        </div>
+                        <div>
+                            <span 
+                                onClick={() => {
+                                    setIsPostOpen(true);}}
+                                className='pointer clickBox'>주소찾기</span>
+                            <input 
+                                type="text" 
+                                name='shipAddress' 
+                                placeholder='상세주소' 
+                                onChange={onChange} />
+                        </div>
+                        {
+                            isPostOpen && <DaumPost
+                                setIsPostOpen={setIsPostOpen}
+                                setZoneCode={setZoneCode}
+                                setAddress={setinsetAddress}
+                            ></DaumPost>
+                        }
+                        <div>
+                            <span>받으실 분</span>
+                            <input 
+                                type="text" 
+                                name='shipReceiver' 
+                                onChange={onChange} />
+                        </div>
+                        <div>
+                            <span>연락처</span> 
+                            <input 
+                                type="text" 
+                                name='shipPhone' 
+                                onChange={onChange} />
+                        </div>
+                        <div className='btn'>
+                            <input 
+                                className='pointer' 
+                                type="button" 
+                                value="추가"
+                                onClick={() => {
+                                    setShipping();
+                                }} />
+                        </div>
+                    </form>
+                </AddressStyle.Shipping>
+            }
 
             {
 
