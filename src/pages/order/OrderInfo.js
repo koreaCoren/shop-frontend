@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
 
 import Inicis from 'components/inicis/Inicis';
-import { order } from 'utils/axios';
+import { order, deliveryList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/order/order"
 
@@ -17,8 +17,29 @@ const OrderInfo = ({ orderData }) => {
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({})
+    const [userAddr, setUserAddr] = useState("");
+    const [checkAddr, setCheckAddr] = useState("new");
 
     const { mutateAsync, isLoading } = useMutation(order);
+    const getUserAddr = useMutation(deliveryList);
+
+    const getAddrData = async() => {
+        const data = {
+            user_id : sessionStorage.getItem('userId')
+        }
+        await getUserAddr.mutateAsync(data);
+        setUserAddr(data.result);
+    }
+
+    const checkRadio = (e) => {
+        console.log(e.target.value);
+        setCheckAddr(e.target.value);
+    }
+
+    useEffect(() => {
+        getAddrData();
+    },[])
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -135,17 +156,38 @@ const OrderInfo = ({ orderData }) => {
                     <Style.SubTitle>배송 정보</Style.SubTitle>
                     <Style.Form>
                         <div>
+                            <label htmlFor="">
+                                <span>신규 주소</span>
+                                <input 
+                                    type="radio" 
+                                    value="new" 
+                                    name="addr"
+                                    onChange={checkRadio}
+                                    />
+                                <span>기존 주소</span>
+                                <input 
+                                    type="radio" 
+                                    value="old"
+                                    name="addr"
+                                onChange={checkRadio}/>
+                            </label>
+                        </div>
+                        <div>
                             <span>주문자</span>
-                            <input type="text" onChange={onChange} name='buyerName' />
+                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.user_id} />
+                        </div>
+                        <div>
+                            <span>받는 사람</span>
+                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.ship_receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input type="text" onChange={onChange} name='buyerTel' />
+                            <input type="text" onChange={onChange} name='buyerTel' value={checkAddr === "new" ? "" : userAddr.ship_phone} />
                         </div>
                         <div>
                             <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
-                            <input readOnly value={address === "" ? "" : address} name='orderAddress' />
-                            <input type="text" onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
+                            <input readOnly value={userAddr.ship_address} name='orderAddress' />
+                            <input type="text" value={checkAddr === "new" ? "" : userAddr.ship_detail_address} onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
                         </div>
                         {
                             isPostOpen && <DaumPost

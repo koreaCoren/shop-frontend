@@ -80,6 +80,11 @@ export const ORDER_SUCCESS = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_ini_orders`,
 })
 
+//유저 기본 배송지 불러오기
+export const DELIVERY_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/delivery_list`
+})
+
 //--------- 주문 관련 끝 ---------
 
 //--------- 개인정보 시작 -------
