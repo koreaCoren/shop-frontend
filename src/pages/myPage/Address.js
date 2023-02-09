@@ -13,6 +13,8 @@ const Address = ({ }) => {
     const [shipPhone, setShipPhone] = useState("");
     const [shipReceiver, setShipReceiver] = useState("");
     const [showShipping, setShowShipping] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const { mutateAsync, isSuccess } = useMutation(address);
     const userShipAdd = useMutation(insertAddress);
@@ -111,9 +113,12 @@ const Address = ({ }) => {
                     <div>주소<input type="text" name='shipAddress' onChange={onChange} /></div>
                     <div>받으실 분<input type="text" name='shipReceiver' onChange={onChange} /></div>
                     <div>연락처 <input type="text" name='shipPhone' onChange={onChange} /></div>
-                    <div><input type="button" value="추가" onClick={() => {
-                        setShipping();
-                    }} /></div>
+                    <div className='btn'>
+                        <input className='pointer' type="button" value="추가" 
+                        onClick={() => {
+                            setShipping();
+                        }} />
+                    </div>
 
                 </form>
             </AddressStyle.Shipping>}
@@ -136,17 +141,19 @@ const Address = ({ }) => {
                         list.map((item, index) => {
                             return (
                                 <AddressStyle.Ctnt>
-                                    <div className='flex60'
-                                        onClick={() => {
-                                            setDefaultAddr(item.i_addr);
-                                        }}>
-                                        <i className={(item.default_address === 1) ? "fa-regular fa-circle-check" : "fa-regular fa-circle"}></i></div>
+                                    <div className='flex60'>
+                                        <i className={(item.default_address === 1) 
+                                            ? "fa-regular fa-circle-check pointer" 
+                                            : "fa-regular fa-circle pointer"}
+                                            onClick={() => {
+                                                setDefaultAddr(item.i_addr);
+                                            }}></i></div>
                                     <div className='flex60'>{item.ship_name}</div>
                                     <div className='flex360'>{item.ship_address}</div>
                                     <div className='flex120'>{item.ship_receiver}</div>
                                     <div className='flex100'>{item.ship_phone}</div>
                                     {/* <div className='flex60'><i className="fa-solid fa-pen"></i></div> */}
-                                    <div className='flex60 del' onClick={() => {
+                                    <div className='flex60 pointer' onClick={() => {
                                         delShpping(item.i_addr);
                                     }}><i className="fa-sharp fa-solid fa-trash"></i></div>
                                 </AddressStyle.Ctnt >
