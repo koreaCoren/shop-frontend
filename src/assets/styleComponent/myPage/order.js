@@ -50,7 +50,7 @@ export const CodeTitle = styled.span`
 
 export const ListDiv = styled.div`
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;       
     
     ul{
         width: 100%;
@@ -66,13 +66,21 @@ export const ListDiv = styled.div`
     }
     ul > li > div {
         font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+    ul > li > div > div{
+        padding: 10px 0 10px 20px;
     }
     ul > li > div > div {
-        padding: 5px 0;
+        /* padding: 5px 0; */
     }
     .botTitle{
         padding-top: 20px;
     }
     
-    
+     
 `
+export const Space = styled.div`
+    padding: 30px 0 30px 0;
+    ` 

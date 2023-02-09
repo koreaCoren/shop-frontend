@@ -16,7 +16,8 @@ const OrderInfo = ({ orderData }) => {
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
-    const [payData, setPayData] = useState({})
+    const [payData, setPayData] = useState({});
+    const delivery = '주문접수';
 
     const { mutateAsync, isLoading } = useMutation(order);
     const onChange = (e) => {
@@ -47,9 +48,11 @@ const OrderInfo = ({ orderData }) => {
             orderDatas.push({
                 goods_code: orderData[i].product_code, // 상품코드
                 goods_name: orderData[i].product_name, // 상품이름
+                goods_sale: orderData[i].sale, // 할인율
                 order_pay: orderData[i].total_price, // 총 상품가격
                 order_count: orderData[i].prodcut_count, //상품 갯수
             })
+
             orderTotalPrice = orderTotalPrice + orderData[i].total_price;
         }
 
@@ -94,8 +97,9 @@ const OrderInfo = ({ orderData }) => {
             buyer_name: buyerName, // 주문자 이름
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
             buyer_tel: buyerTel, // 주문자 번호
-            return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
-            refund: "ㄴ", //환불여부
+            delivery: delivery, // 주문처리현황
+            // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
+            refund: "N", //환불여부
         }
 
         mutateAsync(data);
