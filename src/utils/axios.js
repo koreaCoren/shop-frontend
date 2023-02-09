@@ -199,6 +199,17 @@ export const orderSuccess = async (data) => {
     return api;
 }
 
+//유저 기본 배송지 불러오기
+export const deliveryList = async (data) => {
+    const api = await API.DELIVERY_LIST.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 // -------- 주문 끝 --------------
 
 // -------- 개인정보 시작 ------------

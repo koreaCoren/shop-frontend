@@ -19,22 +19,10 @@ const Address = ({ }) => {
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
 
-
     const { mutateAsync, isSuccess } = useMutation(address);
     const userShipAdd = useMutation(insertAddress);
     const userShipDel = useMutation(deleteAddress);
     const DefaultAddr = useMutation(insDefaultAddr);
-
-
-
-    const getAddrData = async () => {
-        const data = {
-            userId: sessionStorage.getItem('userId'),
-            token: sessionStorage.getItem("token")
-        };
-        await mutateAsync(data);
-        setBoard(data.result);
-    }
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -60,6 +48,16 @@ const Address = ({ }) => {
     //새 배송지 추가시 보여줄 div
     const showShipDiv = () => {
         showShipping === false ? setShowShipping(true) : setShowShipping(false);
+    }
+
+    //유저 배송지 받기
+    const getAddrData = async () => {
+        const data = {
+            userId: sessionStorage.getItem('userId'),
+            token: sessionStorage.getItem("token")
+        };
+        await mutateAsync(data);
+        setBoard(data.result);
     }
 
     //배송지 추가
@@ -95,12 +93,10 @@ const Address = ({ }) => {
             i_addr: addrValue
         }
         await DefaultAddr.mutateAsync(data);
-
     }
 
     useEffect(() => {
         getAddrData();
-        // console.log(list);
     }, [])
 
     return (
@@ -135,8 +131,14 @@ const Address = ({ }) => {
                             setAddress={setinsetAddress}
                         ></DaumPost>
                     }
-                    <div>받으실 분<input type="text" name='shipReceiver' onChange={onChange} /></div>
-                    <div>연락처 <input type="text" name='shipPhone' onChange={onChange} /></div>
+                    <div>
+                        <span>받으실 분</span>
+                        <input type="text" name='shipReceiver' onChange={onChange} />
+                    </div>
+                    <div>
+                        <span>연락처</span> 
+                        <input type="text" name='shipPhone' onChange={onChange} />
+                    </div>
                     <div className='btn'>
                         <input className='pointer' type="button" value="추가"
                         onClick={() => {
