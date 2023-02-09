@@ -163,31 +163,32 @@ const OrderInfo = ({ orderData }) => {
                                     value="new" 
                                     name="addr"
                                     onChange={checkRadio}
+                                    checked={checkAddr === "new"}
                                     />
                                 <span>기존 주소</span>
                                 <input 
                                     type="radio" 
                                     value="old"
                                     name="addr"
-                                onChange={checkRadio}/>
+                                    onChange={checkRadio}/>
                             </label>
                         </div>
                         <div>
                             <span>주문자</span>
-                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.user_id} />
+                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? buyerName : userAddr.user_id} />
                         </div>
                         <div>
                             <span>받는 사람</span>
-                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.ship_receiver} />
+                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? null : userAddr.ship_receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input type="text" onChange={onChange} name='buyerTel' value={checkAddr === "new" ? "" : userAddr.ship_phone} />
+                            <input type="text" onChange={onChange} name='buyerTel' value={checkAddr === "new" ? buyerTel : userAddr.ship_phone} />
                         </div>
                         <div>
                             <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
-                            <input readOnly value={userAddr.ship_address} name='orderAddress' />
-                            <input type="text" value={checkAddr === "new" ? "" : userAddr.ship_detail_address} onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
+                            <input readOnly value={checkAddr === "new" ? address : userAddr.ship_address} name='orderAddress' />
+                            <input type="text" value={checkAddr === "new" ? buyerDetailAddress : userAddr.ship_detail_address} onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
                         </div>
                         {
                             isPostOpen && <DaumPost
