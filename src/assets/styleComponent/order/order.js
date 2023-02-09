@@ -80,11 +80,16 @@ export const Form = styled.form`
         padding: 7px 0px;
     }
 
-    div input{
+    div input:not([type="radio"]){
         width: 400px;
         border: 1px solid #ddd;
         padding: 5px;
     }
+
+    div input[type="radio"]{
+        width: 50px;
+    }
+
     
     .submit{
         background-color: #ddd;

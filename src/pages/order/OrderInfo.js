@@ -13,6 +13,7 @@ const OrderInfo = ({ orderData }) => {
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
     const [address, setAddress] = useState("");
+    const [receiver, setReceiver] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
@@ -161,7 +162,7 @@ const OrderInfo = ({ orderData }) => {
                     <Style.Form>
                         <div>
                             <label htmlFor="">
-                                <span>신규 주소</span>
+                                <span>직접 입력</span>
                                 <input
                                     type="radio"
                                     value="new"
@@ -169,12 +170,14 @@ const OrderInfo = ({ orderData }) => {
                                     onChange={checkRadio}
                                     checked={checkAddr === "new"}
                                     />
-                                <span>기존 주소</span>
+                                    
+                                <span>기본 배송지</span>
                                 <input
                                     type="radio"
                                     value="old"
                                     name="addr"
-                                    onChange={checkRadio}/>
+                                    onChange={checkRadio}
+                                    />
                             </label>
                         </div>
                         <div>
@@ -183,14 +186,18 @@ const OrderInfo = ({ orderData }) => {
                         </div>
                         <div>
                             <span>받는 사람</span>
-                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? null : userAddr.ship_receiver} />
+                            <input type="text" onChange={onChange} name='receiver' value={checkAddr === "new" ? receiver : userAddr.ship_receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
                             <input type="text" onChange={onChange} name='buyerTel' value={checkAddr === "new" ? buyerTel : userAddr.ship_phone} />
                         </div>
                         <div>
-                            <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                            {
+                               checkAddr === "new" ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                                                   : <span>주소</span>
+                            }
+                            
                             <input readOnly value={checkAddr === "new" ? address : userAddr.ship_address} name='orderAddress' />
                             <input type="text" value={checkAddr === "new" ? buyerDetailAddress : userAddr.ship_detail_address} onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
                         </div>
