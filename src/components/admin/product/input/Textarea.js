@@ -6,7 +6,7 @@ const Textarea = ({ title, setProductContent, setImageCode }) => {
     return (
         <Div>
             <span>{title}</span>
-            <TextEditor setProductContent={setProductContent} setImageCode={setImageCode}></TextEditor>
+            <TextEditor api={"http://192.168.0.100/shop-backend/backend/goods/ins_goods"} setContent={setProductContent} setImageCode={setImageCode} width={700}></TextEditor>
         </Div>
     );
 };
