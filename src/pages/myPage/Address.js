@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { address, insertAddress, deleteAddress, insDefaultAddr } from 'utils/axios';
+import DaumPost from 'components/daumPost/DaumPost';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as AddressStyle from "assets/styleComponent/myPage/address"
@@ -14,6 +15,9 @@ const Address = ({ }) => {
     const [shipReceiver, setShipReceiver] = useState("");
     const [showShipping, setShowShipping] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [insetAddress, setinsetAddress] = useState("");
+    const [zoneCode, setZoneCode] = useState("");
+    const [isPostOpen, setIsPostOpen] = useState(false);
 
 
     const { mutateAsync, isSuccess } = useMutation(address);
@@ -62,7 +66,8 @@ const Address = ({ }) => {
     const setShipping = async () => {
         const data = {
             user_id: id,
-            ship_address: shipAddress,
+            ship_address: insetAddress,
+            ship_detail_address: shipAddress,
             ship_name: shipName,
             ship_phone: shipPhone,
             ship_receiver: shipReceiver
@@ -109,17 +114,35 @@ const Address = ({ }) => {
             </div>
             {showShipping && <AddressStyle.Shipping>
                 <form>
-                    <div>배송지명<input type="text" name='shipName' onChange={onChange} /></div>
-                    <div>주소<input type="text" name='shipAddress' onChange={onChange} /></div>
+                    <div>
+                        <span>배송지명</span>
+                        <input type="text" name='shipName' onChange={onChange} /></div>
+                    <div>
+                        <span>주소</span>
+                        <input type="text" readOnly value={insetAddress === "" ? "" : insetAddress} name='AddAddress' />
+                    </div>
+                    <div>
+                        <span 
+                            onClick={() => {
+                                setIsPostOpen(true);}}
+                            className='pointer clickBox'>주소찾기</span>
+                        <input type="text" name='shipAddress' placeholder='상세주소' onChange={onChange} />
+                    </div>
+                    {
+                        isPostOpen && <DaumPost
+                            setIsPostOpen={setIsPostOpen}
+                            setZoneCode={setZoneCode}
+                            setAddress={setinsetAddress}
+                        ></DaumPost>
+                    }
                     <div>받으실 분<input type="text" name='shipReceiver' onChange={onChange} /></div>
                     <div>연락처 <input type="text" name='shipPhone' onChange={onChange} /></div>
                     <div className='btn'>
-                        <input className='pointer' type="button" value="추가" 
+                        <input className='pointer' type="button" value="추가"
                         onClick={() => {
                             setShipping();
                         }} />
                     </div>
-
                 </form>
             </AddressStyle.Shipping>}
 
@@ -149,7 +172,7 @@ const Address = ({ }) => {
                                                 setDefaultAddr(item.i_addr);
                                             }}></i></div>
                                     <div className='flex60'>{item.ship_name}</div>
-                                    <div className='flex360'>{item.ship_address}</div>
+                                    <div className='flex360'>{item.ship_address} {item.ship_detail_address}</div>
                                     <div className='flex120'>{item.ship_receiver}</div>
                                     <div className='flex100'>{item.ship_phone}</div>
                                     {/* <div className='flex60'><i className="fa-solid fa-pen"></i></div> */}

@@ -54,7 +54,7 @@ export const Shipping = styled.div`
         font-size: 16px;
         line-height: 1.7;
     }
-    div:not(.btn){
+    div:not(.btn, .daumPost){
         padding-bottom: 10px;
         display: grid;
         grid-template-columns: 0.5fr 4fr;
@@ -65,7 +65,6 @@ export const Shipping = styled.div`
         height: 25px;
     }
     .btn{
-        width: 100%;
         text-align: center;
     }
     .btn input[type=button]{
