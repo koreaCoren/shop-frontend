@@ -29,6 +29,27 @@ const OrderInfo = ({ orderData }) => {
         getAddrData();
     }, [])
 
+    useEffect(() => {
+        switch(checkAddr){
+            case "new":
+                setBuyerName("");
+                setBuyerTel("");
+                setReceiver("");
+                setAddress("");
+                setBuyerDetailAddress("");
+                break;
+            case "old":
+                setBuyerName(userAddr.user_id);
+                setBuyerTel(userAddr.ship_phone);
+                setReceiver(userAddr.ship_receiver);
+                setAddress(userAddr.ship_address);
+                setBuyerDetailAddress(userAddr.ship_detail_address);
+                break;
+            default:
+                break;
+            }
+    },[checkAddr])
+
     //기본 배송지 불러오기
     const getAddrData = async () => {
         const data = {
@@ -37,7 +58,7 @@ const OrderInfo = ({ orderData }) => {
         await getUserAddr.mutateAsync(data);
         setUserAddr(data.result);
     }
-    
+
     const checkRadio = (e) => {
         setCheckAddr(e.target.value);
     }
@@ -185,7 +206,7 @@ const OrderInfo = ({ orderData }) => {
                                 type="text" 
                                 onChange={onChange} 
                                 name='buyerName' 
-                                value={checkAddr === "new" ? buyerName : userAddr.user_id} />
+                                value={buyerName} />
                         </div>
                         <div>
                             <span>받는 사람</span>
@@ -193,7 +214,7 @@ const OrderInfo = ({ orderData }) => {
                                 type="text" 
                                 onChange={onChange} 
                                 name='receiver' 
-                                value={checkAddr === "new" ? receiver : userAddr.ship_receiver} />
+                                value={receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
@@ -201,7 +222,7 @@ const OrderInfo = ({ orderData }) => {
                                 type="text" 
                                 onChange={onChange} 
                                 name='buyerTel' 
-                                value={checkAddr === "new" ? buyerTel : userAddr.ship_phone} />
+                                value={buyerTel} />
                         </div>
                         <div>
                             {
@@ -212,12 +233,12 @@ const OrderInfo = ({ orderData }) => {
                             <input 
                                 readOnly 
                                 name='orderAddress' 
-                                value={checkAddr === "new" ? address : userAddr.ship_address}/>
+                                value={address}/>
                             <input 
                                 type="text" 
                                 onChange={onChange}
                                 name='buyerDetailAddress'
-                                value={checkAddr === "new" ? buyerDetailAddress : userAddr.ship_detail_address}  
+                                value={buyerDetailAddress}  
                                 placeholder='상세주소입력' />
                         </div>
                         {
