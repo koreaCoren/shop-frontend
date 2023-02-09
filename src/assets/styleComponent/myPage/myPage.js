@@ -61,6 +61,15 @@ h3{
     border-radius: 10px;
     width: 80%;
 }
+input[type=submit]{
+        border: none;
+        background-color: #444;
+        color: #fff;
+        line-height: 24px;
+        padding: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+};
 
 `
 
@@ -109,13 +118,5 @@ export const Form = styled.form`
         line-height: 24px;
     }
 
-    input[type="submit"]{
-        border: none;
-        background-color: #444;
-        color: #fff;
-        line-height: 24px;
-        padding: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-    };
+    
 `
