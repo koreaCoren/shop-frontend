@@ -63,6 +63,7 @@ export const ListDiv = styled.div`
         line-height: 1.5;
         display: flex;
         justify-content: space-between;
+        padding: 10px;
     }
     ul > li > div {
         font-size: 16px;
