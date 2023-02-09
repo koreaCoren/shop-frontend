@@ -59,7 +59,7 @@ export const register = async (data) => {
 
 //토큰체크
 export const tokenCheck = async (data) => {
-    const api = await API.TOKEN.post("", data).then(async (res) => {
+    const api = await API.TOKEN.post("", data).then((res) => {
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -76,6 +76,16 @@ export const tokenCheck = async (data) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
     });
+    return api;
+}
+
+export const boardWrite = async (data) => {
+    const api = await API.BOARD_WRITE.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
     return api;
 }
 

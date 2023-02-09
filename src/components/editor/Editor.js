@@ -4,9 +4,9 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const TextEditor = ({ setProductContent, setImageCode }) => {
+const TextEditor = ({ api, setContent, setImageCode, width }) => {
     let arr = [];
-    const API = `http://192.168.0.100/shop-backend/backend/goods/ins_goods`;
+    const API = api;
     const uploadAdapter = (loader) => {
         const code = Math.floor((Math.random() * (99999 - 10000) + 10000));
         arr.push(code);
@@ -35,7 +35,7 @@ const TextEditor = ({ setProductContent, setImageCode }) => {
     }
 
     return (
-        <Div>
+        <Div width={width}>
             <CKEditor
                 config={{
                     extraPlugins: [uploadPlugin]
@@ -48,7 +48,7 @@ const TextEditor = ({ setProductContent, setImageCode }) => {
                 }}
                 onChange={(event, editor) => {
                     const data = editor.getData();
-                    setProductContent(data);
+                    setContent(data);
                 }}
                 onBlur={(event, editor) => {
                     // console.log('Blur.', editor);
@@ -63,7 +63,7 @@ const TextEditor = ({ setProductContent, setImageCode }) => {
 
 const Div = styled.div`
     .ck.ck-reset.ck-editor.ck-rounded-corners{
-        width: 700px;
+        width: ${(props) => props.width}px;
     }
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
         min-height: 300px;
