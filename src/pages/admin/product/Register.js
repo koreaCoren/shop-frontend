@@ -100,8 +100,9 @@ const Register = () => {
             goods_sell: sell,
             goods_img: thumbnail,
             goods_detail: productContent,
-            goods_imageCode: imageCode,
+            image_code: imageCode,
             goods_option: productOption,
+            type: "product",
         }
         await mutateAsync(data);
     }
@@ -158,8 +159,6 @@ const Register = () => {
                     <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
                 </Style.Container>
             </form>
-
-            {isLoading && <Loading />}
         </>
     );
 };

@@ -20,9 +20,9 @@ export const LOGOUT_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/break_token`,
 });
 
-//게시판 글쓰기
-export const BOARD_WRITE = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/board/ins_board`
+//에디터 관련 (게시판, 어드민 상품등록 등등)
+export const EDITOR_REGISTER = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/editor/ins_editor_data`,
 })
 
 //--------- 어드민 관련 시작 ---------
@@ -30,11 +30,6 @@ export const BOARD_WRITE = axios.create({
 // 어드민 상품리스트
 export const PRODUCT_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_goods`,
-})
-
-// 어드민 상품등록
-export const PRODUCT_REGISTER_API = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/goods/ins_goods`,
 })
 
 // 어드민 상품삭제

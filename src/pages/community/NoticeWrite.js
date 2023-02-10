@@ -33,7 +33,8 @@ const NoticeWrite = () => {
         const data = {
             title: title,
             content: content,
-            imageCode: imageCode
+            image_code: imageCode,
+            type: "notice",
         }
 
         await mutateAsync(data);
