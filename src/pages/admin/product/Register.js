@@ -153,7 +153,7 @@ const Register = () => {
                     <ProductInput title="수량" type="text" name="sell" placeholder="수량" onChange={onChange} />
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} />
-                    <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} />
+                    <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" />
                     <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
                     <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
                 </Style.Container>
