@@ -17,16 +17,16 @@ const NoticeWrite = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        let arr = [imageCode];
+        let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
-            if (content.indexOf(imageCode[i]) === -1) {
-                for (let j = 0; j < arr[0].length; j++) {
-                    if (arr[0][j] === imageCode[i]) {
-                        arr[0].splice(j, 1);
+            for (let j = 0; j < arr.length; j++) {
+                if (content.indexOf(imageCode[i]) === -1) {
+                    if (arr[j] === imageCode[i]) {
+                        arr.splice(j, 1);
                         j--;
                     }
                 }
-                setImageCode(arr[0]);
+                setImageCode(arr);
             }
         }
 
@@ -56,7 +56,7 @@ const NoticeWrite = () => {
             <h2>공지사항 글쓰기</h2>
             <form onSubmit={onSubmit}>
                 <LoginInput type="text" name="title" value={title} placeholder="제목" onChange={onChange}></LoginInput>
-                <TextEditor api={""} setContent={setContent} setImageCode={setImageCode} width={""}></TextEditor>
+                <TextEditor api="http://192.168.0.86/shop-backend/backend/board/ins_board" setContent={setContent} setImageCode={setImageCode} width=""></TextEditor>
                 <Style.Button>
                     <button>글쓰기</button>
                 </Style.Button>
