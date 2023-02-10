@@ -20,8 +20,9 @@ export const LOGOUT_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/break_token`,
 });
 
+//게시판 글쓰기
 export const BOARD_WRITE = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/???`
+    baseURL: `${process.env.REACT_APP_API_URL}/board/ins_board`
 })
 
 //--------- 어드민 관련 시작 ---------

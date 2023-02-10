@@ -79,6 +79,7 @@ export const tokenCheck = async (data) => {
     return api;
 }
 
+//게시판 글쓰기
 export const boardWrite = async (data) => {
     const api = await API.BOARD_WRITE.post("", data).then((res) => {
 

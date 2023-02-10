@@ -103,7 +103,7 @@ const Register = () => {
             goods_imageCode: imageCode,
             goods_option: productOption,
         }
-        // await mutateAsync(data);
+        await mutateAsync(data);
     }
 
     const onChange = (e) => {
