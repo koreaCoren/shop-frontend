@@ -4,9 +4,9 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const TextEditor = ({ api, setContent, setImageCode, width }) => {
+const TextEditor = ({ setContent, setImageCode, width, type }) => {
     let arr = [];
-    const API = api;
+    const API = `${process.env.REACT_APP_API_URL}/board/ins_board`;
     const uploadAdapter = (loader) => {
         const code = Math.floor((Math.random() * (99999 - 10000) + 10000));
         arr.push(code);
@@ -17,8 +17,8 @@ const TextEditor = ({ api, setContent, setImageCode, width }) => {
                     const body = new FormData();
                     loader.file.then((file) => {
                         body.append("uploadImg", file);
-                        axios.post(`${API}?imageCode=${code}`, body).then((res) => {
-                            resolve({ default: `${res.data.result.goods_img + '?code=' + code}` });
+                        axios.post(`${API}?imageCode=${code}&type=${type}`, body).then((res) => {
+                            resolve({ default: `${res.data.result.img_path + '?code=' + code}` });
                         }).catch((error) => {
                             reject(error);
                         })

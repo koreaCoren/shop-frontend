@@ -56,7 +56,7 @@ const NoticeWrite = () => {
             <h2>공지사항 글쓰기</h2>
             <form onSubmit={onSubmit}>
                 <LoginInput type="text" name="title" value={title} placeholder="제목" onChange={onChange}></LoginInput>
-                <TextEditor api="http://192.168.0.86/shop-backend/backend/board/ins_board" setContent={setContent} setImageCode={setImageCode} width=""></TextEditor>
+                <TextEditor setContent={setContent} setImageCode={setImageCode} width="" type="notice"></TextEditor>
                 <Style.Button>
                     <button>글쓰기</button>
                 </Style.Button>
