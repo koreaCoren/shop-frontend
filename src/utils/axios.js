@@ -81,8 +81,13 @@ export const tokenCheck = async (data) => {
 
 //게시판 글쓰기
 export const boardWrite = async (data) => {
-    const api = await API.BOARD_WRITE.post("", data).then((res) => {
-
+    const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
+        if (res.data.result === "success") {
+            alert("등록완료");
+            window.location.replace("/community/notice/1");
+        } else if (res.data.result === "fail") {
+            alert("알 수 없는 에러로 등록실패 했습니다.");
+        }
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
@@ -100,7 +105,7 @@ export const productList = async () => {
 
 // 어드민 상품 등록
 export const productRegister = async (data) => {
-    const api = await API.PRODUCT_REGISTER_API.post("", data).then((res) => {
+    const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
         if (res.data.result === "success") {
             alert("등록완료");
             window.location.replace("/admin/product");

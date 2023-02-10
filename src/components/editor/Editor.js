@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const TextEditor = ({ setContent, setImageCode, width, type }) => {
     let arr = [];
-    const API = `${process.env.REACT_APP_API_URL}/board/ins_board`;
+    const API = `${process.env.REACT_APP_API_URL}/editor/ins_editor_data`;
     const uploadAdapter = (loader) => {
         const code = Math.floor((Math.random() * (99999 - 10000) + 10000));
         arr.push(code);

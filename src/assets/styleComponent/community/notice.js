@@ -9,9 +9,38 @@ export const Contaienr = styled.div`
         font-weight: bold;
         margin-bottom: 50px;
     }
+
+    .search{
+        position: relative;
+    }
+
+    .search input{
+        border: 1px solid #aaa;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .search i{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        color: #aaa;
+        cursor: pointer;
+    }
+
+    .write{
+        padding: 5px 20px;
+        border-radius: 5px;
+        background-color: #444;
+        color: #fff;
+        font-size: 16px;
+    }
 `
 
 export const Board = styled.div`
+    margin-top: 10px;
+
     ul{
         display: grid;
         grid-template-columns: 1fr 70% 1fr 1fr 1fr;
