@@ -77,16 +77,16 @@ const Register = () => {
         const productCode = yy + mm + dd + time + serialNumber;
 
         //에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
-        let arr = [imageCode];
+        let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
-            if (productContent.indexOf(imageCode[i]) === -1) {
-                for (let j = 0; j < arr[0].length; j++) {
-                    if (arr[0][j] === imageCode[i]) {
-                        arr[0].splice(j, 1);
+            for (let j = 0; j < arr.length; j++) {
+                if (productContent.indexOf(imageCode[i]) === -1) {
+                    if (arr[j] === imageCode[i]) {
+                        arr.splice(j, 1);
                         j--;
                     }
                 }
-                setImageCode(arr[0]);
+                setImageCode(arr);
             }
         }
 
@@ -103,7 +103,7 @@ const Register = () => {
             goods_imageCode: imageCode,
             goods_option: productOption,
         }
-        await mutateAsync(data);
+        // await mutateAsync(data);
     }
 
     const onChange = (e) => {

@@ -270,7 +270,6 @@ export const insertAddress = async (data) => {
         data.result = res.data;
         alert("신규배송지가 추가되었습니다.");
         window.location.replace("/myPage/address");
-
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
