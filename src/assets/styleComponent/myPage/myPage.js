@@ -75,7 +75,6 @@ input[type=submit]{
         cursor: pointer;
         margin-top: 20px;
 };
-
 `
 
 export const Div = styled.div`
