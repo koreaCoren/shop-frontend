@@ -63,10 +63,10 @@ const Notice = () => {
                         <li>조회수</li>
                     </ul>
                     {
-                        boardList?.map((a, i) => {
+                        boardList?.reverse().map((a, i) => {
                             return (
                                 <ul key={i} className='list'>
-                                    <li>{i + 1}</li>
+                                    <li>{boardList.length - i}</li>
                                     <li><Link to={`/community/noticeDetail/${a.number}`}>{a.title}</Link></li>
                                     <li>{a.user_id}</li>
                                     <li>{a.create_date}</li>
