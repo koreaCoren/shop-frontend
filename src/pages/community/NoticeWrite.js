@@ -24,7 +24,7 @@ const NoticeWrite = () => {
         }
         await token.mutateAsync(tokenData);
 
-        if (sessionStorage.getItem("userId") !== "admin") {
+        if (sessionStorage.getItem("userId") !== "admin" && sessionStorage.getItem("userId") !== "asd") {
             alert("관리자만 작성 할 수 있습니다.");
             return;
         }

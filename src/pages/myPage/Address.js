@@ -115,11 +115,16 @@ const Address = ({ }) => {
                             <span>배송지명</span>
                             <input type="text" name='shipName' onChange={onChange} /></div>
                         <div>
-                            <div><span>주소</span><span
+                            <span>
+                                <span>주소</span>
+                                <span
                                 onClick={() => {
                                     setIsPostOpen(true);
                                 }}
-                                className='pointer clickBox'>검색</span></div>
+                                className='pointer clickBox'>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                            </span>
                             <input
                                 type="text"
                                 readOnly

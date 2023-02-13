@@ -58,8 +58,13 @@ h3{
     color: white;
     text-align: center;
     line-height: 1.7;
-    border-radius: 10px;
-    width: 80%;
+    border-radius: 15px;
+    width: 20%;
+    display: inline-block;
+}
+.clickBox i{
+    position: relative;
+    top: 5px;
 }
 input[type=submit]{
         border: none;
