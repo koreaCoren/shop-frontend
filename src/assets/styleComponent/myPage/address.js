@@ -57,7 +57,7 @@ export const Shipping = styled.div`
     div:not(.btn, .daumPost){
         padding-bottom: 10px;
         display: grid;
-        grid-template-columns: 0.5fr 4fr;
+        grid-template-columns: 1fr 4fr;
     }
     input[type=text]{
         border-radius: 5px;

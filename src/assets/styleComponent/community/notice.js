@@ -67,4 +67,10 @@ export const Board = styled.div`
     .list li,.list a{
         line-height: 40px;
     }
+
+    p{
+        text-align: center;
+        line-height: 200px;
+        border-bottom: 1px solid #aaa;
+    }
 `
