@@ -43,7 +43,7 @@ const NoticeWrite = () => {
             user_id: sessionStorage.getItem("userId"),
             title: title,
             content: content,
-            date: yy + mm + dd,
+            date: `${yy}/${mm}/${dd}`,
             image_code: imageCode,
             code: code,
             type: "notice",
