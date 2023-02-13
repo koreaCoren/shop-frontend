@@ -1,11 +1,10 @@
 import axios from "axios";
 
 // 어드민 상품리스트
-export const test = async (data) => {
-
-    const url = `https://apis.tracker.delivery/carriers/${data.carrier}/tracks/${data.delivery}`;
-    const api = await axios.get(url);
-    return api.res;
+export const test = async (t1, t2, why) => {
+    const url = `https://apis.tracker.delivery/carriers/${t1}/tracks/${t2}`;
+    const res = await axios.get(url);
+    why.push(res.data.state.text);
 }
 
 export default test;
