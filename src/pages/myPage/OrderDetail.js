@@ -23,13 +23,13 @@ const OrderDetail = ({ }) => {
             orderCode: orderCode,
         };
         await mutateAsync(data);
+        setList(data.result);
+
     }
 
 
     useEffect(() => {
         getOrderDetailData();
-        const aaa = test();
-        console.log(aaa);
     }, [])
 
     return (
