@@ -13,20 +13,31 @@ const Notice = () => {
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
     const [search, setSearch] = useState("");
+    const result = useQuery("boardRead", boardRead);
 
     const searching = () => {
         let arr = [];
-        boardList.forEach((el) => {
+
+        if (search.length <= 2) {
+            alert("2글자 이상 입력해주세요");
+            return;
+        }
+
+        result.data.forEach((el) => {
             if (search === el.title) {
                 arr.push(el);
             }
         });
+
+        if (arr.length === 0) {
+            alert("검색된 게시글이 없습니다");
+            return;
+        }
+
         setBoardList(arr);
     }
 
-    const result = useQuery("boardRead", boardRead);
     useEffect(() => {
-        console.log(result);
         setBoardList(result.data?.reverse());
     }, [result.isLoading])
 
