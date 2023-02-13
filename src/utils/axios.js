@@ -60,6 +60,7 @@ export const register = async (data) => {
 //토큰체크
 export const tokenCheck = async (data) => {
     const api = await API.TOKEN.post("", data).then((res) => {
+        console.log(res.data.result);
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
