@@ -21,15 +21,11 @@ function App() {
     const nav = useNavigate();
     const [header, setHeader] = useState(true);
     const [orderData, setOrderData] = useState();
-    const { mutate, isLoading } = useMutation(tokenCheck);
+    const { mutateAsync, isLoading } = useMutation(tokenCheck);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const data = {
-            token: sessionStorage.getItem("token"),
-            userId: sessionStorage.getItem("userId"),
-        }
-        mutate(data);
+        mutateAsync();
     }, [nav])
 
     return (

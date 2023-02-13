@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 
@@ -18,14 +18,16 @@ const Notice = () => {
     const searching = () => {
         let arr = [];
 
-        if (search.length <= 2) {
+        if (search.length <= 1) {
             alert("2글자 이상 입력해주세요");
             return;
         }
 
         result.data.forEach((el) => {
-            if (search === el.title) {
-                arr.push(el);
+            if (el.del !== "Y") {
+                if (el.title.indexOf(search) !== -1) {
+                    arr.push(el);
+                }
             }
         });
 
@@ -37,8 +39,20 @@ const Notice = () => {
         setBoardList(arr);
     }
 
+    const getBoard = () => {
+        let arr = [];
+        result.data.forEach((el) => {
+            if (el.del !== "Y") {
+                arr.push(el);
+            }
+        })
+        setBoardList(arr);
+    }
+
     useEffect(() => {
-        setBoardList(result.data?.reverse());
+        if (result.isLoading !== true) {
+            getBoard();
+        }
     }, [result.isLoading])
 
     const onChange = (e) => {
@@ -75,17 +89,19 @@ const Notice = () => {
                         <li>조회수</li>
                     </ul>
                     {
-                        boardList?.map((a, i) => {
-                            return (
-                                <ul key={i} className='list'>
-                                    <li>{boardList.length - i}</li>
-                                    <li><Link to={`/community/noticeDetail/${a.number}`}>{a.title}</Link></li>
-                                    <li>{a.user_id}</li>
-                                    <li>{a.create_date}</li>
-                                    <li>{a.view_up}</li>
-                                </ul>
-                            )
-                        })
+                        boardList?.length > 0
+                            ? boardList?.slice((boardPage - 1) * 10, (boardPage - 1) * 10 + 10).map((a, i) => {
+                                return (
+                                    <ul key={i} className='list'>
+                                        <li>{a.i_board}</li>
+                                        <li><Link to={`/community/noticeDetail/${a.i_board}`}>{a.title}</Link></li>
+                                        <li>{a.user_id}</li>
+                                        <li>{a.create_date}</li>
+                                        <li>{a.view_up}</li>
+                                    </ul>
+                                )
+                            })
+                            : <p>등록된 게시글이 없습니다</p>
                     }
                 </Style.Board>
 
