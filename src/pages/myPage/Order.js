@@ -56,6 +56,8 @@ const Order = ({ }) => {
                                 </div>
                             </OrderStyle.Div>
                             <Style.Line></Style.Line>
+
+                            <img src={a.goods_img} alt="" />
                             <OrderStyle.Div>
                                 <ul>
                                     <li><OrderStyle.SubTitle>상품명</OrderStyle.SubTitle> {a.goods_name}</li>

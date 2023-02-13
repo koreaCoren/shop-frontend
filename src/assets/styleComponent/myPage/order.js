@@ -84,4 +84,8 @@ export const ListDiv = styled.div`
 `
 export const Space = styled.div`
     padding: 30px 0 30px 0;
+    `
+
+export const Img = styled.img`
+    padding: 30px 0 30px 0;
     ` 
