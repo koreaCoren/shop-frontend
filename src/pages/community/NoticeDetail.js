@@ -38,11 +38,11 @@ const NoticeDetail = () => {
                     <ul>
                         <li>
                             <div>다음글</div>
-                            <div><a href="#">질문입니다03</a></div>
+                            <div><Link>질문입니다03</Link></div>
                         </li>
                         <li>
                             <div>이전글</div>
-                            <div><a href="#">질문입니다01</a></div>
+                            <div><Link>질문입니다01</Link></div>
                         </li>
                     </ul>
                 </div>

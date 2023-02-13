@@ -13,6 +13,7 @@ const OrderInfo = ({ orderData }) => {
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
     const [address, setAddress] = useState("");
+    const [receiver, setReceiver] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
@@ -24,6 +25,32 @@ const OrderInfo = ({ orderData }) => {
     const { mutateAsync, isLoading } = useMutation(order);
     const getUserAddr = useMutation(deliveryList);
 
+    useEffect(() => {
+        getAddrData();
+    }, [])
+
+    useEffect(() => {
+        switch(checkAddr){
+            case "new":
+                setBuyerName("");
+                setBuyerTel("");
+                setReceiver("");
+                setAddress("");
+                setBuyerDetailAddress("");
+                break;
+            case "old":
+                setBuyerName(userAddr.user_id);
+                setBuyerTel(userAddr.ship_phone);
+                setReceiver(userAddr.ship_receiver);
+                setAddress(userAddr.ship_address);
+                setBuyerDetailAddress(userAddr.ship_detail_address);
+                break;
+            default:
+                break;
+            }
+    },[checkAddr])
+
+    //기본 배송지 불러오기
     const getAddrData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId')
@@ -33,13 +60,8 @@ const OrderInfo = ({ orderData }) => {
     }
 
     const checkRadio = (e) => {
-        console.log(e.target.value);
         setCheckAddr(e.target.value);
     }
-
-    useEffect(() => {
-        getAddrData();
-    }, [])
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -162,37 +184,63 @@ const OrderInfo = ({ orderData }) => {
                     <Style.Form>
                         <div>
                             <label htmlFor="">
-                                <span>신규 주소</span>
+                                <span>직접 입력</span>
                                 <input
                                     type="radio"
                                     value="new"
                                     name="addr"
                                     onChange={checkRadio}
-                                />
-                                <span>기존 주소</span>
+                                    checked={checkAddr === "new"}
+                                    />
+                                <span>기본 배송지</span>
                                 <input
                                     type="radio"
                                     value="old"
                                     name="addr"
-                                    onChange={checkRadio} />
+                                    onChange={checkRadio}
+                                    />
                             </label>
                         </div>
                         <div>
                             <span>주문자</span>
-                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.user_id} />
+                            <input 
+                                type="text" 
+                                onChange={onChange} 
+                                name='buyerName' 
+                                value={buyerName} />
                         </div>
                         <div>
                             <span>받는 사람</span>
-                            <input type="text" onChange={onChange} name='buyerName' value={checkAddr === "new" ? "" : userAddr.ship_receiver} />
+                            <input 
+                                type="text" 
+                                onChange={onChange} 
+                                name='receiver' 
+                                value={receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input type="text" onChange={onChange} name='buyerTel' value={checkAddr === "new" ? "" : userAddr.ship_phone} />
+                            <input 
+                                type="text" 
+                                onChange={onChange} 
+                                name='buyerTel' 
+                                value={buyerTel} />
                         </div>
                         <div>
-                            <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
-                            <input readOnly value={userAddr.ship_address} name='orderAddress' />
-                            <input type="text" value={checkAddr === "new" ? "" : userAddr.ship_detail_address} onChange={onChange} placeholder='상세주소입력' name='buyerDetailAddress' />
+                            {
+                               checkAddr === "new" 
+                                ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                                : <span>주소</span>
+                            }
+                            <input 
+                                readOnly 
+                                name='orderAddress' 
+                                value={address}/>
+                            <input 
+                                type="text" 
+                                onChange={onChange}
+                                name='buyerDetailAddress'
+                                value={buyerDetailAddress}  
+                                placeholder='상세주소입력' />
                         </div>
                         {
                             isPostOpen && <DaumPost

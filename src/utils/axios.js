@@ -59,7 +59,7 @@ export const register = async (data) => {
 
 //토큰체크
 export const tokenCheck = async (data) => {
-    const api = await API.TOKEN.post("", data).then(async (res) => {
+    const api = await API.TOKEN.post("", data).then((res) => {
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -79,6 +79,22 @@ export const tokenCheck = async (data) => {
     return api;
 }
 
+//게시판 글쓰기
+export const boardWrite = async (data) => {
+    const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
+        if (res.data.result === "success") {
+            alert("등록완료");
+            window.location.replace("/community/notice/1");
+        } else if (res.data.result === "fail") {
+            alert("알 수 없는 에러로 등록실패 했습니다.");
+        }
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
@@ -89,7 +105,7 @@ export const productList = async () => {
 
 // 어드민 상품 등록
 export const productRegister = async (data) => {
-    const api = await API.PRODUCT_REGISTER_API.post("", data).then((res) => {
+    const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
         if (res.data.result === "success") {
             alert("등록완료");
             window.location.replace("/admin/product");
@@ -260,7 +276,6 @@ export const insertAddress = async (data) => {
         data.result = res.data;
         alert("신규배송지가 추가되었습니다.");
         window.location.replace("/myPage/address");
-
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");

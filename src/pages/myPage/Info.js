@@ -37,6 +37,10 @@ const Info = ({ }) => {
     //     await userUpd.mutateAsync(data);
     // }
 
+    useEffect(() => {
+        getUserData();
+    }, [])
+
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -112,9 +116,7 @@ const Info = ({ }) => {
         setAddress(data.result?.user_addr);
     }
 
-    useEffect(() => {
-        getUserData();
-    }, [])
+    
 
 
     return (
@@ -132,48 +134,79 @@ const Info = ({ }) => {
                         <div>
                             <div className='inputTitle'>아이디</div>
                             <div>
-                                <Input type="text" name="id" value={UserData.user_id} readOnly={true} />
+                                <Input 
+                                    type="text" 
+                                    name="id" 
+                                    value={UserData.user_id} 
+                                    readOnly={true} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>이름</div>
                             <div>
-                                <Input type="text" name="name" value={Name} onChange={onChange} />
+                                <Input 
+                                    type="text" 
+                                    name="name" 
+                                    value={Name} 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>현재 비밀번호</div>
                             <div>
-                                <Input type="password" name="currentPW" onChange={onChange} />
+                                <Input 
+                                    type="password" 
+                                    name="currentPW" 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>새 비밀번호</div>
                             <div>
-                                <Input type="password" name="changePW" onChange={onChange} />
+                                <Input 
+                                    type="password" 
+                                    name="changePW" 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>휴대폰</div>
                             <div>
-                                <Input type="text" name="tell" value={Tell} onChange={onChange} />
+                                <Input 
+                                    type="text" 
+                                    name="tell" 
+                                    value={Tell} 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>이메일</div>
                             <div>
-                                <Input type="text" name="email" value={Email} onChange={onChange} />
+                                <Input 
+                                    type="text" 
+                                    name="email" 
+                                    value={Email} 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>주소</div>
                             <div>
-                                <Input type="text" name="address" value={Address} onChange={onChange} />
+                                <Input 
+                                    type="text" 
+                                    name="address" 
+                                    value={Address} 
+                                    onChange={onChange} />
                             </div>
                         </div>
                         <div>
-                            <input type="button" value="수정" onClick={(() => {
-                                CurrentPW === "" ? onSubmit(1) : onSubmit(2);
+                            <input 
+                                type="button" 
+                                value="수정" 
+                                onClick={(() => {
+                                CurrentPW === "" 
+                                    ? onSubmit(1) 
+                                    : onSubmit(2);
                             })} />
                         </div>
                     </InfoStyle.Form>

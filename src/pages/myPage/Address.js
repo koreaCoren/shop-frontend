@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { address, insertAddress, deleteAddress, insDefaultAddr } from 'utils/axios';
+
+import Loading from 'components/loding/Loading';
 import DaumPost from 'components/daumPost/DaumPost';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
@@ -14,15 +16,66 @@ const Address = ({ }) => {
     const [shipPhone, setShipPhone] = useState("");
     const [shipReceiver, setShipReceiver] = useState("");
     const [showShipping, setShowShipping] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [insetAddress, setinsetAddress] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
 
-    const { mutateAsync, isSuccess } = useMutation(address);
-    const userShipAdd = useMutation(insertAddress);
-    const userShipDel = useMutation(deleteAddress);
-    const DefaultAddr = useMutation(insDefaultAddr);
+    const destination = useMutation(address); // 배송지 불러오기
+    const userShipAdd = useMutation(insertAddress); // 신규 배송지 추가
+    const userShipDel = useMutation(deleteAddress); // 배송지 삭제
+    const DefaultAddr = useMutation(insDefaultAddr); // 기본 배송지로 설정
+
+    //새 배송지 추가시 보여줄 div
+    const showShipDiv = () => {
+        showShipping === false ? setShowShipping(true) : setShowShipping(false);
+    }
+
+    //유저 배송지 받기
+    const getAddrData = async () => {
+        const data = {
+            userId: sessionStorage.getItem('userId'),
+            token: sessionStorage.getItem("token")
+        };
+        await destination.mutateAsync(data);
+        setBoard(data.result);
+    }
+
+    //배송지 추가
+    const setShipping = async () => {
+        const data = {
+            user_id: id,
+            ship_address: insetAddress,
+            ship_detail_address: shipAddress,
+            ship_name: shipName,
+            ship_phone: shipPhone,
+            ship_receiver: shipReceiver
+        };
+        await userShipAdd.mutateAsync(data);
+        setShowShipping(false);
+    }
+
+    //배송지 삭제
+    const delShpping = async (addrValue) => {
+        if (window.confirm("정말로 삭제 하시겠습니까?")) {
+            const data = {
+                i_addr: addrValue
+            }
+            await userShipDel.mutateAsync(data);
+        }
+    }
+
+    //기본 배송지 설정
+    const setDefaultAddr = async (addrValue) => {
+        const data = {
+            user_id: id,
+            i_addr: addrValue
+        }
+        await DefaultAddr.mutateAsync(data);
+    }
+
+    useEffect(() => {
+        getAddrData();
+    }, [])
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -45,60 +98,6 @@ const Address = ({ }) => {
         }
     }
 
-    //새 배송지 추가시 보여줄 div
-    const showShipDiv = () => {
-        showShipping === false ? setShowShipping(true) : setShowShipping(false);
-    }
-
-    //유저 배송지 받기
-    const getAddrData = async () => {
-        const data = {
-            userId: sessionStorage.getItem('userId'),
-            token: sessionStorage.getItem("token")
-        };
-        await mutateAsync(data);
-        setBoard(data.result);
-    }
-
-    //배송지 추가
-    const setShipping = async () => {
-        const data = {
-            user_id: id,
-            ship_address: insetAddress,
-            ship_detail_address: shipAddress,
-            ship_name: shipName,
-            ship_phone: shipPhone,
-            ship_receiver: shipReceiver
-        };
-        await userShipAdd.mutateAsync(data);
-        setShowShipping(false);
-    }
-
-    //배송지 삭제
-    const delShpping = async (addrValue) => {
-        if (window.confirm("지울거?")) {
-            const data = {
-                i_addr: addrValue
-            }
-            await userShipDel.mutateAsync(data);
-        } else {
-            alert("그래...");
-        }
-    }
-
-    //기본 배송지 설정
-    const setDefaultAddr = async (addrValue) => {
-        const data = {
-            user_id: id,
-            i_addr: addrValue
-        }
-        await DefaultAddr.mutateAsync(data);
-    }
-
-    useEffect(() => {
-        getAddrData();
-    }, [])
-
     return (
         <Style.InDiv>
             <div className='subTitle'>
@@ -108,49 +107,72 @@ const Address = ({ }) => {
                 </div>
                 <div className='new' onClick={showShipDiv}>+ 새 배송지 추가</div>
             </div>
-            {showShipping && <AddressStyle.Shipping>
-                <form>
-                    <div>
-                        <span>배송지명</span>
-                        <input type="text" name='shipName' onChange={onChange} /></div>
-                    <div>
-                        <span>주소</span>
-                        <input type="text" readOnly value={insetAddress === "" ? "" : insetAddress} name='AddAddress' />
-                    </div>
-                    <div>
-                        <span 
-                            onClick={() => {
-                                setIsPostOpen(true);}}
-                            className='pointer clickBox'>주소찾기</span>
-                        <input type="text" name='shipAddress' placeholder='상세주소' onChange={onChange} />
-                    </div>
-                    {
-                        isPostOpen && <DaumPost
-                            setIsPostOpen={setIsPostOpen}
-                            setZoneCode={setZoneCode}
-                            setAddress={setinsetAddress}
-                        ></DaumPost>
-                    }
-                    <div>
-                        <span>받으실 분</span>
-                        <input type="text" name='shipReceiver' onChange={onChange} />
-                    </div>
-                    <div>
-                        <span>연락처</span> 
-                        <input type="text" name='shipPhone' onChange={onChange} />
-                    </div>
-                    <div className='btn'>
-                        <input className='pointer' type="button" value="추가"
-                        onClick={() => {
-                            setShipping();
-                        }} />
-                    </div>
-                </form>
-            </AddressStyle.Shipping>}
+            {
+                showShipping &&
+                <AddressStyle.Shipping>
+                    <form>
+                        <div>
+                            <span>배송지명</span>
+                            <input type="text" name='shipName' onChange={onChange} /></div>
+                        <div>
+                            <span>주소</span>
+                            <input
+                                type="text"
+                                readOnly
+                                value={insetAddress === ""
+                                    ? ""
+                                    : insetAddress}
+                                name='AddAddress' />
+                        </div>
+                        <div>
+                            <span
+                                onClick={() => {
+                                    setIsPostOpen(true);
+                                }}
+                                className='pointer clickBox'>주소찾기</span>
+                            <input
+                                type="text"
+                                name='shipAddress'
+                                placeholder='상세주소'
+                                onChange={onChange} />
+                        </div>
+                        {
+                            isPostOpen &&
+                            <DaumPost
+                                setIsPostOpen={setIsPostOpen}
+                                setZoneCode={setZoneCode}
+                                setAddress={setinsetAddress}
+                            ></DaumPost>
+                        }
+                        <div>
+                            <span>받으실 분</span>
+                            <input
+                                type="text"
+                                name='shipReceiver'
+                                onChange={onChange} />
+                        </div>
+                        <div>
+                            <span>연락처</span>
+                            <input
+                                type="text"
+                                name='shipPhone'
+                                onChange={onChange} />
+                        </div>
+                        <div className='btn'>
+                            <input
+                                className='pointer'
+                                type="button"
+                                value="추가"
+                                onClick={() => {
+                                    setShipping();
+                                }} />
+                        </div>
+                    </form>
+                </AddressStyle.Shipping>
+            }
 
             {
-
-                isSuccess &&
+                destination.isSuccess &&
                 <AddressStyle.Contents>
                     <AddressStyle.Column>
                         <div className='flex60'>선택</div>
@@ -163,12 +185,12 @@ const Address = ({ }) => {
                     </AddressStyle.Column>
 
                     {
-                        list.map((item, index) => {
+                        list.map((item, i) => {
                             return (
-                                <AddressStyle.Ctnt>
+                                <AddressStyle.Ctnt key={i}>
                                     <div className='flex60'>
-                                        <i className={(item.default_address === 1) 
-                                            ? "fa-regular fa-circle-check pointer" 
+                                        <i className={(item.default_address === 1)
+                                            ? "fa-regular fa-circle-check pointer"
                                             : "fa-regular fa-circle pointer"}
                                             onClick={() => {
                                                 setDefaultAddr(item.i_addr);
@@ -186,9 +208,9 @@ const Address = ({ }) => {
                         })
                     }
                 </AddressStyle.Contents >
-
             }
 
+            {destination.isLoading && <Loading />}
         </Style.InDiv >
 
     );
