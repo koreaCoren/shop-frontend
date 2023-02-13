@@ -16,6 +16,7 @@ const OrderDetail = ({ }) => {
     const nav = useNavigate();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
+    let why = [];
 
     const getOrderDetailData = async () => {
         const data = {
@@ -23,17 +24,18 @@ const OrderDetail = ({ }) => {
             orderCode: orderCode,
         };
         await mutateAsync(data);
+        await test("kr.cjlogistics", 564363707014, why);
+        setState(...why);
     }
 
 
     useEffect(() => {
         getOrderDetailData();
-        const aaa = test();
-        console.log(aaa);
     }, [])
 
     return (
         <Style.InDiv>
+            {state}
             <div className='subTitle'>
                 <OrderStyle.Div>
                     <h2>주문 내역상세</h2>
