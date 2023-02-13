@@ -17,7 +17,7 @@ const OrderDetail = ({ }) => {
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
     let trackResult = [];
-
+    // ㅁㄴㅇㄹ
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
