@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
 
+import { boardRead } from 'utils/axios';
 import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/community/notice";
 
 const Notice = () => {
     const { boardPage } = useParams();
-    const [boardList, setBoardList] = useState([
-        {
-            number: "1",
-            title: "제목",
-            user_id: "pkd",
-            date: "2023/02/08",
-            views: "123123",
-        },
-    ]);
+    const [boardList, setBoardList] = useState();
     const [search, setSearch] = useState("");
 
     const searching = () => {
@@ -27,6 +22,12 @@ const Notice = () => {
         });
         setBoardList(arr);
     }
+
+    const result = useQuery("boardRead", boardRead);
+    useEffect(() => {
+        console.log(result);
+        setBoardList(result.data);
+    }, [result.isLoading])
 
     const onChange = (e) => {
         const value = e.target.value;
@@ -62,21 +63,21 @@ const Notice = () => {
                         <li>조회수</li>
                     </ul>
                     {
-                        boardList.map((a, i) => {
+                        boardList?.map((a, i) => {
                             return (
                                 <ul key={i} className='list'>
-                                    <li>{a.number}</li>
+                                    <li>{i + 1}</li>
                                     <li><Link to={`/community/noticeDetail/${a.number}`}>{a.title}</Link></li>
                                     <li>{a.user_id}</li>
-                                    <li>{a.date}</li>
-                                    <li>{a.views}</li>
+                                    <li>{a.create_date}</li>
+                                    <li>{a.view_up}</li>
                                 </ul>
                             )
                         })
                     }
                 </Style.Board>
 
-                <Pageing count={10} boardPage={boardPage} boardLength={boardList.length} url={"/community/notice"} />
+                <Pageing count={10} boardPage={boardPage} boardLength={boardList?.length} url={"/community/notice"} />
             </div>
         </Style.Contaienr>
     );
