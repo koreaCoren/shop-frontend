@@ -7,6 +7,7 @@ import { boardRead } from 'utils/axios';
 import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/community/notice";
+import Loading from 'components/loding/Loading';
 
 const Notice = () => {
     const { boardPage } = useParams();
@@ -26,7 +27,7 @@ const Notice = () => {
     const result = useQuery("boardRead", boardRead);
     useEffect(() => {
         console.log(result);
-        setBoardList(result.data);
+        setBoardList(result.data?.reverse());
     }, [result.isLoading])
 
     const onChange = (e) => {
@@ -63,7 +64,7 @@ const Notice = () => {
                         <li>조회수</li>
                     </ul>
                     {
-                        boardList?.reverse().map((a, i) => {
+                        boardList?.map((a, i) => {
                             return (
                                 <ul key={i} className='list'>
                                     <li>{boardList.length - i}</li>
@@ -79,6 +80,7 @@ const Notice = () => {
 
                 <Pageing count={10} boardPage={boardPage} boardLength={boardList?.length} url={"/community/notice"} />
             </div>
+            {result.isLoading && <Loading />}
         </Style.Contaienr>
     );
 };
