@@ -88,6 +88,7 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
+
         const date = new Date();
         const yy = date.getFullYear().toString().substring(2);
         const mm = (("00" + (date.getMonth() + 1)).slice(-2));
