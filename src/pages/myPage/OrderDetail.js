@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import { orderCodeList } from 'utils/axios';
-import test from 'utils/delivery';
+import track from 'utils/delivery';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -16,7 +16,7 @@ const OrderDetail = ({ }) => {
     const nav = useNavigate();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
-    let why = [];
+    let trackResult = [];
 
     const getOrderDetailData = async () => {
         const data = {
@@ -26,8 +26,8 @@ const OrderDetail = ({ }) => {
         await mutateAsync(data);
         setList(data.result);
 
-        await test("kr.cjlogistics", 564363707014, why);
-        setState(...why);
+        await track("kr.cjlogistics", 564363707014, trackResult);
+        setState(...trackResult);
     }
 
 
