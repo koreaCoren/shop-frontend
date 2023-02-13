@@ -60,6 +60,7 @@ export const register = async (data) => {
 //토큰체크
 export const tokenCheck = async (data) => {
     const api = await API.TOKEN.post("", data).then((res) => {
+        console.log(res.data.result);
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -93,6 +94,12 @@ export const boardWrite = async (data) => {
         window.location.replace("/");
     })
     return api;
+}
+
+// 공지사항 출력
+export const boardRead = async () => {
+    const { data } = await API.READ_BOARD.get();
+    return data;
 }
 
 //--------- 어드민 관련 시작 ---------

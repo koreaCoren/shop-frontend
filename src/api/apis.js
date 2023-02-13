@@ -25,6 +25,11 @@ export const EDITOR_REGISTER = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/editor/ins_editor_data`,
 })
 
+// 공지사항 출력
+export const READ_BOARD = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_notice`
+})
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
