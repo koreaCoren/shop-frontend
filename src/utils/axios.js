@@ -95,6 +95,12 @@ export const boardWrite = async (data) => {
     return api;
 }
 
+// 공지사항 출력
+export const boardRead = async () => {
+    const { data } = await API.READ_BOARD.get();
+    return data;
+}
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
