@@ -33,6 +33,10 @@ export const READ_BOARD = axios.create({
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
+export const TEST = axios.create({
+    baseURL: `https://apis.tracker.delivery/carriers/kr.cjlogistics/tracks/564363707014`,
+})
+// 어드민 상품리스트
 export const PRODUCT_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_goods`,
 })

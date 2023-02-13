@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import { orderCodeList } from 'utils/axios';
+import test from 'utils/delivery';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -11,6 +12,7 @@ const OrderDetail = ({ }) => {
     const location = useLocation();
     const { orderCode } = useParams();
     const [list, setList] = useState();
+    const [state, setState] = useState();
     const nav = useNavigate();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
@@ -18,17 +20,17 @@ const OrderDetail = ({ }) => {
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
-            orderCode: orderCode
+            orderCode: orderCode,
         };
         await mutateAsync(data);
-        setList(data.result);
-
     }
+
 
     useEffect(() => {
         getOrderDetailData();
+        const aaa = test();
+        console.log(aaa);
     }, [])
-
 
     return (
         <Style.InDiv>
@@ -74,7 +76,17 @@ const OrderDetail = ({ }) => {
                 <ul>
                     <li>
                         <div>배송현황</div>
-                        <div>{list ? list[0].delivery : '확인중'}<div><a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a></div></div>
+                        <div>
+                            {list ?
+                                list[0].delivery === '' || list[0].carrier === '' ? state : '테스트'
+                                : '확인중'}
+                            <div>
+                                <a href={list ?
+                                    list[0].delivery === '' || list[0].carrier === '' ? '#' : `https://tracker.delivery/#/${list[0].carrier}/${list[0].delivery}`
+                                    : '확인중'} target="_blank">배송조회</a>
+                            </div>
+
+                        </div>
 
                     </li>
                 </ul>
