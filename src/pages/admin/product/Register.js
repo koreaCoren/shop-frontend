@@ -8,7 +8,6 @@ import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
 import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
-import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/admin/product/register"
 
