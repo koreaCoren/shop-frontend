@@ -1,3 +1,4 @@
+import axios from "axios";
 import * as API from "../api/apis";
 
 //로그인
@@ -58,9 +59,12 @@ export const register = async (data) => {
 }
 
 //토큰체크
-export const tokenCheck = async (data) => {
+export const tokenCheck = async () => {
+    const data = {
+        token: sessionStorage.getItem("token"),
+        userId: sessionStorage.getItem("userId"),
+    }
     const api = await API.TOKEN.post("", data).then((res) => {
-        console.log(res.data.result);
         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
             sessionStorage.removeItem("loginCheck");
             sessionStorage.removeItem('userId');
@@ -100,6 +104,17 @@ export const boardWrite = async (data) => {
 export const boardRead = async () => {
     const { data } = await API.READ_BOARD.get();
     return data;
+}
+
+// 게시글 조회수 상승
+export const boardView = async (data) => {
+    const api = await API.VIEW_BOARD.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
 }
 
 //--------- 어드민 관련 시작 ---------

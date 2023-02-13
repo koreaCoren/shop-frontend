@@ -18,11 +18,7 @@ const NoticeWrite = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const tokenData = {
-            token: sessionStorage.getItem("token"),
-            userId: sessionStorage.getItem("userId"),
-        }
-        await token.mutateAsync(tokenData);
+        await token.mutateAsync();
 
         if (sessionStorage.getItem("userId") !== "admin") {
             alert("관리자만 작성 할 수 있습니다.");

@@ -30,6 +30,11 @@ export const READ_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/sel_notice`
 })
 
+// 게시글 조회수 상승
+export const VIEW_BOARD = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/view_up`
+})
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
