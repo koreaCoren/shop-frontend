@@ -115,7 +115,16 @@ const Address = ({ }) => {
                             <span>배송지명</span>
                             <input type="text" name='shipName' onChange={onChange} /></div>
                         <div>
-                            <span>주소</span>
+                            <span>
+                                <span>주소</span>
+                                <span
+                                onClick={() => {
+                                    setIsPostOpen(true);
+                                }}
+                                className='pointer clickBox'>
+                                    <i className="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                            </span>
                             <input
                                 type="text"
                                 readOnly
@@ -125,11 +134,7 @@ const Address = ({ }) => {
                                 name='AddAddress' />
                         </div>
                         <div>
-                            <span
-                                onClick={() => {
-                                    setIsPostOpen(true);
-                                }}
-                                className='pointer clickBox'>주소찾기</span>
+                            <div></div>
                             <input
                                 type="text"
                                 name='shipAddress'
