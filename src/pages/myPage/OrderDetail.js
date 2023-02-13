@@ -74,7 +74,7 @@ const OrderDetail = ({ }) => {
                 <ul>
                     <li>
                         <div>배송현황</div>
-                        <div>{list ? list[0].delivery : '확인중'}<div>배송조회</div></div>
+                        <div>{list ? list[0].delivery : '확인중'}<div><a href="https://tracker.delivery/#/:carrier_id/:track_id" target="_blank">배송조회</a></div></div>
 
                     </li>
                 </ul>
