@@ -47,6 +47,18 @@ input[type="button"]{
     cursor: pointer;
     margin-top: 20px;
 }
+input[type="submit"]{
+    border: 1px solid #70707070;
+    background-color: white;
+    color: #444;
+    font-size: 16px;
+    letter-spacing: 18px;
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+}
 
 .inputTitle{
     width: 100px;

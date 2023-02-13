@@ -16,7 +16,7 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [telll, setTell] = useState("");
     const [eamil, setEmail] = useState("");
-    const [address, setAddress] = useState("");
+    // const [address, setAddress] = useState("");
 
     const { mutateAsync, isLoading } = useMutation(register);
 
@@ -34,7 +34,7 @@ const Register = () => {
             pw: password,
             tell: telll,
             email: eamil,
-            address: address,
+            // address: address,
         };
 
         mutateAsync(data);
@@ -67,9 +67,9 @@ const Register = () => {
             case "email":
                 setEmail(value);
                 break;
-            case "address":
-                setAddress(value);
-                break;
+            // case "address":
+            //     setAddress(value);
+            //     break;
             default:
                 break;
         }
@@ -85,7 +85,7 @@ const Register = () => {
                     <Input type="password" name="pw" onChange={onChange} placeholder="비밀번호" />
                     <Input type="text" name="tell" onChange={onChange} placeholder="전화번호" />
                     <Input type="text" name="email" onChange={onChange} placeholder="이메일" />
-                    <Input type="text" name="address" onChange={onChange} placeholder="주소" />
+                    {/* <Input type="text" name="address" onChange={onChange} placeholder="주소" /> */}
                     <input type="submit" value="회원가입" />
                 </div>
             </Style.Form>
