@@ -143,4 +143,15 @@ export const SET_DEFAULT_ADDR = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
 })
 
+//좋아요 리스트 받기
+export const GET_FAV_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_fav`
+})
+
+//상품 좋아요
+export const SET_FAV = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
+})
+
 //--------- 개인정보 끝 ---------
+//--------- 상품 관련 ----------

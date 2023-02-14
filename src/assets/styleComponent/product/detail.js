@@ -199,7 +199,6 @@ export const fav = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: $;
 `
 
 export const Description = styled.div``
