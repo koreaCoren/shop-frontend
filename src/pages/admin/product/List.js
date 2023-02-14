@@ -6,6 +6,7 @@ import { productDelete, productList } from 'utils/axios';
 import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/admin/product/list"
+import * as Common from "assets/styleComponent/admin/common"
 
 
 const List = () => {
@@ -26,7 +27,7 @@ const List = () => {
             {
                 result.data?.map((a, i) => {
                     return (
-                        <Style.Container key={i}>
+                        <Common.Container key={i}>
                             <ul>
                                 <Style.ProductList>
                                     <img src={a.goods_img} alt="" />
@@ -47,7 +48,7 @@ const List = () => {
                                     </Style.Ul>
                                 </Style.ProductList>
                             </ul>
-                        </Style.Container>
+                        </Common.Container>
                     )
                 })
             }

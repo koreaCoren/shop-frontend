@@ -35,6 +35,11 @@ export const VIEW_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/view_up`
 })
 
+// 게시글 삭제
+export const DELETE_BOARD = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
+})
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
@@ -69,6 +74,11 @@ export const ORDER_MANAGEMENT = axios.create({
 // 어드민 주문 관리 디테일
 export const ORDER_MANAGEMENT_DETAIL = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_code_orders`
+})
+
+// 기본 배송지 설정
+export const DEFAULT_DELIVERY = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/default_carrier`
 })
 
 //--------- 어드민 관련 끝 ---------
@@ -133,4 +143,15 @@ export const SET_DEFAULT_ADDR = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
 })
 
+//좋아요 리스트 받기
+export const GET_FAV_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_fav`
+})
+
+//상품 좋아요
+export const SET_FAV = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
+})
+
 //--------- 개인정보 끝 ---------
+//--------- 상품 관련 ----------

@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as API from "../api/apis";
 
 //로그인
@@ -89,7 +88,7 @@ export const boardWrite = async (data) => {
     const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
         if (res.data.result === "success") {
             alert("등록완료");
-            window.location.replace("/community/notice/1");
+            window.location.replace(`/community/${data.type}/1`);
         } else if (res.data.result === "fail") {
             alert("알 수 없는 에러로 등록실패 했습니다.");
         }
@@ -110,6 +109,18 @@ export const boardRead = async () => {
 export const boardView = async (data) => {
     const api = await API.VIEW_BOARD.post("", data).then((res) => {
 
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
+}
+
+// 게시글 삭제
+export const boardDelete = async (data) => {
+    const api = await API.DELETE_BOARD.post("", data).then((res) => {
+        alert("삭제되었습니다");
+        window.location.replace(`/community/${data.type}/1`);
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
@@ -178,6 +189,17 @@ export const orderManagement = async () => {
 export const orderManagementDetail = async (data) => {
     const api = await API.ORDER_MANAGEMENT_DETAIL.post("", data).then((res) => {
         data.detail = res.data;
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+// 기본 배송지 설정
+export const deliveryUpdate = async (data) => {
+    const api = await API.DEFAULT_DELIVERY.post("", data).then((res) => {
+
     }).catch((error) => {
         alert("서버와 통신이 실패했습니다.\n" + error);
         window.location.replace("/");
@@ -331,5 +353,26 @@ export const insDefaultAddr = async (data) => {
     return api;
 }
 
+//좋아요 보여줌
+export const getFavList = async (data) => {
+    const api = await API.GET_FAV_LIST.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+    })
+    return api
+}
+
+//상품 좋아요
+export const settingFav = async (data) => {
+    const api = await API.SET_FAV.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("좋지 않아요!");
+    })
+    return api;
+}
+
 // -------- 개인정보 끝 --------------
 
+// -------- 상품 관련 ---------------

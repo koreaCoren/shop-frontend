@@ -8,6 +8,7 @@ import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 
 import * as Style from 'assets/styleComponent/admin/order/order';
+import * as Common from 'assets/styleComponent/admin/common';
 
 const Order = () => {
     const nav = useNavigate();
@@ -24,11 +25,11 @@ const Order = () => {
     return (
         <>
             <Top title={"주문 관리"} isButton={false} />
-            <Style.Padding>
+            <Common.Padding>
                 {
                     board?.map((a, i) => {
                         return (
-                            <Style.Container key={i}>
+                            <Common.Container key={i} style={{ textAlign: "center" }}>
                                 <Style.Div>
                                     <ul>
                                         <li>주문번호 : {a.orderCode}</li>
@@ -42,11 +43,11 @@ const Order = () => {
                                     </ul>
                                 </Style.Div>
                                 <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>자세히 보기</Style.DetailButton>
-                            </Style.Container>
+                            </Common.Container>
                         )
                     })
                 }
-            </Style.Padding>
+            </Common.Padding>
             <Pageing count={boardCount} boardPage={boardPage} boardLength={result.data?.length} url={"/admin/order"} />
             {result.isLoading && <Loading />}
         </>
