@@ -191,6 +191,17 @@ export const Button = styled.div`
     cursor: pointer;
 `
 
+export const fav = styled.div`
+    border: 1px solid #ccc;
+    flex: 0.2;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: $;
+`
+
 export const Description = styled.div``
 export const DescriptionMenu = styled.div`
     ul{
