@@ -24,8 +24,7 @@ const OrderDetail = ({ }) => {
         };
         await mutateAsync(data);
         setList(data.result);
-
-        await track("kr.cjlogistics", 564363707014, trackResult);
+        await track(data.result[0].carrier, data.result[0].delivery, trackResult);
         setState(...trackResult);
     }
 
