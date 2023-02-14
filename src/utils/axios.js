@@ -196,6 +196,17 @@ export const orderManagementDetail = async (data) => {
     return api;
 }
 
+// 기본 배송지 설정
+export const deliveryUpdate = async (data) => {
+    const api = await API.DEFAULT_DELIVERY.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 //--------- 어드민 관련 끝 ---------
 
 // -------- 주문 시작 --------------

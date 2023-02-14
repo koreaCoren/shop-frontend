@@ -5,7 +5,7 @@ import List from 'pages/admin/product/List';
 import Register from 'pages/admin/product/Register';
 import Top from "components/admin/Top";
 
-import * as Style from "assets/styleComponent/admin/product/product"
+import * as Common from "assets/styleComponent/admin/common"
 
 const Product = () => {
     const nav = useLocation();
@@ -14,12 +14,12 @@ const Product = () => {
             {
                 nav.pathname === "/admin/product" && <Top title={"상품등록"} isButton={true} buttonTitle={"상품등록"} buttonLink={"register"} />
             }
-            <Style.Padding>
+            <Common.Padding>
                 <Routes>
                     <Route path='/' element={<List />} />
                     <Route path='/register' element={<Register />} />
                 </Routes>
-            </Style.Padding>
+            </Common.Padding>
         </>
     );
 };

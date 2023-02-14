@@ -10,6 +10,7 @@ import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
 
 import * as Style from "assets/styleComponent/admin/product/register"
+import * as Common from "assets/styleComponent/admin/common"
 
 const Register = () => {
     const [productName, setProductName] = useState("");
@@ -139,15 +140,15 @@ const Register = () => {
     return (
         <>
             <form onSubmit={onSubmit}>
-                <Style.Container>
-                    <h2>상품 기본 설정</h2>
+                <Common.Container>
+                    <Style.H2>상품 기본 설정</Style.H2>
                     <ProductInput title="상품이름" type="text" name="prodctName" placeholder="상품이름" onChange={onChange} />
                     <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={firstCategory} />
                     <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={secondCategory} />
-                </Style.Container>
+                </Common.Container>
 
-                <Style.Container>
-                    <h2>상품 상세 설정</h2>
+                <Common.Container>
+                    <Style.H2>상품 상세 설정</Style.H2>
                     <ProductInput title="가격" type="text" name="price" placeholder="상품가격" onChange={onChange} />
                     <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} />
                     <ProductInput title="수량" type="text" name="sell" placeholder="수량" onChange={onChange} />
@@ -156,7 +157,7 @@ const Register = () => {
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" />
                     <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
                     <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
-                </Style.Container>
+                </Common.Container>
             </form>
         </>
     );

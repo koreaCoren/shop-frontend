@@ -7,6 +7,7 @@ import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 
 import * as Style from 'assets/styleComponent/admin/order/orderDetail'
+import * as Common from 'assets/styleComponent/admin/common'
 
 const OrderDetail = () => {
     const { orderCode } = useParams();
@@ -55,26 +56,26 @@ const OrderDetail = () => {
     return (
         <>
             <Top title={"주문 상세보기"} isButton={false} />
-            <Style.Padding>
+            <Common.Padding>
                 {
                     isSuccess &&
                     detail.map((a, i) => {
                         return (
-                            <Style.Container key={i}>
+                            <Common.Container key={i}>
                                 <Style.Content>
                                     <li>상품이름 : {a.goods_name}</li>
                                     <li>상품 코드 : {a.goods_code}</li>
                                     <li>상품 금액 : {a.order_pay}</li>
                                     <li>상품 갯수 : {a.order_count}</li>
                                 </Style.Content>
-                            </Style.Container>
+                            </Common.Container>
                         )
                     })
                 }
 
                 {
                     isSuccess &&
-                    <Style.Container>
+                    <Common.Container>
                         <Style.Content>
                             <li>주문자 아이디 : {detail[0].user_id}</li>
                             <li>주문자 이름 : {detail[0].buyer_name}</li>
@@ -90,9 +91,9 @@ const OrderDetail = () => {
                                 <button>확인</button>
                             </li>
                         </Style.Content>
-                    </Style.Container>
+                    </Common.Container>
                 }
-            </Style.Padding>
+            </Common.Padding>
             {isLoading && <Loading />}
         </>
     );

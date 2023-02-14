@@ -8,7 +8,8 @@ import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 import Register from './Register';
 
-import * as Style from "assets/styleComponent/admin/category/category"
+import * as Style from "assets/styleComponent/admin/category/category";
+import * as Common from "assets/styleComponent/admin/common";
 
 const Category = () => {
     const nav = useNavigate();
@@ -111,11 +112,11 @@ const Category = () => {
         <>
             <Top title={"카테고리"} isButton={true} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
             <Style.Save onClick={onSubmit}>저장</Style.Save>
-            <Style.Padding>
+            <Common.Padding>
                 {
                     categorys.map((a, i) => {
                         return (
-                            <Style.Container key={i}>
+                            <Common.Container key={i}>
                                 <Style.Flex>
                                     <Style.CateInfo>
                                         <li>분류코드 : {a.cate_code}</li>
@@ -130,7 +131,7 @@ const Category = () => {
                                 {
                                     a.lowCategory?.map((b, j) => {
                                         return (
-                                            <Style.Container key={j}>
+                                            <Common.Container key={j}>
                                                 <Style.Flex>
                                                     <Style.CateInfo>
                                                         <li>분류코드 : {b.cate_code}</li>
@@ -141,15 +142,15 @@ const Category = () => {
                                                         <Link to={`updateLowCate?index=${i}&lowIndex=${j}`}>수정</Link>
                                                     </Style.Buttons>
                                                 </Style.Flex>
-                                            </Style.Container>
+                                            </Common.Container>
                                         )
                                     })
                                 }
-                            </Style.Container>
+                            </Common.Container>
                         )
                     })
                 }
-            </Style.Padding>
+            </Common.Padding>
 
             <Routes>
                 <Route path="registerCate" element={
