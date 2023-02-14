@@ -24,6 +24,7 @@ const OrderDetail = ({ }) => {
             orderCode: orderCode,
         };
         await mutateAsync(data);
+        setList(data.result);
         await test("kr.cjlogistics", 564363707014, why);
         setState(...why);
     }
