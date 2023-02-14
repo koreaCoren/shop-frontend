@@ -42,3 +42,35 @@ export const H2 = styled.h2`
     border-bottom: 1px solid #eee;
     padding: 10px 5px;
 `
+
+export const Ul = styled.ul`
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+    padding: 10px 5px;
+
+    li{
+        line-height: 1.5;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    input{
+        width: 200px;
+        line-height: 25px;
+        padding: 0px 5px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+    }
+
+    button{
+        padding: 0px 15px;
+        border-radius: 5px;
+        line-height: 25px;
+        color: #fff;
+        background-color: #1a6dff;
+        cursor: pointer;
+    }
+`
