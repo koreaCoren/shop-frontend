@@ -76,6 +76,11 @@ export const ORDER_MANAGEMENT_DETAIL = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_code_orders`
 })
 
+// 기본 배송지 설정
+export const DEFAULT_DELIVERY = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/default_carrier`
+})
+
 //--------- 어드민 관련 끝 ---------
 
 //--------- 주문 관련 시작 ---------
