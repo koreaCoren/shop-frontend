@@ -35,6 +35,11 @@ export const VIEW_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/view_up`
 })
 
+// 게시글 삭제
+export const DELETE_BOARD = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
+})
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트

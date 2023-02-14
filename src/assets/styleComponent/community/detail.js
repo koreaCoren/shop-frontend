@@ -123,7 +123,7 @@ export const Detail = styled.div`
         line-height: 1.2;
     }
 
-    .more {
+    .more,button {
         margin-top: 20px;
         border: 1px solid #ccc;
         font-weight: bold;
@@ -133,6 +133,8 @@ export const Detail = styled.div`
         text-align: center;
         border-radius: 5px;
         margin-bottom: 30px;
+        margin-right: 5px;
+        cursor: pointer;
     }
 
     .comments {
