@@ -331,5 +331,26 @@ export const insDefaultAddr = async (data) => {
     return api;
 }
 
+//좋아요 보여줌
+export const getFavList = async (data) => {
+    const api = await API.GET_FAV_LIST.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+    })
+    return api
+}
+
+//상품 좋아요
+export const settingFav = async (data) => {
+    const api = await API.SET_FAV.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("좋지 않아요!");
+    })
+    return api;
+}
+
 // -------- 개인정보 끝 --------------
 
+// -------- 상품 관련 ---------------
