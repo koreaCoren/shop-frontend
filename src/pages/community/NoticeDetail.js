@@ -1,23 +1,36 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import Loading from 'components/loding/Loading';
-import { boardRead, boardView } from 'utils/axios';
+import { boardDelete, boardRead, boardView } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/community/detail";
 
 const NoticeDetail = () => {
     const { boardPage } = useParams();
+    const nav = useNavigate();
     const result = useQuery("boardRead", boardRead);
-    const { mutateAsync } = useMutation(boardView);
+    const view = useMutation(boardView);
+    const deleted = useMutation(boardDelete);
+
+    const boardDel = async () => {
+        const ok = window.confirm("정말로 삭제하시겠습니까?");
+        if (ok) {
+            const data = {
+                type: "notice",
+                i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
+            }
+            await deleted.mutateAsync(data);
+        }
+    }
 
     useEffect(() => {
         const data = {
             type: "notice",
             i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
         }
-        mutateAsync(data);
+        view.mutateAsync(data);
     }, [])
 
     return (
@@ -49,6 +62,7 @@ const NoticeDetail = () => {
                     </div>
 
                     <Link to="/community/notice/1" className="more">목록</Link>
+                    <button onClick={boardDel}>삭제</button>
 
                     <div className="differentBoard">
                         <ul>

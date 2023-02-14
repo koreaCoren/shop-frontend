@@ -11,6 +11,7 @@ import Loading from 'components/loding/Loading';
 
 const Notice = () => {
     const { boardPage } = useParams();
+    const nav = useNavigate();
     const [boardList, setBoardList] = useState();
     const [search, setSearch] = useState("");
     const result = useQuery("boardRead", boardRead);
@@ -50,6 +51,7 @@ const Notice = () => {
     }
 
     useEffect(() => {
+        console.log(result);
         if (result.isLoading !== true) {
             getBoard();
         }
