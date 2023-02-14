@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import DaumPost from 'components/daumPost/DaumPost';
 
 import Inicis from 'components/inicis/Inicis';
-import { order, deliveryList } from 'utils/axios';
+import { order, addressList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/order/order"
 
@@ -23,14 +23,14 @@ const OrderInfo = ({ orderData }) => {
     const [checkAddr, setCheckAddr] = useState("new");
 
     const { mutateAsync, isLoading } = useMutation(order);
-    const getUserAddr = useMutation(deliveryList);
+    const getUserAddr = useMutation(addressList);
 
     useEffect(() => {
         getAddrData();
     }, [])
 
     useEffect(() => {
-        switch(checkAddr){
+        switch (checkAddr) {
             case "new":
                 setBuyerName("");
                 setBuyerTel("");
@@ -47,8 +47,8 @@ const OrderInfo = ({ orderData }) => {
                 break;
             default:
                 break;
-            }
-    },[checkAddr])
+        }
+    }, [checkAddr])
 
     //기본 배송지 불러오기
     const getAddrData = async () => {
@@ -191,55 +191,55 @@ const OrderInfo = ({ orderData }) => {
                                     name="addr"
                                     onChange={checkRadio}
                                     checked={checkAddr === "new"}
-                                    />
+                                />
                                 <span>기본 배송지</span>
                                 <input
                                     type="radio"
                                     value="old"
                                     name="addr"
                                     onChange={checkRadio}
-                                    />
+                                />
                             </label>
                         </div>
                         <div>
                             <span>주문자</span>
-                            <input 
-                                type="text" 
-                                onChange={onChange} 
-                                name='buyerName' 
+                            <input
+                                type="text"
+                                onChange={onChange}
+                                name='buyerName'
                                 value={buyerName} />
                         </div>
                         <div>
                             <span>받는 사람</span>
-                            <input 
-                                type="text" 
-                                onChange={onChange} 
-                                name='receiver' 
+                            <input
+                                type="text"
+                                onChange={onChange}
+                                name='receiver'
                                 value={receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input 
-                                type="text" 
-                                onChange={onChange} 
-                                name='buyerTel' 
+                            <input
+                                type="text"
+                                onChange={onChange}
+                                name='buyerTel'
                                 value={buyerTel} />
                         </div>
                         <div>
                             {
-                               checkAddr === "new" 
-                                ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
-                                : <span>주소</span>
+                                checkAddr === "new"
+                                    ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                                    : <span>주소</span>
                             }
-                            <input 
-                                readOnly 
-                                name='orderAddress' 
-                                value={address}/>
-                            <input 
-                                type="text" 
+                            <input
+                                readOnly
+                                name='orderAddress'
+                                value={address} />
+                            <input
+                                type="text"
                                 onChange={onChange}
                                 name='buyerDetailAddress'
-                                value={buyerDetailAddress}  
+                                value={buyerDetailAddress}
                                 placeholder='상세주소입력' />
                         </div>
                         {
