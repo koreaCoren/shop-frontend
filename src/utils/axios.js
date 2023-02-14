@@ -207,6 +207,18 @@ export const deliveryUpdate = async (data) => {
     return api;
 }
 
+// 설정된 기본 배송지 
+export const defaultSelect = async () => {
+    const { data } = await API.DEFAULT_SELECT.get();
+    return data;
+}
+
+// 송장 미입력 리스트 
+export const nullInvoice = async () => {
+    const { data } = await API.NULL_INVOICE.get();
+    return data;
+}
+
 //--------- 어드민 관련 끝 ---------
 
 // -------- 주문 시작 --------------
