@@ -16,6 +16,7 @@ const Detail = ({ result, setOrderData }) => {
     const [count, setCount] = useState(1);
     const [deliveryPay, setDeliveryPay] = useState(2500);
     const [lightOn, setLightOn] = useState();
+    const [fav, setFav] = useState(false);
 
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
@@ -101,6 +102,7 @@ const Detail = ({ result, setOrderData }) => {
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
+                                <Style.fav onClick={() => {setFav(!fav)}}>{fav === false ? "♡" : "❤︎"}</Style.fav>
                                 {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>
