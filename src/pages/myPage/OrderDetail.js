@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import { orderCodeList } from 'utils/axios';
-import test from 'utils/delivery';
+import track from 'utils/delivery';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -16,8 +16,7 @@ const OrderDetail = ({ }) => {
     const nav = useNavigate();
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
-    let why = [];
-
+    let trackResult = [];
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
@@ -25,8 +24,9 @@ const OrderDetail = ({ }) => {
         };
         await mutateAsync(data);
         setList(data.result);
-        await test("kr.cjlogistics", 564363707014, why);
-        setState(...why);
+
+        await track("kr.cjlogistics", 564363707014, trackResult);
+        setState(...trackResult);
     }
 
 
@@ -36,7 +36,6 @@ const OrderDetail = ({ }) => {
 
     return (
         <Style.InDiv>
-            {state}
             <div className='subTitle'>
                 <OrderStyle.Div>
                     <h2>주문 내역상세</h2>
@@ -81,7 +80,9 @@ const OrderDetail = ({ }) => {
                         <div>배송현황</div>
                         <div>
                             {list ?
-                                list[0].delivery === '' || list[0].carrier === '' ? state : '테스트'
+                                list[0].delivery === '' || list[0].carrier === ''
+                                    ? '주문접수'
+                                    : state
                                 : '확인중'}
                             <div>
                                 <a href={list ?
