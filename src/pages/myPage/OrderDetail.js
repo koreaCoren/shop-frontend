@@ -17,7 +17,6 @@ const OrderDetail = ({ }) => {
     const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
     const deliveryPrice = 2500;
     let trackResult = [];
-    // ㅁㄴㅇㄹ
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
@@ -82,7 +81,7 @@ const OrderDetail = ({ }) => {
                         <div>
                             {list ?
                                 list[0].delivery === '' || list[0].carrier === ''
-                                    ? '빈값'
+                                    ? '주문접수'
                                     : state
                                 : '확인중'}
                             <div>
