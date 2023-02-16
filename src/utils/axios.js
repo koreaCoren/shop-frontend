@@ -365,6 +365,16 @@ export const insDefaultAddr = async (data) => {
     return api;
 }
 
+//찜한 상품
+export const reqPickList = async (data) => {
+    const api = await API.REQ_PICK_LIST.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+    })
+    return api;
+}
+
 //좋아요 보여줌
 export const getFavList = async (data) => {
     const api = await API.GET_FAV_LIST.post("", data).then((res) => {
@@ -372,7 +382,7 @@ export const getFavList = async (data) => {
     }).catch((error) => {
         alert("서버와 통신을 실패했습니다.\n" + error);
     })
-    return api
+    return api;
 }
 
 //상품 좋아요
