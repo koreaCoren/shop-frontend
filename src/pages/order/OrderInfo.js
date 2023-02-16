@@ -18,7 +18,7 @@ const OrderInfo = ({ orderData }) => {
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({});
-    const delivery = '주문접수';
+    const delivery = '';
     const [userAddr, setUserAddr] = useState("");
     const [checkAddr, setCheckAddr] = useState("new");
 
