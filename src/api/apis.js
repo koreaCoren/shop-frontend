@@ -153,6 +153,11 @@ export const SET_DEFAULT_ADDR = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
 })
 
+//찜한 상품
+export const REQ_PICK_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_pick_list`,
+})
+
 //좋아요 리스트 받기
 export const GET_FAV_LIST = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/sel_fav`

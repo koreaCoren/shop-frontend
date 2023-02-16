@@ -65,7 +65,7 @@ const Detail = ({ result, setOrderData }) => {
             goods_code: productCode
         };
         await favList.mutateAsync(data);
-        setFav(data.result?.is_fav === 0 ? 0 : 1);
+        setFav(data.result?.is_fav === 1 ? 1 : 0);
     }
 
     //좋아요 클릭
