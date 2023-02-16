@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const defaultUl = styled.ul`
+export const DefaultUl = styled.ul`
     li{
         display: flex;
         align-items: center;
@@ -30,7 +30,7 @@ export const defaultUl = styled.ul`
     li button{
         padding: 0px 15px;
         border-radius: 5px;
-        line-height: 25px;
+        line-height: 27px;
         color: #fff;
         background-color: #1a6dff;
         cursor: pointer;
@@ -68,7 +68,7 @@ export const Ul = styled.ul`
     button{
         padding: 0px 15px;
         border-radius: 5px;
-        line-height: 25px;
+        line-height: 27px;
         color: #fff;
         background-color: #1a6dff;
         cursor: pointer;

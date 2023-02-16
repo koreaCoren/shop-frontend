@@ -16,10 +16,15 @@ const Delivery = () => {
     const selectResult = useQuery("defaultSelect", defaultSelect);
     const incoviceResult = useQuery("nullInvoice", nullInvoice);
 
-    const setDelivery = () => {
-        const data = {
-            default_carrier: defaultDelivery,
-        }
+    const setDelivery = async () => {
+        const arr = await getDeliveryList();
+        const data = {};
+        arr.data.forEach(el => {
+            if (el.id === defaultDelivery) {
+                data.name = el.name;
+                data.default_carrier = defaultDelivery;
+            }
+        });
         update.mutateAsync(data);
         alert("저장완료");
     }
@@ -34,8 +39,7 @@ const Delivery = () => {
     }, [])
 
     useEffect(() => {
-        console.log(incoviceResult);
-        setDefaultDelivery(selectResult.data?.default_carrier);
+        setDefaultDelivery(selectResult.data?.carrier_name);
     }, [selectResult.isLoading])
 
 
@@ -58,16 +62,16 @@ const Delivery = () => {
                 <Top title={"배송 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
-                        <Style.defaultUl>
+                        <Style.DefaultUl>
                             <li>
-                                <span>기본 배송지 설정 :</span>
+                                <span>기본 배송사 설정 :</span>
                                 <div className="select">
                                     <select name="defaultDelivery" onChange={onChange}>
-                                        <option value={defaultDelivery}>{defaultDelivery}</option>
+                                        <option value="">{defaultDelivery}</option>
                                         {
                                             deliveryList?.map((a, i) => {
                                                 return (
-                                                    <option key={i} value={a.name}>{a.name}</option>
+                                                    <option key={i} value={a.id}>{a.name}</option>
                                                 )
                                             })
                                         }
@@ -77,7 +81,7 @@ const Delivery = () => {
 
                                 <button onClick={setDelivery}>저장</button>
                             </li>
-                        </Style.defaultUl>
+                        </Style.DefaultUl>
                     </Common.Container>
 
                     <Common.Container>

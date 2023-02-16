@@ -38,7 +38,7 @@ const List = () => {
                                             <li>할인률 : {a.goods_sale}%</li>
                                         </ul>
                                         <ul>
-                                            <li>수량 : {a.goods_sell}</li>
+                                            <li>판매 수량 : {a.goods_sell}</li>
                                             <li>재고 : {a.goods_stock}</li>
                                         </ul>
                                     </Style.Div>
