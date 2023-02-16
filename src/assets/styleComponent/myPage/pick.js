@@ -40,3 +40,52 @@ export const Div = styled.div`
         margin-top: 35px;
     }
 `
+
+export const List = styled.div`
+    
+    border:1px solid gray;
+    padding: 10px;
+    border-radius:  10px;
+    margin-bottom: 30px;
+    display: flex;
+    .goodsImg{
+        flex: 1;
+    }
+    .goodsImg img{
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+    .goodsImg span{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+    }
+    .goodsInfo{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 3;
+    }
+    .goodsInfo .nm{
+        font-size: 20px;
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
+    .goodsBtn{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+    }
+    .goodsBtn button{
+        padding: 5px;
+        background-color: black;
+        border-radius: 10px;
+        color: white;
+        width: 60%;
+    }
+    .goodsBtn .basket{
+        margin-bottom: 20px;
+    }
+`
