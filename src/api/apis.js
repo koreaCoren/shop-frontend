@@ -116,11 +116,11 @@ export const ORDER_SUCCESS = axios.create({
 })
 
 //유저 기본 배송지 불러오기
-export const DELIVERY_LIST = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/order/delivery_list`
+export const ADDRESS_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/delivery/address_list`,
 })
 
-//--------- 주문 관련 끝 ---------
+//--------- 주문 관련 끝 --------
 
 //--------- 개인정보 시작 -------
 
@@ -154,4 +154,20 @@ export const SET_DEFAULT_ADDR = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_default_address`,
 })
 
+//찜한 상품
+export const REQ_PICK_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_pick_list`,
+})
+
+//좋아요 리스트 받기
+export const GET_FAV_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_fav`
+})
+
+//상품 좋아요
+export const SET_FAV = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
+})
+
 //--------- 개인정보 끝 ---------
+//--------- 상품 관련 ----------
