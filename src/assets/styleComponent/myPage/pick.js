@@ -42,12 +42,17 @@ export const Div = styled.div`
 `
 
 export const List = styled.div`
-    
     border:1px solid gray;
     padding: 10px;
     border-radius:  10px;
     margin-bottom: 30px;
     display: flex;
+    .show{
+        display:block;
+    }
+    .hide{
+        display: none;
+    }
     .goodsImg{
         flex: 1;
     }
@@ -67,7 +72,7 @@ export const List = styled.div`
         justify-content: center;
         flex: 3;
     }
-    .goodsInfo .nm{
+    .goodsInfo .nm a{
         font-size: 20px;
         font-weight: bold;
         padding-bottom: 10px;

@@ -27,7 +27,7 @@ const Order = () => {
             <Top title={"주문 관리"} isButton={false} />
             <Common.Padding>
                 {
-                    board?.map((a, i) => {
+                    board.map((a, i) => {
                         return (
                             <Common.Container key={i} style={{ textAlign: "center" }}>
                                 <Style.Div>
