@@ -73,6 +73,9 @@ const OrderInfo = ({ orderData }) => {
             case "buyerTel":
                 setBuyerTel(value);
                 break;
+            case "receiver":
+                setReceiver(value);
+                break;
             case "buyerDetailAddress":
                 setBuyerDetailAddress(value);
                 break;
