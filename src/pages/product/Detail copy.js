@@ -18,7 +18,7 @@ const Detail = ({ result, setOrderData }) => {
     const [count, setCount] = useState(1);
     const [deliveryPay, setDeliveryPay] = useState(2500);
     const [lightOn, setLightOn] = useState();
-    const [fav, setFav] = useState(false);
+    const [fav, setFav] = useState(0);
 
 
     const favControll = useMutation(settingFav);
@@ -39,6 +39,10 @@ const Detail = ({ result, setOrderData }) => {
     useEffect(() => {
         selFav();
     }, []);
+
+    useEffect(() => {
+        insFav();
+    },[fav]);
 
     //상품갯수증가
     const countUp = () => {
@@ -61,19 +65,23 @@ const Detail = ({ result, setOrderData }) => {
             goods_code: productCode
         };
         await favList.mutateAsync(data);
-        setFav(data.result?.is_fav === true ? true : false);
+        setFav(data.result?.is_fav === 1 ? 1 : 0);
+    }
+
+    //좋아요 클릭
+    const changeFav = () => {
+        setFav(fav === 0? 1 : 0);
     }
 
     // 좋아요 insert
     const insFav = async () => {
         if(sessionStorage.getItem('userId') !== null){
             const data = {
-                user_id: sessionStorage.getItem('userId'),
-                goods_code : productCode,
-                is_fav : fav,
+            user_id: sessionStorage.getItem('userId'),
+            goods_code : productCode,
+            is_fav : fav
             }
-            console.log(fav);
-            // await favControll.mutateAsync(data);
+            await favControll.mutateAsync(data);
         } else{
             alert("로그인이 필요합니다.");
             window.location.replace("/login");
@@ -139,10 +147,7 @@ const Detail = ({ result, setOrderData }) => {
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
-                                <Style.fav onClick={()=>{
-                                    setFav(!fav);
-                                    console.log(fav);
-                                } }>{fav === false ? "♡" : "❤︎"}</Style.fav>
+                                <Style.fav onClick={() => {changeFav(fav)}}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
                                 {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>
