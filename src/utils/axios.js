@@ -389,8 +389,9 @@ export const getFavList = async (data) => {
 export const settingFav = async (data) => {
     const api = await API.SET_FAV.post("", data).then((res) => {
         data.result = res.data;
+        window.location.reload();
     }).catch((error) => {
-        alert("좋지 않아요!");
+        alert("서버와 통신을 실패했습니다.\n" + error);
     })
     return api;
 }

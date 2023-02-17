@@ -45,7 +45,7 @@ const OrderInfo = ({ orderData }) => {
         }
     }
 
-    //기본 배송지 불러오기
+    //기본 배송지 불러오기//
     const getAddrData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId')
@@ -66,6 +66,9 @@ const OrderInfo = ({ orderData }) => {
                 break;
             case "buyerTel":
                 setBuyerTel(value);
+                break;
+            case "receiver":
+                setReceiver(value);
                 break;
             case "buyerDetailAddress":
                 setBuyerDetailAddress(value);

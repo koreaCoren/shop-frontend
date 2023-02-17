@@ -5,10 +5,12 @@ import * as Style from "assets/styleComponent/myPage/myPage";
 import * as PickStyle from "assets/styleComponent/myPage/pick";
 
 import { reqPickList } from 'utils/axios';
+import { settingFav } from 'utils/axios';
 
 const Pick = ({ }) => {
     const [pickList, SetPickList] = useState();
     const getPickList = useMutation(reqPickList);
+    const setDelFav = useMutation(settingFav);
 
     useEffect(() => {
         showPickList();
@@ -21,6 +23,15 @@ const Pick = ({ }) => {
         await getPickList.mutateAsync(data);
         SetPickList(data.result);
         console.log(data.result);
+    }
+
+    const delFav = async(goodsCode) => {
+        const data = {
+            user_id : sessionStorage.getItem('userId'),
+            goods_code : goodsCode,
+            is_fav : 0
+        }
+        await setDelFav.mutateAsync(data);
     }
 
     return (
@@ -49,7 +60,8 @@ const Pick = ({ }) => {
                                     </div>
                                     <div className='goodsBtn'>
                                         <button className='basket'>담기</button>
-                                        <button className='favDel'>삭제</button>
+                                        <button className='favDel' 
+                                                onClick={() => {delFav(item.goods_code)}} >삭제</button>
                                     </div>
                                 </PickStyle.List>
                             )
