@@ -29,26 +29,21 @@ const OrderInfo = ({ orderData }) => {
         getAddrData();
     }, [])
 
-    useEffect(() => {
-        switch (checkAddr) {
-            case "new":
-                setBuyerName("");
-                setBuyerTel("");
-                setReceiver("");
-                setAddress("");
-                setBuyerDetailAddress("");
-                break;
-            case "old":
-                setBuyerName(userAddr.user_id);
-                setBuyerTel(userAddr.ship_phone);
-                setReceiver(userAddr.ship_receiver);
-                setAddress(userAddr.ship_address);
-                setBuyerDetailAddress(userAddr.ship_detail_address);
-                break;
-            default:
-                break;
+    const checkRadio = (e) => {
+        if (e.target.value === "old") {
+            setBuyerName(userAddr.user_id);
+            setBuyerTel(userAddr.ship_phone);
+            setReceiver(userAddr.ship_receiver);
+            setAddress(userAddr.ship_address);
+            setBuyerDetailAddress(userAddr.ship_detail_address);
+        } else {
+            setBuyerName("");
+            setBuyerTel("");
+            setReceiver("");
+            setAddress("");
+            setBuyerDetailAddress("");
         }
-    }, [checkAddr])
+    }
 
     //기본 배송지 불러오기
     const getAddrData = async () => {
@@ -59,16 +54,15 @@ const OrderInfo = ({ orderData }) => {
         setUserAddr(data.result);
     }
 
-    const checkRadio = (e) => {
-        setCheckAddr(e.target.value);
-    }
-
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         switch (name) {
             case "buyerName":
                 setBuyerName(value);
+                break;
+            case "receiver":
+                setReceiver(value);
                 break;
             case "buyerTel":
                 setBuyerTel(value);
@@ -149,6 +143,7 @@ const OrderInfo = ({ orderData }) => {
         mutateAsync(data);
         setIsPurchase(isPurchase + 1);
     }
+
     return (
         <Style.Order>
             <div className="wrap">
@@ -185,45 +180,22 @@ const OrderInfo = ({ orderData }) => {
                         <div>
                             <label htmlFor="">
                                 <span>직접 입력</span>
-                                <input
-                                    type="radio"
-                                    value="new"
-                                    name="addr"
-                                    onChange={checkRadio}
-                                    checked={checkAddr === "new"}
-                                />
+                                <input type="radio" value="new" name="addr" onChange={checkRadio} />
                                 <span>기본 배송지</span>
-                                <input
-                                    type="radio"
-                                    value="old"
-                                    name="addr"
-                                    onChange={checkRadio}
-                                />
+                                <input type="radio" value="old" name="addr" onChange={checkRadio} />
                             </label>
                         </div>
                         <div>
                             <span>주문자</span>
-                            <input
-                                type="text"
-                                onChange={onChange}
-                                name='buyerName'
-                                value={buyerName} />
+                            <input type="text" onChange={onChange} name='buyerName' value={buyerName} />
                         </div>
                         <div>
                             <span>받는 사람</span>
-                            <input
-                                type="text"
-                                onChange={onChange}
-                                name='receiver'
-                                value={receiver} />
+                            <input type="text" onChange={onChange} name='receiver' value={receiver} />
                         </div>
                         <div>
                             <span>연락처</span>
-                            <input
-                                type="text"
-                                onChange={onChange}
-                                name='buyerTel'
-                                value={buyerTel} />
+                            <input type="text" onChange={onChange} name='buyerTel' value={buyerTel} />
                         </div>
                         <div>
                             {
@@ -231,16 +203,8 @@ const OrderInfo = ({ orderData }) => {
                                     ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
                                     : <span>주소</span>
                             }
-                            <input
-                                readOnly
-                                name='orderAddress'
-                                value={address} />
-                            <input
-                                type="text"
-                                onChange={onChange}
-                                name='buyerDetailAddress'
-                                value={buyerDetailAddress}
-                                placeholder='상세주소입력' />
+                            <input readOnly name='orderAddress' value={address} />
+                            <input type="text" onChange={onChange} name='buyerDetailAddress' value={buyerDetailAddress} placeholder='상세주소입력' />
                         </div>
                         {
                             isPostOpen && <DaumPost
