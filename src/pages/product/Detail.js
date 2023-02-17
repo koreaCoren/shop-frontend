@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import {settingFav, getFavList} from 'utils/axios';
+import { settingFav, getFavList } from 'utils/axios';
 
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
@@ -33,7 +33,7 @@ const Detail = ({ result, setOrderData }) => {
                 };
             };
         };
-        
+
     }, [result.isLoading]);
 
     useEffect(() => {
@@ -53,9 +53,9 @@ const Detail = ({ result, setOrderData }) => {
         }
         setCount(count - 1);
     }
-    
+
     // 좋아요 리스트
-    const selFav = async() => {
+    const selFav = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
             goods_code: productCode
@@ -66,7 +66,8 @@ const Detail = ({ result, setOrderData }) => {
 
     // 좋아요 insert
     const insFav = async () => {
-        if(sessionStorage.getItem('userId') !== null){
+        console.log(fav);
+        if (sessionStorage.getItem('userId') !== null) {
             const data = {
                 user_id: sessionStorage.getItem('userId'),
                 goods_code : productCode,

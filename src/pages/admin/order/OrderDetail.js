@@ -50,7 +50,6 @@ const OrderDetail = () => {
 
     useEffect(() => {
         getDetail();
-        console.log(detail);
     }, [])
 
     return (
