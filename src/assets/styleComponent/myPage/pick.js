@@ -42,17 +42,12 @@ export const Div = styled.div`
 `
 
 export const List = styled.div`
-    border:1px solid gray;
-    padding: 10px;
-    border-radius:  10px;
-    margin-bottom: 30px;
+    :not(:nth-child(1)){
+            border-top: 1px solid rgba(0,0,0,0.1);
+            padding-top: 20px;
+        }
+    padding: 0px 20px 30px 20px;
     display: flex;
-    .show{
-        display:block;
-    }
-    .hide{
-        display: none;
-    }
     .goodsImg{
         flex: 1;
     }
