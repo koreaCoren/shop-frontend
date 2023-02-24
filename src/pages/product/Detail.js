@@ -26,6 +26,7 @@ const Detail = ({ result, setOrderData }) => {
 
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
+        selFav();
         if (result.isLoading === false) {
             for (let i = 0; i < result.data.length; i++) {
                 if (result.data[i].goods_code === productCode) {
@@ -36,13 +37,13 @@ const Detail = ({ result, setOrderData }) => {
         
     }, [result.isLoading]);
 
-    useEffect(() => {
-        selFav();
-    }, []);
+    // useEffect(() => {
+    //     selFav();
+    // }, []);
 
-    useEffect(() => {
-        insFav();
-    },[fav]);
+    // useEffect(() => {
+    //     insFav();
+    // },[fav]);
 
     //상품갯수증가
     const countUp = () => {
@@ -65,12 +66,15 @@ const Detail = ({ result, setOrderData }) => {
             goods_code: productCode
         };
         await favList.mutateAsync(data);
-        setFav(data.result?.is_fav === 1 ? 1 : 0);
+        console.log(data.result.is_fav);
+        setFav(data.result.is_fav);
     }
 
     //좋아요 클릭
     const changeFav = () => {
         setFav(fav === 0? 1 : 0);
+        insFav(fav);
+        console.log(fav);
     }
 
     // 좋아요 insert
@@ -79,7 +83,7 @@ const Detail = ({ result, setOrderData }) => {
             const data = {
             user_id: sessionStorage.getItem('userId'),
             goods_code : productCode,
-            is_fav : fav
+            is_fav : fav === 0 ? 1 : 0
             }
             await favControll.mutateAsync(data);
         } else{
