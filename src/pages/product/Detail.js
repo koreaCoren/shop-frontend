@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import {settingFav, getFavList} from 'utils/axios';
+import { settingFav, getFavList } from 'utils/axios';
 
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
@@ -34,7 +34,7 @@ const Detail = ({ result, setOrderData }) => {
                 };
             };
         };
-        
+
     }, [result.isLoading]);
 
     // useEffect(() => {
@@ -58,9 +58,9 @@ const Detail = ({ result, setOrderData }) => {
         }
         setCount(count - 1);
     }
-    
+
     // 좋아요 리스트
-    const selFav = async() => {
+    const selFav = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
             goods_code: productCode
@@ -72,21 +72,21 @@ const Detail = ({ result, setOrderData }) => {
 
     //좋아요 클릭
     const changeFav = () => {
-        setFav(fav === 0? 1 : 0);
+        setFav(fav === 0 ? 1 : 0);
         insFav(fav);
         console.log(fav);
     }
 
     // 좋아요 insert
     const insFav = async () => {
-        if(sessionStorage.getItem('userId') !== null){
+        if (sessionStorage.getItem('userId') !== null) {
             const data = {
-            user_id: sessionStorage.getItem('userId'),
-            goods_code : productCode,
-            is_fav : fav === 0 ? 1 : 0
+                user_id: sessionStorage.getItem('userId'),
+                goods_code: productCode,
+                is_fav: fav === 0 ? 1 : 0
             }
             await favControll.mutateAsync(data);
-        } else{
+        } else {
             alert("로그인이 필요합니다.");
             window.location.replace("/login");
         }
@@ -151,7 +151,7 @@ const Detail = ({ result, setOrderData }) => {
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
-                                <Style.fav onClick={() => {changeFav(fav)}}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
+                                <Style.fav onClick={() => { changeFav(fav) }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
                                 {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>

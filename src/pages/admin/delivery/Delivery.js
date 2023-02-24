@@ -27,6 +27,7 @@ const Delivery = () => {
         });
         update.mutateAsync(data);
         alert("저장완료");
+        selectResult.refetch();
     }
 
     const getList = async () => {
