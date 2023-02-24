@@ -105,6 +105,9 @@ const OrderInfo = ({ orderData }) => {
         } else if (buyerDetailAddress === "") {
             alert("상세주소 입력해주세요");
             return;
+        }else if ( receiver === "") {
+            alert("받는 사람을 입력해주세요");
+            return;
         }
 
 
@@ -141,6 +144,7 @@ const OrderInfo = ({ orderData }) => {
             delivery: delivery, // 주문처리현황
             // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "N", //환불여부
+            receiver: receiver
         }
 
         mutateAsync(data);

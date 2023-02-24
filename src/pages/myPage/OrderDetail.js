@@ -143,7 +143,7 @@ const OrderDetail = ({ }) => {
                 <ul>
                     <li>
                         <div>받는분</div>
-                        <div>{list ? list[0].buyer_name : '확인중'}</div>
+                        <div>{list ? list[0].receiver : '확인중'}</div>
                     </li>
                     <li>
                         <div>핸드폰</div>
