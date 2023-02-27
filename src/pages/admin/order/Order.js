@@ -14,7 +14,7 @@ const Order = () => {
     const nav = useNavigate();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
-    const [boardCount, setBoardCount] = useState(4)
+    const [boardCount, setBoardCount] = useState(4);
     const result = useQuery("orderManagement", orderManagement);
 
     useEffect(() => {
@@ -27,14 +27,14 @@ const Order = () => {
             <Top title={"주문 관리"} isButton={false} />
             <Common.Padding>
                 {
-                    board.map((a, i) => {
+                    board?.map((a, i) => {
                         return (
                             <Common.Container key={i} style={{ textAlign: "center" }}>
                                 <Style.Div>
                                     <ul>
                                         <li>주문번호 : {a.orderCode}</li>
                                         <li>회원 ID : {a.user_id}</li>
-                                        <li>주문자 : {a.buyer_name}</li>
+                                        <li>받는 사람 : {a.receiver}</li>
                                         <li>주문자 번호 : {a.buyer_tel}</li>
                                         <li>총 상품 금액 : {a.total_price}</li>
                                         <li>총 상품수 : {a.total_count}</li>
