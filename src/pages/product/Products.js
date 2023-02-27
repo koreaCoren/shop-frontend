@@ -4,7 +4,9 @@ import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
 
-import * as Style from "assets/styleComponent/product/products"
+import * as Style from "assets/styleComponent/product/products";
+
+import noImg from "assets/images/noImg.gif";
 
 const Products = ({ result }) => {
     const nav = useNavigate();
@@ -38,7 +40,7 @@ const Products = ({ result }) => {
                                 return (
                                     <li key={i}>
                                         <Link to={`/product/detail/${a.goods_code}`}>
-                                            <img src={a.goods_img} alt="" />
+                                            <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             <h3>{a.goods_nm}</h3>
                                             <h4>{a.goods_price} 원</h4>
                                         </Link>

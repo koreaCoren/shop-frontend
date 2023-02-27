@@ -11,6 +11,8 @@ import loginCheck from 'utils/loginCheck';
 import * as Style from "assets/styleComponent/product/detail"
 import addBasket from 'utils/addBasket';
 
+import noImg from "assets/images/noImg.gif";
+
 const Detail = ({ result, setOrderData }) => {
     const nav = useNavigate();
     const { productCode } = useParams();
@@ -122,7 +124,7 @@ const Detail = ({ result, setOrderData }) => {
             <div className="wrap">
                 <Style.Info>
                     <Style.ImageInfo>
-                        <img src={productDetail?.goods_img} alt="" />
+                        <img src={productDetail?.goods_img === "" ? noImg :productDetail?.goods_img} alt="" />
                         {/* 확대보기 버튼
                         <button>
                             <i className="fa-solid fa-magnifying-glass"></i>
