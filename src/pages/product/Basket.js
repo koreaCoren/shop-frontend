@@ -132,7 +132,7 @@ const Basket = ({ setOrderData }) => {
                                         </li>
                                         <li>{a.prodcut_count}개</li>
                                         <li>{a.goods_sale}%</li>
-                                        <li>{Math.ceil(a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count}원</li>
+                                        <li>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
                                     </ul>
                                 )
                             })

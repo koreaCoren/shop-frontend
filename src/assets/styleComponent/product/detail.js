@@ -203,7 +203,7 @@ export const fav = styled.div`
 
 export const Description = styled.div``
 export const DescriptionMenu = styled.div`
-    cursor: default;
+    cursor: pointer;
     ul{
         text-align: center;
     }
@@ -331,7 +331,7 @@ h4{
     letter-spacing: 1px;
 }
 .nav{
-    cursor: default;
+    cursor: pointer;
     ul{
         text-align: center;
     }

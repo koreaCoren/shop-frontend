@@ -42,7 +42,7 @@ const Products = ({ result }) => {
                                         <Link to={`/product/detail/${a.goods_code}`}>
                                             <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             <h3>{a.goods_nm}</h3>
-                                            <h4>{a.goods_price} 원</h4>
+                                            <h4>{a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</h4>
                                         </Link>
                                     </li>
                                 )
