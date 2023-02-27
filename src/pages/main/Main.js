@@ -151,7 +151,7 @@ const Main = ({ setHeader }) => {
                                             </ul>
                                         </div>
                                         <div className="name">{a.goods_nm}</div>
-                                        <div className="pay">{a.goods_price}원</div>
+                                        <div className="pay">{a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</div>
                                     </li>
                                 )
                             })

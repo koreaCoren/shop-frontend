@@ -9,6 +9,8 @@ import * as Style from "assets/styleComponent/myPage/myPage";
 import * as PickStyle from "assets/styleComponent/myPage/pick";
 import addBasket from 'utils/addBasket';
 
+import noImg from "assets/images/noImg.gif";
+
 const Pick = ({ }) => {
     const [pickList, setPickList] = useState();
     const getPickList = useMutation(reqPickList);
@@ -53,10 +55,7 @@ const Pick = ({ }) => {
                             return(
                                 <PickStyle.List key={index}>
                                     <div className='goodsImg'>
-                                        {item.goods_img === ""
-                                            ?<span>이미지 음슴</span>   
-                                            :<img src={item.goods_img} alt="" />
-                                        }
+                                    <img src={item.goods_img === "" ? noImg :item.goods_img}/>
                                     </div>
                                     <div className='goodsInfo'>
                                         <span className='nm'>
