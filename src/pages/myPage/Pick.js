@@ -24,7 +24,7 @@ const Pick = ({ }) => {
         }
         await getPickList.mutateAsync(data);
         setPickList(data.result);
-        console.log(data.result);
+        // console.log(data.result);
     }
 
     const delFav = async(i,goodsCode) => {
