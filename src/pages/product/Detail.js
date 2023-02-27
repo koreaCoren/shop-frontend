@@ -20,6 +20,9 @@ const Detail = ({ result, setOrderData }) => {
     const [lightOn, setLightOn] = useState();
     const [fav, setFav] = useState(0);
 
+    const DescriptionRef = useRef();
+    const returnRef = useRef();
+
 
     const favControll = useMutation(settingFav);
     const favList = useMutation(getFavList);
@@ -72,7 +75,7 @@ const Detail = ({ result, setOrderData }) => {
 
     //좋아요 클릭
     const changeFav = () => {
-        setFav(fav === 0 ? 1 : 0);
+        setFav(fav => fav === 0 ? 1 : 0);
         insFav(fav);
         console.log(fav);
     }
@@ -81,9 +84,9 @@ const Detail = ({ result, setOrderData }) => {
     const insFav = async () => {
         if (sessionStorage.getItem('userId') !== null) {
             const data = {
-                user_id: sessionStorage.getItem('userId'),
-                goods_code: productCode,
-                is_fav: fav === 0 ? 1 : 0
+            user_id: sessionStorage.getItem('userId'),
+            goods_code : productCode,
+            is_fav : fav === 0 ?1 :0,
             }
             await favControll.mutateAsync(data);
         } else {
@@ -109,6 +112,11 @@ const Detail = ({ result, setOrderData }) => {
         }
         setOrderData([data]);
         nav("/order/info");
+    }
+
+    //스크롤 이동
+    const moveScroll = (location) => {
+        location.current.scrollIntoView({behavior:"smooth"})
     }
 
     return (
@@ -166,9 +174,11 @@ const Detail = ({ result, setOrderData }) => {
                                 <li className=''><span>상품문의</span></li>
                                 <li className=''><span>교환/반품</span></li>
                             </ul> */}
-                        <ul>
+                        <ul ref={DescriptionRef}>
                             <li>상세정보</li>
-                            <li>교환/반품</li>
+                            <li onClick={() => {
+                                    moveScroll(returnRef);
+                                }}>교환/반품</li>
                         </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
@@ -242,6 +252,53 @@ const Detail = ({ result, setOrderData }) => {
                             </tbody>
                         </table>
                     </Style.QnA> */}
+                    <Style.Return>
+                        <div className='nav'>
+                            <ul ref={returnRef}>
+                                <li onClick={() => {
+                                    moveScroll(DescriptionRef);
+                                }}>상세정보</li>
+                                <li>교환/반품</li>
+                            </ul>
+                        </div>
+                        <div className='info'>
+                            <h4>교환/반품 정보</h4>
+                            <ul>
+                                <li>반품배송비(편도) : 3,500원 (최초 배송비 미결제시 7,000원 부과)</li>
+                                <li>교환배송비(왕복) : 7,000원</li>
+                                <li>보내실곳 : 회사 주소</li>
+                                <li>단, 교환/반품 비용은 상품 및 교환/반품 사유에 따라 변경될 수 있으므로 교환/반품 신청 화면 확인 부탁드립니다.</li>
+                            </ul>
+                        </div>
+                        <div className='period'>
+                            <h4>교환/반품 사유에 따른 요청 가능 기간</h4>
+                            <ul>
+                                <li>구매자 단순 변심 : 상품 수령 후 7일 이내(구매자 반품 배송비 부담)</li>
+                                <li>표시/광고와 상이, 계약 내용과 다르게 이행된 경우<br />
+                                상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내(판매자 반품 배송비 부담)</li>
+                            </ul>
+                        </div>
+                        <div className='refuse'>
+                            <h4>교환/반품이 불가한 경우</h4>
+                            <ul>
+                                <li>교환/반품 요청이 기간이 지난 경우</li>
+                                <li>소비자의 책임 있는 사유로 상품 등이 분실/파손/훼손된 경우(단, 확인을 위한 포장훼손 제외)</li>
+                                <li>소비자의 사용/소비에 의해 상품 등의 가치가 현저히 감소한 경우 (예: 식품, 화장품, 향수, 음반)</li>
+                                <li>제품을 설치 또는 장착하였거나 개통한 경우 (예 : 전자제품, 컴퓨터, 휴대폰 등)</li>
+                                <li>시간의 경과에 의해 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우 (신선식품과 같이 유통기한이 정해져 있는 상품)</li>
+                                <li>복제가 가능한 상품 등의 포장을 훼손한 경우 (CD/DVD/GAME/BOOK의 경우 포장 개봉 시)</li>
+                                <li>주문제작 상품 중 상품제작에 들어간 경우(주문접수 후 개별생산, 맞춤 제작 등)</li>
+                            </ul>
+                        </div>
+                        <div className='condition'>
+                            <h4>거래 조건에 대한 정보</h4>
+                            <ul>
+                                <li>소화물 택배의 배송은 발송일로부터 1~2 영업일이 소요되나, <br />
+                                지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라 질 수 있습니다.</li>
+                                <li>`전자상거래등에서의 소비자보호에 관한 법률`이 정하는 바에 따라 소비자의 청약철회 후 판매자가 재화 등을 반환 받은 날로부터 3영업일 이내에 지급받은 대금의 환급을 정당한 사유없이 지연하는 때에는 소비자는 지연기간에 대해서 전상법 시행령으로 정하는 이율을 곱하여 산정한 지연이자(지연배상금)을 신청할 수 있습니다.</li>
+                            </ul>
+                        </div>
+                    </Style.Return>
                 </Style.Description>
             </div>
 
