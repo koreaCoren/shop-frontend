@@ -69,7 +69,6 @@ const Detail = ({ result, setOrderData }) => {
             goods_code: productCode
         };
         await favList.mutateAsync(data);
-        console.log(data.result.is_fav);
         setFav(data.result.is_fav);
     }
 
@@ -77,7 +76,6 @@ const Detail = ({ result, setOrderData }) => {
     const changeFav = () => {
         setFav(fav => fav === 0 ? 1 : 0);
         insFav(fav);
-        console.log(fav);
     }
 
     // 좋아요 insert

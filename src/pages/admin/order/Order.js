@@ -19,7 +19,6 @@ const Order = () => {
 
     useEffect(() => {
         const reverseArr = result.data;
-        console.log(reverseArr);
         setBoard(reverseArr?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
     }, [result.isLoading, nav])
 
