@@ -18,7 +18,7 @@ const List = () => {
         const ok = window.confirm("정말로 삭제 하시겠습니까?");
         if (ok) {
             mutateAsync({ goods_code: data.goods_code, goods_img: data.goods_img, goods_nm: data.goods_nm });
-            // window.location.reload();
+            window.location.reload();
         }
     }
 
