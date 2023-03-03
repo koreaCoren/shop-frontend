@@ -63,6 +63,14 @@ export const Purchase = styled.div`
     }
 
     ul.productInfo li .content{}
+    .count .none{
+        cursor: default;
+    }
+
+    ul.productInfo li button{
+        cursor: pointer;
+    }
+
 `
 
 export const Button = styled.div`

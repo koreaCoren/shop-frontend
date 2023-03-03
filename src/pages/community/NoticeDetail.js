@@ -26,11 +26,13 @@ const NoticeDetail = () => {
     }
 
     useEffect(() => {
+        console.log(result);
         const data = {
             type: "notice",
             i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
         }
         view.mutateAsync(data);
+        
     }, [])
 
     return (

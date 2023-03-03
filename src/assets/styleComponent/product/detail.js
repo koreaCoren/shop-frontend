@@ -151,7 +151,6 @@ export const Quantity = styled.div`
     .money {
         font-size: 16px;
     }
-
 `
 
 export const Total = styled.div`

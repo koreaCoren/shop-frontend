@@ -51,7 +51,7 @@ const Notice = () => {
     }
 
     useEffect(() => {
-        // console.log(result);
+        console.log(result);
         if (result.isLoading !== true) {
             getBoard();
         }
