@@ -75,7 +75,7 @@ const Basket = ({ setOrderData }) => {
         const data = JSON.parse(sessionStorage.getItem("basket"));
         if(data[i].prodcut_count > 1){
             data[i].prodcut_count -= 1;
-        } else{
+        } else {
             data[i].prodcut_count = 1;
         }
         sessionStorage.setItem("basket",JSON.stringify(data));
@@ -151,12 +151,18 @@ const Basket = ({ setOrderData }) => {
                                                 <div className="title">{a.goods_nm}</div>
                                             </div>
                                         </li>
-                                        <li><button onClick={()=>{
-                                            countDown(i);
-                                        }}>-</button>{a.prodcut_count}개
+                                        <li className='count'>
+                                            {a.prodcut_count > 1 
+                                                ?
+                                                <button onClick={()=>{
+                                                    countDown(i);
+                                                }}><span>-</span></button>
+                                                :<span className='none'>-</span>
+                                            }
+                                            {a.prodcut_count}개
                                         <button onClick={() => {
                                             countUp(i);
-                                        }}>+</button></li>
+                                        }}><span>+</span></button></li>
                                         <li>{a.goods_sale}%</li>
                                         <li>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
                                     </ul>
