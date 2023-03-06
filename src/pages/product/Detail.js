@@ -37,14 +37,6 @@ const Detail = ({ result, setOrderData }) => {
 
     }, [result.isLoading]);
 
-    // useEffect(() => {
-    //     selFav();
-    // }, []);
-
-    // useEffect(() => {
-    //     insFav();
-    // },[fav]);
-
     //상품갯수증가
     const countUp = () => {
         setCount(count + 1);
@@ -66,25 +58,20 @@ const Detail = ({ result, setOrderData }) => {
             goods_code: productCode
         };
         await favList.mutateAsync(data);
-        console.log(data.result.is_fav);
         setFav(data.result.is_fav);
-    }
-
-    //좋아요 클릭
-    const changeFav = () => {
-        setFav(fav === 0 ? 1 : 0);
-        insFav(fav);
         console.log(fav);
     }
 
-    // 좋아요 insert
+    // 좋아요 클릭
     const insFav = async () => {
+        fav === 0 ? setFav(1) : setFav(0);
         if (sessionStorage.getItem('userId') !== null) {
             const data = {
                 user_id: sessionStorage.getItem('userId'),
                 goods_code: productCode,
-                is_fav: fav === 0 ? 1 : 0
+                is_fav: fav
             }
+            console.log(fav);
             await favControll.mutateAsync(data);
         } else {
             alert("로그인이 필요합니다.");
@@ -151,7 +138,7 @@ const Detail = ({ result, setOrderData }) => {
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
-                                <Style.fav onClick={() => { changeFav(fav) }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
+                                <Style.fav onClick={() => { insFav() }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
                                 {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>
