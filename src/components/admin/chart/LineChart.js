@@ -18,6 +18,18 @@ const LineChart = () => {
             yFormat=" >-.2f"
             axisTop={null}
             axisRight={null}
+            theme={{
+                axis: {
+                    legend: {
+                        text: {
+                            fontSize: 20,
+                            fontWeight: 600,
+                            fontFamily: "Pretendard-Regular",
+                            fill: '#000000',
+                        },
+                    },
+                },
+            }}
             axisBottom={{
                 orient: 'bottom',
                 tickSize: 5,

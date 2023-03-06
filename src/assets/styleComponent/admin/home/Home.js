@@ -23,8 +23,9 @@ export const Situation = styled.ul`
     }
 
     li > h3{
-        font-size: 20px;
-        margin-bottom: 20px;
+        font-size: 22px;
+        margin-bottom: 15px;
+        font-weight: bold;
     }
 
     li > div{

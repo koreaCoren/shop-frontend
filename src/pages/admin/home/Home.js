@@ -22,9 +22,6 @@ const Home = () => {
             </Style.ChartGrid>
             <Style.BoardGrid>
                 <Common.Container>
-                    <LineChart />
-                </Common.Container>
-                <Common.Container>
                     <Style.Situation>
                         <li>
                             <h3>주문상황</h3>
@@ -67,6 +64,9 @@ const Home = () => {
                             </div>
                         </li>
                     </Style.Situation>
+                </Common.Container>
+                <Common.Container>
+                    <LineChart />
                 </Common.Container>
                 <Common.Container>
                     빨리 생각해내봐
