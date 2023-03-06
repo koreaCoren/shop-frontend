@@ -69,7 +69,7 @@ const Home = () => {
                     </Style.Situation>
                 </Common.Container>
                 <Common.Container>
-                    5번
+                    빨리 생각해내봐
                 </Common.Container>
             </Style.BoardGrid>
         </Common.Padding>
