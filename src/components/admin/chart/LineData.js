@@ -1,7 +1,6 @@
 export const data = [
     {
-        "id": "japan",
-        "color": "hsl(313, 70%, 50%)",
+        "id": "방문자수",
         "data": [
             {
                 "x": "02/01",

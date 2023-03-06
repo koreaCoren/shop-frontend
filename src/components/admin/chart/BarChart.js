@@ -10,7 +10,7 @@ const Chart = () => {
                 'donut'
             ]}
             indexBy="country"
-            margin={{ top: 50, right: 70, bottom: 50, left: 70 }}
+            margin={{ top: 50, right: 70, bottom: 70, left: 70 }}
             padding={0.30}
             innerPadding={2}
             groupMode="grouped"
@@ -73,6 +73,27 @@ const Chart = () => {
                         1.6
                     ]
                 ]
+            }}
+            theme={{
+                axis: {
+                    legend: {
+                        text: {
+                            fontSize: 20,
+                            fontWeight: 600,
+                            fontFamily: "Pretendard-Regular",
+                            fill: '#000000',
+                        },
+                    },
+                },
+            }}
+            axisBottom={{
+                orient: 'bottom',
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: '주간 상품 판매 현황',
+                legendOffset: 50,
+                legendPosition: 'middle'
             }}
             legends={[]}
             role="application"
