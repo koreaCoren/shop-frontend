@@ -25,7 +25,7 @@ const Delivery = () => {
                 data.default_carrier = defaultDelivery;
             }
         });
-        update.mutateAsync(data);
+        await update.mutateAsync(data);
         alert("저장완료");
         selectResult.refetch();
     }

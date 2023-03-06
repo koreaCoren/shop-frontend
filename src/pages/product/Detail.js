@@ -81,7 +81,6 @@ const Detail = ({ result, setOrderData }) => {
                 goods_code: productCode,
                 is_fav: fav === 0 ? 1 : 0,
             }
-            console.log(fav);
             await favControll.mutateAsync(data);
         } else {
             alert("로그인이 필요합니다.");
