@@ -15,7 +15,7 @@ export const Info = styled.div`
 
 export const ImageInfo = styled.div`
     width: 100%;
-
+    
     img {
         border: 1px solid #ccc;
         display: flex;
@@ -151,7 +151,6 @@ export const Quantity = styled.div`
     .money {
         font-size: 16px;
     }
-
 `
 
 export const Total = styled.div`
@@ -203,6 +202,7 @@ export const fav = styled.div`
 
 export const Description = styled.div``
 export const DescriptionMenu = styled.div`
+    cursor: pointer;
     ul{
         text-align: center;
     }
@@ -211,7 +211,7 @@ export const DescriptionMenu = styled.div`
         display: inline-block;
         text-align: center;
         padding: 30px;
-        font-size: 16px;
+        font-size: 18px;
     }
 
     ul li:nth-child(2) {
@@ -320,6 +320,57 @@ export const QnA = styled.div`
         padding-left: 10px;
         cursor: pointer;
     }
+`
+export const Return = styled.div`
+margin: 40px 0;
+h4{
+    padding: 10px 10px 20px 10px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.nav{
+    cursor: pointer;
+    ul{
+        text-align: center;
+    }
+    ul li{
+        display: inline-block;
+        text-align: center;
+        padding: 30px;
+        font-size: 18px;
+    }
+    ul li:nth-child(1) {
+        color: rgb(180,180,180);
+    }
+}
 
-    
+.info, .period{
+    padding-bottom: 20px;
+    ul{
+        padding-left: 35px;
+    }
+    ul li{
+        list-style: disc;
+        display: list-item;
+        padding-bottom: 10px;
+        font-size: 16px;
+        color: rgb(105,105,105);
+        letter-spacing: 1px;
+    }
+}
+.refuse, .condition{
+    padding-bottom: 20px;
+    ul{
+        padding-left: 35px;
+    }
+    ul li{
+        list-style: decimal;
+        display: list-item;
+        padding-bottom: 10px;
+        font-size: 16px;
+        color: rgb(105,105,105);
+        letter-spacing: 1px;
+    }
+}
 `

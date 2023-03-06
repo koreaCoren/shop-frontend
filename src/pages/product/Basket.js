@@ -11,6 +11,8 @@ const Basket = ({ setOrderData }) => {
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
+    
+
     //전체 선택
     const allCheck = (checked) => {
         if (checked) {
@@ -61,6 +63,25 @@ const Basket = ({ setOrderData }) => {
         return arr;
     }
 
+    //갯수 증가
+    const countUp = (i) => {
+        const data = JSON.parse(sessionStorage.getItem("basket"));
+        data[i].prodcut_count += 1;
+        sessionStorage.setItem("basket",JSON.stringify(data));
+        setBasketData(JSON.parse(sessionStorage.getItem("basket")));
+    }
+    //갯수 감소
+    const countDown = (i) => {
+        const data = JSON.parse(sessionStorage.getItem("basket"));
+        if(data[i].prodcut_count > 1){
+            data[i].prodcut_count -= 1;
+        } else {
+            data[i].prodcut_count = 1;
+        }
+        sessionStorage.setItem("basket",JSON.stringify(data));
+        setBasketData(JSON.parse(sessionStorage.getItem("basket")));
+    }
+
     //주문하기
     const basketOrder = () => {
         const selectData = selectBasket();
@@ -93,7 +114,7 @@ const Basket = ({ setOrderData }) => {
         nav("/order/info");
     }
 
-    useEffect(() => { }, [reload])
+    useEffect(() => { }, [reload]);
 
     return (
         <Style.Basket>
@@ -130,9 +151,20 @@ const Basket = ({ setOrderData }) => {
                                                 <div className="title">{a.goods_nm}</div>
                                             </div>
                                         </li>
-                                        <li>{a.prodcut_count}개</li>
+                                        <li className='count'>
+                                            {a.prodcut_count > 1 
+                                                ?
+                                                <button onClick={()=>{
+                                                    countDown(i);
+                                                }}><span>-</span></button>
+                                                :<span className='none'>-</span>
+                                            }
+                                            {a.prodcut_count}개
+                                        <button onClick={() => {
+                                            countUp(i);
+                                        }}><span>+</span></button></li>
                                         <li>{a.goods_sale}%</li>
-                                        <li>{Math.ceil(a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count}원</li>
+                                        <li>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
                                     </ul>
                                 )
                             })

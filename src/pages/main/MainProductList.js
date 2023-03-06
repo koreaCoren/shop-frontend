@@ -6,6 +6,8 @@ import { productList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/main/mainProductList";
 
+import noImg from "assets/images/noImg.gif";
+
 const MainProductList = () => {
     let result = useQuery("prodcutList", productList);
 
@@ -18,7 +20,7 @@ const MainProductList = () => {
                         return (
                             <li key={i}>
                                 <Link to={`/product/detail/${a.goods_code}`}>
-                                    <img src={a.goods_img} alt="" />
+                                    <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                     <h3>{a.goods_nm}</h3>
                                     <h4>{a.goods_price} 원</h4>
                                 </Link>
