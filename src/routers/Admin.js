@@ -45,7 +45,7 @@ const Admin = ({ setHeader }) => {
 const Div = styled.div`
     display: grid;
     grid-template-columns: 200px 1fr;
-    min-width: 1920px;
+    min-width: 1200px;
     min-height: 100vh;
 `
 export default Admin;
