@@ -44,6 +44,16 @@ export const DELETE_BOARD = axios.create({
 
 //--------- 어드민 관련 시작 ---------
 
+// 어드민 대시보드
+// 상품 판매 금액 리스트
+export const SELL_DATA_LIST_API = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/data/sell_data_list`,
+})
+// 누적 판매 리스트
+export const ACCUMULATE_SELL_DATA_API = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/data/cumulative_sales`
+})
+
 // 어드민 상품리스트
 export const TEST = axios.create({
     baseURL: `https://apis.tracker.delivery/carriers/kr.cjlogistics/tracks/564363707014`,
