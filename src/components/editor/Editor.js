@@ -4,7 +4,7 @@ import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-const TextEditor = ({ setContent, setImageCode, width, type }) => {
+const TextEditor = ({ setContent, setImageCode, width, type, value }) => {
     let arr = [];
     const API = `${process.env.REACT_APP_API_URL}/editor/ins_editor_data`;
     const uploadAdapter = (loader) => {
@@ -41,7 +41,7 @@ const TextEditor = ({ setContent, setImageCode, width, type }) => {
                     extraPlugins: [uploadPlugin]
                 }}
                 editor={ClassicEditor}
-                data=""
+                data={value}
                 onReady={editor => {
                     // You can store the "editor" and use when it is needed.
                     // console.log('Editor is ready to use!', editor);

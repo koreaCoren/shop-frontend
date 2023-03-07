@@ -84,6 +84,7 @@ export const List = styled.div`
         border-radius: 10px;
         color: white;
         width: 60%;
+        cursor: pointer;
     }
     .goodsBtn .basket{
         margin-bottom: 20px;
