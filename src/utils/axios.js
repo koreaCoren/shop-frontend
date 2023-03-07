@@ -130,6 +130,17 @@ export const boardDelete = async (data) => {
 
 //--------- 어드민 관련 시작 ---------
 
+// 어드민 대시보드
+// 상품 판매 금액 리스트
+export const sellByDateList = async () => {
+    const {data} = await API.SELL_DATA_LIST_API.get();
+    return data;
+}
+export const accumulateSell = async() => {
+    const {data} = await API.ACCUMULATE_SELL_DATA_API.get();
+    return data;
+}
+
 // 어드민 상품리스트
 export const productList = async () => {
     const { data } = await API.PRODUCT_LIST_API.get();
