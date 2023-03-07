@@ -13,6 +13,31 @@ export const BoardGrid = styled.div`
     grid-gap: 30px;
 `
 
+export const Title = styled.div`
+    display: flex;
+    justify-content: space-between;
+    h3{
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .selectBox{
+        position: relative;
+    }
+
+    .selectBox select{
+        border: 1px solid #aaa;
+        padding: 3px 30px 3px 5px;
+    }
+
+    .selectBox i{
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+    }
+`
+
 export const Situation = styled.ul`
     display: flex;
     flex-direction: column;

@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ResponsiveLine } from '@nivo/line'
 import { data } from './LineData';
+import { useEffect } from 'react';
 
-const LineChart = () => {
+const LineChart = ({ day }) => {
+    const [arr, setArr] = useState([
+        {
+            "id": "방문자수",
+            "data": data[0].data.slice(data[0].data.length - day, data[0].data.length)
+        }
+    ])
+    useEffect(() => {
+        setArr([
+            {
+                "id": "방문자수",
+                "data": data[0].data.slice(data[0].data.length - day, data[0].data.length)
+            }
+        ])
+    }, [day])
     return (
         <ResponsiveLine
-            data={data}
-            margin={{ top: 20, right: 40, bottom: 70, left: 40 }}
+            data={arr}
+            margin={{ top: 20, right: 40, bottom: 30, left: 40 }}
             xScale={{ type: 'point' }}
             yScale={{
                 type: 'linear',
@@ -18,27 +33,6 @@ const LineChart = () => {
             yFormat=" >-.2f"
             axisTop={null}
             axisRight={null}
-            theme={{
-                axis: {
-                    legend: {
-                        text: {
-                            fontSize: 20,
-                            fontWeight: 600,
-                            fontFamily: "Pretendard-Regular",
-                            fill: '#000000',
-                        },
-                    },
-                },
-            }}
-            axisBottom={{
-                orient: 'bottom',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: '방문자 수',
-                legendOffset: 50,
-                legendPosition: 'middle'
-            }}
             enableGridX={false}
             enablePoints={false}
             colors={{ scheme: 'set3' }}
