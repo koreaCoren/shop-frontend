@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 
-import { categoryList, productRegister, reqGoodsData } from 'utils/axios';
+import { categoryList, productEditor, reqGoodsData } from 'utils/axios';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
@@ -34,7 +34,7 @@ const Edit = () => {
     const {productCode} = useParams();
 
     const result = useQuery("categoryList", categoryList);
-    const { mutateAsync, isLoading } = useMutation(productRegister);
+    const { mutateAsync, isLoading } = useMutation(productEditor);
     const getGoods = useMutation(reqGoodsData);
 
 
@@ -72,7 +72,7 @@ const Edit = () => {
         let firCate = str.slice(0,2);
         setCate01(cate01 => firCate);
         setCate02(cate02 => str);
-
+        setThumbnail(thumbnail => data.result.result.goods_img);
     }
 
     const onSubmit = async (e) => {
@@ -173,10 +173,10 @@ const Edit = () => {
                     <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} value={discount} />
                     <ProductInput title="판매 수량" type="text" name="sell" placeholder="판매 수량" onChange={onChange} value={sell}/>
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
-                    <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} />
+                    <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent}/>
                     <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
-                    <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
+                    <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
                 </Common.Container>
             </form>
         </>
