@@ -7,7 +7,7 @@ const Chart = ({ day }) => {
         <ResponsiveBar
             data={data.slice(data.length - day, data.length)}
             keys={[
-                'bar',
+                '일 판매 금액',
             ]}
             indexBy="date"
             margin={{ top: 50, right: 70, bottom: 30, left: 70 }}

@@ -27,7 +27,7 @@ export const Title = styled.div`
 
     .selectBox select{
         border: 1px solid #aaa;
-        padding: 3px 30px 3px 5px;
+        padding: 5px 40px 5px 5px;
     }
 
     .selectBox i{

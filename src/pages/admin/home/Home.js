@@ -9,10 +9,20 @@ import LinkButton from 'components/admin/product/button/LinkButton';
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/home/Home';
 import { useState } from 'react';
+import axios from 'axios';
 
 const Home = () => {
     const [product, setProduct] = useState(7);
     const [visitor, setVisitor] = useState(7);
+
+    const test = async () => {
+        axios.get("http://192.168.0.14:8080/test").then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+    test();
 
     const onChenge = (e) => {
         const name = e.target.name;
