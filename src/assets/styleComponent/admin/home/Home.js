@@ -2,15 +2,21 @@ import styled from "styled-components";
 
 export const ChartGrid = styled.div`
     display: grid;
-    grid-template-columns: 1000px 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     grid-gap: 30px;
     height: 500px;
+    > div > div > div > div > svg{
+        width: 100% !important;
+    }
 `
 
 export const BoardGrid = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
+    > div > div > div > div > svg{
+        width: 100% !important;
+    }
 `
 
 export const Title = styled.div`
