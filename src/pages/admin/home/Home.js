@@ -8,16 +8,54 @@ import LinkButton from 'components/admin/product/button/LinkButton';
 
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/home/Home';
+import { useState } from 'react';
 
 const Home = () => {
+    const [product, setProduct] = useState(7);
+    const [visitor, setVisitor] = useState(7);
+
+    const onChenge = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        switch (name) {
+            case "product":
+                setProduct(value);
+                break;
+            case "visitor":
+                setVisitor(value);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     return (
         <Common.Padding>
             <Style.ChartGrid>
                 <Common.Container>
-                    <BarChart />
+                    <Style.Title>
+                        <h3>상품 판매 현황</h3>
+                        <div className="selectBox">
+                            <select name='product' onChange={onChenge}>
+                                <option value="7">7일</option>
+                                <option value="15">15일</option>
+                                <option value="30">30일</option>
+                            </select>
+                            <i className="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </Style.Title>
+                    <div style={{ width: "100%", maxHeight: "400px", height: "100%" }}>
+                        <BarChart day={product} />
+                    </div>
                 </Common.Container>
                 <Common.Container>
-                    <DonutChart />
+                    <Style.Title>
+                        <h3>누적 판매 TOP 5</h3>
+                    </Style.Title>
+                    <div style={{ width: "100%", maxHeight: "400px", height: "100%" }}>
+                        <DonutChart />
+                    </div>
                 </Common.Container>
             </Style.ChartGrid>
             <Style.BoardGrid>
@@ -66,13 +104,26 @@ const Home = () => {
                     </Style.Situation>
                 </Common.Container>
                 <Common.Container>
-                    <LineChart />
+                    <Style.Title>
+                        <h3>방문자 수</h3>
+                        <div className="selectBox">
+                            <select name='visitor' onChange={onChenge}>
+                                <option value="7">7일</option>
+                                <option value="15">15일</option>
+                                <option value="30">30일</option>
+                            </select>
+                            <i className="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </Style.Title>
+                    <div style={{ width: "100%", maxHeight: "370px", height: "100%" }}>
+                        <LineChart day={visitor} />
+                    </div>
                 </Common.Container>
                 <Common.Container>
                     빨리 생각해내봐
                 </Common.Container>
             </Style.BoardGrid>
-        </Common.Padding>
+        </Common.Padding >
     );
 };
 
