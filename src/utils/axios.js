@@ -152,6 +152,15 @@ export const productRegister = async (data) => {
     return api;
 }
 
+// 어드민 상품 수정
+export const productEditor = async (data) => {
+    const api = await API.PRODUCT_EDIT_API.post("", data).then((res) => {
+        alert("수정완료");
+        window.location.replace("/admin/product");
+    }).catch((error) => {alert("서버와 통신을 실패했습니다.")})
+    return api;
+}
+
 // 어드민 상품삭제
 export const productDelete = async (data) => {
     const api = await API.PRODUCT_DELETE_API.post("", data).then((res) => {

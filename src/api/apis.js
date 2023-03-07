@@ -58,6 +58,11 @@ export const PRODUCT_SEL_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/detail_goods`
 })
 
+// 어드민 상품수정
+export const PRODUCT_EDIT_API = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/goods/upd_goods`
+})
+
 // 어드민 상품삭제
 export const PRODUCT_DELETE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/del_goods`,

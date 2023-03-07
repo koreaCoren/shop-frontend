@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import styled from "styled-components";
 
 const ProductInput = ({ title, setThumbnail, thumbnail }) => {
@@ -14,6 +14,7 @@ const ProductInput = ({ title, setThumbnail, thumbnail }) => {
         };
         reader.readAsDataURL(theFile);
     }
+
     return (
         <Div>
             <span>{title}</span>
