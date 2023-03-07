@@ -42,14 +42,6 @@ const Detail = ({ result, setOrderData }) => {
 
     }, [result.isLoading]);
 
-    // useEffect(() => {
-    //     selFav();
-    // }, []);
-
-    // useEffect(() => {
-    //     insFav();
-    // },[fav]);
-
     //상품갯수증가
     const countUp = () => {
         setCount(count + 1);
@@ -80,13 +72,14 @@ const Detail = ({ result, setOrderData }) => {
         insFav(fav);
     }
 
-    // 좋아요 insert
+    // 좋아요 클릭
     const insFav = async () => {
+        fav === 0 ? setFav(1) : setFav(0);
         if (sessionStorage.getItem('userId') !== null) {
             const data = {
-            user_id: sessionStorage.getItem('userId'),
-            goods_code : productCode,
-            is_fav : fav === 0 ?1 :0,
+                user_id: sessionStorage.getItem('userId'),
+                goods_code: productCode,
+                is_fav: fav === 0 ? 1 : 0,
             }
             await favControll.mutateAsync(data);
         } else {
@@ -116,7 +109,7 @@ const Detail = ({ result, setOrderData }) => {
 
     //스크롤 이동
     const moveScroll = (location) => {
-        location.current.scrollIntoView({behavior:"smooth"})
+        location.current.scrollIntoView({ behavior: "smooth" })
     }
 
     return (
@@ -124,7 +117,7 @@ const Detail = ({ result, setOrderData }) => {
             <div className="wrap">
                 <Style.Info>
                     <Style.ImageInfo>
-                        <img src={productDetail?.goods_img === "" ? noImg :productDetail?.goods_img} alt="" />
+                        <img src={productDetail?.goods_img === "" ? noImg : productDetail?.goods_img} alt="" />
                         {/* 확대보기 버튼
                         <button>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -154,12 +147,12 @@ const Detail = ({ result, setOrderData }) => {
                             </Style.Quantity>
                             <Style.Total>
                                 <span><b>총 상품가격</b></span>
-                                <b>{Math.ceil((productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01)))*count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</b>
+                                <b>{Math.ceil((productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</b>
                             </Style.Total>
                             <Style.ButtonBox>
                                 <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
-                                <Style.fav onClick={() => { changeFav(fav) }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
+                                <Style.fav onClick={() => { insFav() }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav>
                                 {/* <Style.Button>관련상품</Style.Button> */}
                             </Style.ButtonBox>
                         </div>
@@ -177,8 +170,8 @@ const Detail = ({ result, setOrderData }) => {
                         <ul ref={DescriptionRef}>
                             <li>상세정보</li>
                             <li onClick={() => {
-                                    moveScroll(returnRef);
-                                }}>교환/반품</li>
+                                moveScroll(returnRef);
+                            }}>교환/반품</li>
                         </ul>
                     </Style.DescriptionMenu>
                     <Style.OrderMenu>
@@ -275,7 +268,7 @@ const Detail = ({ result, setOrderData }) => {
                             <ul>
                                 <li>구매자 단순 변심 : 상품 수령 후 7일 이내(구매자 반품 배송비 부담)</li>
                                 <li>표시/광고와 상이, 계약 내용과 다르게 이행된 경우<br />
-                                상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내(판매자 반품 배송비 부담)</li>
+                                    상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내(판매자 반품 배송비 부담)</li>
                             </ul>
                         </div>
                         <div className='refuse'>
@@ -294,7 +287,7 @@ const Detail = ({ result, setOrderData }) => {
                             <h4>거래 조건에 대한 정보</h4>
                             <ul>
                                 <li>소화물 택배의 배송은 발송일로부터 1~2 영업일이 소요되나, <br />
-                                지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라 질 수 있습니다.</li>
+                                    지역/대형 화물/설치/예약/발송지체 등의 특이사항에 따라 배송기간은 달라 질 수 있습니다.</li>
                                 <li>`전자상거래등에서의 소비자보호에 관한 법률`이 정하는 바에 따라 소비자의 청약철회 후 판매자가 재화 등을 반환 받은 날로부터 3영업일 이내에 지급받은 대금의 환급을 정당한 사유없이 지연하는 때에는 소비자는 지연기간에 대해서 전상법 시행령으로 정하는 이율을 곱하여 산정한 지연이자(지연배상금)을 신청할 수 있습니다.</li>
                             </ul>
                         </div>
