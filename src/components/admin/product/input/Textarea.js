@@ -2,11 +2,11 @@ import React from 'react';
 import styled from "styled-components";
 import TextEditor from 'components/editor/Editor';
 
-const Textarea = ({ title, setProductContent, setImageCode, type }) => {
+const Textarea = ({ title, setProductContent, setImageCode, type, value }) => {
     return (
         <Div>
             <span>{title}</span>
-            <TextEditor setContent={setProductContent} setImageCode={setImageCode} width={700} type={type}></TextEditor>
+            <TextEditor setContent={setProductContent} setImageCode={setImageCode} width={700} type={type} value={value} ></TextEditor>
         </Div>
     );
 };

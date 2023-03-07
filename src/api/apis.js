@@ -40,6 +40,8 @@ export const DELETE_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
 })
 
+
+
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 상품리스트
@@ -51,10 +53,16 @@ export const PRODUCT_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_goods`,
 })
 
+// 어드민 특정 상품 불러오기(수정에 사용)
+export const PRODUCT_SEL_API = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/goods/detail_goods`
+})
+
 // 어드민 상품삭제
 export const PRODUCT_DELETE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/del_goods`,
 })
+
 
 // 어드민 카테고리 리스트
 export const CATEGORY_LIST_API = axios.create({

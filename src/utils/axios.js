@@ -162,6 +162,17 @@ export const productDelete = async (data) => {
     return api;
 }
 
+// 어드민 상품 디테일 불러오기
+export const reqGoodsData = async (data) => {
+    const api = await API.PRODUCT_SEL_API.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 // 어드민 카테고리 리스트
 export const categoryList = async () => {
     const { data } = await API.CATEGORY_LIST_API.get();

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 
-const ProductSelect = ({ title, type, name, placeholder, onChange, option }) => {
+const ProductSelect = ({ title, type, name, placeholder, onChange, option, value }) => {
     return (
         <Label>
             <span>{title}</span>
             <div>
-                <select type={type} name={name} placeholder={placeholder} onChange={onChange} >
+                <select type={type} name={name} placeholder={placeholder} onChange={onChange} value={value}>
                     <option value="선택해주세요">선택해주세요</option>
                     {
                         option?.map((a, i) => {

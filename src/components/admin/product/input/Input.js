@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 
-const ProductInput = ({ title, type, name, placeholder, onChange }) => {
+const ProductInput = ({ title, type, name, placeholder, onChange, value }) => {
     return (
         <Label>
             <span>{title}</span>
-            <input type={type} name={name} placeholder={placeholder} onChange={onChange} />
+            <input type={type} name={name} placeholder={placeholder} onChange={onChange} value={value} />
         </Label>
     );
 };
