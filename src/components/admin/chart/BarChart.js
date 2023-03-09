@@ -1,13 +1,8 @@
 import React from 'react';
-import {useQuery} from 'react-query';
 import { ResponsiveBar } from '@nivo/bar';
-import { data } from './BarData';
 
-import {sellByDateList} from 'utils/axios';
 
-const Chart = ({ day }) => {
-    const result = useQuery("sellDataList", sellByDateList);
-    
+const Chart = ({ data, day }) => {
     return (
         <ResponsiveBar
             data={data.slice(data.length - day, data.length)}

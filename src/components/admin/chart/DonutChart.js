@@ -1,13 +1,8 @@
 import React from 'react';
-import {useQuery} from 'react-query';
 import { ResponsivePie } from '@nivo/pie'
-// import { data } from './DonutData';
 
-import {accumulateSell} from 'utils/axios';
 
-const DonutChart = () => {
-    const result = useQuery("sellDataList", accumulateSell);
-
+const DonutChart = ({ data }) => {
     return (
         <ResponsivePie
             data={data}
