@@ -112,7 +112,6 @@ export const ORDER_MANAGEMENT = axios.create({
 export const ORDER_MANAGEMENT_DETAIL = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_code_orders`
 })
-
 // 기본 배송지 설정
 export const DEFAULT_DELIVERY = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/default_carrier`
@@ -127,6 +126,12 @@ export const DEFAULT_SELECT = axios.create({
 export const NULL_INVOICE = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/sel_delivery_null`
 })
+
+// 송장 번호 업데이트
+export const DELIVERY_INPUT = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_delivery`
+})
+
 
 //--------- 어드민 관련 끝 ---------
 
