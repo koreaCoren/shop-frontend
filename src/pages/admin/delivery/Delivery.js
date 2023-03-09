@@ -35,14 +35,13 @@ const Delivery = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const arr = e.target;
-        for (let i = 1; i < e.target.length; i = i + 2) {
-            const data = {};
-            data.orderCode = arr[i].value;
-            data.deliveryNumber = arr[i + 1].value
-            data.carrier = selectResult.data?.default_carrier;
-            await input.mutateAsync(data);
+        const data = [];
+        for (let i = 1; i < arr.length; i = i + 2) {
+            if (arr[i + 1].value !== '') {
+                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier })
+            }
         }
-        alert("저장완료");
+        input.mutateAsync(data);
     };
 
     const getList = async () => {
