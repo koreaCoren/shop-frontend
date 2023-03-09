@@ -263,7 +263,8 @@ export const defaultDeliveryUpdate = async (data) => {
 // 송장입력
 export const deliveryInput = async (data) => {
     const api = await API.DELIVERY_INPUT.post("", data).then((res) => {
-
+        res.data.result === "Success" ? alert("저장완료") : alert(res.data.result)
+        window.location.reload();
     }).catch((error) => {
         alert("서버와 통신이 실패했습니다.\n" + error);
         window.location.replace("/");
