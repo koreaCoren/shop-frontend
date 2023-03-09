@@ -130,15 +130,37 @@ export const boardDelete = async (data) => {
 
 //--------- 어드민 관련 시작 ---------
 
-// 어드민 대시보드
-// 상품 판매 금액 리스트
+// 상품 판매 현황
 export const sellByDateList = async () => {
-    const {data} = await API.SELL_DATA_LIST_API.get();
+    const { data } = await API.SELL_DATA_LIST_API.get();
     return data;
 }
-export const accumulateSell = async() => {
-    const {data} = await API.ACCUMULATE_SELL_DATA_API.get();
+
+// 누적 판매 TOP5
+export const accumulateSell = async () => {
+    const { data } = await API.ACCUMULATE_SELL_DATA_API.get();
     return data;
+}
+
+// 유저 리스트
+export const user = async () => {
+    const { data } = await API.USER.get();
+    return data;
+}
+
+// 유저 리스트
+export const userDeleted = async (data) => {
+    const api = await API.USER_DELETE.post("", data).then((res) => {
+        if (res.data === "success") {
+            alert("삭제완료");
+        } else {
+            alert("알수없는 이유로 에러발생");
+        }
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
 }
 
 // 어드민 상품리스트
@@ -168,7 +190,7 @@ export const productEditor = async (data) => {
     const api = await API.PRODUCT_EDIT_API.post("", data).then((res) => {
         alert("수정완료");
         window.location.replace("/admin/product");
-    }).catch((error) => {alert("서버와 통신을 실패했습니다.")})
+    }).catch((error) => { alert("서버와 통신을 실패했습니다.") })
     return api;
 }
 
