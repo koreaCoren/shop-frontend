@@ -35,14 +35,14 @@ const Delivery = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const arr = e.target;
-        for (let i = 1; i < e.target.length; i = i + 2) {
-            const data = {};
-            data.orderCode = arr[i].value;
-            data.deliveryNumber = arr[i + 1].value
-            data.carrier = selectResult.data?.default_carrier;
-            input.mutateAsync(data);
+        const data = [];
+        for (let i = 1; i < arr.length; i = i + 2) {
+            if (arr[i + 1].value !== '') {
+                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier });
+            }
         }
-        alert("저장완료");
+        console.log(data);
+        input.mutateAsync(data);
 
     };
 
@@ -113,7 +113,7 @@ const Delivery = () => {
                                     return (
                                         <Style.Ul key={i}>
                                             <li>주문자 : {a.buyer_name}</li>
-                                            <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabindex="-1" readOnly /></li>
+                                            <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabIndex="-1" readOnly /></li>
                                             <li>송장번호 입력 : <input type="text" name="deliveryNumber" onChange={onChange} /></li>
                                         </Style.Ul>
                                     )
