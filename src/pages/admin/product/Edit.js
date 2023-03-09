@@ -6,7 +6,7 @@ import { categoryList, productEditor, reqGoodsData } from 'utils/axios';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
-import ProductOption from 'components/admin/product/input/ProductOption';
+import EditOption from 'components/admin/product/input/EditOption';
 import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
 
@@ -176,7 +176,7 @@ const Edit = () => {
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent}/>
-                    <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData}/>
+                    <EditOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData}/>
                     <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
                 </Common.Container>
             </form>
