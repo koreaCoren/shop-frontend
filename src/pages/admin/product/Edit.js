@@ -30,7 +30,7 @@ const Edit = () => {
     const [productContent, setProductContent] = useState("");
     const [productOption, setProductOption] = useState("");
     const [imageCode, setImageCode] = useState([]);
-    const [optionData, setOptionData] = useState();
+    const [optionData, setOptionData] = useState([]);
     const {productCode} = useParams();
 
     const result = useQuery("categoryList", categoryList);
