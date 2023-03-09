@@ -250,9 +250,20 @@ export const orderManagementDetail = async (data) => {
     return api;
 }
 
+
 // 기본 배송지 설정
-export const deliveryUpdate = async (data) => {
+export const defaultDeliveryUpdate = async (data) => {
     const api = await API.DEFAULT_DELIVERY.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+// 송장입력
+export const deliveryInput = async (data) => {
+    const api = await API.DELIVERY_INPUT.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신이 실패했습니다.\n" + error);
@@ -271,6 +282,17 @@ export const defaultSelect = async () => {
 export const nullInvoice = async () => {
     const { data } = await API.NULL_INVOICE.get();
     return data;
+}
+
+// 송장번호 업데이트(미완)
+export const deliveryUpdate = async (data) => {
+    const api = await API.DELIVERY_INPUT.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
 }
 
 //--------- 어드민 관련 끝 ---------

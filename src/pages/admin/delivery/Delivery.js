@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
 import Top from 'components/admin/Top';
-import { defaultSelect, deliveryUpdate, nullInvoice } from 'utils/axios';
+import { defaultSelect, defaultDeliveryUpdate, nullInvoice, deliveryInput } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/admin/delivery/delivery";
 import * as Common from "assets/styleComponent/admin/common";
@@ -12,7 +12,9 @@ import Loading from 'components/loding/Loading';
 const Delivery = () => {
     const [defaultDelivery, setDefaultDelivery] = useState();
     const [deliveryList, setDeliveryList] = useState();
-    const update = useMutation(deliveryUpdate);
+    const [deliveryNumber, setDeliveryNumber] = useState();
+    const update = useMutation(defaultDeliveryUpdate);
+    const input = useMutation(deliveryInput);
     const selectResult = useQuery("defaultSelect", defaultSelect);
     const incoviceResult = useQuery("nullInvoice", nullInvoice);
 
@@ -25,10 +27,24 @@ const Delivery = () => {
                 data.default_carrier = defaultDelivery;
             }
         });
-        await update.mutateAsync(data);
+        update.mutateAsync(data);
         alert("저장완료");
         selectResult.refetch();
     }
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const arr = e.target;
+        for (let i = 1; i < e.target.length; i = i + 2) {
+            const data = {};
+            data.orderCode = arr[i].value;
+            data.deliveryNumber = arr[i + 1].value
+            data.carrier = selectResult.data?.default_carrier;
+            input.mutateAsync(data);
+        }
+        alert("저장완료");
+
+    };
 
     const getList = async () => {
         const arr = await getDeliveryList();
@@ -50,6 +66,9 @@ const Delivery = () => {
         switch (name) {
             case "defaultDelivery":
                 setDefaultDelivery(value);
+                break;
+            case "deliveryNumber":
+                setDeliveryNumber(value);
                 break;
 
             default:
@@ -86,19 +105,22 @@ const Delivery = () => {
                     </Common.Container>
 
                     <Common.Container>
-                        <Style.H2>송장번호 미입력 현황</Style.H2>
+                        <form onSubmit={onSubmit}>
+                            <Style.H2>송장번호 미입력 현황<button type="submit">저장</button></Style.H2>
 
-                        {
-                            incoviceResult.data.map((a, i) => {
-                                return (
-                                    <Style.Ul key={i}>
-                                        <li>주문자 : {a.buyer_name}</li>
-                                        <li>주문번호 : {a.orderCode}</li>
-                                        <li>송장번호 입력 : <input type="text" /><button>저장</button></li>
-                                    </Style.Ul>
-                                )
-                            })
-                        }
+                            {
+                                incoviceResult.data.map((a, i) => {
+                                    return (
+                                        <Style.Ul key={i}>
+                                            <li>주문자 : {a.buyer_name}</li>
+                                            <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabindex="-1" readOnly /></li>
+                                            <li>송장번호 입력 : <input type="text" name="deliveryNumber" onChange={onChange} /></li>
+                                        </Style.Ul>
+                                    )
+                                })
+                            }
+                        </form>
+
                     </Common.Container>
                 </Common.Padding>
             </>

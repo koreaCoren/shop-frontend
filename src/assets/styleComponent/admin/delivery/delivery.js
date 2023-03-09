@@ -38,9 +38,19 @@ export const DefaultUl = styled.ul`
 `
 
 export const H2 = styled.h2`
+    display: flex;
+    justify-content: space-between;
     font-size: 18px;
     border-bottom: 1px solid #eee;
     padding: 10px 5px;
+    button{
+        padding: 0px 15px;
+        border-radius: 5px;
+        line-height: 27px;
+        color: #fff;
+        background-color: #1a6dff;
+        cursor: pointer;
+    }
 `
 
 export const Ul = styled.ul`
@@ -64,7 +74,9 @@ export const Ul = styled.ul`
         border: 1px solid #aaa;
         border-radius: 5px;
     }
-
+    input.orderCode{
+        border: none;
+    }
     button{
         padding: 0px 15px;
         border-radius: 5px;

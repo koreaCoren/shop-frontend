@@ -30,7 +30,7 @@ const Edit = () => {
     const [productContent, setProductContent] = useState("");
     const [productOption, setProductOption] = useState("");
     const [imageCode, setImageCode] = useState([]);
-    const [productData, setProductData] = useState();
+    const [optionData, setOptionData] = useState([]);
     const {productCode} = useParams();
 
     const result = useQuery("categoryList", categoryList);
@@ -61,18 +61,19 @@ const Edit = () => {
             goods_code : productCode
         }
         await getGoods.mutateAsync(data);
-        setProductName(productName => data.result.result.goods_nm);
-        setPrice(price => data.result.result.goods_price);
-        setDiscount(discount => data.result.result.goods_sale);
-        setSell(sell => data.result.result.goods_sell);
-        setStock(stock => data.result.result.goods_stock);
-        setProductContent(productContent => data.result.result.goods_detail);
-        let cateData = data.result.result.cate_code;
+        setProductName(productName => data.result.result.goods_data.goods_nm);
+        setPrice(price => data.result.result.goods_data.goods_price);
+        setDiscount(discount => data.result.result.goods_data.goods_sale);
+        setSell(sell => data.result.result.goods_data.goods_sell);
+        setStock(stock => data.result.result.goods_data.goods_stock);
+        setProductContent(productContent => data.result.result.goods_data.goods_detail);
+        let cateData = data.result.result.goods_data.cate_code;
         let str = cateData.toString();
         let firCate = str.slice(0,2);
         setCate01(cate01 => firCate);
         setCate02(cate02 => str);
-        setThumbnail(thumbnail => data.result.result.goods_img);
+        setThumbnail(thumbnail => data.result.result.goods_data.goods_img);
+        setOptionData(optionData => data.result.result.option_data);
     }
 
     const onSubmit = async (e) => {
@@ -175,7 +176,7 @@ const Edit = () => {
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent}/>
-                    <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
+                    <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData}/>
                     <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
                 </Common.Container>
             </form>
