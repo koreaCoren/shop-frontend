@@ -41,7 +41,6 @@ const Delivery = () => {
                 data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier });
             }
         }
-        console.log(data);
         input.mutateAsync(data);
 
     };
