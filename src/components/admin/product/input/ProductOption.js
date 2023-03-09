@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from "styled-components";
 
-const ProductOption = ({ title, setProductOption }) => {
+const ProductOption = ({ title, setProductOption, data }) => {
     const [optionList, setOption] = useState([{ option_name: `productOption1`, option_price: `productPrice1` }]);
-
+    const [optionData, setOptionData] = useState(data);
+    
     // 옵션 추가
     const createOption = () => {
         let arr = [];
@@ -44,7 +45,8 @@ const ProductOption = ({ title, setProductOption }) => {
                     optionList.map((a, i) => {
                         return (
                             <div key={i}>
-                                <input className="optionName" type="text" name={a.optionName} placeholder={`${i + 1}번 옵션명`} />
+                                <input className="optionName" type="text" name={a.optionName} placeholder={`${i + 1}번 옵션명`}
+                                />
                                 <input className="price" type="text" name={a.price} placeholder={`${i + 1}번 옵션 가격`} />
                                 <input type="button" value="삭제" onClick={() => {
                                     deleteOption(i);

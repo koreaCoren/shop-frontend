@@ -1,7 +1,7 @@
 import React from 'react';
 import {useQuery} from 'react-query';
 import { ResponsivePie } from '@nivo/pie'
-// import { data } from './DonutData';
+import { data } from './DonutData';
 
 import {accumulateSell} from 'utils/axios';
 
