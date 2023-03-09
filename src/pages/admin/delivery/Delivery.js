@@ -40,10 +40,9 @@ const Delivery = () => {
             data.orderCode = arr[i].value;
             data.deliveryNumber = arr[i + 1].value
             data.carrier = selectResult.data?.default_carrier;
-            input.mutateAsync(data);
+            await input.mutateAsync(data);
         }
         alert("저장완료");
-
     };
 
     const getList = async () => {
@@ -113,7 +112,7 @@ const Delivery = () => {
                                     return (
                                         <Style.Ul key={i}>
                                             <li>주문자 : {a.buyer_name}</li>
-                                            <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabindex="-1" readOnly /></li>
+                                            <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabIndex="-1" readOnly /></li>
                                             <li>송장번호 입력 : <input type="text" name="deliveryNumber" onChange={onChange} /></li>
                                         </Style.Ul>
                                     )
