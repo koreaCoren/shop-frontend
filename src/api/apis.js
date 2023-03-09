@@ -49,15 +49,29 @@ export const DELETE_BOARD = axios.create({
 export const SELL_DATA_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/data/sell_data_list`,
 })
+
 // 누적 판매 리스트
 export const ACCUMULATE_SELL_DATA_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/data/cumulative_sales`
+})
+
+//회원 관리
+export const USER = axios.create({
+    // baseURL: `${process.env.REACT_APP_API_URL}/???`
+    baseURL: `http://192.168.0.14:8080/userList`
+})
+
+// 회원 삭제
+export const USER_DELETE = axios.create({
+    // baseURL: `${process.env.REACT_APP_API_URL}/???`
+    baseURL: `http://192.168.0.14:8080/userDelete`
 })
 
 // 어드민 상품리스트
 export const TEST = axios.create({
     baseURL: `https://apis.tracker.delivery/carriers/kr.cjlogistics/tracks/564363707014`,
 })
+
 // 어드민 상품리스트
 export const PRODUCT_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_goods`,
@@ -193,4 +207,5 @@ export const SET_FAV = axios.create({
 })
 
 //--------- 개인정보 끝 ---------
+
 //--------- 상품 관련 ----------

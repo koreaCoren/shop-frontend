@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Home from 'pages/admin/home/Home';
+import UserList from 'pages/admin/user/UserList';
+import UserDetail from 'pages/admin/user/UserDetail';
 import Product from 'pages/admin/product/Product';
 import SideMenu from 'components/admin/sideMenu/SideMenu';
 import Category from 'pages/admin/category/Category';
@@ -31,6 +33,8 @@ const Admin = ({ setHeader }) => {
             <div style={{ backgroundColor: "#eee" }}>
                 <Routes>
                     <Route path='/*' element={<Home />} />
+                    <Route path='/user/:boardPage' element={<UserList />} />
+                    <Route path='/userDetail/:userId' element={<UserDetail />} />
                     <Route path='/product/*' element={<Product />} />
                     <Route path='/category/*' element={<Category />} />
                     <Route path='/order/:boardPage' element={<Order />} />

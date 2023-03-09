@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Div = styled.div`
@@ -19,11 +18,12 @@ export const Div = styled.div`
     }
 `
 
-export const DetailButton = styled(Link)`
+export const DeleteButton = styled.button`
     margin-top: 10px;
     line-height: 30px;
     background-color: #1a6dff;
     color: #fff;
     padding: 0px 50px;
     border-radius: 5px;
+    cursor: pointer;
 `

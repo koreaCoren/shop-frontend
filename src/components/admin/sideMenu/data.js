@@ -1,6 +1,12 @@
 const menus = [
     {
-        mainTitle: "상품관리",
+        mainTitle: "회원 관리",
+        subList: [],
+        url: "user/1",
+        icon: "fa-solid fa-user",
+    },
+    {
+        mainTitle: "상품 관리",
         subList: [
             { title: "카테고리 추가/삭제", url: "Category" },
             { title: "상품등록", url: "product" }
