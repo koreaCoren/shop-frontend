@@ -153,6 +153,7 @@ export const userDeleted = async (data) => {
     const api = await API.USER_DELETE.post("", data).then((res) => {
         if (res.data === "success") {
             alert("삭제완료");
+            window.location.reload();
         } else {
             alert("알수없는 이유로 에러발생");
         }
