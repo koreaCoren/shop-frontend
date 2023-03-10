@@ -23,6 +23,7 @@ const OrderDetail = () => {
         }
         await mutateAsync(data);
         setDetail(data.detail);
+        setInvoiceNumber(data.detail[0].delivery);
         for (let i = 0; i < data.detail.length; i++) {
             price = price + Number(data.detail[i].order_pay);
             setTotalPrice(price);
