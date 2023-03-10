@@ -57,14 +57,12 @@ export const ACCUMULATE_SELL_DATA_API = axios.create({
 
 //회원 관리
 export const USER = axios.create({
-    // baseURL: `${process.env.REACT_APP_API_URL}/???`
-    baseURL: `http://192.168.0.14:8080/userList`
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_list`
 })
 
 // 회원 삭제
 export const USER_DELETE = axios.create({
-    // baseURL: `${process.env.REACT_APP_API_URL}/???`
-    baseURL: `http://192.168.0.14:8080/userDelete`
+    baseURL: `${process.env.REACT_APP_API_URL}/user/del_user`
 })
 
 // 어드민 상품리스트
