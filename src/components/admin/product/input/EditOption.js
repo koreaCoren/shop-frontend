@@ -4,14 +4,8 @@ import { useState } from 'react';
 import styled from "styled-components";
 
 const EditOption = ({ title, setProductOption, data }) => {
-    const [optionList, setOption] = useState([]);
-    const [optionData, setOptionData] = useState([]);
-    useEffect(() => {
-        console.log(data);
-        setOptionData([...optionData, ...data]);
-        setOption([...optionList, ...optionData]);
-        console.log(optionList);
-    },[data]);
+    // console.log(data);
+    const [optionList, setOption] = useState([data]);
 
     // 옵션 추가
     const createOption = () => {
