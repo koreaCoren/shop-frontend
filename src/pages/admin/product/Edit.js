@@ -32,6 +32,7 @@ const Edit = () => {
     const [imageCode, setImageCode] = useState([]);
     const [optionData, setOptionData] = useState([]);
     const { productCode } = useParams();
+    const [dataOn, setDataOn] = useState(false);
 
     const result = useQuery("categoryList", categoryList);
     const { mutateAsync, isLoading } = useMutation(productEditor);
@@ -74,6 +75,7 @@ const Edit = () => {
         setCate02(cate02 => str);
         setThumbnail(thumbnail => data.result.result.goods_data.goods_img);
         setOptionData(optionData => data.result.result.option_data);
+        setDataOn(dataOn => true);
     }
 
     const onSubmit = async (e) => {
@@ -174,7 +176,11 @@ const Edit = () => {
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent} />
-                    <EditOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
+                    {
+                        dataOn &&
+                        <EditOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
+                    }
+
                     <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
                 </Common.Container>
             </form>
