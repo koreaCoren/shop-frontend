@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import styled from "styled-components";
 
-const ProductOption = ({ title, setProductOption }) => {
+const ProductOption = ({ title, setProductOption, data }) => {
     const [optionList, setOption] = useState([{ option_name: `productOption1`, option_price: `productPrice1` }]);
     const [optionData, setOptionData] = useState([]);
 
@@ -45,7 +45,7 @@ const ProductOption = ({ title, setProductOption }) => {
     }
 
     useEffect(() => {
-        if (data.length > 0) {
+        if (data !== undefined) {
             editOption();
         }
     }, [data]);
