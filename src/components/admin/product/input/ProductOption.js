@@ -5,6 +5,51 @@ import styled from "styled-components";
 
 const ProductOption = ({ title, setProductOption }) => {
     const [optionList, setOption] = useState([{ option_name: `productOption1`, option_price: `productPrice1` }]);
+    const [optionData, setOptionData] = useState([]);
+
+    //옵션 데이터 있으면 넣기
+    const editOption = () => {
+        let optionListArr = [];
+        let optionDataArr = [];
+        for (let i = 0; i < data.length; i++) {
+            optionListArr.push({
+                option_name: `productOption${i + 1}`,
+                option_price: `productPrice${i + 1}`,
+            })
+            optionDataArr.push({
+                option_name: data[i].option_name,
+                option_price: data[i].option_price,
+            })
+        }
+        setOption(optionListArr);
+        setOptionData(optionDataArr);
+    }
+
+    const onChange = (e) => {
+        let arr = [...optionData];
+        const dataNum = e.target.dataset.num;
+        const value = e.target.value;
+        const name = e.target.name;
+        switch (name) {
+            case "optionName":
+                arr[dataNum].option_name = value;
+                break;
+            case "optionPrice":
+                arr[dataNum].option_price = value;
+                break;
+
+            default:
+                break;
+        }
+        setOptionData(arr);
+    }
+
+    useEffect(() => {
+        if (data.length > 0) {
+            editOption();
+        }
+    }, [data]);
+
 
     // 옵션 추가
     const createOption = () => {
@@ -44,8 +89,11 @@ const ProductOption = ({ title, setProductOption }) => {
                     optionList.map((a, i) => {
                         return (
                             <div key={i}>
-                                <input className="optionName" type="text" name={a.optionName} placeholder={`${i + 1}번 옵션명`} />
-                                <input className="price" type="text" name={a.price} placeholder={`${i + 1}번 옵션 가격`} />
+                                <input className="optionName" onChange={
+                                    onChange} data-num={i} type="text" name="optionName" placeholder={`${i + 1}번 옵션명`} value={optionData[i]?.option_name}
+                                />
+                                <input className="price" onChange={onChange} data-num={i} type="text" name="optionPrice" placeholder={`${i + 1}번 옵션 가격`} value={optionData[i]?.option_price} />
+
                                 <input type="button" value="삭제" onClick={() => {
                                     deleteOption(i);
                                 }} />

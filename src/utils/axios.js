@@ -153,6 +153,7 @@ export const userDeleted = async (data) => {
     const api = await API.USER_DELETE.post("", data).then((res) => {
         if (res.data === "success") {
             alert("삭제완료");
+            window.location.reload();
         } else {
             alert("알수없는 이유로 에러발생");
         }
@@ -207,7 +208,7 @@ export const productDelete = async (data) => {
 // 어드민 상품 디테일 불러오기
 export const reqGoodsData = async (data) => {
     const api = await API.PRODUCT_SEL_API.post("", data).then((res) => {
-        data.result = res.data;
+        data.result = res.data.result;
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");

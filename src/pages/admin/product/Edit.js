@@ -32,6 +32,7 @@ const Edit = () => {
     const [imageCode, setImageCode] = useState([]);
     const [optionData, setOptionData] = useState([]);
     const { productCode } = useParams();
+    
     const [dataOn, setDataOn] = useState(false);
 
     const result = useQuery("categoryList", categoryList);
@@ -54,7 +55,6 @@ const Edit = () => {
                 setSecondCategory(firstCategory[i].lowCategory);
             }
         }
-
     }, [cate01])
 
     const getProductData = async () => {
@@ -62,20 +62,23 @@ const Edit = () => {
             goods_code: productCode
         }
         await getGoods.mutateAsync(data);
-        setProductName(productName => data.result.result.goods_data.goods_nm);
-        setPrice(price => data.result.result.goods_data.goods_price);
-        setDiscount(discount => data.result.result.goods_data.goods_sale);
-        setSell(sell => data.result.result.goods_data.goods_sell);
-        setStock(stock => data.result.result.goods_data.goods_stock);
-        setProductContent(productContent => data.result.result.goods_data.goods_detail);
-        let cateData = data.result.result.goods_data.cate_code;
+
+        console.log(data);
+
+        let cateData = data.result.goods_data.cate_code;
         let str = cateData.toString();
         let firCate = str.slice(0, 2);
-        setCate01(cate01 => firCate);
-        setCate02(cate02 => str);
-        setThumbnail(thumbnail => data.result.result.goods_data.goods_img);
-        setOptionData(optionData => data.result.result.option_data);
-        setDataOn(dataOn => true);
+
+        setProductName(data.result.goods_data.goods_nm);
+        setCate01(firCate);
+        setCate02(str);
+        setPrice(data.result.goods_data.goods_price);
+        setDiscount(data.result.goods_data.goods_sale);
+        setSell(data.result.goods_data.goods_sell);
+        setStock(data.result.goods_data.goods_stock);
+        setThumbnail(data.result.goods_data.goods_img);
+        setProductContent(data.result.goods_data.goods_detail);
+        setOptionData(data.result.option_data);
     }
 
     const onSubmit = async (e) => {
@@ -158,6 +161,8 @@ const Edit = () => {
         }
     };
 
+
+
     return (
         <>
             <form onSubmit={onSubmit}>
@@ -176,10 +181,7 @@ const Edit = () => {
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
                     <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent} />
-                    {
-                        dataOn &&
-                        <EditOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
-                    }
+                    <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
 
                     <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
                 </Common.Container>

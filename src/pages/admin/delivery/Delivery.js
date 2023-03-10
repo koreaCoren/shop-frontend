@@ -38,11 +38,10 @@ const Delivery = () => {
         const data = [];
         for (let i = 1; i < arr.length; i = i + 2) {
             if (arr[i + 1].value !== '') {
-                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier });
+                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier })
             }
         }
         input.mutateAsync(data);
-
     };
 
     const getList = async () => {
