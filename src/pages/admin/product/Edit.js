@@ -6,7 +6,6 @@ import { categoryList, productEditor, reqGoodsData } from 'utils/axios';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
-import EditOption from 'components/admin/product/input/EditOption';
 import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
 
@@ -15,6 +14,7 @@ import Loading from 'components/loding/Loading';
 
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/product/edit';
+import ProductOption from 'components/admin/product/input/ProductOption';
 
 const Edit = () => {
     const [productName, setProductName] = useState("");
@@ -32,7 +32,7 @@ const Edit = () => {
     const [imageCode, setImageCode] = useState([]);
     const [optionData, setOptionData] = useState([]);
     const { productCode } = useParams();
-    
+
     const [dataOn, setDataOn] = useState(false);
 
     const result = useQuery("categoryList", categoryList);
