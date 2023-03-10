@@ -9,8 +9,8 @@ const EditOption = ({ title, setProductOption, data }) => {
     useEffect(() => {
         console.log(data);
         setOptionData([...optionData, ...data]);
-
-        
+        setOption([...optionList, ...optionData]);
+        console.log(optionList);
     },[data]);
 
     // 옵션 추가
