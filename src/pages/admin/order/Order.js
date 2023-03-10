@@ -22,6 +22,8 @@ const Order = () => {
         setBoard(reverseArr?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
     }, [result.isLoading, nav])
 
+    console.log(result);
+
     return (
         <>
             <Top title={"주문 관리"} isButton={false} />
@@ -38,7 +40,7 @@ const Order = () => {
                                         <li>주문자 번호 : {a.buyer_tel}</li>
                                         <li>총 상품 금액 : {a.total_price}</li>
                                         <li>총 상품수 : {a.total_count}</li>
-                                        <li>송장번호 : 123123</li>
+                                        <li>송장번호 : {a.delivery}</li>
                                         <li>주문일자 : {a.order_date}</li>
                                     </ul>
                                 </Style.Div>

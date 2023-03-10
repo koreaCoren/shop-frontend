@@ -28,7 +28,6 @@ const UserList = () => {
     useEffect(() => {
         const reverseArr = result.data;
         setBoard(reverseArr?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
-        console.log(result);
     }, [result.isLoading, nav])
 
     return (
