@@ -13,16 +13,13 @@ import Delivery from 'pages/admin/delivery/Delivery';
 import OrderDetail from 'pages/admin/order/OrderDetail';
 
 import styled from 'styled-components';
+import adminCheck from 'utils/adminCheck';
 
-const Admin = ({ setHeader }) => {
+const Admin = () => {
     const nav = useNavigate();
 
     useEffect(() => {
-        setHeader(false);
-        if (sessionStorage.getItem("userId") !== "admin" &&
-            sessionStorage.getItem("userId") !== "pkd" &&
-            sessionStorage.getItem("userId") !== "asd") {
-            alert("접근불가능합니다.");
+        if (adminCheck() === false) {
             nav("/");
         }
     }, [nav])
