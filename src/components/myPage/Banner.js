@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
-import { order } from 'utils/axios';
+import React from 'react';
 import bgImg from "../../assets/images/myPage.jpg";
 
 import styled from 'styled-components';
 
-const Banner = ({ }) => {
-
-
+const Banner = () => {
     return (
         <Slide>
             <img src={bgImg} alt="" />

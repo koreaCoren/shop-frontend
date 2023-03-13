@@ -10,25 +10,6 @@ export const Contaienr = styled.div`
         margin-bottom: 50px;
     }
 
-    .search{
-        position: relative;
-    }
-
-    .search input{
-        border: 1px solid #aaa;
-        padding: 5px;
-        border-radius: 5px;
-    }
-
-    .search i{
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        color: #aaa;
-        cursor: pointer;
-    }
-
     .write{
         padding: 5px 20px;
         border-radius: 5px;

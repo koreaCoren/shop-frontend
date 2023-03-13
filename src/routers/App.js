@@ -26,7 +26,6 @@ function App() {
 
     const adminPageCheck = () => {
         const regex = /.*admin.*/;
-        console.log(regex.test(location.pathname));
         if (regex.test(location.pathname)) {
             setHeader(false);
         } else {

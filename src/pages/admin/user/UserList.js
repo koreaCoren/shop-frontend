@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import { user, userDeleted } from 'utils/axios';
+import Searching from 'components/board/Searching';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
@@ -26,9 +27,8 @@ const UserList = () => {
     }
 
     useEffect(() => {
-        const reverseArr = result.data;
-        setBoard(reverseArr?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
-    }, [result.isLoading, nav])
+        setBoard(result.data);
+    }, [result.isLoading])
 
     return (
         result.isLoading === true
@@ -36,8 +36,11 @@ const UserList = () => {
             : <>
                 <Top title={"회원 관리"} isButton={false} />
                 <Common.Padding>
+                    <Common.Container>
+                        <Searching board={result.data} setBoardList={setBoard} searchType={"email"} />
+                    </Common.Container>
                     {
-                        board?.map((a, i) => {
+                        board?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount).map((a, i) => {
                             return (
                                 <Common.Container key={i} style={{ textAlign: "center" }}>
                                     <Style.Div>
@@ -56,7 +59,7 @@ const UserList = () => {
                         })
                     }
                 </Common.Padding>
-                <Pageing count={boardCount} boardPage={boardPage} boardLength={result.data?.length} url={"/admin/user"} />
+                <Pageing count={boardCount} boardPage={boardPage} boardLength={board?.length} url={"/admin/user"} />
             </>
     );
 };

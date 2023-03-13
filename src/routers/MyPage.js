@@ -2,14 +2,14 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import Banner from 'pages/myPage/Banner';
-import SideMenu from 'pages/myPage/SideMenu';
+import Banner from 'components/myPage/Banner';
+import SideMenu from 'components/myPage/SideMenu';
 import Address from 'pages/myPage/Address';
 import Info from 'pages/myPage/Info';
 import Order from 'pages/myPage/Order';
 import OrderDetail from 'pages/myPage/OrderDetail';
 import Pick from 'pages/myPage/Pick';
-import Relogin from 'pages/myPage/Relogin';
+import PersonalModify from 'pages/myPage/PersonalModify';
 import * as Style from "assets/styleComponent/myPage/myPage"
 
 const MyPage = () => {
@@ -33,7 +33,7 @@ const MyPage = () => {
                     <Route path="/orderDetail/:orderCode" element={<OrderDetail />} />
                     <Route path="/pick" element={<Pick />} />
                     <Route path="/address" element={<Address />} />
-                    <Route path="/relogin" element={<Relogin />} />
+                    <Route path="/personalModify" element={<PersonalModify />} />
                 </Routes>
             </Style.Div>
         </main>
