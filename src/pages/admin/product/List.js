@@ -8,6 +8,7 @@ import Loading from 'components/loding/Loading';
 import * as Style from "assets/styleComponent/admin/product/list"
 import * as Common from "assets/styleComponent/admin/common"
 
+import noImg from "assets/images/noImg.gif";
 
 const List = () => {
     const result = useQuery("prodcutList", productList);
@@ -30,7 +31,7 @@ const List = () => {
                         <Common.Container key={i}>
                             <ul>
                                 <Style.ProductList>
-                                    <img src={a.goods_img} alt="" />
+                                    <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                     <Style.Div>
                                         <ul>
                                             <li>상품이름 : {a.goods_nm}</li>
