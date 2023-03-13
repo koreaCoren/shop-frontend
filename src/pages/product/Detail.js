@@ -90,7 +90,7 @@ const Detail = ({ result, setOrderData }) => {
 
     //구매 클릭
     const orderClick = () => {
-        if (loginCheck() === true) {
+        if (loginCheck(true) === true) {
             return;
         }
         const data = {

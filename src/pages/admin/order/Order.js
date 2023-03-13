@@ -9,27 +9,27 @@ import Pageing from 'components/board/Pageing';
 
 import * as Style from 'assets/styleComponent/admin/order/order';
 import * as Common from 'assets/styleComponent/admin/common';
+import Searching from 'components/board/Searching';
 
 const Order = () => {
-    const nav = useNavigate();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
     const [boardCount, setBoardCount] = useState(4);
     const result = useQuery("orderManagement", orderManagement);
 
     useEffect(() => {
-        const reverseArr = result.data;
-        setBoard(reverseArr?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount));
-    }, [result.isLoading, nav])
-
-    console.log(result);
+        setBoard(result.data);
+    }, [result.isLoading])
 
     return (
         <>
             <Top title={"주문 관리"} isButton={false} />
             <Common.Padding>
+                <Common.Container>
+                    <Searching board={result.data} setBoardList={setBoard} searchType={"orderNumber"} />
+                </Common.Container>
                 {
-                    board?.map((a, i) => {
+                    board?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount).map((a, i) => {
                         return (
                             <Common.Container key={i} style={{ textAlign: "center" }}>
                                 <Style.Div>
@@ -50,7 +50,7 @@ const Order = () => {
                     })
                 }
             </Common.Padding>
-            <Pageing count={boardCount} boardPage={boardPage} boardLength={result.data?.length} url={"/admin/order"} />
+            <Pageing count={boardCount} boardPage={boardPage} boardLength={board?.length} url={"/admin/order"} />
             {result.isLoading && <Loading />}
         </>
     );

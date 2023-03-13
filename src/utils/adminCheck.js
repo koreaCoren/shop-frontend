@@ -1,0 +1,10 @@
+const adminCheck = (isAlert) => {
+    if (sessionStorage.getItem("userId") !== "admin" &&
+        sessionStorage.getItem("userId") !== "asd" &&
+        sessionStorage.getItem("userId") !== "pkd") {
+        isAlert && alert("접근불가능합니다.");
+        return false;
+    }
+}
+
+export default adminCheck;

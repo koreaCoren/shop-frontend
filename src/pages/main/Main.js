@@ -13,11 +13,9 @@ import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 
-const Main = ({ setHeader }) => {
+const Main = () => {
     let result = useQuery("prodcutList", productList);
-    useEffect(() => {
-        setHeader(true);
-    }, [result.isLoading]);
+    useEffect(() => { }, [result.isLoading]);
     return (
         <main>
             <Style.Banner>

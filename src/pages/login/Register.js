@@ -5,6 +5,7 @@ import { useMutation } from "react-query";
 
 import Input from "components/input/Input";
 import { register } from "utils/axios";
+import loginCheck from "utils/loginCheck";
 
 import * as Style from "assets/styleComponent/login/login";
 
@@ -24,7 +25,7 @@ const Register = () => {
         e.preventDefault();
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
         if (!emailRegex.test(eamil)) {
-            alert("이메일 형식이 아님 다시 적으셈");
+            alert("이메일 형식이 아닙니다.");
             return;
         };
 
@@ -42,8 +43,7 @@ const Register = () => {
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("loginCheck") === "success") {
-            alert("로그인중에는 접근 하실 수 없습니다.");
+        if (loginCheck(false) === false) {
             nav("/");
         }
     }, []);

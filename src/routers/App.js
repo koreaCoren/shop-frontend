@@ -19,21 +19,32 @@ import "assets/css/common/common.css";
 
 function App() {
     const nav = useNavigate();
+    const location = useLocation();
     const [header, setHeader] = useState(true);
     const [orderData, setOrderData] = useState();
-    const { mutateAsync, isLoading } = useMutation(tokenCheck);
+    const token = useMutation(tokenCheck);
+
+    const adminPageCheck = () => {
+        const regex = /.*admin.*/;
+        if (regex.test(location.pathname)) {
+            setHeader(false);
+        } else {
+            setHeader(true);
+        }
+    }
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        mutateAsync();
+        adminPageCheck();
+        token.mutateAsync();
     }, [nav])
 
     return (
         <>
             {header && <Header></Header>}
             <Routes>
-                <Route path="/" element={<Main setHeader={setHeader} />} />
-                <Route path="/admin/*" element={<Admin setHeader={setHeader} />} />
+                <Route path="/" element={<Main />} />
+                <Route path="/admin/*" element={<Admin />} />
                 <Route path="/myPage/*" element={<MyPage />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/loginRegister' element={<Register />} />

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
 import { categoryList, productRegister } from 'utils/axios';
+import createCode from 'utils/createCode';
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
@@ -67,15 +68,6 @@ const Register = () => {
             return;
         }
 
-        //상품코드 연도뒷자리2개/월/일/시간/분/랜덤5자리
-        const date = new Date();
-        const yy = date.getFullYear().toString().substring(2);
-        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
-        const dd = (("00" + date.getDate()).slice(-2));
-        const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
-        const serialNumber = Math.floor((Math.random() * (99999 - 10000) + 10000));
-        const productCode = yy + mm + dd + time + serialNumber;
-
         //에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
         let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
@@ -91,7 +83,7 @@ const Register = () => {
         }
 
         const data = {
-            goods_code: productCode,
+            goods_code: createCode(),
             goods_nm: productName,
             cate_code: cate02 === "" || cate02 === "선택해주세요" ? cate01 : cate02,
             goods_price: price,

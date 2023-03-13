@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 
 import Loading from 'components/loding/Loading';
-import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/products";
 

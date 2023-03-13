@@ -3,6 +3,7 @@ import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 
 import { login } from "utils/axios";
+import loginCheck from 'utils/loginCheck';
 import LoginInput from 'components/input/Input';
 
 import * as Style from "assets/styleComponent/login/login"
@@ -27,8 +28,7 @@ const Login = () => {
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("loginCheck") === "success") {
-            alert("로그인중에는 접근 하실 수 없습니다.");
+        if (loginCheck(false) === false) {
             nav("/");
         }
     }, []);

@@ -5,12 +5,12 @@ import LoginInput from 'components/input/Input';
 import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 import { login } from "utils/axios";
+import loginCheck from 'utils/loginCheck';
 
 
-const Relogin = ({ }) => {
+const PersonalModify = ({ }) => {
     const nav = useNavigate();
     const [password, setPassword] = useState("");
-
     const { mutateAsync, isLoading } = useMutation(login);
 
     const onSubmit = async (e) => {
@@ -28,9 +28,8 @@ const Relogin = ({ }) => {
     };
 
     useEffect(() => {
-        if (sessionStorage.getItem("loginCheck") !== "success") {
-            alert("먼저 로그인이 필요합니다.");
-            nav("/login");
+        if (loginCheck(true) === true) {
+            nav("/");
         }
     }, []);
 
@@ -46,7 +45,6 @@ const Relogin = ({ }) => {
         }
     };
 
-
     return (
         <Style.InDiv>
             <div className='relogin_title'>
@@ -59,8 +57,6 @@ const Relogin = ({ }) => {
                 </div>
             </div>
             {
-
-
                 <Info.Div>
                     <Info.Form onSubmit={onSubmit}>
                         <div>
@@ -70,13 +66,11 @@ const Relogin = ({ }) => {
                         <input type='submit' value='확인'></input>
                     </Info.Form>
                 </Info.Div>
-
             }
-
         </Style.InDiv >
 
     );
 };
 
 
-export default Relogin;
+export default PersonalModify;
