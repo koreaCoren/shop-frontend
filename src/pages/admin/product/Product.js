@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import List from 'pages/admin/product/List';
 import Register from 'pages/admin/product/Register';
-import Edit from 'pages/admin/product/Edit';
+import Modfiy from 'pages/admin/product/Modfiy';
 import Top from "components/admin/Top";
 
 import * as Common from "assets/styleComponent/admin/common"
@@ -19,7 +19,7 @@ const Product = () => {
                 <Routes>
                     <Route path='/' element={<List />} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/edit/:productCode' element={<Edit />}></Route>
+                    <Route path='/modfiy/:productCode' element={<Modfiy />}></Route>
                 </Routes>
             </Common.Padding>
         </>

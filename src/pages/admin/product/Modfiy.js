@@ -16,7 +16,7 @@ import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/product/edit';
 import ProductOption from 'components/admin/product/input/ProductOption';
 
-const Edit = () => {
+const Modfiy = () => {
     const [productName, setProductName] = useState("");
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
@@ -190,4 +190,4 @@ const Edit = () => {
     )
 }
 
-export default Edit;
+export default Modfiy;

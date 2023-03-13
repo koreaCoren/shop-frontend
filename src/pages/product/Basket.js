@@ -11,7 +11,7 @@ const Basket = ({ setOrderData }) => {
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
-    
+
 
     //전체 선택
     const allCheck = (checked) => {
@@ -67,18 +67,18 @@ const Basket = ({ setOrderData }) => {
     const countUp = (i) => {
         const data = JSON.parse(sessionStorage.getItem("basket"));
         data[i].prodcut_count += 1;
-        sessionStorage.setItem("basket",JSON.stringify(data));
+        sessionStorage.setItem("basket", JSON.stringify(data));
         setBasketData(JSON.parse(sessionStorage.getItem("basket")));
     }
     //갯수 감소
     const countDown = (i) => {
         const data = JSON.parse(sessionStorage.getItem("basket"));
-        if(data[i].prodcut_count > 1){
+        if (data[i].prodcut_count > 1) {
             data[i].prodcut_count -= 1;
         } else {
             data[i].prodcut_count = 1;
         }
-        sessionStorage.setItem("basket",JSON.stringify(data));
+        sessionStorage.setItem("basket", JSON.stringify(data));
         setBasketData(JSON.parse(sessionStorage.getItem("basket")));
     }
 
@@ -87,7 +87,7 @@ const Basket = ({ setOrderData }) => {
         const selectData = selectBasket();
         let data = [];
 
-        if (loginCheck() === true) {
+        if (loginCheck(true) === true) {
             return;
         }
 
@@ -152,17 +152,17 @@ const Basket = ({ setOrderData }) => {
                                             </div>
                                         </li>
                                         <li className='count'>
-                                            {a.prodcut_count > 1 
+                                            {a.prodcut_count > 1
                                                 ?
-                                                <button onClick={()=>{
+                                                <button onClick={() => {
                                                     countDown(i);
                                                 }}><span>-</span></button>
-                                                :<span className='none'>-</span>
+                                                : <span className='none'>-</span>
                                             }
                                             {a.prodcut_count}개
-                                        <button onClick={() => {
-                                            countUp(i);
-                                        }}><span>+</span></button></li>
+                                            <button onClick={() => {
+                                                countUp(i);
+                                            }}><span>+</span></button></li>
                                         <li>{a.goods_sale}%</li>
                                         <li>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
                                     </ul>

@@ -20,7 +20,7 @@ const NoticeWrite = () => {
     const token = useMutation(tokenCheck);
 
     useEffect(() => {
-        if (adminCheck() === false) {
+        if (adminCheck(true) === false) {
             nav("/");
         }
     }, [])

@@ -19,7 +19,7 @@ const Admin = () => {
     const nav = useNavigate();
 
     useEffect(() => {
-        if (adminCheck() === false) {
+        if (adminCheck(true) === false) {
             nav("/");
         }
     }, [nav])

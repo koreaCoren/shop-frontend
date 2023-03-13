@@ -4,41 +4,18 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 
 import { boardRead } from 'utils/axios';
+import adminCheck from 'utils/adminCheck'
+import searching from 'utils/searching';
 import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/community/notice";
 import Loading from 'components/loding/Loading';
+import Searching from 'components/board/Searching';
 
 const Notice = () => {
     const { boardPage } = useParams();
-    const nav = useNavigate();
     const [boardList, setBoardList] = useState();
-    const [search, setSearch] = useState("");
     const result = useQuery("boardRead", boardRead);
-
-    const searching = () => {
-        let arr = [];
-
-        if (search.length <= 1) {
-            alert("2글자 이상 입력해주세요");
-            return;
-        }
-
-        result.data.forEach((el) => {
-            if (el.del !== "Y") {
-                if (el.title.indexOf(search) !== -1) {
-                    arr.push(el);
-                }
-            }
-        });
-
-        if (arr.length === 0) {
-            alert("검색된 게시글이 없습니다");
-            return;
-        }
-
-        setBoardList(arr);
-    }
 
     const getBoard = () => {
         let arr = [];
@@ -51,24 +28,10 @@ const Notice = () => {
     }
 
     useEffect(() => {
-        console.log(result);
         if (result.isLoading !== true) {
             getBoard();
         }
     }, [result.isLoading])
-
-    const onChange = (e) => {
-        const value = e.target.value;
-        const name = e.target.name;
-        switch (name) {
-            case "search":
-                setSearch(value);
-                break;
-
-            default:
-                break;
-        }
-    }
 
     return (
         <Style.Contaienr>
@@ -76,11 +39,9 @@ const Notice = () => {
                 <h2>공지사항</h2>
 
                 <div className="flexBox">
-                    <div className="search">
-                        <input type="text" placeholder='제목검색' name='search' value={search} onChange={onChange} />
-                        <i className="fa-solid fa-magnifying-glass" onClick={searching}></i>
-                    </div>
-                    <Link className='write' to={"/community/write"}>글쓰기</Link>
+                    <Searching board={result.data} setBoardList={setBoardList} searchType={"title"} />
+                    {adminCheck(false) && <Link className='write' to={"/community/write"}>글쓰기</Link>}
+
                 </div>
                 <Style.Board>
                     <ul className='title'>

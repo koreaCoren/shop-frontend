@@ -4,6 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 
 import Loading from 'components/loding/Loading';
 import { boardDelete, boardRead, boardView } from 'utils/axios';
+import adminCheck from 'utils/adminCheck';
 
 import * as Style from "assets/styleComponent/community/detail";
 
@@ -26,13 +27,11 @@ const NoticeDetail = () => {
     }
 
     useEffect(() => {
-        console.log(result);
         const data = {
             type: "notice",
             i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
         }
         view.mutateAsync(data);
-        
     }, [])
 
     return (
@@ -64,7 +63,7 @@ const NoticeDetail = () => {
                     </div>
 
                     <Link to="/community/notice/1" className="more">목록</Link>
-                    <button onClick={boardDel}>삭제</button>
+                    {adminCheck(false) && <button onClick={boardDel}>삭제</button>}
 
                     <div className="differentBoard">
                         <ul>
