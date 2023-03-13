@@ -15,7 +15,6 @@ import noImg from "assets/images/noImg.gif";
 
 const Main = ({ setHeader }) => {
     let result = useQuery("prodcutList", productList);
-    console.log(result);
     useEffect(() => {
         setHeader(true);
     }, [result.isLoading]);
