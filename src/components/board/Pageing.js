@@ -1,71 +1,81 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 /**
- *  @param {*} count 페이지 표시되는 게시글
- * @param {*} boardPage 현재 페이지
- * @param {*} boardLength  게시글 총 갯수
- * @param {*} url /이동할페이지위치/(변수)
+ * @param {number} count 페이지 표시되는 게시글
+ * @param {number} boardPage 현재 페이지
+ * @param {number} boardLength 게시글 총 갯수
+ * @param {string} url 이동할 페이지 위치
  * @returns 
  */
-const Pageing = ({ count, boardPage, boardLength, url }) => {
-    let page = [];
-    const NOW_PAGE = Number(boardPage);
-    const MIN_PAGE = 1;
-    const MAX_PAGE = Math.ceil(boardLength / count);
-    const MIN_NAV = NOW_PAGE - 2 <= 1 ? 1 : NOW_PAGE - 2;
-    const MAX_NAV = NOW_PAGE + 2 >= MAX_PAGE ? MAX_PAGE : NOW_PAGE + 2;
-    const TOTAL_NAV = 5;
+const Paging = ({ count, boardPage, boardLength, url }) => {
+    const nowPage = Number(boardPage);
+    const minPage = 1;
+    const maxPage = Math.ceil(boardLength / count);
+    const minNav = Math.max(nowPage - 2, minPage);
+    const maxNav = Math.min(nowPage + 2, maxPage);
+    const totalNav = 5;
 
-    // 페이징 출력
-    const pageLoop = (min, max) => {
-        if (NOW_PAGE === 1) {
-            max = TOTAL_NAV <= MAX_PAGE ? max + 2 : MAX_PAGE;
-        } else if (NOW_PAGE === 2) {
-            max = TOTAL_NAV <= MAX_PAGE ? max + 1 : MAX_PAGE;
-        } else if (NOW_PAGE === MAX_PAGE || NOW_PAGE === MAX_PAGE - 1) {
-            min = TOTAL_NAV >= MAX_PAGE ? MIN_PAGE : MAX_PAGE - 4;
+    const pageNumbers = useMemo(() => {
+        const pageArr = [];
+        let startPage = minNav;
+
+        if (nowPage === minPage) {
+            startPage = minPage;
+        } else if (nowPage === minPage + 1) {
+            startPage = minPage;
+        } else if (nowPage >= maxPage - 1) {
+            startPage = Math.max(maxPage - totalNav + 1, minPage);
         }
 
-        for (let i = min; i <= max; i++) {
-            page.push(
-                <li key={i}><Link className={i === NOW_PAGE ? "now" : ""} to={`${url}/${i}`}>{i}</Link></li>
-            )
+        for (let i = startPage; i <= Math.min(startPage + totalNav - 1, maxPage); i++) {
+            pageArr.push(i);
         }
-    }
 
-    // 페이지가 한개일때
-    if (MIN_PAGE === MAX_PAGE) {
-        page.push(
-            <li><Link className='now' to={`${url}/1`}>{MIN_PAGE}</Link></li>
-        )
-    } else {
-        pageLoop(MIN_NAV, MAX_NAV);
-    }
+        return pageArr;
+    }, [nowPage, minNav, maxNav, minPage, maxPage, totalNav]);
 
     return (
-        <PageingContainer>
+        <PagingContainer>
             <ul>
-                <li><Link to={`${url}/1`}><i className="fa-solid fa-angles-left"></i></Link></li>
-                {page}
-                <li><Link to={`${url}/${MAX_PAGE}`}><i className="fa-solid fa-angles-right"></i></Link></li>
+                <li>
+                    <Link to={`${url}/${Math.max(nowPage - 1, minPage)}`}>
+                        <i className="fa-solid fa-angles-left"></i>
+                    </Link>
+                </li>
+                {pageNumbers.map((page) => (
+                    <li key={page}>
+                        <Link
+                            to={`${url}/${page}`}
+                            className={page === nowPage ? 'now' : ''}
+                        >
+                            {page}
+                        </Link>
+                    </li>
+                ))}
+                <li>
+                    <Link to={`${url}/${Math.min(nowPage + 1, maxPage)}`}>
+                        <i className="fa-solid fa-angles-right"></i>
+                    </Link>
+                </li>
             </ul>
-        </PageingContainer>
+        </PagingContainer>
     );
 };
 
-export const PageingContainer = styled.div`
+export const PagingContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 15px 0px;
 
-    ul{
+    ul {
         display: flex;
         gap: 10px;
     }
 
-    ul li a{
+    ul li a {
         background-color: #aaa;
         color: #fff;
         border-radius: 5px;
@@ -75,10 +85,10 @@ export const PageingContainer = styled.div`
         align-items: center;
         justify-content: center;
     }
-    
-    ul li a.now{
+
+    ul li a.now {
         background-color: #1a6dff;
     }
-`
+`;
 
-export default Pageing;
+export default Paging;

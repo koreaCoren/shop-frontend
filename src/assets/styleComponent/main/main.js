@@ -45,6 +45,57 @@ export const Banner = styled.div`
         border: 1px solid #fff;
         margin-top: 30px;
     }
+
+    @media(max-width:1200px) {
+        overflow: hidden;
+        >img {
+            width: 1200px;
+        }
+
+        .content {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    @media(max-width:700px) {
+        .content>div h2 {
+            font-size: 40px;
+        }
+
+        .content>div h2 b {
+            font-size: 45px;
+            margin-top: 10px;
+        }
+
+        .content>a {
+            margin-top: 20px;
+        }
+    }
+
+    @media(max-width:500px) {
+        >img {
+            width: 800px;
+        }
+
+        .content>div {
+            padding: 30px 20px;
+        }
+
+        .content>div h2 {
+            font-size: 22px;
+        }
+
+        .content>div h2 b {
+            font-size: 28px;
+        }
+
+        .content>a {
+            font-size: 20px;
+            padding: 10px 20px;
+        }
+    }
 `
 
 export const BrandStory = styled.div`
@@ -66,6 +117,16 @@ export const BrandStory = styled.div`
         font-size: 20px;
         color: #999;
         line-height: 1.5;
+    }
+
+    @media(max-width:500px) {
+        h3 {
+        font-size: 30px;
+        }
+
+        p {
+        font-size: 16px;
+        }
     }
 `
 
@@ -159,6 +220,31 @@ export const ViewMore = styled.div`
 
     ul li div h3 p {
         font-size: 24px;
+    }
+
+    @media(max-width:700px) {
+        ul li {
+        height: 300px;
+        }
+
+        ul li div h3 span {
+        font-size: 20px;
+        }
+
+        ul li div h3 p {
+        font-size: 14px;
+        }
+    }
+
+    @media(max-width:550px) {
+        ul {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        ul li {
+            height: 200px;
+        }
     }
 `
 
@@ -263,6 +349,30 @@ export const LifeHim = styled.div`
         font-size: 22px;
         color: #1b387c;
     }
+
+    @media(max-width:1200px) {
+        padding: 50px 15px;
+    }
+
+    @media(max-width:1000px) {
+        .flexContainer {
+            grid-template-columns: 230px 1fr;
+        }
+    }
+
+    @media(max-width:500px) {
+        .flexContainer {
+            grid-template-columns: 1fr;
+        }
+
+        .flexContainer .content .slideButton {
+            margin: 20px 0px;
+        }
+
+        .flexContainer .slider {
+            text-align: center;
+        }
+    }
 `
 
 export const Best = styled.div`
@@ -332,9 +442,50 @@ export const Best = styled.div`
     }
 
     .wrap>ul li .pay {
-    font-size: 20px;
-    color: #1b387c;
-    font-family: 'Pretendard-Bold' !important;
+        font-size: 20px;
+        color: #1b387c;
+        font-family: 'Pretendard-Bold' !important;
+    }
+
+    @media(max-width:1200px) {
+        .wrap>ul {
+            gap: 30px;
+        }
+    }
+
+    @media(max-width:1000px) {
+        .wrap>ul li .hoverBox a img {
+            width: 100%;
+        }
+    }
+
+    @media(max-width:800px) {
+        .wrap>ul {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media(max-width:700px) {
+        .wrap>ul li .name {
+            font-size: 18px;
+        }
+
+        .wrap>ul li .text {
+            font-size: 14px;
+        }
+    }
+
+    
+    @media(max-width:550px) {
+        .wrap>ul li .hoverBox a img {
+            height: 150px;
+        }
+    }
+    
+    @media(max-width:400px) {
+        .wrap>ul li .hoverBox a img {
+            height: 120px;
+        }
     }
 `
 
@@ -429,5 +580,34 @@ export const Review = styled.div`
         border-radius: 10px;
         text-align: center;
         margin-top: 50px;
+    }
+
+    @media(max-width:800px) {
+        ul {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        ul li a>img {
+            padding: 20px;
+        }
+    }
+
+    @media(max-width:500px) {
+        ul {
+            grid-template-columns: 1fr;
+        }
+
+        ul li:nth-child(3),
+        ul li:nth-child(4) {
+            display: none;
+        }
+
+        ul li:nth-child(2) a .bar {
+            display: none;
+        }
+
+        ul li a .prodcutName {
+            display: none;
+        }
     }
 `

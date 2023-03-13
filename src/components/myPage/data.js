@@ -6,15 +6,15 @@ const menus = [
         icon: "fa-solid fa-file-invoice-dollar",
     },
 
-    {
-        mainTitle: "찜한 상품",
-        subList: [
-            // { title: "카테고리 추가/삭제", url: "Category" },
-            // { title: "상품등록", url: "product" }
-        ],
-        url: "pick",
-        icon: "fa-solid fa-gift",
-    },
+    // {
+    //     mainTitle: "찜한 상품",
+    //     subList: [
+    //         // { title: "카테고리 추가/삭제", url: "Category" },
+    //         // { title: "상품등록", url: "product" }
+    //     ],
+    //     url: "pick",
+    //     icon: "fa-solid fa-gift",
+    // },
 
     {
         mainTitle: "기본 배송지 관리",

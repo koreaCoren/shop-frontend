@@ -105,7 +105,7 @@ const OrderInfo = ({ orderData }) => {
         } else if (buyerDetailAddress === "") {
             alert("상세주소 입력해주세요");
             return;
-        }else if ( receiver === "") {
+        } else if (receiver === "") {
             alert("받는 사람을 입력해주세요");
             return;
         }
@@ -126,8 +126,8 @@ const OrderInfo = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderTotalPrice) > 50000 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
             payStatus: 0,
-            returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
-            closeUrl: "http://localhost:3000/close",
+            returnUrl: `${process.env.REACT_APP_API_URL}/order/ini_transaction?orderCode=${orderCode}`,
+            closeUrl: "http://158.247.196.248:9003/close",
         })
 
         const data = {
