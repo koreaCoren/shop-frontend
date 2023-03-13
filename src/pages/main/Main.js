@@ -15,6 +15,7 @@ import noImg from "assets/images/noImg.gif";
 
 const Main = ({ setHeader }) => {
     let result = useQuery("prodcutList", productList);
+    console.log(result);
     useEffect(() => {
         setHeader(true);
     }, [result.isLoading]);
@@ -144,7 +145,7 @@ const Main = ({ setHeader }) => {
                                     <li key={i}>
                                         <div className="hoverBox">
                                             <Link to={`/product/detail/${a.goods_code}`}>
-                                                <img src={a.goods_img === "" ? noImg :a.goods_img} alt="" />
+                                                <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             </Link>
                                             <ul>
                                                 <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
