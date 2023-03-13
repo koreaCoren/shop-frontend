@@ -310,6 +310,7 @@ export const orderList = async (data) => {
     })
     return api;
 }
+
 // 주문번호로 주문확인
 export const orderCodeList = async (data) => {
     const api = await API.ORDER_CODE_LIST.post("", data).then((res) => {
