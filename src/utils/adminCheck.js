@@ -4,6 +4,8 @@ const adminCheck = (isAlert) => {
         sessionStorage.getItem("userId") !== "pkd") {
         isAlert && alert("접근불가능합니다.");
         return false;
+    } else {
+        return true
     }
 }
 

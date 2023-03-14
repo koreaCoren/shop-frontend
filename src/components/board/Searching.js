@@ -65,7 +65,6 @@ const Searching = ({ board, setBoardList, searchType }) => {
             default:
                 break;
         }
-        console.log(value);
         return value
     }
 

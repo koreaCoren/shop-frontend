@@ -5,7 +5,6 @@ import { useQuery } from 'react-query';
 
 import { boardRead } from 'utils/axios';
 import adminCheck from 'utils/adminCheck'
-import searching from 'utils/searching';
 import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/community/notice";

@@ -4,9 +4,10 @@ export const Save = styled.div`
     position: fixed;
     bottom: 15px;
     right: 15px;
+    font-size: 18px;
     background-color: #1a6dff;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     display: flex;
     align-items: center;
