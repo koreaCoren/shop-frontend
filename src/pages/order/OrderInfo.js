@@ -127,7 +127,7 @@ const OrderInfo = ({ orderData }) => {
             productPrice: Number(orderTotalPrice) > 50000 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
             payStatus: 0,
             returnUrl: `${process.env.REACT_APP_API_URL}/order/ini_transaction?orderCode=${orderCode}`,
-            closeUrl: "http://158.247.196.248:9003/close",
+            closeUrl: "http://lifehim.com/close",
         })
 
         const data = {
