@@ -15,6 +15,7 @@ import noImg from "assets/images/noImg.gif";
 
 const Main = () => {
     let result = useQuery("prodcutList", productList);
+    console.log(result.data);
     useEffect(() => { }, [result.isLoading]);
     return (
         <main>
@@ -147,9 +148,25 @@ const Main = () => {
                                             <ul>
                                                 <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
                                             </ul>
+                                            {
+                                                a.goods_sale > 0
+                                                    ? <div className="sale">{a.goods_sale}% <br /> 할인!</div>
+                                                    : null
+                                            }
                                         </div>
                                         <div className="name">{a.goods_nm}</div>
-                                        <div className="pay">{a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</div>
+                                        {
+                                            Number(a.goods_sale) <= 0
+                                                ? <div className="pay">{
+                                                    a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                </div>
+                                                : <div className="pay discount">
+                                                    <p>
+                                                        {a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                    </p>
+                                                    <p>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
+                                                </div>
+                                        }
                                     </li>
                                 )
                             })

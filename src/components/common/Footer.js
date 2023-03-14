@@ -5,7 +5,7 @@ import logo from "assets/images/ft_logo.svg"
 const Footer = () => {
     return (
         <Foot>
-            <div class="wrap">
+            <div className="wrap">
                 {/* <ul>
                     <li><a href="/">홈</a></li>
                     <li><a href="/pages/brandIntro.php">회사소개</a></li>
@@ -13,14 +13,14 @@ const Footer = () => {
                     <li><a href="#">개인정보처리방침</a></li>
                 </ul> */}
 
-                <div class="content">
+                <div className="content">
                     <div>
                         <img src={logo} alt="" />
                         <span>COSTOMER CENTER</span><br />
                         070-7335-5470 l 평일 9:00 ~ 18:00 / 점심 12:00 ~ 13:00 <br />(토, 일, 공휴일 휴무)
                     </div>
                     <p>
-                        상호명 / <b class="b">라이프힘</b > 대표자 / <b>전기철</b><br class="br" /> 사업자등록번호 / <b>619-81-07048</b><br class="br" /> 통신판매업신고번호 / <b>제2017-대구수성구-0415호</b><br /> 고객센터 / <b>070-7335-5470</b> <br class="br" />주소 / <b>대구광역시 수성구 동대구로6길68 2F</b>
+                        상호명 / <b className="b">라이프힘</b > 대표자 / <b>전기철</b><br className="br" /> 사업자등록번호 / <b>619-81-07048</b><br className="br" /> 통신판매업신고번호 / <b>제2017-대구수성구-0415호</b><br /> 고객센터 / <b>070-7335-5470</b> <br className="br" />주소 / <b>대구광역시 수성구 동대구로6길68 2F</b>
                     </p>
                 </div>
 
