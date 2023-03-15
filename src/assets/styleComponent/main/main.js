@@ -388,13 +388,28 @@ export const Best = styled.div`
     .wrap>ul {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         gap: 15px;
     }
 
     .wrap>ul li .hoverBox {
         position: relative;
+    }
+
+    .wrap>ul li .hoverBox .sale{
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #e90d00;
+        color: #fff;
+        width: 70px;
+        height:70px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
     }
 
     .wrap>ul li .hoverBox a img {
@@ -445,6 +460,20 @@ export const Best = styled.div`
         font-size: 20px;
         color: #1b387c;
         font-family: 'Pretendard-Bold' !important;
+    }
+
+    .wrap>ul li .pay.discount p{
+        line-height: 1.2;
+    }
+
+    .wrap>ul li .pay.discount p:nth-child(1) {
+        color: #ccc;
+        font-size: 16px;
+        text-decoration: line-through;
+    }
+
+    .wrap>ul li .pay.discount p:nth-child(2){
+        font-size: 20px;
     }
 
     @media(max-width:1200px) {

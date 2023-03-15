@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { reqPickList } from 'utils/axios';
 import { settingFav } from 'utils/axios';
+import addBasket from 'utils/addBasket';
+import SubTitle from 'components/myPage/SubTitle';
 
 import * as Style from "assets/styleComponent/myPage/myPage";
 import * as PickStyle from "assets/styleComponent/myPage/pick";
-import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 
@@ -20,61 +21,56 @@ const Pick = ({ }) => {
         showPickList();
     }, []);
 
-    const showPickList = async() => {
+    const showPickList = async () => {
         const data = {
-            user_id : sessionStorage.getItem('userId')
+            user_id: sessionStorage.getItem('userId')
         }
         await getPickList.mutateAsync(data);
         setPickList(data.result);
         // console.log(data.result);
     }
 
-    const delFav = async(i,goodsCode) => {
+    const delFav = async (i, goodsCode) => {
         let arr = pickList;
-        arr.splice(i,1);
+        arr.splice(i, 1);
         setPickList([...arr]);
         const data = {
-            user_id : sessionStorage.getItem('userId'),
-            goods_code : goodsCode,
-            is_fav : 0
+            user_id: sessionStorage.getItem('userId'),
+            goods_code: goodsCode,
+            is_fav: 0
         }
         await setDelFav.mutateAsync(data);
     }
 
     return (
         <Style.InDiv>
-            <div className='subTitle'>
-                <div>
-                    <h2>찜한 상품</h2>
-                    <div className='grayTitle'>찜한 상품은 최대 100개까지 표시가 됩니다.</div>
-                </div>
-            </div>
+            <SubTitle h2={"찜한 상품"} h3={"찜한 상품은 최대 100개까지 표시가 됩니다."} clickEvent={null} clickText={null} />
             <div className='contents'>
-                    {
-                        pickList?.map((item, index) => {
-                            return(
-                                <PickStyle.List key={index}>
-                                    <div className='goodsImg'>
-                                    <img src={item.goods_img === "" ? noImg :item.goods_img}/>
-                                    </div>
-                                    <div className='goodsInfo'>
-                                        <span className='nm'>
-                                            <Link to={`/product/detail/${item.goods_code}`}>{item.goods_nm}</Link>
-                                        </span>
-                                        <span className='price'>{item.goods_price}원</span>
-                                    </div>
-                                    <div className='goodsBtn'>
-                                        <button className='basket' onClick={() => { addBasket(item, 1) }}>담기</button>
-                                        <button className='favDel' 
-                                                onClick={() => {
-                                                    delFav(index,item.goods_code);
-                                                    }} >삭제</button>
-                                    </div>
-                                </PickStyle.List>
-                            )
-                        })
-                    }
-                
+                {
+                    pickList?.map((item, index) => {
+                        return (
+                            <PickStyle.List key={index}>
+                                <div className='goodsImg'>
+                                    <img src={item.goods_img === "" ? noImg : item.goods_img} />
+                                </div>
+                                <div className='goodsInfo'>
+                                    <span className='nm'>
+                                        <Link to={`/product/detail/${item.goods_code}`}>{item.goods_nm}</Link>
+                                    </span>
+                                    <span className='price'>{item.goods_price}원</span>
+                                </div>
+                                <div className='goodsBtn'>
+                                    <button className='basket' onClick={() => { addBasket(item, 1) }}>담기</button>
+                                    <button className='favDel'
+                                        onClick={() => {
+                                            delFav(index, item.goods_code);
+                                        }} >삭제</button>
+                                </div>
+                            </PickStyle.List>
+                        )
+                    })
+                }
+
 
             </div>
         </Style.InDiv>

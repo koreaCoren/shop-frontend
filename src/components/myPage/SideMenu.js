@@ -7,7 +7,8 @@ const SideMenu = () => {
         <Ul>
             <li><Link to="/myPage/order/1">마이페이지</Link></li>
             <li><Link to="/myPage/order/1"><i className='fa-solid fa-file-invoice-dollar'></i>주문내역</Link></li>
-            <li><Link to="/myPage/Address"><i className='fa-solid fa-truck'></i>기본 배송지 관리</Link></li>
+            <li><Link to="/myPage/address"><i className='fa-solid fa-truck'></i>기본 배송지 관리</Link></li>
+            <li><Link to="/myPage/review"><i className='fa-solid fa-star'></i>상품 후기 작성</Link></li>
             <li><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i>개인 정보 수정</Link></li>
         </Ul>
     );

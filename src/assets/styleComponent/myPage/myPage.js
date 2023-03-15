@@ -7,32 +7,6 @@ background-color: white;
 width: 100%;
 height: 100%;
 padding: 30px;
-.subTitle{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1.5px solid black;
-    padding-bottom: 30px;
-    font-weight: bold;
-}
-.subTitle > div{
-    display: flex;
-    align-items: center;
-}
-h2{        
-    font-size: 24px;
-}
-.grayTitle{
-    color: gray;
-    padding: 0 10px;
-
-}
-.new{
-    font-size: 20px;
-    text-align: right;
-    cursor: pointer;
-}
 .contents{
     display: flex;
     flex-direction: column;
@@ -46,9 +20,6 @@ h2{
 .relogin_title div{
     padding: 20px 0 10px 0;
 
-}
-h3{
-    font-size: 18px;
 }
 .pointer{
     cursor: pointer;

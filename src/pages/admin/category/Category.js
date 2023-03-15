@@ -52,7 +52,6 @@ const Category = () => {
         arr.splice(index, 1);
         for (let i = 0; i < arr.length; i++) {
             const idx = i + 1;
-            // console.log(arr[i].lowCategory.length + 1);
             arr[i].cate_code = idx * 10;
             if (arr[i].lowCategory.length > 0) {
                 for (let j = 0; j < arr[i].lowCategory.length; j++) {
@@ -91,9 +90,10 @@ const Category = () => {
         nav("/admin/Category");
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
-        mutateAsync(categorys);
+        await mutateAsync(categorys);
+        alert("저장완료")
     };
 
     const onChange = (e) => {

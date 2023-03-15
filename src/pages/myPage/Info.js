@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useMutation } from 'react-query';
 import { info, userUpdate } from "utils/axios";
 import Input from "components/input/Input";
+import SubTitle from 'components/myPage/SubTitle';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as InfoStyle from "assets/styleComponent/myPage/info"
@@ -116,12 +117,13 @@ const Info = ({ }) => {
         setAddress(data.result?.user_addr);
     }
 
-    
+
 
 
     return (
         userInfo.isSuccess &&
         <Style.InDiv>
+            <SubTitle h2={"개인 정보 수정"} h3={"회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요."} clickEvent={null} clickText={null} />
             <div className='subTitle'>
                 <div>
                     <h2>개인 정보 수정</h2>
@@ -134,80 +136,80 @@ const Info = ({ }) => {
                         <div>
                             <div className='inputTitle'>아이디</div>
                             <div>
-                                <Input 
-                                    type="text" 
-                                    name="id" 
-                                    value={UserData.user_id} 
+                                <Input
+                                    type="text"
+                                    name="id"
+                                    value={UserData.user_id}
                                     readOnly={true} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>이름</div>
                             <div>
-                                <Input 
-                                    type="text" 
-                                    name="name" 
-                                    value={Name} 
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    value={Name}
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>현재 비밀번호</div>
                             <div>
-                                <Input 
-                                    type="password" 
-                                    name="currentPW" 
+                                <Input
+                                    type="password"
+                                    name="currentPW"
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>새 비밀번호</div>
                             <div>
-                                <Input 
-                                    type="password" 
-                                    name="changePW" 
+                                <Input
+                                    type="password"
+                                    name="changePW"
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>휴대폰</div>
                             <div>
-                                <Input 
-                                    type="text" 
-                                    name="tell" 
-                                    value={Tell} 
+                                <Input
+                                    type="text"
+                                    name="tell"
+                                    value={Tell}
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>이메일</div>
                             <div>
-                                <Input 
-                                    type="text" 
-                                    name="email" 
-                                    value={Email} 
+                                <Input
+                                    type="text"
+                                    name="email"
+                                    value={Email}
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
                             <div className='inputTitle'>주소</div>
                             <div>
-                                <Input 
-                                    type="text" 
-                                    name="address" 
-                                    value={Address} 
+                                <Input
+                                    type="text"
+                                    name="address"
+                                    value={Address}
                                     onChange={onChange} />
                             </div>
                         </div>
                         <div>
-                            <input 
-                                type="button" 
-                                value="수정" 
+                            <input
+                                type="button"
+                                value="수정"
                                 onClick={(() => {
-                                CurrentPW === "" 
-                                    ? onSubmit(1) 
-                                    : onSubmit(2);
-                            })} />
+                                    CurrentPW === ""
+                                        ? onSubmit(1)
+                                        : onSubmit(2);
+                                })} />
                         </div>
                     </InfoStyle.Form>
                 </InfoStyle.Div>

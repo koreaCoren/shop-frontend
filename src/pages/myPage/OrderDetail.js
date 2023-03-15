@@ -4,6 +4,7 @@ import { useQuery, useMutation } from 'react-query';
 
 import { orderCodeList } from 'utils/axios';
 import { track } from 'utils/delivery';
+import SubTitle from 'components/myPage/SubTitle';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -35,16 +36,7 @@ const OrderDetail = ({ }) => {
 
     return (
         <Style.InDiv>
-            <div className='subTitle'>
-                <OrderStyle.Div>
-                    <h2>주문 내역상세</h2>
-                </OrderStyle.Div>
-                <div>
-                    <div className='grayTitle'>배송 또는 상품에 문제가 있나요?</div>
-                    <div>1:1문의하기</div>
-                </div>
-
-            </div>
+            <SubTitle h2={"주문 내역상세"} h3={null} clickEvent={null} clickText={"1:1문의하기"} />
             <OrderStyle.CodeTitle> 주문번호 {list ? list[0].orderCode : ''}</OrderStyle.CodeTitle>
             {
                 isSuccess &&

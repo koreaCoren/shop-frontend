@@ -5,6 +5,7 @@ import { useQuery, useMutation } from 'react-query';
 import { orderList } from 'utils/axios';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
+import SubTitle from 'components/myPage/SubTitle';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as OrderStyle from "assets/styleComponent/myPage/order"
@@ -35,13 +36,7 @@ const Order = ({ }) => {
 
     return (
         <Style.InDiv>
-            <div className='subTitle'>
-                <OrderStyle.Div>
-                    <h2>주문 내역</h2>
-                    <div className='grayTitle'>최대 지난 3년간의 주문 내역까지 확인할 수 있어요</div>
-                </OrderStyle.Div>
-                <div className='new'>3개월</div>
-            </div>
+            <SubTitle h2={"주문 내역"} h3={"최대 지난 3년간의 주문 내역까지 확인할 수 있어요"} clickEvent={null} clickText={"3개월"} />
             {
                 isSuccess &&
                 sliceBoard?.map((a, i) => {

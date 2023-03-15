@@ -70,6 +70,7 @@ const Basket = ({ setOrderData }) => {
         sessionStorage.setItem("basket", JSON.stringify(data));
         setBasketData(JSON.parse(sessionStorage.getItem("basket")));
     }
+
     //갯수 감소
     const countDown = (i) => {
         const data = JSON.parse(sessionStorage.getItem("basket"));
