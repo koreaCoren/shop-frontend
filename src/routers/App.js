@@ -5,15 +5,15 @@ import { useMutation } from "react-query";
 import { tokenCheck } from "utils/axios";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
-import Main from "../pages/main/Main";
+import Close from "components/inicis/Close";
+import Main from "pages/main/Main";
 import Login from "pages/login/Login";
 import Register from "pages/login/Register";
 import Admin from "routers/Admin";
 import MyPage from "routers/MyPage";
 import Product from "./Product";
 import Order from "./Order";
-import Close from "components/inicis/Close";
-import Community from "./Community";
+import Community from "./community/Community";
 
 import "assets/css/common/common.css";
 

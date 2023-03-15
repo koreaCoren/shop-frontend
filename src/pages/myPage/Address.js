@@ -4,6 +4,7 @@ import { address, insertAddress, deleteAddress, insDefaultAddr } from 'utils/axi
 
 import Loading from 'components/loding/Loading';
 import DaumPost from 'components/daumPost/DaumPost';
+import SubTitle from 'components/myPage/SubTitle';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
 import * as AddressStyle from "assets/styleComponent/myPage/address"
@@ -100,13 +101,7 @@ const Address = ({ }) => {
 
     return (
         <Style.InDiv>
-            <div className='subTitle'>
-                <div>
-                    <h2>배송지 관리</h2>
-                    <div className='grayTitle'>배송지에 따라 상품유형 및 배송정보가 달라질 수 있습니다.</div>
-                </div>
-                <div className='new' onClick={showShipDiv}>+ 새 배송지 추가</div>
-            </div>
+            <SubTitle h2={"배송지 관리"} h3={"배송지에 따라 상품유형 및 배송정보가 달라질 수 있습니다."} clickEvent={showShipDiv} clickText={"+ 새 배송지 추가"} />
             {
                 showShipping &&
                 <AddressStyle.Shipping>
@@ -118,10 +113,10 @@ const Address = ({ }) => {
                             <span>
                                 <span>주소</span>
                                 <span
-                                onClick={() => {
-                                    setIsPostOpen(true);
-                                }}
-                                className='pointer clickBox'>
+                                    onClick={() => {
+                                        setIsPostOpen(true);
+                                    }}
+                                    className='pointer clickBox'>
                                     <i className="fa-solid fa-magnifying-glass"></i>
                                 </span>
                             </span>
