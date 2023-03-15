@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export const Div = styled.div`
-border-top: 2px solid black;
 display: flex;
 justify-content: center;
 padding-top: 20px;

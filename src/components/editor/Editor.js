@@ -38,7 +38,7 @@ const TextEditor = ({ setContent, setImageCode, width, type, value }) => {
         <Div width={width}>
             <CKEditor
                 config={{
-                    extraPlugins: [uploadPlugin]
+                    extraPlugins: [uploadPlugin],
                 }}
                 editor={ClassicEditor}
                 data={value}
