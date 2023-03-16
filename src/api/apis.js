@@ -60,6 +60,11 @@ export const ACCUMULATE_SELL_DATA_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/data/cumulative_sales`
 })
 
+// 방문자 수
+export const USER_ACCESS_COUNT = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/data/sel_user_count`
+})
+
 //회원 관리
 export const USER = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_list`

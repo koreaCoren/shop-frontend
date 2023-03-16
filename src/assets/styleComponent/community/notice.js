@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Contaienr = styled.div`
     padding: 50px 0px;
-
+    
     h2{
         text-align: center;
         font-size: 30px;
@@ -16,6 +16,12 @@ export const Contaienr = styled.div`
         background-color: #444;
         color: #fff;
         font-size: 16px;
+    }
+
+    @media (max-width:500px) {
+        input{
+            width: 200px;
+        }
     }
 `
 
@@ -53,5 +59,17 @@ export const Board = styled.div`
         text-align: center;
         line-height: 200px;
         border-bottom: 1px solid #aaa;
+    }
+
+    @media (max-width:700px) {
+        ul{
+            grid-template-columns: 50px 1fr 100px;
+        }
+        .title li:nth-child(4),
+        .title li:nth-child(5),
+        .list li:nth-child(4),
+        .list li:nth-child(5){
+            display: none;
+        }
     }
 `

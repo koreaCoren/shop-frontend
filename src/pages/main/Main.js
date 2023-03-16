@@ -135,42 +135,46 @@ const Main = () => {
             <Style.Best>
                 <div className="wrap">
                     <h3>라이프힘 베스트</h3>
-                    <ul>
-                        {
-                            result.data?.slice(0, 4).map((a, i) => {
-                                return (
-                                    <li key={i}>
-                                        <div className="hoverBox">
-                                            <Link to={`/product/detail/${a.goods_code}`}>
-                                                <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
-                                            </Link>
-                                            <ul>
-                                                <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
-                                            </ul>
-                                            {
-                                                a.goods_sale > 0
-                                                    ? <div className="sale">{a.goods_sale}% <br /> 할인!</div>
-                                                    : null
-                                            }
-                                        </div>
-                                        <div className="name">{a.goods_nm}</div>
-                                        {
-                                            Number(a.goods_sale) <= 0
-                                                ? <div className="pay">{
-                                                    a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                    {
+                        result.data?.length > 0
+                            ? <ul>
+                                {
+                                    result.data?.slice(0, 4).map((a, i) => {
+                                        return (
+                                            <li key={i}>
+                                                <div className="hoverBox">
+                                                    <Link to={`/product/detail/${a.goods_code}`}>
+                                                        <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
+                                                    </Link>
+                                                    <ul>
+                                                        <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
+                                                    </ul>
+                                                    {
+                                                        a.goods_sale > 0
+                                                            ? <div className="sale">{a.goods_sale}% <br /> 할인!</div>
+                                                            : null
+                                                    }
                                                 </div>
-                                                : <div className="pay discount">
-                                                    <p>
-                                                        {a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
-                                                    </p>
-                                                    <p>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
-                                                </div>
-                                        }
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
+                                                <div className="name">{a.goods_nm}</div>
+                                                {
+                                                    Number(a.goods_sale) <= 0
+                                                        ? <div className="pay">{
+                                                            a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                        </div>
+                                                        : <div className="pay discount">
+                                                            <p>
+                                                                {a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                            </p>
+                                                            <p>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
+                                                        </div>
+                                                }
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 상품이 없습니다.</p>
+                    }
                     {/* <ul>
                         <li>
                             <div className="hoverBox">
