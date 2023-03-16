@@ -50,7 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://158.247.196.248:9003",
+  "proxy": "http://localhost:3000",
   "devDependencies": {
     "webpack-dev-server": "^4.11.1"
   }
