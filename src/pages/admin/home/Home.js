@@ -9,7 +9,7 @@ import LinkButton from 'components/admin/product/button/LinkButton';
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/home/Home';
 
-import { accumulateSell, sellByDateList } from 'utils/axios';
+import { accumulateSell, sellByDateList, userAccessCount } from 'utils/axios';
 import { useEffect } from 'react';
 import Loading from 'components/loding/Loading';
 
@@ -19,13 +19,16 @@ const Home = () => {
     const [isDataLoading, setIsDataLoading] = useState(false);
     const bar = useQuery("sellByDateList", sellByDateList);
     const donut = useQuery("accumulateSell", accumulateSell);
+    const line = useQuery("userAccessCount", userAccessCount);
 
     useEffect(() => {
         if (donut.isLoading === false &&
-            bar.isLoading === false) {
+            bar.isLoading === false &&
+            line.isLoading === false
+        ) {
             setIsDataLoading(true);
         }
-    }, [donut.isLoading, bar.isLoading])
+    }, [donut.isLoading, bar.isLoading, line.isLoading])
 
     const onChenge = (e) => {
         const name = e.target.name;
@@ -131,7 +134,7 @@ const Home = () => {
                             </div>
                         </Style.Title>
                         <div style={{ width: "100%", maxHeight: "370px", height: "100%" }}>
-                            <LineChart day={visitor} />
+                            <LineChart data={line.data} day={visitor} />
                         </div>
                     </Common.Container>
                     <Common.Container>

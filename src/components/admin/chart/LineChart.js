@@ -3,18 +3,18 @@ import { ResponsiveLine } from '@nivo/line'
 import { data } from './LineData';
 import { useEffect } from 'react';
 
-const LineChart = ({ day }) => {
+const LineChart = ({ day, data }) => {
     const [arr, setArr] = useState([
         {
             "id": "방문자수",
-            "data": data[0].data.slice(data[0].data.length - day, data[0].data.length)
+            "data": data.slice(data.length - day, data.length)
         }
     ])
     useEffect(() => {
         setArr([
             {
                 "id": "방문자수",
-                "data": data[0].data.slice(data[0].data.length - day, data[0].data.length)
+                "data": data.slice(data.length - day, data.length)
             }
         ])
     }, [day])

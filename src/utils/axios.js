@@ -99,7 +99,11 @@ export const boardWrite = async (data) => {
     const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
         if (res.data.result === "success") {
             alert("등록완료");
-            window.location.replace(`/community/${data.type}/1`);
+            if (data.type === "review") {
+                window.location.replace(`/community/${data.type}/photo/1`);
+            } else {
+                window.location.replace(`/community/${data.type}/1`);
+            }
         } else if (res.data.result === "fail") {
             alert("알 수 없는 에러로 등록실패 했습니다.");
         }
@@ -150,6 +154,12 @@ export const sellByDateList = async () => {
 // 누적 판매 TOP5
 export const accumulateSell = async () => {
     const { data } = await API.ACCUMULATE_SELL_DATA_API.get();
+    return data;
+}
+
+// 방문자수
+export const userAccessCount = async () => {
+    const { data } = await API.USER_ACCESS_COUNT.get();
     return data;
 }
 

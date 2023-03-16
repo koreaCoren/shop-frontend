@@ -176,4 +176,32 @@ export const Detail = styled.div`
         font-size: 16px;
         color: #909090;
     }
+    @media(max-width:400px) {
+        .productTitle {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .productTitle>div:first-child {
+            width: 100%;
+            border: none;
+        }
+
+        .title ul li {
+            grid-template-columns: 100px 1fr;
+        }
+
+        .comments {
+            padding: 50px 0px;
+            text-align: center;
+        }
+
+        .differentBoard ul li {
+            grid-template-columns: 100px 1fr;
+        }
+        
+    .more,button {
+        width: 120px;
+    }
+}
 `
