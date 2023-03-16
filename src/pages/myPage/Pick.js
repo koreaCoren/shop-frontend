@@ -7,8 +7,8 @@ import { settingFav } from 'utils/axios';
 import addBasket from 'utils/addBasket';
 import SubTitle from 'components/myPage/SubTitle';
 
-import * as Style from "assets/styleComponent/myPage/myPage";
-import * as PickStyle from "assets/styleComponent/myPage/pick";
+import * as Common from "assets/styleComponent/myPage/myPage";
+import * as Style from "assets/styleComponent/myPage/pick";
 
 import noImg from "assets/images/noImg.gif";
 
@@ -43,13 +43,13 @@ const Pick = ({ }) => {
     }
 
     return (
-        <Style.InDiv>
+        <Common.InDiv>
             <SubTitle h2={"찜한 상품"} h3={"찜한 상품은 최대 100개까지 표시가 됩니다."} clickEvent={null} clickText={null} />
             <div className='contents'>
                 {
                     pickList?.map((item, index) => {
                         return (
-                            <PickStyle.List key={index}>
+                            <Style.List key={index}>
                                 <div className='goodsImg'>
                                     <img src={item.goods_img === "" ? noImg : item.goods_img} />
                                 </div>
@@ -66,14 +66,14 @@ const Pick = ({ }) => {
                                             delFav(index, item.goods_code);
                                         }} >삭제</button>
                                 </div>
-                            </PickStyle.List>
+                            </Style.List>
                         )
                     })
                 }
 
 
             </div>
-        </Style.InDiv>
+        </Common.InDiv>
     );
 };
 export default Pick;

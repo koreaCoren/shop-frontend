@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
-import { tokenCheck } from "utils/axios";
+import { tokenCheck, userCount } from "utils/axios";
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
 import Close from "components/inicis/Close";
@@ -16,13 +16,25 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
+import { useCookies } from "react-cookie";
+import moment from "moment/moment";
 
 function App() {
     const nav = useNavigate();
     const location = useLocation();
     const [header, setHeader] = useState(true);
     const [orderData, setOrderData] = useState();
+    const [cookies, setCookies] = useCookies();
     const token = useMutation(tokenCheck);
+    const userAccessCheck = useMutation(userCount);
+
+    const accessCheck = async () => {
+        const expires = moment().add('10', 'm').toDate();
+        if (cookies.userCount !== 'true') {
+            setCookies('userCount', true, { expires });
+            userAccessCheck.mutate("나 등장~!");
+        }
+    }
 
     const adminPageCheck = () => {
         const regex = /.*admin.*/;
@@ -35,6 +47,7 @@ function App() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        accessCheck();
         adminPageCheck();
         token.mutateAsync();
     }, [nav])

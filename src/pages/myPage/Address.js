@@ -6,8 +6,8 @@ import Loading from 'components/loding/Loading';
 import DaumPost from 'components/daumPost/DaumPost';
 import SubTitle from 'components/myPage/SubTitle';
 
-import * as Style from "assets/styleComponent/myPage/myPage"
-import * as AddressStyle from "assets/styleComponent/myPage/address"
+import * as Common from "assets/styleComponent/myPage/myPage"
+import * as Style from "assets/styleComponent/myPage/address"
 
 const Address = ({ }) => {
     const id = sessionStorage.getItem("userId");
@@ -100,11 +100,11 @@ const Address = ({ }) => {
     }
 
     return (
-        <Style.InDiv>
+        <Common.InDiv>
             <SubTitle h2={"배송지 관리"} h3={"배송지에 따라 상품유형 및 배송정보가 달라질 수 있습니다."} clickEvent={showShipDiv} clickText={"+ 새 배송지 추가"} />
             {
                 showShipping &&
-                <AddressStyle.Shipping>
+                <Style.Shipping>
                     <form>
                         <div>
                             <span>배송지명</span>
@@ -168,13 +168,13 @@ const Address = ({ }) => {
                                 }} />
                         </div>
                     </form>
-                </AddressStyle.Shipping>
+                </Style.Shipping>
             }
 
             {
                 destination.isSuccess &&
-                <AddressStyle.Contents>
-                    <AddressStyle.Column>
+                <Style.Contents>
+                    <Style.Column>
                         <div className='flex60'>선택</div>
                         <div className='flex60'>배송지명</div>
                         <div className='flex360'>주소</div>
@@ -182,12 +182,12 @@ const Address = ({ }) => {
                         <div className='flex100'>연락처</div>
                         {/* <div className='flex60'>수정</div> */}
                         <div className='flex60'>삭제</div>
-                    </AddressStyle.Column>
+                    </Style.Column>
 
                     {
                         list.map((item, i) => {
                             return (
-                                <AddressStyle.Ctnt key={i}>
+                                <Style.Ctnt key={i}>
                                     <div className='flex60'>
                                         <i className={(item.default_address === 1)
                                             ? "fa-regular fa-circle-check pointer"
@@ -203,15 +203,15 @@ const Address = ({ }) => {
                                     <div className='flex60 pointer' onClick={() => {
                                         delShpping(item.i_addr);
                                     }}><i className="fa-sharp fa-solid fa-trash"></i></div>
-                                </AddressStyle.Ctnt >
+                                </Style.Ctnt >
                             )
                         })
                     }
-                </AddressStyle.Contents >
+                </Style.Contents >
             }
 
             {destination.isLoading && <Loading />}
-        </Style.InDiv >
+        </Common.InDiv >
 
     );
 };

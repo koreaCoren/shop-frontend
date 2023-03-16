@@ -5,6 +5,11 @@ export const TOKEN = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/checkToken`,
 })
 
+// 접속자 집계
+export const USER_COUNT = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/data/user_count`
+})
+
 //로그인
 export const LOGIN_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user`,
@@ -133,7 +138,7 @@ export const DELIVERY_INPUT = axios.create({
 
 //--------- 어드민 관련 끝 ---------
 
-//--------- 주문 관련 시작 ---------
+//--------- 마이페이지 ---------
 
 // 주문확인
 export const ORDER_LIST = axios.create({
@@ -159,10 +164,6 @@ export const ORDER_SUCCESS = axios.create({
 export const ADDRESS_LIST = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/address_list`,
 })
-
-//--------- 주문 관련 끝 --------
-
-//--------- 개인정보 시작 -------
 
 //배송지 확인
 export const USER_ADDRESS = axios.create({
@@ -209,6 +210,6 @@ export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
 })
 
-//--------- 개인정보 끝 ---------
+//---------마이페이지 끝 --------
 
 //--------- 상품 관련 ----------
