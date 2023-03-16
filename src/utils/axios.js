@@ -83,6 +83,17 @@ export const tokenCheck = async () => {
     return api;
 }
 
+// 접속자 집계
+export const userCount = async (data) => {
+    const api = await API.USER_COUNT.post("".data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 //게시판 글쓰기
 export const boardWrite = async (data) => {
     const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
@@ -261,6 +272,7 @@ export const defaultDeliveryUpdate = async (data) => {
     })
     return api;
 }
+
 // 송장입력
 export const deliveryInput = async (data) => {
     const api = await API.DELIVERY_INPUT.post("", data).then((res) => {

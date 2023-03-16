@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 
 export const InDiv = styled.div`
-    
 background-color: white;
 width: 100%;
 height: 100%;
@@ -55,6 +54,7 @@ min-width: 1200px;
 min-height: 70vh;
 padding: 20px 0 50px 0;
 `
+
 export const Line = styled.div`
 width: 100%;
 border-top: 1px solid #DDDFE1;
@@ -66,7 +66,6 @@ width: 100%;
 border-top: 2px solid #000000;
 margin-top: 20px;
 `
-
 
 export const Form = styled.form`
     display: flex;
@@ -92,6 +91,28 @@ export const Form = styled.form`
         width: 320px;
         line-height: 24px;
     }
+`
 
-    
+export const ReviewForm = styled.form`
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+        margin-top: 10px;
+
+        input,form textarea{
+            width: 100%;
+        }
+`
+
+export const Button = styled.div`
+    text-align: center;
+
+    button{
+        background-color: #444;
+        color: #fff;
+        padding: 10px 30px;
+        margin: 0 5px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 `

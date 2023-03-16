@@ -15,7 +15,6 @@ import noImg from "assets/images/noImg.gif";
 
 const Main = () => {
     let result = useQuery("prodcutList", productList);
-    console.log(result.data);
     useEffect(() => { }, [result.isLoading]);
     return (
         <main>

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import axios from 'axios';
 
 import BarChart from 'components/admin/chart/BarChart';
 import DonutChart from 'components/admin/chart/DonutChart';

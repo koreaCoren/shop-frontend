@@ -6,8 +6,8 @@ import { orderCodeList } from 'utils/axios';
 import { track } from 'utils/delivery';
 import SubTitle from 'components/myPage/SubTitle';
 
-import * as Style from "assets/styleComponent/myPage/myPage"
-import * as OrderStyle from "assets/styleComponent/myPage/order"
+import * as Common from "assets/styleComponent/myPage/myPage"
+import * as Style from "assets/styleComponent/myPage/order"
 
 const OrderDetail = ({ }) => {
     const location = useLocation();
@@ -35,37 +35,37 @@ const OrderDetail = ({ }) => {
     }, [])
 
     return (
-        <Style.InDiv>
+        <Common.InDiv>
             <SubTitle h2={"주문 내역상세"} h3={null} clickEvent={null} clickText={"1:1문의하기"} />
-            <OrderStyle.CodeTitle> 주문번호 {list ? list[0].orderCode : ''}</OrderStyle.CodeTitle>
+            <Style.CodeTitle> 주문번호 {list ? list[0].orderCode : ''}</Style.CodeTitle>
             {
                 isSuccess &&
                 list?.map((a, i) => {
                     return (
                         <div className='contents' key={i}>
-                            <OrderStyle.Div>
-                                <OrderStyle.MainTitle>상품명 : {a.goods_name}</OrderStyle.MainTitle>
+                            <Style.Div>
+                                <Style.MainTitle>상품명 : {a.goods_name}</Style.MainTitle>
 
-                            </OrderStyle.Div>
-                            <Style.Line></Style.Line>
+                            </Style.Div>
+                            <Common.Line></Common.Line>
 
-                            <OrderStyle.Div>
+                            <Style.Div>
                                 <ul>
-                                    {/* <li><OrderStyle.SubTitle>상품명</OrderStyle.SubTitle> {a.goods_name}</li> */}
-                                    <li><OrderStyle.SubTitle>상품개수</OrderStyle.SubTitle> {a.order_count}개</li>
-                                    <li><OrderStyle.SubTitle>주문금액</OrderStyle.SubTitle> {a.order_pay}원</li>
-                                    <li><OrderStyle.SubTitle>할인금액</OrderStyle.SubTitle> {a.goods_sale}원</li>
+                                    {/* <li><Style.SubTitle>상품명</Style.SubTitle> {a.goods_name}</li> */}
+                                    <li><Style.SubTitle>상품개수</Style.SubTitle> {a.order_count}개</li>
+                                    <li><Style.SubTitle>주문금액</Style.SubTitle> {a.order_pay}원</li>
+                                    <li><Style.SubTitle>할인금액</Style.SubTitle> {a.goods_sale}원</li>
                                 </ul>
-                            </OrderStyle.Div>
+                            </Style.Div>
                         </div >
                     )
                 })
             }
-            <OrderStyle.Div>
+            <Style.Div>
                 <h2 className='botTitle'>배송조회</h2>
-            </OrderStyle.Div>
-            <Style.BoldLine></Style.BoldLine>
-            <OrderStyle.ListDiv>
+            </Style.Div>
+            <Common.BoldLine></Common.BoldLine>
+            <Style.ListDiv>
                 <ul>
                     <li>
                         <div>배송현황</div>
@@ -85,19 +85,19 @@ const OrderDetail = ({ }) => {
 
                     </li>
                 </ul>
-            </OrderStyle.ListDiv>
+            </Style.ListDiv>
 
-            <Style.Line></Style.Line>
-
-
-            <OrderStyle.Space></OrderStyle.Space>
+            <Common.Line></Common.Line>
 
 
-            <OrderStyle.Div>
+            <Style.Space></Style.Space>
+
+
+            <Style.Div>
                 <h2 className='botTitle'>결제정보</h2>
-            </OrderStyle.Div>
-            <Style.BoldLine></Style.BoldLine>
-            <OrderStyle.ListDiv>
+            </Style.Div>
+            <Common.BoldLine></Common.BoldLine>
+            <Style.ListDiv>
                 <ul>
                     <li>
                         <div>총 상품금액</div>
@@ -120,18 +120,18 @@ const OrderDetail = ({ }) => {
                         <div>{list ? list[0].order_date : '확인중'}</div>
                     </li>
                 </ul>
-            </OrderStyle.ListDiv>
-            <Style.Line></Style.Line>
+            </Style.ListDiv>
+            <Common.Line></Common.Line>
 
 
-            <OrderStyle.Space></OrderStyle.Space>
+            <Style.Space></Style.Space>
 
 
-            <OrderStyle.Div>
+            <Style.Div>
                 <h2 className='botTitle'>배송정보</h2>
-            </OrderStyle.Div>
-            <Style.BoldLine></Style.BoldLine>
-            <OrderStyle.ListDiv>
+            </Style.Div>
+            <Common.BoldLine></Common.BoldLine>
+            <Style.ListDiv>
                 <ul>
                     <li>
                         <div>받는분</div>
@@ -147,10 +147,10 @@ const OrderDetail = ({ }) => {
                     </li>
 
                 </ul>
-            </OrderStyle.ListDiv>
-            <Style.Line></Style.Line>
+            </Style.ListDiv>
+            <Common.Line></Common.Line>
 
-        </Style.InDiv >
+        </Common.InDiv >
 
     );
 };
