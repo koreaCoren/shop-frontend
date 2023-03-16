@@ -4,8 +4,8 @@ import { info, userUpdate } from "utils/axios";
 import Input from "components/input/Input";
 import SubTitle from 'components/myPage/SubTitle';
 
-import * as Style from "assets/styleComponent/myPage/myPage"
-import * as InfoStyle from "assets/styleComponent/myPage/info"
+import * as Common from "assets/styleComponent/myPage/myPage"
+import * as Style from "assets/styleComponent/myPage/info"
 import * as Login from "assets/styleComponent/login/login";
 
 
@@ -122,17 +122,11 @@ const Info = ({ }) => {
 
     return (
         userInfo.isSuccess &&
-        <Style.InDiv>
+        <Common.InDiv>
             <SubTitle h2={"개인 정보 수정"} h3={"회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요."} clickEvent={null} clickText={null} />
-            <div className='subTitle'>
-                <div>
-                    <h2>개인 정보 수정</h2>
-                    <div className='grayTitle'>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</div>
-                </div>
-            </div>
             <div className='contents'>
-                <InfoStyle.Div>
-                    <InfoStyle.Form>
+                <Style.Div>
+                    <Style.Form>
                         <div>
                             <div className='inputTitle'>아이디</div>
                             <div>
@@ -211,10 +205,10 @@ const Info = ({ }) => {
                                         : onSubmit(2);
                                 })} />
                         </div>
-                    </InfoStyle.Form>
-                </InfoStyle.Div>
+                    </Style.Form>
+                </Style.Div>
             </div>
-        </Style.InDiv >
+        </Common.InDiv >
     );
 };
 export default Info;
