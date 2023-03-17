@@ -55,6 +55,7 @@ const Modfiy = () => {
                 setSecondCategory(firstCategory[i].lowCategory);
             }
         }
+        setCate02("");
     }, [cate01])
 
     const getProductData = async () => {
@@ -62,8 +63,6 @@ const Modfiy = () => {
             goods_code: productCode
         }
         await getGoods.mutateAsync(data);
-
-        console.log(data);
 
         let cateData = data.result.goods_data.cate_code;
         let str = cateData.toString();
@@ -140,6 +139,7 @@ const Modfiy = () => {
                 break;
             case "firstCategory":
                 setCate01(value);
+                setSecondCategory([]);
                 break;
             case "secondCategory":
                 setCate02(value);
