@@ -30,9 +30,9 @@ export const EDITOR_REGISTER = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/editor/ins_editor_data`,
 })
 
-// 공지사항 출력
+// 게시판 출력
 export const READ_BOARD = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_notice`
+    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_board`
 })
 
 // 게시글 조회수 상승
@@ -213,6 +213,11 @@ export const GET_FAV_LIST = axios.create({
 //상품 좋아요
 export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
+})
+
+//  상품후기 리스트
+export const PRODUCT_REVIEW = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/buy_product_list`,
 })
 
 //---------마이페이지 끝 --------

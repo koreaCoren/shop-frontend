@@ -115,9 +115,15 @@ export const boardWrite = async (data) => {
 }
 
 // 공지사항 출력
-export const boardRead = async () => {
-    const { data } = await API.READ_BOARD.get();
-    return data;
+export const boardRead = async (data) => {
+    const api = await API.READ_BOARD.post("", data).then((res) => {
+        console.log(res);
+        console.log("dasds");
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
 }
 
 // 게시글 조회수 상승
@@ -471,6 +477,7 @@ export const reqPickList = async (data) => {
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
     return api;
 }
@@ -481,6 +488,7 @@ export const getFavList = async (data) => {
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
     return api;
 }
@@ -491,8 +499,21 @@ export const settingFav = async (data) => {
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
     })
     return api;
+}
+
+// 상품후기 리스트
+export const productReview = async (data) => {
+    const api = await API.PRODUCT_REVIEW.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+
+    return api
 }
 
 // -------- 개인정보 끝 --------------

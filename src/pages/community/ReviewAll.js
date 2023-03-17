@@ -6,20 +6,20 @@ import noImg from "assets/images/noImg.gif";
 const ReviewAll = () => {
     return (
         <>
-            <ul class="all">
+            <ul className="all">
                 <li>
-                    <div class="content">
-                        <div class="star">★★★★★</div>
+                    <div className="content">
+                        <div className="star">★★★★★</div>
                         <h3>제목입니다제목입니다제목입니다제목입니다.</h3>
                         <p>
                             내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다
                         </p>
                         <button>더보기</button>
-                        <div class="comments">
+                        <div className="comments">
                             댓글 [1]
                         </div>
                     </div>
-                    <div class="reviewInfo">
+                    <div className="reviewInfo">
                         <ul>
                             <li><span>상품명</span> 상품이름입니다.</li>
                             <li><span>작성자</span> lif****</li>
@@ -28,8 +28,8 @@ const ReviewAll = () => {
                     </div>
                 </li>
                 <li>
-                    <div class="content">
-                        <div class="star">★★★★★</div>
+                    <div className="content">
+                        <div className="star">★★★★★</div>
                         <h3>제목입니다제목입니다제목입니다제목입니다.</h3>
                         <p>
                             내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다
@@ -39,15 +39,15 @@ const ReviewAll = () => {
                             내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다
                         </p>
                         <button>더보기</button>
-                        <div class="imageView">
+                        <div className="imageView">
                             <img src={noImg} alt="" />
                             <img src={noImg} alt="" />
                         </div>
-                        <div class="comments">
+                        <div className="comments">
                             댓글 [1]
                         </div>
                     </div>
-                    <div class="reviewInfo">
+                    <div className="reviewInfo">
                         <ul>
                             <li><span>상품명</span> 상품이름입니다.</li>
                             <li><span>작성자</span> lif****</li>
@@ -57,12 +57,12 @@ const ReviewAll = () => {
                 </li>
             </ul>
 
-            <div class="pagention">
-                <a href="#"><i class="fa-solid fa-angles-left"></i></a>
-                <a href="#"><i class="fa-solid fa-angle-left"></i></a>
+            <div className="pagention">
+                <a href="#"><i className="fa-solid fa-angles-left"></i></a>
+                <a href="#"><i className="fa-solid fa-angle-left"></i></a>
                 <span>1</span>
-                <a href="#"><i class="fa-solid fa-angle-right"></i></a>
-                <a href="#"><i class="fa-solid fa-angles-right"></i></a>
+                <a href="#"><i className="fa-solid fa-angle-right"></i></a>
+                <a href="#"><i className="fa-solid fa-angles-right"></i></a>
             </div>
         </>
     );

@@ -1,14 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from 'react-query';
 
 import SubTitle from 'components/myPage/SubTitle';
+import { productReview } from 'utils/axios';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/review"
 
 import noImg from "assets/images/noImg.gif";
+import { useEffect } from 'react';
 
 const Review = () => {
+    const { mutateAsync } = useMutation(productReview);
+
+    const getProductReview = async () => {
+        const data = {
+            user_id: sessionStorage.getItem("userId"),
+        }
+        await mutateAsync(data);
+    }
+
+    useEffect(() => {
+        getProductReview();
+    }, [])
+
     return (
         <Common.InDiv>
             <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />
