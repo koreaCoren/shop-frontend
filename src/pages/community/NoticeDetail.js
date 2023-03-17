@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import Loading from 'components/loding/Loading';
-import { boardDelete, boardRead, boardView } from 'utils/axios';
+import { boardDelete, boardDetail, boardRead, boardView } from 'utils/axios';
 import adminCheck from 'utils/adminCheck';
 
 import * as Style from "assets/styleComponent/community/detail";
@@ -11,31 +11,46 @@ import * as Style from "assets/styleComponent/community/detail";
 const NoticeDetail = () => {
     const { boardPage } = useParams();
     const nav = useNavigate();
-    const result = useQuery("boardRead", boardRead);
+    const [readDetail, setReadDetail] = useState();
+    const result = useMutation(boardDetail);
     const view = useMutation(boardView);
     const deleted = useMutation(boardDelete);
+
+    const read = async () => {
+        const data = {
+            i_board: boardPage,
+            boardType: "notice",
+        }
+        await result.mutateAsync(data);
+        setReadDetail(data.result);
+        viewUp(data.result);
+    }
 
     const boardDel = async () => {
         const ok = window.confirm("정말로 삭제하시겠습니까?");
         if (ok) {
             const data = {
                 type: "notice",
-                i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
+                i_board: readDetail.i_board,
             }
             await deleted.mutateAsync(data);
         }
     }
 
-    useEffect(() => {
+    const viewUp = async (Iboard) => {
         const data = {
             type: "notice",
-            i_board: result.data[result.data[boardPage - 1].i_board - 1].i_board,
+            i_board: Iboard.i_board,
         }
-        view.mutateAsync(data);
+        await view.mutateAsync(data);
+    }
+
+    useEffect(() => {
+        read();
     }, [])
 
     return (
-        result.isLoading
+        result.isSuccess !== true
             ? <Loading />
             : <Style.Detail>
                 <div className="wrap">
@@ -45,40 +60,40 @@ const NoticeDetail = () => {
                         <ul>
                             <li>
                                 <div>제목</div>
-                                <div>{result.data[result.data[boardPage - 1].i_board - 1].title}</div>
+                                <div>{readDetail.title}</div>
                             </li>
                             <li>
                                 <div>작성자</div>
-                                <div>{result.data[result.data[boardPage - 1].i_board - 1].user_id}</div>
+                                <div>{readDetail.user_id}</div>
                             </li>
                         </ul>
                         <div>
-                            <p><b>작성일</b>{result.data[result.data[boardPage - 1].i_board - 1].create_date}</p>
-                            <p><b>조회수</b>{result.data[result.data[boardPage - 1].i_board - 1].view_up}</p>
+                            <p><b>작성일</b>{readDetail.create_date}</p>
+                            <p><b>조회수</b>{readDetail.view_up}</p>
                         </div>
                     </div>
 
                     <div className="content">
-                        <p dangerouslySetInnerHTML={{ __html: result.data[result.data[boardPage - 1].i_board - 1].content }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: readDetail.content }}></p>
                     </div>
 
                     <Link to="/community/notice/1" className="more">목록</Link>
                     {adminCheck(false) && <button onClick={boardDel}>삭제</button>}
 
-                    <div className="differentBoard">
+                    {/* <div className="differentBoard">
                         <ul>
                             <li>
                                 <div>다음글</div>
                                 <div>
                                     <Link to={
-                                        result.data[result.data[Number(boardPage) - 1].i_board - 2] === undefined
+                                        readDetail[readDetail[Number(boardPage) - 1].i_board - 2] === undefined
                                             ? null
                                             : `/community/noticeDetail/${Number(boardPage)}`
                                     }>
                                         {
-                                            result.data[result.data[Number(boardPage) - 1].i_board - 2] === undefined
+                                            readDetail[readDetail[Number(boardPage) - 1].i_board - 2] === undefined
                                                 ? "다음글이없습니다."
-                                                : result.data[result.data[Number(boardPage) - 1].i_board - 2].title
+                                                : readDetail[readDetail[Number(boardPage) - 1].i_board - 2].title
                                         }
                                     </Link>
                                 </div>
@@ -87,20 +102,20 @@ const NoticeDetail = () => {
                                 <div>이전글</div>
                                 <div>
                                     <Link to={
-                                        result.data[Number(boardPage - 1)] === undefined
+                                        readDetail[Number(boardPage - 1)] === undefined
                                             ? null
                                             : `/community/noticeDetail/${Number(boardPage) - 1}`
                                     }>
                                         {
-                                            result.data[result.data[Number(boardPage) - 1].i_board] === undefined
+                                            readDetail[readDetail[Number(boardPage) - 1].i_board] === undefined
                                                 ? "이전글이없습니다."
-                                                : result.data[result.data[Number(boardPage) - 1].i_board].title
+                                                : readDetail[readDetail[Number(boardPage) - 1].i_board].title
                                         }
                                     </Link>
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </Style.Detail>
     );

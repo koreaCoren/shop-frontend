@@ -12,6 +12,7 @@ import Loading from 'components/loding/Loading';
 import Searching from 'components/board/Searching';
 
 const Notice = () => {
+    const nav = useNavigate();
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
@@ -22,15 +23,12 @@ const Notice = () => {
             boardType: "notice"
         }
         await mutateAsync(data);
-        console.log(isSuccess);
-        // setBoardList(arr);
+        setBoardList(data.result);
     }
 
     useEffect(() => {
-        if (isSuccess !== true) {
-            getBoard();
-        }
-    }, [isSuccess])
+        getBoard();
+    }, [nav])
 
     return (
         isSuccess !== true
@@ -53,8 +51,8 @@ const Notice = () => {
                             <li>조회수</li>
                         </ul>
                         {
-                            boardList?.length > 0
-                                ? boardList?.slice((boardPage - 1) * 10, (boardPage - 1) * 10 + 10).map((a, i) => {
+                            boardList?.list.length > 0
+                                ? boardList?.list.map((a, i) => {
                                     return (
                                         <ul key={i} className='list'>
                                             <li>{a.i_board}</li>
@@ -69,7 +67,7 @@ const Notice = () => {
                         }
                     </Style.Board>
 
-                    <Pageing count={10} boardPage={boardPage} boardLength={boardList?.length} url={"/community/notice"} />
+                    <Pageing count={10} boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/notice"} />
                 </div>
             </Style.Contaienr>
     );

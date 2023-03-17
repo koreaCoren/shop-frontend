@@ -35,6 +35,11 @@ export const READ_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/sel_board`
 })
 
+// 게시글 디테일
+export const DETAIL_BOARD = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/detail_board`
+})
+
 // 게시글 조회수 상승
 export const VIEW_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/view_up`
