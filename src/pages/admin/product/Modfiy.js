@@ -8,8 +8,6 @@ import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductSelect from 'components/admin/product/input/Select';
 import Textarea from 'components/admin/product/input/Textarea';
-
-import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 
 import * as Common from 'assets/styleComponent/admin/common';
@@ -33,8 +31,6 @@ const Modfiy = () => {
     const [optionData, setOptionData] = useState([]);
     const { productCode } = useParams();
 
-    const [dataOn, setDataOn] = useState(false);
-
     const result = useQuery("categoryList", categoryList);
     const { mutateAsync, isLoading } = useMutation(productEditor);
     const getGoods = useMutation(reqGoodsData);
@@ -55,7 +51,6 @@ const Modfiy = () => {
                 setSecondCategory(firstCategory[i].lowCategory);
             }
         }
-        setCate02("");
     }, [cate01])
 
     const getProductData = async () => {
@@ -139,6 +134,7 @@ const Modfiy = () => {
                 break;
             case "firstCategory":
                 setCate01(value);
+                setCate02("");
                 setSecondCategory([]);
                 break;
             case "secondCategory":
@@ -165,29 +161,31 @@ const Modfiy = () => {
 
 
     return (
-        <>
-            <form onSubmit={onSubmit}>
-                <Common.Container>
-                    <Style.H2>상품 기본 설정</Style.H2>
-                    <ProductInput title="상품이름" type="text" name="prodctName" placeholder="상품이름" onChange={onChange} value={productName} />
-                    <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={firstCategory} value={cate01} />
-                    <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={secondCategory} value={cate02} />
-                </Common.Container>
+        getGoods.isSuccess === false
+            ? <Loading />
+            : <>
+                <form onSubmit={onSubmit}>
+                    <Common.Container>
+                        <Style.H2>상품 기본 설정</Style.H2>
+                        <ProductInput title="상품이름" type="text" name="prodctName" placeholder="상품이름" onChange={onChange} value={productName} />
+                        <ProductSelect title="카테고리 1번" type="text" name="firstCategory" placeholder="상품이름" onChange={onChange} option={firstCategory} value={cate01} />
+                        <ProductSelect title="카테고리 2번" type="text" name="secondCategory" placeholder="상품이름" onChange={onChange} option={secondCategory} value={cate02} />
+                    </Common.Container>
 
-                <Common.Container>
-                    <Style.H2>상품 상세 설정</Style.H2>
-                    <ProductInput title="가격" type="text" name="price" placeholder="상품가격" onChange={onChange} value={price} />
-                    <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} value={discount} />
-                    <ProductInput title="판매 수량" type="text" name="sell" placeholder="판매 수량" onChange={onChange} value={sell} />
-                    <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
-                    <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
-                    <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent} />
-                    <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
+                    <Common.Container>
+                        <Style.H2>상품 상세 설정</Style.H2>
+                        <ProductInput title="가격" type="text" name="price" placeholder="상품가격" onChange={onChange} value={price} />
+                        <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} value={discount} />
+                        <ProductInput title="판매 수량" type="text" name="sell" placeholder="판매 수량" onChange={onChange} value={sell} />
+                        <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} value={stock} />
+                        <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} value={thumbnail} />
+                        <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" value={productContent} />
+                        <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} data={optionData} />
 
-                    <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
-                </Common.Container>
-            </form>
-        </>
+                        <Style.ProductRegister type='submit'>상품 수정</Style.ProductRegister>
+                    </Common.Container>
+                </form>
+            </>
     )
 }
 
