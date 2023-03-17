@@ -108,6 +108,7 @@ const Register = () => {
                 break;
             case "firstCategory":
                 setCate01(value);
+                setSecondCategory([]);
                 break;
             case "secondCategory":
                 setCate02(value);
