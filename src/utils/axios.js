@@ -114,11 +114,21 @@ export const boardWrite = async (data) => {
     return api;
 }
 
-// 공지사항 출력
+// 게시글 출력
 export const boardRead = async (data) => {
     const api = await API.READ_BOARD.post("", data).then((res) => {
-        console.log(res);
-        console.log("dasds");
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
+}
+
+// 게시글 디테일
+export const boardDetail = async (data) => {
+    const api = await API.DETAIL_BOARD.post("", data).then((res) => {
+        data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");

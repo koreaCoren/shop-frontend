@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const Paging = ({ count, boardPage, boardLength, url }) => {
     const nowPage = Number(boardPage);
     const minPage = 1;
-    const maxPage = Math.ceil(boardLength / count);
+    const maxPage = boardLength;
     const minNav = Math.max(nowPage - 2, minPage);
     const maxNav = Math.min(nowPage + 2, maxPage);
     const totalNav = 5;
