@@ -50,6 +50,11 @@ export const DELETE_BOARD = axios.create({
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 대시보드
+
+export const SEL_DASH = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/sel_dash`,
+})
+
 // 상품 판매 금액 리스트
 export const SELL_DATA_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/data/sell_data_list`,

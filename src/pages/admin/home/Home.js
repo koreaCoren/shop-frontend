@@ -9,7 +9,7 @@ import LinkButton from 'components/admin/product/button/LinkButton';
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/home/Home';
 
-import { accumulateSell, sellByDateList, userAccessCount } from 'utils/axios';
+import { accumulateSell, sellByDateList, userAccessCount, sel_dash } from 'utils/axios';
 import { useEffect } from 'react';
 import Loading from 'components/loding/Loading';
 
@@ -20,6 +20,8 @@ const Home = () => {
     const bar = useQuery("sellByDateList", sellByDateList);
     const donut = useQuery("accumulateSell", accumulateSell);
     const line = useQuery("userAccessCount", userAccessCount);
+    const dash = useQuery("sel_dash", sel_dash);
+    console.log(dash.data?.delivery_not);
 
     useEffect(() => {
         if (donut.isLoading === false &&
@@ -84,15 +86,15 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>입금</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.input}건</div>
                                     </span>
                                     <span>
                                         <h4>배송</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.delivering}건</div>
                                     </span>
                                     <span>
                                         <h4>완료</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.complete}건</div>
                                     </span>
                                 </div>
                             </li>
@@ -101,7 +103,7 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>송장 미입력</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.delivery_not}건</div>
                                         <LinkButton link={"/admin/delivery"} title={"바로가기"} />
                                     </span>
                                 </div>
