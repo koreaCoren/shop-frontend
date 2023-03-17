@@ -70,14 +70,20 @@ const OrderDetail = ({ }) => {
                     <li>
                         <div>배송현황</div>
                         <div>
-                            {list ?
-                                list[0].delivery === '' || list[0].carrier === ''
-                                    ? '주문접수'
-                                    : state
-                                : '확인중'}
+                            {
+                                list
+                                    ? list[0].delivery === '' || list[0].carrier === ''
+                                        ? <span>주문접수</span>
+                                        : state
+                                            ? <span>{state}</span>
+                                            : <span style={{ color: "red" }}> 송장입력오류</span>
+                                    : <span>확인중</span>
+                            }
                             <div>
                                 <a href={list ?
-                                    list[0].delivery === '' || list[0].carrier === '' ? '#' : `https://tracker.delivery/#/${list[0].carrier}/${list[0].delivery}`
+                                    list[0].delivery === '' || list[0].carrier === ''
+                                        ? '#'
+                                        : `https://tracker.delivery/#/${list[0].carrier}/${list[0].delivery}`
                                     : '확인중'} target="_blank">배송조회</a>
                             </div>
 

@@ -151,6 +151,13 @@ export const boardDelete = async (data) => {
 
 //--------- 어드민 관련 시작 ---------
 
+//관리자용 대시보드
+export const sel_dash = async () => {
+    const { data } = await API.SEL_DASH.get();
+    return data;
+}
+
+
 // 상품 판매 현황
 export const sellByDateList = async () => {
     const { data } = await API.SELL_DATA_LIST_API.get();
