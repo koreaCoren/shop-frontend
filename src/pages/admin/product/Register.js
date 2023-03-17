@@ -81,7 +81,7 @@ const Register = () => {
                 setImageCode(arr);
             }
         }
-
+        
         const data = {
             goods_code: createCode(),
             goods_nm: productName,
