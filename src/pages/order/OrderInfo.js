@@ -124,7 +124,7 @@ const OrderInfo = ({ orderData }) => {
             buyerName: buyerName,
             buyerTel: Number(buyerTel),
             buyerEmail: "",
-            productPrice: Number(orderTotalPrice) > 50000 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
+            productPrice: Number(orderTotalPrice) > 0 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
             payStatus: 0,
             //서버
             // returnUrl: `${process.env.REACT_APP_API_URL}/order/ini_transaction?orderCode=${orderCode}`,

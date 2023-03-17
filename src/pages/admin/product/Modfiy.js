@@ -125,6 +125,7 @@ const Modfiy = () => {
     }
 
     const onChange = (e) => {
+        console.log(e);
         const value = e.target.value;
         const name = e.target.name;
         switch (name) {
