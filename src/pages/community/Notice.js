@@ -20,7 +20,7 @@ const Notice = () => {
 
     const getBoard = async () => {
         const data = {}
-        if (searchParams.get("search") !== null) {
+        if (searchParams.get("search") === null) {
             data.boardPage = boardPage;
             data.boardType = "notice";
         } else {
