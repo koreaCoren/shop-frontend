@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 /**
@@ -9,6 +10,7 @@ import styled from 'styled-components';
  */
 
 const Searching = ({ board, setBoardList, searchType }) => {
+    const nav = useNavigate();
     const [searchValue, setSearchValue] = useState("");
 
     const searchTypes = {
@@ -41,10 +43,11 @@ const Searching = ({ board, setBoardList, searchType }) => {
             return;
         }
 
-        setBoardList(arr);
+        nav(`?search=${searchValue}`);
+        // setBoardList(arr);
     };
 
-    const onChange = e => {
+    const onChange = (e) => {
         const { name, value } = e.target;
         switch (name) {
             case "search":
@@ -55,7 +58,7 @@ const Searching = ({ board, setBoardList, searchType }) => {
         }
     };
 
-    const enterKeypress = e => {
+    const enterKeypress = (e) => {
         if (e.key === "Enter") {
             search();
         }

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 /**
@@ -10,6 +10,8 @@ import styled from 'styled-components';
  * @returns 
  */
 const Paging = ({ count, boardPage, boardLength, url }) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const nowPage = Number(boardPage);
     const minPage = 1;
     const maxPage = boardLength;
@@ -39,28 +41,57 @@ const Paging = ({ count, boardPage, boardLength, url }) => {
     return (
         <PagingContainer>
             <ul>
-                <li>
-                    <Link to={`${url}/${Math.max(nowPage - 1, minPage)}`}>
-                        <i className="fa-solid fa-angles-left"></i>
-                    </Link>
-                </li>
-                {pageNumbers.map((page) => (
-                    <li key={page}>
-                        <Link
-                            to={`${url}/${page}`}
-                            className={page === nowPage ? 'now' : ''}
-                        >
-                            {page}
-                        </Link>
-                    </li>
-                ))}
-                <li>
-                    <Link to={`${url}/${Math.min(nowPage + 1, maxPage)}`}>
-                        <i className="fa-solid fa-angles-right"></i>
-                    </Link>
-                </li>
+                {
+                    searchParams === null
+                        ? <li>
+                            <Link to={`${url}/1`}>
+                                <i className="fa-solid fa-angles-left"></i>
+                            </Link>
+                        </li>
+                        : <li>
+                            <Link to={`${url}/1?search=${searchParams.get("search")}`}>
+                                <i className="fa-solid fa-angles-left"></i>
+                            </Link>
+                        </li>
+                }
+                {
+                    searchParams === null
+                        ? pageNumbers.map((page) => (
+                            <li key={page}>
+                                <Link
+                                    to={`${url}/${page}`}
+                                    className={page === nowPage ? 'now' : ''}
+                                >
+                                    {page}
+                                </Link>
+                            </li>
+                        ))
+                        : pageNumbers.map((page) => (
+                            <li key={page}>
+                                <Link
+                                    to={`${url}/${page}?search=${searchParams.get("search")}`}
+                                    className={page === nowPage ? 'now' : ''}
+                                >
+                                    {page}
+                                </Link>
+                            </li>
+                        ))
+                }
+                {
+                    searchParams === null
+                        ? <li>
+                            <Link to={`${url}/${maxPage}`}>
+                                <i className="fa-solid fa-angles-right"></i>
+                            </Link>
+                        </li>
+                        : <li>
+                            <Link to={`${url}/${maxPage}?search=${searchParams.get("search")}`}>
+                                <i className="fa-solid fa-angles-right"></i>
+                            </Link>
+                        </li>
+                }
             </ul>
-        </PagingContainer>
+        </PagingContainer >
     );
 };
 
