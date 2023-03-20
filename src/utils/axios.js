@@ -128,6 +128,7 @@ export const boardRead = async (data) => {
 // 게시글 디테일
 export const boardDetail = async (data) => {
     const api = await API.DETAIL_BOARD.post("", data).then((res) => {
+        console.log(res);
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -187,12 +188,21 @@ export const userAccessCount = async () => {
 }
 
 // 유저 리스트
-export const user = async () => {
-    const { data } = await API.USER.get();
-    return data;
+// export const user = async () => {
+//     const { data } = await API.USER.get();
+//     return data;
+// }
+export const user = async (data) => {
+    const api = await API.USER.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
 }
 
-// 유저 리스트
+// 유저 리스트 삭제
 export const userDeleted = async (data) => {
     const api = await API.USER_DELETE.post("", data).then((res) => {
         if (res.data === "success") {

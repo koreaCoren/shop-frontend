@@ -47,7 +47,7 @@ const NoticeDetail = () => {
 
     useEffect(() => {
         read();
-    }, [])
+    }, [nav])
 
     return (
         result.isSuccess !== true
@@ -80,20 +80,20 @@ const NoticeDetail = () => {
                     <Link to="/community/notice/1" className="more">목록</Link>
                     {adminCheck(false) && <button onClick={boardDel}>삭제</button>}
 
-                    {/* <div className="differentBoard">
+                    <div className="differentBoard">
                         <ul>
                             <li>
                                 <div>다음글</div>
                                 <div>
                                     <Link to={
-                                        readDetail[readDetail[Number(boardPage) - 1].i_board - 2] === undefined
+                                        readDetail.next.length <= 0
                                             ? null
-                                            : `/community/noticeDetail/${Number(boardPage)}`
+                                            : `/community/noticeDetail/${Number(readDetail.next[0].i_board)}`
                                     }>
                                         {
-                                            readDetail[readDetail[Number(boardPage) - 1].i_board - 2] === undefined
+                                            readDetail.next.length <= 0
                                                 ? "다음글이없습니다."
-                                                : readDetail[readDetail[Number(boardPage) - 1].i_board - 2].title
+                                                : readDetail.next[0].title
                                         }
                                     </Link>
                                 </div>
@@ -102,20 +102,20 @@ const NoticeDetail = () => {
                                 <div>이전글</div>
                                 <div>
                                     <Link to={
-                                        readDetail[Number(boardPage - 1)] === undefined
+                                        readDetail.pre.length <= 0
                                             ? null
-                                            : `/community/noticeDetail/${Number(boardPage) - 1}`
+                                            : `/community/noticeDetail/${Number(readDetail.pre[0].i_board)}`
                                     }>
                                         {
-                                            readDetail[readDetail[Number(boardPage) - 1].i_board] === undefined
+                                            readDetail.pre.length <= 0
                                                 ? "이전글이없습니다."
-                                                : readDetail[readDetail[Number(boardPage) - 1].i_board].title
+                                                : readDetail.pre[0].title
                                         }
                                     </Link>
                                 </div>
                             </li>
                         </ul>
-                    </div> */}
+                    </div>
                 </div>
             </Style.Detail>
     );

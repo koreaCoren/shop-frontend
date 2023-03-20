@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
@@ -13,14 +13,20 @@ import Searching from 'components/board/Searching';
 
 const Notice = () => {
     const nav = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
 
     const getBoard = async () => {
-        const data = {
-            boardPage: boardPage,
-            boardType: "notice"
+        const data = {}
+        if (searchParams.get("search") !== null) {
+            data.boardPage = boardPage;
+            data.boardType = "notice";
+        } else {
+            data.boardPage = boardPage;
+            data.boardType = "notice";
+            data.search = searchParams.get("search");
         }
         await mutateAsync(data);
         setBoardList(data.result);
@@ -38,8 +44,8 @@ const Notice = () => {
                     <h2>공지사항</h2>
 
                     <div className="flexBox">
-                        {/* <Searching board={result.data} setBoardList={setBoardList} searchType={"title"} />
-                    {adminCheck(false) && <Link className='write' to={"/community/write"}>글쓰기</Link>} */}
+                        <Searching board={boardList.list} setBoardList={setBoardList} searchType={"title"} />
+                        {adminCheck(false) && <Link className='write' to={"/community/write"}>글쓰기</Link>}
 
                     </div>
                     <Style.Board>
@@ -51,8 +57,8 @@ const Notice = () => {
                             <li>조회수</li>
                         </ul>
                         {
-                            boardList?.list.length > 0
-                                ? boardList?.list.map((a, i) => {
+                            boardList.list.length > 0
+                                ? boardList.list.map((a, i) => {
                                     return (
                                         <ul key={i} className='list'>
                                             <li>{a.i_board}</li>
