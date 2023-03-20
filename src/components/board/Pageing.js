@@ -42,7 +42,7 @@ const Paging = ({ count, boardPage, boardLength, url }) => {
         <PagingContainer>
             <ul>
                 {
-                    searchParams === null
+                    searchParams.get("search") === null
                         ? <li>
                             <Link to={`${url}/1`}>
                                 <i className="fa-solid fa-angles-left"></i>
@@ -55,9 +55,9 @@ const Paging = ({ count, boardPage, boardLength, url }) => {
                         </li>
                 }
                 {
-                    searchParams === null
-                        ? pageNumbers.map((page) => (
-                            <li key={page}>
+                    pageNumbers.map((page) => (
+                        searchParams.get("search") === null
+                            ? <li key={page}>
                                 <Link
                                     to={`${url}/${page}`}
                                     className={page === nowPage ? 'now' : ''}
@@ -65,9 +65,7 @@ const Paging = ({ count, boardPage, boardLength, url }) => {
                                     {page}
                                 </Link>
                             </li>
-                        ))
-                        : pageNumbers.map((page) => (
-                            <li key={page}>
+                            : <li key={page}>
                                 <Link
                                     to={`${url}/${page}?search=${searchParams.get("search")}`}
                                     className={page === nowPage ? 'now' : ''}
@@ -75,10 +73,10 @@ const Paging = ({ count, boardPage, boardLength, url }) => {
                                     {page}
                                 </Link>
                             </li>
-                        ))
+                    ))
                 }
                 {
-                    searchParams === null
+                    searchParams.get("search") === null
                         ? <li>
                             <Link to={`${url}/${maxPage}`}>
                                 <i className="fa-solid fa-angles-right"></i>

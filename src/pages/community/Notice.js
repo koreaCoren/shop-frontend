@@ -34,7 +34,7 @@ const Notice = () => {
 
     useEffect(() => {
         getBoard();
-    }, [nav])
+    }, [nav, searchParams.get("search")])
 
     return (
         isSuccess !== true
