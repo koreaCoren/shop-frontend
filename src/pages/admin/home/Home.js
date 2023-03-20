@@ -86,15 +86,15 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>입금</h4>
-                                        <div>{dash.data?.input}건</div>
+                                        <div>{dash.data?.input === null ? 0 : dash.data?.input}건</div>
                                     </span>
                                     <span>
                                         <h4>배송</h4>
-                                        <div>{dash.data?.delivering}건</div>
+                                        <div>{dash.data?.delivering === null ? 0 : dash.data?.delivering}건</div>
                                     </span>
                                     <span>
                                         <h4>완료</h4>
-                                        <div>{dash.data?.complete}건</div>
+                                        <div>{dash.data?.complete === null ? 0 : dash.data?.complete}건</div>
                                     </span>
                                 </div>
                             </li>
@@ -103,7 +103,7 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>송장 미입력</h4>
-                                        <div>{dash.data?.delivery_not}건</div>
+                                        <div>{dash.data?.delivery_not === null ? 0 : dash.data?.delivery_not}건</div>
                                         <LinkButton link={"/admin/delivery"} title={"바로가기"} />
                                     </span>
                                 </div>
