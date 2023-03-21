@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import { user, userDeleted } from 'utils/axios';
@@ -13,6 +13,7 @@ import * as Common from 'assets/styleComponent/admin/common';
 
 const UserList = () => {
     const nav = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
     const [boardCount, setBoardCount] = useState(5);
@@ -27,8 +28,14 @@ const UserList = () => {
     }
 
     const getUser = async () => {
-        const data = {
-            userPage: boardPage,
+        const data = {}
+        if (searchParams.get("search") === null) {
+            data.userPage = boardPage;
+            data.boardType = "user";
+        } else {
+            data.userPage = boardPage;
+            data.boardType = "user";
+            data.search = searchParams.get("search");
         }
         await users.mutateAsync(data);
         setBoard(data.result);
@@ -45,7 +52,7 @@ const UserList = () => {
                 <Top title={"회원 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
-                        <Searching board={board.list} setBoardList={setBoard} searchType={"email"} />
+                        <Searching board={board.list} setBoardList={setBoard} searchType={"user"} />
                     </Common.Container>
                     {
                         board.list.map((a, i) => {
