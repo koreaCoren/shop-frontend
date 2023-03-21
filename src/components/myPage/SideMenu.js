@@ -27,6 +27,7 @@ const SideMenu = () => {
 };
 
 const Ul = styled.ul`
+    
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -67,6 +68,24 @@ const Ul = styled.ul`
     }
     i {
         width: 20px;
+    }
+
+    @media screen and (max-width: 800px){
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 0 10px;
+        li:first-child{
+            display: none;
+        }
+        i{
+            display: none;
+        }
+        li:not(:nth-child(1)) > a{
+        padding: 10px 0px;
+        text-align: center;
+        width: 100%;
+        
+        }
     }
 `
 
