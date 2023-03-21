@@ -16,31 +16,39 @@ const UserList = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
     const [boardCount, setBoardCount] = useState(5);
-    const result = useQuery("userList", user);
-    const { mutateAsync } = useMutation(userDeleted);
+    const users = useMutation(user);
+    const deleted = useMutation(userDeleted);
 
     const userDelete = async (index) => {
         const data = {
             user_id: board[index].user_id,
         }
-        await mutateAsync(data);
+        await deleted.mutateAsync(data);
+    }
+
+    const getUser = async () => {
+        const data = {
+            userPage: boardPage,
+        }
+        await users.mutateAsync(data);
+        setBoard(data.result);
     }
 
     useEffect(() => {
-        setBoard(result.data);
-    }, [result.isLoading])
+        getUser();
+    }, [nav])
 
     return (
-        result.isLoading === true
+        users.isSuccess !== true
             ? <Loading />
             : <>
                 <Top title={"회원 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
-                        <Searching board={result.data} setBoardList={setBoard} searchType={"email"} />
+                        <Searching board={board.list} setBoardList={setBoard} searchType={"email"} />
                     </Common.Container>
                     {
-                        board?.slice((boardPage - 1) * boardCount, (boardPage - 1) * boardCount + boardCount).map((a, i) => {
+                        board.list.map((a, i) => {
                             return (
                                 <Common.Container key={i} style={{ textAlign: "center" }}>
                                     <Style.Div>
@@ -59,7 +67,7 @@ const UserList = () => {
                         })
                     }
                 </Common.Padding>
-                <Pageing count={boardCount} boardPage={boardPage} boardLength={board?.length} url={"/admin/user"} />
+                <Pageing boardPage={boardPage} boardLength={board.count.page_count} url={"/admin/user"} />
             </>
     );
 };

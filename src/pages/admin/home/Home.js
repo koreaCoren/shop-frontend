@@ -21,6 +21,7 @@ const Home = () => {
     const donut = useQuery("accumulateSell", accumulateSell);
     const line = useQuery("userAccessCount", userAccessCount);
     const dash = useQuery("sel_dash", sel_dash);
+
     useEffect(() => {
         if (donut.isLoading === false &&
             bar.isLoading === false &&
