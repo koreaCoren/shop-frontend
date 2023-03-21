@@ -14,10 +14,14 @@ export const Contents = styled.div`
     }
     .flex100 {
         flex-basis: 100px;
-    }
+    }  
+    .flex580 {
+        display: flex;
+        flex-basis: 580px;
+    }  
 `
 
-export const Column = styled.div`
+export const Column = styled.ul`
     display: flex;
     padding: 20px;    
     border-bottom: 1px solid black;
@@ -25,21 +29,43 @@ export const Column = styled.div`
     line-height: 10px;
     font-weight: 500;       
     align-items: center;
-    justify-content: space-between;        
-    @media screen and (max-width: 450px){
+    justify-content: space-between;  
+        
+    @media screen and (max-width: 700px){
      display   :none ;
     }
 `
 
-export const Ctnt = styled.div`
+export const Ctnt = styled.ul`
     text-align: center;
     display: flex;
     padding: 20px;  
     align-items: center;
     justify-content: space-between;
-    @media screen and (max-width:450px){
-        .flex60:nth-child(2){display:none};
+    @media screen and (max-width:700px){
         padding: 10px 0px;
+        .mobile {
+            display: block;
+        }
+        .flex60:nth-child(2){
+            display: none;
+        }
+        .flex580 {
+            flex-direction: column;
+            .flex60, .flex100, .flex120, .flex360{
+                flex-basis: 0;
+            }
+            .flex360{
+                span:nth-child(2){
+                    display: block;
+                }
+            }
+            .flex120{
+                display: flex;
+    justify-content: space-evenly;
+            }
+        }
+        
     } 
 `
 
