@@ -21,8 +21,6 @@ const Home = () => {
     const donut = useQuery("accumulateSell", accumulateSell);
     const line = useQuery("userAccessCount", userAccessCount);
     const dash = useQuery("sel_dash", sel_dash);
-    console.log(dash.data?.delivery_not);
-
     useEffect(() => {
         if (donut.isLoading === false &&
             bar.isLoading === false &&
@@ -140,7 +138,7 @@ const Home = () => {
                         </div>
                     </Common.Container>
                     <Common.Container>
-                        빨리 생각해내봐
+                        .
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >

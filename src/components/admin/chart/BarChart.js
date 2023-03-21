@@ -2,7 +2,17 @@ import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 
 
+
 const Chart = ({ data, day }) => {
+    const testA = {
+        tickSize: 3,
+        tickPadding: 6,
+        tickRotation: 0,
+    }
+    if (day > 15) {
+        testA.tickRotation = -30
+    }
+    console.log(testA);
     return (
         <ResponsiveBar
             data={data.slice(data.length - day, data.length)}
@@ -78,7 +88,30 @@ const Chart = ({ data, day }) => {
             role="application"
             ariaLabel="Nivo bar chart demo"
             barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}
+            axisLeft={{
+                format: value =>
+                    Number(value).toLocaleString('ru-RU', {
+                        minimumFractionDigits: 2,
+                    }),
+            }}
+
+            axisBottom={testA}
+            tooltip={({ id, value, color }) => (
+                <div
+                    style={{
+                        padding: 12,
+                        color,
+                        background: 'white',
+                        border: '1px solid #22222240'
+                    }}
+                >
+                    <strong>
+                        {id}: {value}원
+                    </strong>
+                </div>
+            )}
         />
+
     );
 };
 
