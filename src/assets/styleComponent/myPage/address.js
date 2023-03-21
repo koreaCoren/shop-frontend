@@ -18,7 +18,6 @@ export const Contents = styled.div`
 `
 
 export const Column = styled.div`
-
     display: flex;
     padding: 20px;    
     border-bottom: 1px solid black;
@@ -27,7 +26,9 @@ export const Column = styled.div`
     font-weight: 500;       
     align-items: center;
     justify-content: space-between;        
-    
+    @media screen and (max-width: 450px){
+     display   :none ;
+    }
 `
 
 export const Ctnt = styled.div`
@@ -35,7 +36,11 @@ export const Ctnt = styled.div`
     display: flex;
     padding: 20px;  
     align-items: center;
-    justify-content: space-between;     
+    justify-content: space-between;
+    @media screen and (max-width:450px){
+        .flex60:nth-child(2){display:none};
+        padding: 10px 0px;
+    } 
 `
 
 export const Shipping = styled.div`
@@ -73,4 +78,5 @@ export const Shipping = styled.div`
         padding: 5px 15px;
         border-radius: 5px;
     }
+    
 `

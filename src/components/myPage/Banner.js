@@ -23,6 +23,9 @@ const Slide = styled.div`
         height: 300px;
         padding: 10px 0;
     }
+    @media screen and (max-width: 500px){
+        display: none;
+    }
 `
 
 export default Banner;

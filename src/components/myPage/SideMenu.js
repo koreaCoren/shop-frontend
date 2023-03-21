@@ -18,10 +18,10 @@ const SideMenu = () => {
     return (
         <Ul>
             <li><Link to="/myPage/order/1">마이페이지</Link></li>
-            <li className={url === 0 ? "on" : ""}><Link to="/myPage/order/1"><i className='fa-solid fa-file-invoice-dollar'></i>주문내역</Link></li>
-            <li className={url === 1 ? "on" : ""}><Link to="/myPage/address"><i className='fa-solid fa-truck'></i>기본 배송지 관리</Link></li>
-            <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i>상품 후기 작성</Link></li>
-            <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i>개인 정보 수정</Link></li>
+            <li className={url === 0 ? "on" : ""}><Link to="/myPage/order/1"><i className='fa-solid fa-file-invoice-dollar'></i><p>주문내역</p></Link></li>
+            <li className={url === 1 ? "on" : ""}><Link to="/myPage/address"><i className='fa-solid fa-truck'></i><p>기본 배송지 관리</p></Link></li>
+            <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i><p>상품 후기 작성</p></Link></li>
+            <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i><p>개인 정보 수정</p></Link></li>
         </Ul>
     );
 };
@@ -32,6 +32,9 @@ const Ul = styled.ul`
     flex-direction: column;
     gap: 5px;
     height: 100%;
+    p{
+        display: inline-block;
+    }
     > li{
         cursor: pointer;        
         padding: 5px;
@@ -72,19 +75,17 @@ const Ul = styled.ul`
 
     @media screen and (max-width: 800px){
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         padding: 0 10px;
         li:first-child{
             display: none;
         }
-        i{
-            display: none;
-        }
         li:not(:nth-child(1)) > a{
-        padding: 10px 0px;
-        text-align: center;
+        padding: 10px 10px;
         width: 100%;
-        
+        }
+        p{
+            font-size: 14px;
         }
     }
 `
