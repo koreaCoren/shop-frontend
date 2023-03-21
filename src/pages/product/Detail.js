@@ -155,7 +155,7 @@ const Detail = ({ result, setOrderData }) => {
                             </Style.Total>
                             <Style.ButtonBox>
                                 {productDetail?.goods_stock == 0
-                                    ?<Style.Button onClick={orderClick}>재고부족</Style.Button>
+                                    ?<Style.Button cursor={"default"} style={{color:"tomato"}} >재고부족</Style.Button>
                                     :<Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                 }
                                 
