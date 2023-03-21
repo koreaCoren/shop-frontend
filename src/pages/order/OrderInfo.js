@@ -7,6 +7,8 @@ import { order, addressList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/order/order"
 
+import noImg from "assets/images/noImg.gif";
+
 const OrderInfo = ({ orderData }) => {
     const [orderMap, setOrderMap] = useState([...orderData]);
     const [buyerName, setBuyerName] = useState("");
@@ -171,7 +173,7 @@ const OrderInfo = ({ orderData }) => {
                                 </ul>
                                 <ul className="productInfo">
                                     <li>
-                                        <img src={a.product_img} alt="" />
+                                        <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                         <div className="content">
                                             <div className="title">{a.product_name}</div>
                                         </div>

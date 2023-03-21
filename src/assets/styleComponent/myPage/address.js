@@ -27,7 +27,7 @@ export const Column = styled.div`
     align-items: center;
     justify-content: space-between;        
     @media screen and (max-width: 450px){
-     display   :none ;
+     display : none ;
     }
 `
 
