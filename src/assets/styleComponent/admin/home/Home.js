@@ -77,5 +77,9 @@ export const Situation = styled.ul`
     li > div > span > div{
         font-size: 18px;
     }
+    .mvpage{
+        font-size: 18px;
+        text-decoration: underline;
+    }
     
 `
