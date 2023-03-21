@@ -5,6 +5,8 @@ import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/basket"
 
+import noImg from "assets/images/noImg.gif";
+
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
@@ -147,7 +149,7 @@ const Basket = ({ setOrderData }) => {
                                             />
                                         </li>
                                         <li>
-                                            <img src={a.goods_img} alt="" />
+                                            <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             <div className="content">
                                                 <div className="title">{a.goods_nm}</div>
                                             </div>

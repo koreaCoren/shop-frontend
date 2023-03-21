@@ -41,6 +41,11 @@ const List = () => {
                                         <ul>
                                             <li>판매 수량 : {a.goods_sell}</li>
                                             <li>재고 : {a.goods_stock}</li>
+                                            {
+                                                a.goods_stock == 0
+                                                    ? <li className='warning'>재고 부족!</li>
+                                                    : ""
+                                            }
                                         </ul>
                                     </Style.Div>
                                     <Style.Ul>

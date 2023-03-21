@@ -103,7 +103,10 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>송장 미입력</h4>
-                                        <div>{dash.data?.delivery_not === null ? 0 : dash.data?.delivery_not}건</div>
+                                        <div>
+                                            {dash.data?.delivery_not === null 
+                                                ? 0 
+                                                : dash.data?.delivery_not}건</div>
                                         <LinkButton link={"/admin/delivery"} title={"바로가기"} />
                                     </span>
                                 </div>
@@ -113,11 +116,11 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>위험</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.warning === null ? 0 : dash.data?.warning}건</div>
                                     </span>
                                     <span>
                                         <h4>부족</h4>
-                                        <div>0건</div>
+                                        <div>{dash.data?.shortage === null ? 0 : dash.data?.shortage}건</div>
                                     </span>
                                 </div>
                             </li>
