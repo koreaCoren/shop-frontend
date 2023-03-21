@@ -139,7 +139,7 @@ const Home = () => {
                         </div>
                     </Common.Container>
                     <Common.Container>
-                        빨리 생각해내봐
+                        .
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >
