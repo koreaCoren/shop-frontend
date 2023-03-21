@@ -104,8 +104,8 @@ const Home = () => {
                                     <span>
                                         <h4>송장 미입력</h4>
                                         <div>
-                                            {dash.data?.delivery_not === null 
-                                                ? 0 
+                                            {dash.data?.delivery_not === null
+                                                ? 0
                                                 : dash.data?.delivery_not}건</div>
                                         <LinkButton link={"/admin/delivery"} title={"바로가기"} />
                                     </span>
@@ -143,7 +143,10 @@ const Home = () => {
                         </div>
                     </Common.Container>
                     <Common.Container>
-                        .
+                        <Style.Title>
+                            <h3>상품 후기</h3>
+
+                        </Style.Title>
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >

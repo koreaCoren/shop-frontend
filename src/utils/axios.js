@@ -85,7 +85,7 @@ export const tokenCheck = async () => {
 
 // 접속자 집계
 export const userCount = async (data) => {
-    const api = await API.USER_COUNT.post("".data).then((res) => {
+    const api = await API.USER_COUNT.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
