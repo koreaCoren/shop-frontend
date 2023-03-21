@@ -50,7 +50,6 @@ input[type=submit]{
 export const Div = styled.div`
 display: grid;
 grid-template-columns: 200px 1fr;
-min-width: 1200px;
 min-height: 70vh;
 padding: 20px 0 50px 0;
 `

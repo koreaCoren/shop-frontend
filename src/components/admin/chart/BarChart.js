@@ -106,7 +106,7 @@ const Chart = ({ data, day }) => {
                     }}
                 >
                     <strong>
-                        {id}: {value}원
+                        {id} : {value}원
                     </strong>
                 </div>
             )}
