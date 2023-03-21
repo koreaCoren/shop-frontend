@@ -40,4 +40,16 @@ export const ReviewList = styled.ul`
         padding: 7px 15px;
         border-radius: 7px;
     }
+    @media screen and (max-width:500px){
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        li > div{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px;
+    }
+    }
 `

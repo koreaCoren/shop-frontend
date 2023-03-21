@@ -187,6 +187,7 @@ const Address = ({ }) => {
                     {
                         list.map((item, i) => {
                             return (
+
                                 <Style.Ctnt key={i}>
                                     <div className='flex60'>
                                         <i className={(item.default_address === 1)
@@ -194,7 +195,7 @@ const Address = ({ }) => {
                                             : "fa-regular fa-circle pointer"}
                                             onClick={() => {
                                                 setDefaultAddr(item.i_addr);
-                                            }}></i></div>
+                                    }}></i></div>
                                     <div className='flex60'>{item.ship_name}</div>
                                     <div className='flex360'>{item.ship_address} {item.ship_detail_address}</div>
                                     <div className='flex120'>{item.ship_receiver}</div>
