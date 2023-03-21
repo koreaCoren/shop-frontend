@@ -44,7 +44,7 @@ const Notice = () => {
                     <h2>공지사항</h2>
 
                     <div className="flexBox">
-                        <Searching board={boardList.list} setBoardList={setBoardList} searchType={"title"} />
+                        <Searching board={boardList.list} setBoardList={setBoardList} searchType={"notice"} />
                         {adminCheck(false) && <Link className='write' to={"/community/write"}>글쓰기</Link>}
 
                     </div>

@@ -14,7 +14,7 @@ const Searching = ({ board, setBoardList, searchType }) => {
     const [searchValue, setSearchValue] = useState("");
 
     const searchTypes = {
-        title: {
+        notice: {
             prop: "title",
             placeholder: "제목 검색"
         },
@@ -22,7 +22,7 @@ const Searching = ({ board, setBoardList, searchType }) => {
             prop: "orderCode",
             placeholder: "주문번호 검색"
         },
-        email: {
+        user: {
             prop: "user_email",
             placeholder: "이메일 검색"
         }
@@ -34,17 +34,11 @@ const Searching = ({ board, setBoardList, searchType }) => {
             return;
         }
 
-        const arr = board.filter(el =>
-            el.del !== "Y" && el[searchTypes[searchType].prop].indexOf(searchValue) !== -1
-        );
-
-        if (arr.length === 0) {
-            alert("검색된 게시글이 없습니다");
-            return;
+        if (searchType === "notice") {
+            nav(`/community/notice/1?search=${searchValue}`);
+        } else if (searchType === "user") {
+            nav(`/admin/user/1?search=${searchValue}`);
         }
-
-        nav(`?search=${searchValue}`);
-        // setBoardList(arr);
     };
 
     const onChange = (e) => {
