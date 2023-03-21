@@ -187,7 +187,7 @@ export const Button = styled.div`
     padding: 20px 0px;
     color: ${props => props.color !== "black" ? "#333" : "#fff"};
     background-color: ${props => props.color !== "black" ? "#fff" : "#333"};
-    cursor: pointer;
+    cursor: ${props => props.cursor === "default" ? "default" : "pointer"};
 `
 
 export const fav = styled.div`
