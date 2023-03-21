@@ -93,6 +93,10 @@ const Detail = ({ result, setOrderData }) => {
         if (loginCheck(true) === true) {
             return;
         }
+        if(productDetail?.goods_stock == 0){
+            alert("재고가 없습니다. 판매자에게 문의바랍니다");
+            return
+        }
         const data = {
             product_code: productCode,
             product_name: productDetail?.goods_nm,
@@ -150,7 +154,11 @@ const Detail = ({ result, setOrderData }) => {
                                 <b>{Math.ceil((productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</b>
                             </Style.Total>
                             <Style.ButtonBox>
-                                <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
+                                {productDetail?.goods_stock == 0
+                                    ?<Style.Button cursor={"default"} style={{color:"tomato"}} >재고부족</Style.Button>
+                                    :<Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
+                                }
+                                
                                 <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
                                 {/* <Style.fav onClick={() => { insFav() }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav> */}
                                 {/* <Style.Button>관련상품</Style.Button> */}
