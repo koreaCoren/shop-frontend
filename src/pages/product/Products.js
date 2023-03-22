@@ -67,6 +67,15 @@ const Products = ({ result }) => {
         return arr;
     }
 
+    useEffect(() => {
+        if (result.isLoading === false) {
+            sortData();
+        }
+    }, [result.isLoading, select]);
+
+    useEffect(() => {
+        reset();
+    }, [result.isLoading, nav]);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -74,16 +83,11 @@ const Products = ({ result }) => {
         switch (name) {
             case "select":
                 setSelect(value);
-                sortData();
                 break;
             default:
                 break;
         }
     }
-
-    useEffect(() => {
-        reset();
-    }, [result.isLoading, nav]);
 
     return (
         <div style={{ paddingBottom: "50px", }}>
