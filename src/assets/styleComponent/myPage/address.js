@@ -32,7 +32,7 @@ export const Column = styled.ul`
     justify-content: space-between;  
         
     @media screen and (max-width: 700px){
-     display   :none ;
+        display   :none ;
     }
 `
 
