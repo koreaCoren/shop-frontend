@@ -1,5 +1,5 @@
 import React from 'react';
-import bgImg from "../../assets/images/myPage.jpg";
+import bgImg from "../../assets/images/mypage/myPage.jpg";
 
 import styled from 'styled-components';
 

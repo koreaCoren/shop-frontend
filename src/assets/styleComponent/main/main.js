@@ -6,6 +6,7 @@ import view03 from "assets/images/main/view03.jpg"
 export const Banner = styled.div`
     position: relative;
     font-family: 'Nanum Myeongjo', serif !important;
+    overflow: hidden;
 
     .content{
         position: absolute;

@@ -10,7 +10,7 @@ const SideMenu = () => {
     const [menuList, setMenuList] = useState(0);
     return (
         <Ul>
-            <li><a href="/">PKD ADMIN</a></li>
+            <li><a href="/">COREN ADMIN</a></li>
             <li><Link to={"/admin"}><i className="fa-solid fa-house"></i>홈</Link></li>
             {
                 menus.map((a, i) => {

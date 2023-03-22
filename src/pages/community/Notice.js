@@ -73,7 +73,7 @@ const Notice = () => {
                         }
                     </Style.Board>
 
-                    <Pageing count={10} boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/notice"} />
+                    <Pageing boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/notice"} />
                 </div>
             </Style.Contaienr>
     );

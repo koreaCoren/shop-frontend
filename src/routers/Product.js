@@ -14,7 +14,7 @@ const Product = ({ setOrderData }) => {
         <>
             <Routes>
                 <Route path='detail/:productCode' element={<Detail result={result} setOrderData={setOrderData} />}></Route>
-                <Route path='products/:categoryCode' element={<Products result={result} setOrderData={setOrderData} />}></Route>
+                <Route path='products/:categoryCode/:boardPage' element={<Products result={result} setOrderData={setOrderData} />}></Route>
                 <Route path='basket' element={<Basket setOrderData={setOrderData} />}></Route>
             </Routes>
         </>

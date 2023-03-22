@@ -12,7 +12,6 @@ const Chart = ({ data, day }) => {
     if (day > 15) {
         testA.tickRotation = -30
     }
-    console.log(testA);
     return (
         <ResponsiveBar
             data={data.slice(data.length - day, data.length)}
