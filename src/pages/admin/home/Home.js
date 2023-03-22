@@ -106,8 +106,8 @@ const Home = () => {
                                         <h4>송장 미입력</h4>
                                         <div>
                                             <Link className='mvpage' to={"/admin/delivery"}>
-                                                {dash.data?.delivery_not === null 
-                                                    ? 0 
+                                                {dash.data?.delivery_not === null
+                                                    ? 0
                                                     : dash.data?.delivery_not}건
                                             </Link>
                                         </div>
@@ -123,7 +123,7 @@ const Home = () => {
                                         <div>
                                             <Link className='mvpage' to={"/admin/product"}>
                                                 {dash.data?.warning === null ? 0 : dash.data?.warning}건
-                                            </Link>    
+                                            </Link>
                                         </div>
                                     </span>
                                     <span>
@@ -131,7 +131,7 @@ const Home = () => {
                                         <div>
                                             <Link className='mvpage' to={"/admin/product"}>
                                                 {dash.data?.shortage === null ? 0 : dash.data?.shortage}건
-                                            </Link>    
+                                            </Link>
                                         </div>
                                     </span>
                                 </div>
@@ -155,7 +155,13 @@ const Home = () => {
                         </div>
                     </Common.Container>
                     <Common.Container>
-                        .
+                        <Style.Title>
+                            <h3>상품 문의</h3>
+                        </Style.Title>
+
+                        <span style={{ width: "100%", fontSize: "30px", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", height: "80%" }}>
+                            Comming Soon
+                        </span>
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >

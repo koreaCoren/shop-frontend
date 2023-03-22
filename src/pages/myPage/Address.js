@@ -129,7 +129,7 @@ const Address = ({ }) => {
                                 name='AddAddress' />
                         </div>
                         <div>
-                            <div></div>
+                            <span></span>
                             <input
                                 type="text"
                                 name='shipAddress'
@@ -175,13 +175,15 @@ const Address = ({ }) => {
                 destination.isSuccess &&
                 <Style.Contents>
                     <Style.Column>
-                        <div className='flex60'>선택</div>
-                        <div className='flex60'>배송지명</div>
-                        <div className='flex360'>주소</div>
-                        <div className='flex120'>받으실 분</div>
-                        <div className='flex100'>연락처</div>
+                        <li className='flex60'>선택</li>
+                        <li className='flex60'>배송지명</li>
+                        <ul className='flex580'>
+                            <li className='flex360'>주소</li>
+                            <li className='flex120'>받으실 분</li>
+                            <li className='flex100'>연락처</li>
+                        </ul>
                         {/* <div className='flex60'>수정</div> */}
-                        <div className='flex60'>삭제</div>
+                        <li className='flex60'>삭제</li>
                     </Style.Column>
 
                     {
@@ -189,21 +191,34 @@ const Address = ({ }) => {
                             return (
 
                                 <Style.Ctnt key={i}>
-                                    <div className='flex60'>
+                                    <li className='flex60'>
                                         <i className={(item.default_address === 1)
                                             ? "fa-regular fa-circle-check pointer"
                                             : "fa-regular fa-circle pointer"}
                                             onClick={() => {
                                                 setDefaultAddr(item.i_addr);
-                                    }}></i></div>
-                                    <div className='flex60'>{item.ship_name}</div>
-                                    <div className='flex360'>{item.ship_address} {item.ship_detail_address}</div>
-                                    <div className='flex120'>{item.ship_receiver}</div>
-                                    <div className='flex100'>{item.ship_phone}</div>
-                                    {/* <div className='flex60'><i className="fa-solid fa-pen"></i></div> */}
-                                    <div className='flex60 pointer' onClick={() => {
+                                            }}></i>
+                                    </li>
+                                    <li className='flex60'>{item.ship_name}</li>
+                                    <ul className='flex580'>
+                                        <li className='flex360'>
+                                            <span>{item.ship_address}</span>
+                                            <span>{item.ship_detail_address}</span>
+                                        </li>
+                                        <li className='flex120'>
+                                            <span>
+                                                {item.ship_receiver}
+                                            </span>
+                                            <span className='mobile'>
+                                                {item.ship_phone}
+                                            </span>
+                                        </li>
+                                        <li className='flex100 pc'>{item.ship_phone}</li>
+                                        {/* <div className='flex60'><i className="fa-solid fa-pen"></i></div> */}
+                                    </ul>
+                                    <li className='flex60 pointer' onClick={() => {
                                         delShpping(item.i_addr);
-                                    }}><i className="fa-sharp fa-solid fa-trash"></i></div>
+                                    }}><i className="fa-sharp fa-solid fa-trash"></i></li>
                                 </Style.Ctnt >
                             )
                         })

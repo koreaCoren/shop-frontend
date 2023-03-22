@@ -54,11 +54,15 @@ input[type=submit]{
 export const Div = styled.div`
 display: grid;
 grid-template-columns: 200px 1fr;
+min-height: 70vh;
+padding: 20px 0 50px 0;
 @media screen and (max-width: 800px) {
     display: block;
 }
-min-height: 70vh;
-padding: 20px 0 50px 0;
+@media screen and (max-width: 700px) {
+    min-height: 0;
+}
+
 `
 
 export const Line = styled.div`

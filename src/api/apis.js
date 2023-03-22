@@ -225,7 +225,7 @@ export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
 })
 
-//  상품후기 리스트
+// 유저 구매 리스트
 export const PRODUCT_REVIEW = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/buy_product_list`,
 })
@@ -233,3 +233,4 @@ export const PRODUCT_REVIEW = axios.create({
 //---------마이페이지 끝 --------
 
 //--------- 상품 관련 ----------
+
