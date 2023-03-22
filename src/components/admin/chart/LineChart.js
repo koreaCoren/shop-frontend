@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ResponsiveLine } from '@nivo/line'
 // import { data } from './LineData';
-import { useEffect } from 'react';
 
 const LineChart = ({ day, data }) => {
     const [arr, setArr] = useState([

@@ -16,7 +16,6 @@ const UserList = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
-    const [boardCount, setBoardCount] = useState(5);
     const users = useMutation(user);
     const deleted = useMutation(userDeleted);
 
@@ -30,10 +29,10 @@ const UserList = () => {
     const getUser = async () => {
         const data = {}
         if (searchParams.get("search") === null) {
-            data.userPage = boardPage;
+            data.boardPage = boardPage;
             data.boardType = "user";
         } else {
-            data.userPage = boardPage;
+            data.boardPage = boardPage;
             data.boardType = "user";
             data.search = searchParams.get("search");
         }
@@ -43,7 +42,7 @@ const UserList = () => {
 
     useEffect(() => {
         getUser();
-    }, [nav])
+    }, [nav, searchParams.get("search")])
 
     return (
         users.isSuccess !== true

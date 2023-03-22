@@ -19,8 +19,11 @@ const Basket = ({ setOrderData }) => {
     const allCheck = (checked) => {
         if (checked) {
             const arr = [];
+            
             basketData.forEach(el => {
-                arr.push(el.goods_code);
+                if(el.goods_stock != 0){
+                    arr.push(el.goods_code);
+                }
             });
             setCheckData(arr);
         } else {
@@ -142,16 +145,27 @@ const Basket = ({ setOrderData }) => {
                             : basketData.map((a, i) => {
                                 return (
                                     <ul className="productInfo" key={i}>
+
                                         <li>
-                                            <input type="checkbox"
+                                            {
+                                                a.goods_stock != 0
+                                                ?<input type="checkbox"
                                                 onChange={(e) => singCheck(e.target.checked, a.goods_code)}
                                                 checked={checkData.includes(a.goods_code) ? true : false}
-                                            />
+                                                />
+                                                :<input type="checkbox" disabled />
+                                            }
+                                            
                                         </li>
                                         <li>
                                             <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             <div className="content">
                                                 <div className="title">{a.goods_nm}</div>
+                                                {
+                                                    a.goods_stock == 0
+                                                    ?<div className='stockZero'>재고 부족</div>
+                                                    :""
+                                                }
                                             </div>
                                         </li>
                                         <li className='count'>

@@ -6,10 +6,11 @@ import styled from 'styled-components';
  * @param {*} board 게시글리스트
  * @param {*} setBoardList 검색값으로 새로 게시글리스트 변경
  * @param {*} searchType 검색타입
+ * @param {*} reset 상품리스트 리셋 상품관련만 필요 나머지 리스트는 null 넣으면됨
  * @returns 
  */
 
-const Searching = ({ board, setBoardList, searchType }) => {
+const Searching = ({ board, setBoardList, searchType, reset }) => {
     const nav = useNavigate();
     const [searchValue, setSearchValue] = useState("");
 
@@ -18,13 +19,17 @@ const Searching = ({ board, setBoardList, searchType }) => {
             prop: "title",
             placeholder: "제목 검색"
         },
-        orderNumber: {
+        order: {
             prop: "orderCode",
             placeholder: "주문번호 검색"
         },
         user: {
             prop: "user_email",
             placeholder: "이메일 검색"
+        },
+        product: {
+            prop: "goods_nm",
+            placeholder: "상품명 검색"
         }
     };
 
@@ -38,6 +43,13 @@ const Searching = ({ board, setBoardList, searchType }) => {
             nav(`/community/notice/1?search=${searchValue}`);
         } else if (searchType === "user") {
             nav(`/admin/user/1?search=${searchValue}`);
+        } else if (searchType === "order") {
+            nav(`/admin/order/1?search=${searchValue}`);
+        } else if (searchType === "product") {
+            const arr = reset().filter(el =>
+                el.del !== "Y" && el[searchTypes[searchType].prop].indexOf(searchValue) !== -1
+            );
+            setBoardList(arr);
         }
     };
 

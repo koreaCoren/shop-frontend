@@ -288,9 +288,14 @@ export const categorySave = async (data) => {
 }
 
 // 어드민 주문 관리
-export const orderManagement = async () => {
-    const { data } = await API.ORDER_MANAGEMENT.get();
-    return data;
+export const orderManagement = async (data) => {
+    const api = await API.ORDER_MANAGEMENT.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
 }
 
 // 어드민 주문관리 디테일
