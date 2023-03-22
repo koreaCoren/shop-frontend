@@ -28,6 +28,7 @@ function App() {
     const token = useMutation(tokenCheck);
     const userAccessCheck = useMutation(userCount);
 
+    // 방문자 체크
     const accessCheck = async () => {
         const expires = moment().add('10', 'm').toDate();
         if (cookies.userCount !== 'true') {
@@ -36,6 +37,7 @@ function App() {
         }
     }
 
+    // 어드민페이지 들어오면 헤더 삭제
     const adminPageCheck = () => {
         const regex = /.*admin.*/;
         if (regex.test(location.pathname)) {

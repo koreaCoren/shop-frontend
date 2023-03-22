@@ -8,6 +8,14 @@ export const Products = styled.div`
         margin-bottom: 50px;
     }
 
+    .banner{
+        margin-bottom: 20px;
+    }
+    
+    .banner img{
+        width: 100%;
+    }
+
     ul{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -36,3 +44,24 @@ export const Products = styled.div`
         font-size: 16px;
     }
 `
+
+
+
+export const Select = styled.label`
+    position: relative;
+    select{
+        border: 1px solid #aaa;
+        width: 250px;
+        border-radius: 5px;
+        line-height: 26px;
+        padding: 0px 10px;
+        color: #757575;
+    }
+    i{
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-70%);
+        color: #757575;
+    }
+`;
