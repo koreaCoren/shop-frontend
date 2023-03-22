@@ -156,9 +156,12 @@ const Home = () => {
                     </Common.Container>
                     <Common.Container>
                         <Style.Title>
-                            <h3>상품 후기</h3>
-
+                            <h3>상품 문의</h3>
                         </Style.Title>
+
+                        <span style={{ width: "100%", fontSize: "30px", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", height: "80%" }}>
+                            Comming Soon
+                        </span>
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >
