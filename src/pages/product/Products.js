@@ -68,10 +68,10 @@ const Products = ({ result }) => {
     }
 
     useEffect(() => {
-        if (result.isLoading === false) {
+        if (productList?.length > 0) {
             sortData();
         }
-    }, [result.isLoading, select]);
+    }, [select]);
 
     useEffect(() => {
         reset();
