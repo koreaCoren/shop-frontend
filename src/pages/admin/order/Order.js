@@ -23,7 +23,6 @@ const Order = () => {
 
     const getOrder = async () => {
         const data = {};
-        let trackResult = [];
         if (searchParams.get("search") === null) {
             data.boardPage = boardPage;
             data.boardType = "order";
@@ -58,7 +57,6 @@ const Order = () => {
                     </Common.Container>
                     {
                         board.list?.map((a, i) => {
-
                             return (
                                 <Common.Container key={i} style={{ textAlign: "center" }}>
                                     <Style.Div>
