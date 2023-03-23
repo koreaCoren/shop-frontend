@@ -62,7 +62,7 @@ export const ReviewBoard = styled.div`
     }
     .wrap > ul.all > li > .content h3{
         font-weight: bold;
-        font-size: 16px;
+        font-size: 24px;
         margin: 10px 0px;
     }
     .wrap > ul.all > li > .content p{

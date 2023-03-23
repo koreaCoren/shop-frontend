@@ -32,7 +32,7 @@ const ReviewWrite = () => {
         const data = {
             user_id: sessionStorage.getItem("userId"),
             title: title,
-            content: content,
+            content: content.replace(/\r?\n/g, "<br>"),
             firstImage: firstImage,
             secondImage: secondImage,
             date: `${yy}/${mm}/${dd}`,
