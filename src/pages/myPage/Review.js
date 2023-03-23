@@ -50,7 +50,11 @@ const Review = () => {
                                             <h5>{a.order_count}개</h5>
                                             <h5>{comma(a.order_pay)}원</h5>
                                         </div>
-                                        <Link to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                        {
+                                            a.review === "Y"
+                                                ? <Link to={`/community/review/all/1`}>후기 작성완료</Link>
+                                                : <Link style={{ backgroundColor: "#1a6dff" }} to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                        }
                                     </div>
                                 </li>
                             )

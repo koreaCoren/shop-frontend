@@ -6,10 +6,8 @@ import { boardWrite, tokenCheck } from 'utils/axios';
 import createCode from 'utils/createCode';
 import SubTitle from 'components/myPage/SubTitle';
 import LoginInput from 'components/input/Input';
-import TextEditor from 'components/editor/Editor';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
-import Textarea from 'components/admin/product/input/Textarea';
 import ImageUpload from 'components/input/ImageUpload';
 
 const ReviewWrite = () => {
@@ -67,8 +65,8 @@ const ReviewWrite = () => {
             <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />
 
             <Common.ReviewForm onSubmit={onSubmit}>
-                <LoginInput type="text" name="title" value={title} placeholder="제목" onChange={onChange}></LoginInput>
-                <textarea name="content" value={content} onChange={onChange} placeholder="내용"></textarea>
+                <LoginInput maxLength={100} type="text" name="title" value={title} placeholder="제목 최대 100자" onChange={onChange}></LoginInput>
+                <textarea maxLength={1000} name="content" value={content} onChange={onChange} placeholder="내용 최대 1000자"></textarea>
                 <ImageUpload setImageData={setFirstImage} />
                 <ImageUpload setImageData={setSecondImage} />
                 <Common.Button>
