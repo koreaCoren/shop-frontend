@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
 import SubTitle from 'components/myPage/SubTitle';
-import { productReview } from 'utils/axios';
+import { buyProductList } from 'utils/axios';
+import { comma } from 'utils/commaReplace';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/review"
 
 import noImg from "assets/images/noImg.gif";
-import { useEffect } from 'react';
+import Loading from 'components/loding/Loading';
 
 const Review = () => {
-    const { mutateAsync } = useMutation(productReview);
+    const [boardList, setBoardList] = useState();
+    const { mutateAsync, isSuccess } = useMutation(buyProductList);
 
     const getProductReview = async () => {
         const data = {
             user_id: sessionStorage.getItem("userId"),
         }
         await mutateAsync(data);
+        setBoardList(data.result)
     }
 
     useEffect(() => {
@@ -26,36 +29,59 @@ const Review = () => {
     }, [])
 
     return (
-        <Common.InDiv>
-            <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />
+        isSuccess !== true
+            ? <Loading />
+            : <Common.InDiv>
+                <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />
 
-            <Style.ReviewList>
-                <li>
-                    <div>
-                        <img src={noImg} alt="" />
-                        <div className="content">
-                            <h4>pkd 상품입니다</h4>
-                            <h5>상품 설명</h5>
-                            <h5>1개</h5>
-                            <h5>100,000원</h5>
+                <Style.ReviewList>
+                    {
+                        boardList.map((a, i) => {
+                            return (
+                                <li>
+                                    <div>
+                                        <img src={
+                                            a.goods_img === ""
+                                                ? noImg
+                                                : a.goods_img
+                                        } alt="" />
+                                        <div className="content">
+                                            <h4>{a.goods_name}</h4>
+                                            <h5>{a.order_count}개</h5>
+                                            <h5>{comma(a.order_pay)}원</h5>
+                                        </div>
+                                        <Link to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
+                    <li>
+                        <div>
+                            <img src={noImg} alt="" />
+                            <div className="content">
+                                <h4>pkd 상품입니다</h4>
+                                <h5>상품 설명</h5>
+                                <h5>1개</h5>
+                                <h5>100,000원</h5>
+                            </div>
+                            <Link to="?">후기 작성하기</Link>
                         </div>
-                        <Link to="?">후기 작성하기</Link>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <img src={noImg} alt="" />
-                        <div className="content">
-                            <h4>pkd 상품입니다</h4>
-                            <h5>상품 설명</h5>
-                            <h5>1개</h5>
-                            <h5>100,000원</h5>
+                    </li>
+                    <li>
+                        <div>
+                            <img src={noImg} alt="" />
+                            <div className="content">
+                                <h4>pkd 상품입니다</h4>
+                                <h5>상품 설명</h5>
+                                <h5>1개</h5>
+                                <h5>100,000원</h5>
+                            </div>
+                            <Link to={`/mypage/reviewWrite/${"상품코드 넣을 예정"}`}>후기 작성하기</Link>
                         </div>
-                        <Link to={`/mypage/reviewWrite/${"상품코드 넣을 예정"}`}>후기 작성하기</Link>
-                    </div>
-                </li>
-            </Style.ReviewList>
-        </Common.InDiv>
+                    </li>
+                </Style.ReviewList>
+            </Common.InDiv>
     );
 };
 

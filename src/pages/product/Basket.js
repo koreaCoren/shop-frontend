@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import loginCheck from 'utils/loginCheck';
 
 import * as Style from "assets/styleComponent/product/basket"
+import { comma } from 'utils/commaReplace';
 
 import noImg from "assets/images/noImg.gif";
 
@@ -181,7 +182,7 @@ const Basket = ({ setOrderData }) => {
                                                 countUp(i);
                                             }}><span>+</span></button></li>
                                         <li>{a.goods_sale}%</li>
-                                        <li>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</li>
+                                        <li>{comma(Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count))}원</li>
                                     </ul>
                                 )
                             })

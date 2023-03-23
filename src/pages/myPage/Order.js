@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
 import { orderList } from 'utils/axios';
+import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 import SubTitle from 'components/myPage/SubTitle';
@@ -58,7 +59,7 @@ const Order = ({ }) => {
                                     <li><Style.SubTitle>상품명</Style.SubTitle> {a.goods_name}</li>
                                     <li><Style.SubTitle>주문번호</Style.SubTitle> {a.orderCode}</li>
                                     <li><Style.SubTitle>총 상품개수</Style.SubTitle> {a.total_count}개</li>
-                                    <li><Style.SubTitle>총 주문금액</Style.SubTitle> {a.total_price}원</li>
+                                    <li><Style.SubTitle>총 주문금액</Style.SubTitle> {comma(a.total_price)}원</li>
                                 </ul>
                             </Style.Div>
                         </div >

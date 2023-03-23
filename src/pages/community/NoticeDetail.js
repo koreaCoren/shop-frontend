@@ -47,6 +47,7 @@ const NoticeDetail = () => {
 
     useEffect(() => {
         read();
+        console.log(readDetail);
     }, [nav])
 
     return (
@@ -60,21 +61,21 @@ const NoticeDetail = () => {
                         <ul>
                             <li>
                                 <div>제목</div>
-                                <div>{readDetail.title}</div>
+                                <div>{readDetail.detail.title}</div>
                             </li>
                             <li>
                                 <div>작성자</div>
-                                <div>{readDetail.user_id}</div>
+                                <div>{readDetail.detail.user_id}</div>
                             </li>
                         </ul>
                         <div>
-                            <p><b>작성일</b>{readDetail.create_date}</p>
-                            <p><b>조회수</b>{readDetail.view_up}</p>
+                            <p><b>작성일</b>{readDetail.detail.create_date}</p>
+                            <p><b>조회수</b>{readDetail.detail.view_up}</p>
                         </div>
                     </div>
 
                     <div className="content">
-                        <p dangerouslySetInnerHTML={{ __html: readDetail.content }}></p>
+                        <p dangerouslySetInnerHTML={{ __html: readDetail.detail.content }}></p>
                     </div>
 
                     <Link to="/community/notice/1" className="more">목록</Link>

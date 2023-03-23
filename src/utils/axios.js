@@ -128,7 +128,6 @@ export const boardRead = async (data) => {
 // 게시글 디테일
 export const boardDetail = async (data) => {
     const api = await API.DETAIL_BOARD.post("", data).then((res) => {
-        console.log(res);
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -153,6 +152,17 @@ export const boardDelete = async (data) => {
     const api = await API.DELETE_BOARD.post("", data).then((res) => {
         alert("삭제되었습니다");
         window.location.replace(`/community/${data.type}/1`);
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
+}
+
+// 구매한 상품 리스트 (리뷰용)
+export const buyProductList = async (data) => {
+    const api = await API.BUY_PRODUCT_LIST.post("", data).then((res) => {
+        data.result = res.data
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");
@@ -536,17 +546,6 @@ export const settingFav = async (data) => {
     return api;
 }
 
-// 상품후기 리스트
-export const productReview = async (data) => {
-    const api = await API.PRODUCT_REVIEW.post("", data).then((res) => {
-
-    }).catch((error) => {
-        alert("서버와 통신을 실패했습니다.\n" + error);
-        window.location.replace("/");
-    })
-
-    return api
-}
 
 // -------- 개인정보 끝 --------------
 

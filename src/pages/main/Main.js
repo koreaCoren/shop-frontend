@@ -1,15 +1,16 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import { productList } from 'utils/axios';
+import { comma } from 'utils/commaReplace';
+import addBasket from 'utils/addBasket';
 
 import * as Style from "assets/styleComponent/main/main"
 
 import mainbanner from "assets/images/main/mainBanner.jpg";
 import best from "assets/images/main/best.jpg";
-import { Link } from 'react-router-dom';
-import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 
@@ -159,13 +160,13 @@ const Main = () => {
                                                 {
                                                     Number(a.goods_sale) <= 0
                                                         ? <div className="pay">{
-                                                            a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                            comma(a.goods_price)}원
                                                         </div>
                                                         : <div className="pay discount">
                                                             <p>
-                                                                {a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
+                                                                {comma(a.goods_price)}원
                                                             </p>
-                                                            <p>{Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</p>
+                                                            <p>{comma(Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))))}원</p>
                                                         </div>
                                                 }
                                             </li>

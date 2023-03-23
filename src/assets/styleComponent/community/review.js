@@ -94,6 +94,7 @@ export const ReviewBoard = styled.div`
         height: 80px;
         border-radius: 15px;
         margin-top: 20px;
+        cursor: pointer;
     }
     .wrap > ul.all > li > .reviewInfo{
         width: 25%;
