@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
+import { track } from 'utils/delivery';
+import { comma } from 'utils/commaReplace';
 import { orderManagement } from 'utils/axios';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
@@ -16,10 +18,12 @@ const Order = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
+    const [state, setState] = useState();
     const result = useMutation(orderManagement);
 
     const getOrder = async () => {
-        const data = {}
+        const data = {};
+        let trackResult = [];
         if (searchParams.get("search") === null) {
             data.boardPage = boardPage;
             data.boardType = "order";
@@ -29,13 +33,18 @@ const Order = () => {
             data.search = searchParams.get("search");
         }
         await result.mutateAsync(data);
+
         setBoard(data.result);
+        data.result.list.forEach(e => {
+            track(e.carrier, e.delivery, trackResult);
+        });
+        setState([...trackResult]);
     }
 
     useEffect(() => {
         getOrder()
     }, [nav, searchParams.get("search")])
-
+    console.log(state);
     return (
         result.isSuccess !== true
             ? <Loading />
@@ -43,21 +52,21 @@ const Order = () => {
                 <Top title={"주문 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
-                        <Searching board={board.list} setBoardList={setBoard} searchType={"order"} />
                     </Common.Container>
                     {
-                        board.list.map((a, i) => {
+                        board.list?.map((a, i) => {
+
                             return (
                                 <Common.Container key={i} style={{ textAlign: "center" }}>
                                     <Style.Div>
                                         <ul>
                                             <li>주문번호 : {a.orderCode}</li>
                                             <li>회원 ID : {a.user_id}</li>
-                                            <li>받는 사람 : {a.receiver}</li>
+                                            <li>상품명 : {a.goods_name}</li>
+                                            <li>주문자 이름 : {a.buyer_name}</li>
                                             <li>주문자 번호 : {a.buyer_tel}</li>
-                                            <li>총 상품 금액 : {a.total_price}</li>
-                                            <li>총 상품수 : {a.total_count}</li>
-                                            <li>송장번호 : {a.delivery}</li>
+                                            <li>총 상품 금액 : {comma(a.total_price)}</li>
+                                            <li>배송 현황 : {state[i]}</li>
                                             <li>주문일자 : {a.order_date}</li>
                                         </ul>
                                     </Style.Div>

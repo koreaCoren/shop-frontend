@@ -79,8 +79,9 @@ const OrderDetail = () => {
                         <Style.Content>
                             <li>주문자 아이디 : {detail[0].user_id}</li>
                             <li>주문자 이름 : {detail[0].buyer_name}</li>
-                            <li>주문자 번호 : {detail[0].buyer_tel}</li>
-                            <li>주문자 주소 : {detail[0].buyer_addr}</li>
+                            <li>주문자 연락처 : {detail[0].buyer_tel}</li>
+                            <li>받는사람 : {detail[0].receiver}</li>
+                            <li>배송 주소 : {detail[0].buyer_addr}</li>
                             <li>주문 번호 : {detail[0].orderCode}</li>
                             <li>주문 날짜 : {detail[0].order_date}</li>
                             <li>상품 총 금액 : {totalPrice}</li>
@@ -88,7 +89,7 @@ const OrderDetail = () => {
                             <li>결제 완료 여부 : {detail[0].order_complete === "Y" ? "결제완료" : "미결제"}</li>
                             <li>
                                 송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' value={invoiceNumber} onChange={onChange} />
-                                <button>확인</button>
+                                <button>수정</button>
                             </li>
                         </Style.Content>
                     </Common.Container>

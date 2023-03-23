@@ -2,9 +2,13 @@ import axios from "axios";
 
 // 배송상황 리턴
 export const track = async (carrier, delivery, trackResult) => {
-    const url = `https://apis.tracker.delivery/carriers/${carrier}/tracks/${delivery}`;
-    const res = await axios.get(url);
-    trackResult.push(res.data.state.text);
+    if (carrier && delivery) {
+        const url = `https://apis.tracker.delivery/carriers/${carrier}/tracks/${delivery}`;
+        const res = await axios.get(url);
+        trackResult.push(res.data.state.text);
+    } else {
+        trackResult.push('');
+    }
 }
 
 // 어드민 기본 배송지 목록 가져오기
