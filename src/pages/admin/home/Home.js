@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import BarChart from 'components/admin/chart/BarChart';
 import DonutChart from 'components/admin/chart/DonutChart';
@@ -103,8 +104,14 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>송장 미입력</h4>
-                                        <div>{dash.data?.delivery_not === null ? 0 : dash.data?.delivery_not}건</div>
-                                        <LinkButton link={"/admin/delivery"} title={"바로가기"} />
+                                        <div>
+                                            <Link className='mvpage' to={"/admin/delivery"}>
+                                                {dash.data?.delivery_not === null
+                                                    ? 0
+                                                    : dash.data?.delivery_not}건
+                                            </Link>
+                                        </div>
+                                        {/* <LinkButton link={"/admin/delivery"} title={"바로가기"} /> */}
                                     </span>
                                 </div>
                             </li>
@@ -113,11 +120,19 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>위험</h4>
-                                        <div>0건</div>
+                                        <div>
+                                            <Link className='mvpage' to={"/admin/product"}>
+                                                {dash.data?.warning === null ? 0 : dash.data?.warning}건
+                                            </Link>
+                                        </div>
                                     </span>
                                     <span>
                                         <h4>부족</h4>
-                                        <div>0건</div>
+                                        <div>
+                                            <Link className='mvpage' to={"/admin/product"}>
+                                                {dash.data?.shortage === null ? 0 : dash.data?.shortage}건
+                                            </Link>
+                                        </div>
                                     </span>
                                 </div>
                             </li>
@@ -140,7 +155,13 @@ const Home = () => {
                         </div>
                     </Common.Container>
                     <Common.Container>
-                        .
+                        <Style.Title>
+                            <h3>상품 문의</h3>
+                        </Style.Title>
+
+                        <span style={{ width: "100%", fontSize: "30px", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", height: "80%" }}>
+                            Comming Soon
+                        </span>
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >

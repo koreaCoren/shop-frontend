@@ -43,6 +43,15 @@ const Title = styled.div`
         text-align: right;
         cursor: pointer;
     }
+    @media screen and (max-width: 400px) {
+        padding-bottom: 20px;
+        .new{
+            font-size: 14px;
+        }
+        h3{
+            display: none;
+        }
+    }
 `
 
 export default SubTitle;

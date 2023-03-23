@@ -229,7 +229,7 @@ export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
 })
 
-
 //---------마이페이지 끝 --------
 
 //--------- 상품 관련 ----------
+

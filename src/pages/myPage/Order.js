@@ -48,7 +48,7 @@ const Order = ({ }) => {
                                     {a.order_date.substr(0, 10)} ({a.order_date.substr(11, 5)})
                                 </div>
                                 <div>
-                                    <Link to={`/myPage/orderDetail/${a.orderCode}`} state={{ orderCode: a.orderCode }}>주문내역 상세보기 {'>'}</Link>
+                                    <Link to={`/myPage/orderDetail/${a.orderCode}`} state={{ orderCode: a.orderCode }}> 상세보기 {'>'}</Link>
                                 </div>
                             </Style.Div>
                             <Common.Line></Common.Line>
