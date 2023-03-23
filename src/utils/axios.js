@@ -128,7 +128,6 @@ export const boardRead = async (data) => {
 // 게시글 디테일
 export const boardDetail = async (data) => {
     const api = await API.DETAIL_BOARD.post("", data).then((res) => {
-        console.log(res);
         data.result = res.data;
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
