@@ -23,7 +23,6 @@ const Order = () => {
 
     const getOrder = async () => {
         const data = {};
-        let trackResult = [];
         if (searchParams.get("search") === null) {
             data.boardPage = boardPage;
             data.boardType = "order";
@@ -54,10 +53,10 @@ const Order = () => {
                 <Top title={"주문 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
+                        <Searching board={board.list} setBoardList={setBoard} searchType={"order"} />
                     </Common.Container>
                     {
                         board.list?.map((a, i) => {
-
                             return (
                                 <Common.Container key={i} style={{ textAlign: "center" }}>
                                     <Style.Div>
