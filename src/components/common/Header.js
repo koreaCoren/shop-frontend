@@ -72,7 +72,7 @@ const Header = () => {
                                         )
                                     })
                                 }
-                                <li><Link to={"community/review/photo/1"}>리뷰보기</Link></li>
+                                <li><Link to={"community/review/all/1"}>리뷰보기</Link></li>
                                 <li><Link to={"community/notice/1"}>공지사항</Link></li>
                             </ul>
                         </nav>
