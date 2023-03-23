@@ -309,7 +309,7 @@ const Main = () => {
                         </li>
                     </ul>
                     <div className="button">
-                        <a className="more" href="/pages/review.php?board=photoReview">리뷰 모두 보기</a>
+                        <a className="more" href="/community/review/photo/1">리뷰 모두 보기</a>
                     </div>
                 </div>
             </Style.Review>
