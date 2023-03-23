@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
 
+import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
 import Searching from 'components/board/Searching';
 import Pageing from 'components/board/Pageing';
@@ -116,7 +117,7 @@ const Products = ({ result }) => {
                                         <Link to={`/product/detail/${a.goods_code}`}>
                                             <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
                                             <h3>{a.goods_nm}</h3>
-                                            <h4>{a.goods_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</h4>
+                                            <h4>{comma(a.goods_price)} 원</h4>
                                         </Link>
                                     </li>
                                 )

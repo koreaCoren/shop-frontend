@@ -50,6 +50,11 @@ export const DELETE_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
 })
 
+// 구매한 상품 리스트 (리뷰용)
+export const BUY_PRODUCT_LIST = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_review`
+})
+
 
 //--------- 어드민 관련 시작 ---------
 
@@ -222,11 +227,6 @@ export const GET_FAV_LIST = axios.create({
 //상품 좋아요
 export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
-})
-
-// 유저 구매 리스트
-export const PRODUCT_REVIEW = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/user/buy_product_list`,
 })
 
 //---------마이페이지 끝 --------

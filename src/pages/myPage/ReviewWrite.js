@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
+import { useParams } from 'react-router-dom';
 
 import { boardWrite, tokenCheck } from 'utils/axios';
 import createCode from 'utils/createCode';
@@ -10,6 +11,7 @@ import TextEditor from 'components/editor/Editor';
 import * as Common from "assets/styleComponent/myPage/myPage"
 
 const ReviewWrite = () => {
+    const { productCode, orderCode } = useParams();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [imageCode, setImageCode] = useState([]);
@@ -46,6 +48,8 @@ const ReviewWrite = () => {
             date: `${yy}/${mm}/${dd}`,
             image_code: imageCode,
             code: createCode(),
+            order_code: orderCode,
+            goods_code: productCode,
             type: "review",
         }
 
