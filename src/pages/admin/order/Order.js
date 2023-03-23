@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
-import { track } from 'utils/delivery';
+import { deliveryStatus } from 'utils/delivery';
 import { comma } from 'utils/commaReplace';
 import { orderManagement } from 'utils/axios';
 import Top from 'components/admin/Top';
@@ -18,7 +18,7 @@ const Order = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [board, setBoard] = useState();
-    const [state, setState] = useState();
+    const [state, setState] = useState([]);
     const result = useMutation(orderManagement);
 
     const getOrder = async () => {
@@ -35,16 +35,18 @@ const Order = () => {
         await result.mutateAsync(data);
 
         setBoard(data.result);
-        data.result.list.forEach(e => {
-            track(e.carrier, e.delivery, trackResult);
-        });
-        setState([...trackResult]);
+        getDeliveryStatus(data.result.list);
+    }
+
+    const getDeliveryStatus = async (req) => {
+        const data = await deliveryStatus(req);
+        setState(data);
     }
 
     useEffect(() => {
         getOrder()
     }, [nav, searchParams.get("search")])
-    console.log(state);
+
     return (
         result.isSuccess !== true
             ? <Loading />
