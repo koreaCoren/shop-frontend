@@ -11,7 +11,7 @@ const Review = () => {
     const location = useLocation();
     const [url, setUrl] = useState(0);
     useEffect(() => {
-        const regexArr = [/.*photo.*/, /.*all.*/]
+        const regexArr = [/.*photo.*/, /.*all.*/];
         for (let i = 0; i < regexArr.length; i++) {
             if (regexArr[i].test(location.pathname)) {
                 setUrl(i);

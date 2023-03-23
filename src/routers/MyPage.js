@@ -36,7 +36,7 @@ const MyPage = () => {
                     {/* <Route path="/pick" element={<Pick />} /> */}
                     <Route path="/address" element={<Address />} />
                     <Route path="/review" element={<Review />} />
-                    <Route path="/reviewWrite/*" element={<ReviewWrite />} />
+                    <Route path="/reviewWrite/:productCode/:orderCode" element={<ReviewWrite />} />
                     <Route path="/personalModify" element={<PersonalModify />} />
                 </Routes>
             </Style.Div>

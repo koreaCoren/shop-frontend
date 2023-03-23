@@ -159,6 +159,17 @@ export const boardDelete = async (data) => {
     return api;
 }
 
+// 구매한 상품 리스트 (리뷰용)
+export const buyProductList = async (data) => {
+    const api = await API.BUY_PRODUCT_LIST.post("", data).then((res) => {
+        data.result = res.data
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    });
+    return api;
+}
+
 //--------- 어드민 관련 시작 ---------
 
 //관리자용 대시보드
@@ -535,17 +546,6 @@ export const settingFav = async (data) => {
     return api;
 }
 
-// 상품후기 리스트
-export const productReview = async (data) => {
-    const api = await API.PRODUCT_REVIEW.post("", data).then((res) => {
-
-    }).catch((error) => {
-        alert("서버와 통신을 실패했습니다.\n" + error);
-        window.location.replace("/");
-    })
-
-    return api
-}
 
 // -------- 개인정보 끝 --------------
 
