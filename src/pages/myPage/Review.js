@@ -38,7 +38,7 @@ const Review = () => {
                     {
                         boardList.map((a, i) => {
                             return (
-                                <li>
+                                <li key={i}>
                                     <div>
                                         <img src={
                                             a.goods_img === ""
@@ -56,30 +56,6 @@ const Review = () => {
                             )
                         })
                     }
-                    <li>
-                        <div>
-                            <img src={noImg} alt="" />
-                            <div className="content">
-                                <h4>pkd 상품입니다</h4>
-                                <h5>상품 설명</h5>
-                                <h5>1개</h5>
-                                <h5>100,000원</h5>
-                            </div>
-                            <Link to="?">후기 작성하기</Link>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src={noImg} alt="" />
-                            <div className="content">
-                                <h4>pkd 상품입니다</h4>
-                                <h5>상품 설명</h5>
-                                <h5>1개</h5>
-                                <h5>100,000원</h5>
-                            </div>
-                            <Link to={`/mypage/reviewWrite/${"상품코드 넣을 예정"}`}>후기 작성하기</Link>
-                        </div>
-                    </li>
                 </Style.ReviewList>
             </Common.InDiv>
     );
