@@ -99,8 +99,20 @@ export const ReviewForm = styled.form`
         gap: 10px; 
         margin-top: 10px;
 
-        input,form textarea{
+        input, textarea{
             width: 100%;
+        }
+
+        input[type='file']{
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        
+        textarea{
+            border: 1px solid #ddd;
+            padding: 5px;
+            resize: none;
+            height: 300px;
         }
 `
 
