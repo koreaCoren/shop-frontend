@@ -97,6 +97,7 @@ export const userCount = async (data) => {
 //게시판 글쓰기
 export const boardWrite = async (data) => {
     const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
+        console.log(res);
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "review") {

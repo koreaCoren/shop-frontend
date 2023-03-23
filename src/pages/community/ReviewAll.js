@@ -12,6 +12,7 @@ const ReviewAll = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
+    const [more, setMore] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
 
     const getBoard = async () => {
@@ -43,24 +44,25 @@ const ReviewAll = () => {
                             return (
                                 <li key={i}>
                                     <div className="content">
-                                        <div className="star">★★★★★</div>
+                                        {/* <div className="star">★★★★★</div> */}
                                         <h3>{a.title}</h3>
-                                        <p dangerouslySetInnerHTML={{ __html: a.content }}></p>
-                                        <button>더보기</button>
+                                        <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
+                                        <button onClick={() => {
+                                            i === more
+                                                ? setMore(null)
+                                                : setMore(i)
+                                        }}>더보기</button>
                                         <div className="imageView">
                                             {
-                                                a.firstImg !== null
+                                                a.firstImg !== ""
                                                     ? <img src={a.firstImg} alt="" />
                                                     : null
                                             }
                                             {
-                                                a.secondImg !== null
+                                                a.secondImg !== ""
                                                     ? <img src={a.secondImg} alt="" />
                                                     : null
                                             }
-                                        </div>
-                                        <div className="comments">
-                                            댓글 [1]
                                         </div>
                                     </div>
                                     <div className="reviewInfo">
