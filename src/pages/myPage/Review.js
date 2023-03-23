@@ -38,7 +38,7 @@ const Review = () => {
                     {
                         boardList.map((a, i) => {
                             return (
-                                <li>
+                                <li key={i}>
                                     <div>
                                         <img src={
                                             a.goods_img === ""
@@ -50,36 +50,16 @@ const Review = () => {
                                             <h5>{a.order_count}개</h5>
                                             <h5>{comma(a.order_pay)}원</h5>
                                         </div>
-                                        <Link to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                        {
+                                            a.review === "Y"
+                                                ? <Link to={`/community/review/all/1`}>후기 작성완료</Link>
+                                                : <Link style={{ backgroundColor: "#1a6dff" }} to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                        }
                                     </div>
                                 </li>
                             )
                         })
                     }
-                    <li>
-                        <div>
-                            <img src={noImg} alt="" />
-                            <div className="content">
-                                <h4>pkd 상품입니다</h4>
-                                <h5>상품 설명</h5>
-                                <h5>1개</h5>
-                                <h5>100,000원</h5>
-                            </div>
-                            <Link to="?">후기 작성하기</Link>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <img src={noImg} alt="" />
-                            <div className="content">
-                                <h4>pkd 상품입니다</h4>
-                                <h5>상품 설명</h5>
-                                <h5>1개</h5>
-                                <h5>100,000원</h5>
-                            </div>
-                            <Link to={`/mypage/reviewWrite/${"상품코드 넣을 예정"}`}>후기 작성하기</Link>
-                        </div>
-                    </li>
                 </Style.ReviewList>
             </Common.InDiv>
     );

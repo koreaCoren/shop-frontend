@@ -36,11 +36,13 @@ export const ReviewBoard = styled.div`
         margin-top: 50px;
     }
     .wrap > ul.all > li{
-        border-top: 1px solid #ccc;
         width: 100%;
     }
-    .wrap > ul.all > li:not(:first-child){
+    .wrap > ul.all > li:first-child{
         border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+    }
+    .wrap > ul.all > li:not(:first-child){
         border-bottom: 1px solid #ccc;
     }
     .wrap > ul.all > li{
@@ -52,6 +54,7 @@ export const ReviewBoard = styled.div`
     }
     .wrap > ul.all > li >.content{
         flex: 1;
+        border-right: 1px solid #ccc;
     }
     .wrap > ul.all > li > .content .star{
         color: #ffba00;

@@ -6,15 +6,16 @@ import { boardWrite, tokenCheck } from 'utils/axios';
 import createCode from 'utils/createCode';
 import SubTitle from 'components/myPage/SubTitle';
 import LoginInput from 'components/input/Input';
-import TextEditor from 'components/editor/Editor';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
+import ImageUpload from 'components/input/ImageUpload';
 
 const ReviewWrite = () => {
     const { productCode, orderCode } = useParams();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    const [imageCode, setImageCode] = useState([]);
+    const [firstImage, setFirstImage] = useState("");
+    const [secondImage, setSecondImage] = useState("");
 
     const write = useMutation(boardWrite);
     const token = useMutation(tokenCheck);
@@ -28,25 +29,13 @@ const ReviewWrite = () => {
 
         await token.mutateAsync();
 
-        let arr = imageCode;
-        for (let i = 0; i < imageCode.length; i++) {
-            for (let j = 0; j < arr.length; j++) {
-                if (content.indexOf(imageCode[i]) === -1) {
-                    if (arr[j] === imageCode[i]) {
-                        arr.splice(j, 1);
-                        j--;
-                    }
-                }
-                setImageCode(arr);
-            }
-        }
-
         const data = {
             user_id: sessionStorage.getItem("userId"),
             title: title,
             content: content,
+            firstImage: firstImage,
+            secondImage: secondImage,
             date: `${yy}/${mm}/${dd}`,
-            image_code: imageCode,
             code: createCode(),
             order_code: orderCode,
             goods_code: productCode,
@@ -63,6 +52,9 @@ const ReviewWrite = () => {
             case "title":
                 setTitle(value);
                 break;
+            case "content":
+                setContent(value);
+                break;
             default:
                 break;
         }
@@ -73,8 +65,10 @@ const ReviewWrite = () => {
             <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />
 
             <Common.ReviewForm onSubmit={onSubmit}>
-                <LoginInput type="text" name="title" value={title} placeholder="제목" onChange={onChange}></LoginInput>
-                <TextEditor setContent={setContent} setImageCode={setImageCode} width="" type="review"></TextEditor>
+                <LoginInput maxLength={100} type="text" name="title" value={title} placeholder="제목 최대 100자" onChange={onChange}></LoginInput>
+                <textarea maxLength={1000} name="content" value={content} onChange={onChange} placeholder="내용 최대 1000자"></textarea>
+                <ImageUpload setImageData={setFirstImage} />
+                <ImageUpload setImageData={setSecondImage} />
                 <Common.Button>
                     <button>글쓰기</button>
                 </Common.Button>

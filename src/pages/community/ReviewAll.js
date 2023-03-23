@@ -48,8 +48,16 @@ const ReviewAll = () => {
                                         <p dangerouslySetInnerHTML={{ __html: a.content }}></p>
                                         <button>더보기</button>
                                         <div className="imageView">
-                                            <img src={noImg} alt="" />
-                                            <img src={noImg} alt="" />
+                                            {
+                                                a.firstImg !== null
+                                                    ? <img src={a.firstImg} alt="" />
+                                                    : null
+                                            }
+                                            {
+                                                a.secondImg !== null
+                                                    ? <img src={a.secondImg} alt="" />
+                                                    : null
+                                            }
                                         </div>
                                         <div className="comments">
                                             댓글 [1]
