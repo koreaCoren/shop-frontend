@@ -45,14 +45,24 @@ input[type=submit]{
         cursor: pointer;
         margin-top: 20px;
 };
+@media screen and (max-width: 400px){
+    padding: 15px;
+    margin-top: 20px;
+}
 `
 
 export const Div = styled.div`
 display: grid;
 grid-template-columns: 200px 1fr;
-min-width: 1200px;
 min-height: 70vh;
 padding: 20px 0 50px 0;
+@media screen and (max-width: 800px) {
+    display: block;
+}
+@media screen and (max-width: 700px) {
+    min-height: 0;
+}
+
 `
 
 export const Line = styled.div`

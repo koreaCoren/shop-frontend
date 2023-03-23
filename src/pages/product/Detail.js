@@ -94,6 +94,10 @@ const Detail = ({ result, setOrderData }) => {
         if (loginCheck(true) === true) {
             return;
         }
+        if(productDetail?.goods_stock == 0){
+            alert("재고가 없습니다. 판매자에게 문의바랍니다");
+            return
+        }
         const data = {
             product_code: productCode,
             product_name: productDetail?.goods_nm,

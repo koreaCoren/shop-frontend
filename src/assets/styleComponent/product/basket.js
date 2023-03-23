@@ -70,6 +70,9 @@ export const Purchase = styled.div`
     ul.productInfo li button{
         cursor: pointer;
     }
+    ul li .title{
+        font-size: 18px;
+    }
 
 `
 

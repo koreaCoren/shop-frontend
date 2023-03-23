@@ -63,4 +63,24 @@ input[type="submit"]{
     width: 100px;
     font-size: 14px;
 }
+
+@media screen and (max-width: 800px) {
+    padding: 10px;
+    input{
+    width: 100%;
+    line-height: 24px;
+    }
+    input[type="submit"]{
+    border: 1px solid #70707070;
+    background-color: white;
+    color: #444;
+    font-size: 14px;
+    letter-spacing: 8px;
+    padding: 5px;
+    width: 60%;
+    height: 40px;
+    cursor: pointer;
+    margin-top: 20px;
+    }
+}
 `
