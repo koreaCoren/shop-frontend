@@ -54,6 +54,7 @@ const Order = () => {
                 <Top title={"주문 관리"} isButton={false} />
                 <Common.Padding>
                     <Common.Container>
+                        <Searching board={board.list} setBoardList={setBoard} searchType={"order"} />
                     </Common.Container>
                     {
                         board.list?.map((a, i) => {
