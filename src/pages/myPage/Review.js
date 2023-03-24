@@ -53,7 +53,20 @@ const Review = () => {
                                         {
                                             a.review === "Y"
                                                 ? <Link to={`/community/review/all/1`}>후기 작성완료</Link>
-                                                : <Link style={{ backgroundColor: "#1a6dff" }} to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}>후기 작성하기</Link>
+                                                : 
+                                                    // <Link style={{ backgroundColor: "#1a6dff" }} 
+                                                    // to={{
+                                                    // pathname: `/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`,
+                                                    // state:{
+                                                    //     goods_name: a.goods_name,
+                                                    //     goods_img : a.goods_img
+                                                    // }}} >후기 작성하기</Link>
+                                                    <Link style={{ backgroundColor: "#1a6dff" }} 
+                                                    to={`/mypage/reviewWrite/${a.goods_code}/${a.orderCode}`}
+                                                    state={{
+                                                        goods_name: a.goods_name,
+                                                        goods_img : a.goods_img
+                                                    }} >후기 작성하기</Link>
                                         }
                                     </div>
                                 </li>

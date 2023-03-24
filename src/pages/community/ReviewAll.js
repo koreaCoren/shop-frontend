@@ -7,6 +7,8 @@ import { boardRead } from 'utils/axios';
 import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
+import {ReactComponent as Star} from 'assets/images/star.svg';
+
 const ReviewAll = () => {
     const nav = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +16,7 @@ const ReviewAll = () => {
     const [boardList, setBoardList] = useState();
     const [more, setMore] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
+    const [star,setStar] = useState([]);
 
     const getBoard = async () => {
         const data = {}
@@ -44,7 +47,13 @@ const ReviewAll = () => {
                             return (
                                 <li key={i}>
                                     <div className="content">
-                                        {/* <div className="star">★★★★★</div> */}
+                                        <div className="star">
+                                            {
+                                                Array(a.grade).fill(
+                                                    <Star fill='#ff7f23'></Star>
+                                                )
+                                            }
+                                        </div>
                                         <h3>{a.title}</h3>
                                         <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
                                         <button onClick={() => {
