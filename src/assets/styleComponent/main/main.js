@@ -542,16 +542,24 @@ export const Review = styled.div`
     ul li:not(:last-child) a {
         border-right: 1px solid #cccccc;
     }
-
-    ul li a>img {
-        width: 100%;
-        padding: 50px;
+    ul li a > div:first-child{
+        display: flex;
+        height: 300px;
         border-bottom: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    ul li a>div>img {
+        width: 100%;
+        
+        
         position: relative;
     }
 
     ul li a .content {
+        height: 150px;
         padding: 20px;
+        overflow: hidden;
     }
 
     ul li a .content .star {
@@ -568,18 +576,17 @@ export const Review = styled.div`
 
     ul li a .content p {
         color: #797979;
-        line-height: 1.2;
+        line-height: 1.2;        
     }
 
     ul li a .bar {
         width: 100%;
         height: 1px;
         background-color: #ccc;
-        margin-top: 20px;
     }
 
     ul li a .prodcutName {
-        padding: 0px 20px 20px;
+        padding: 20px;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -587,15 +594,16 @@ export const Review = styled.div`
     }
 
     ul li a .prodcutName div {
+        display: flex;
         width: 50px;
         height: 50px;
         border: 1px solid #ccc;
         border-radius: 50%;
-        padding: 10px;
     }
 
     ul li a .prodcutName div img {
         width: 100%;
+        border-radius: 50%;
     }
 
     .button {

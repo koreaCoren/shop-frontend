@@ -55,6 +55,11 @@ export const BUY_PRODUCT_LIST = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/sel_user_review`
 })
 
+// 메인 리뷰 리스트
+export const MAIN_REVIEW = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_main_review`
+})
+
 
 //--------- 어드민 관련 시작 ---------
 
