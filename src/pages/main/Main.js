@@ -13,6 +13,7 @@ import mainbanner from "assets/images/main/mainBanner.jpg";
 import best from "assets/images/main/best.jpg";
 
 import noImg from "assets/images/noImg.gif";
+import { ReactComponent as Star } from 'assets/images/star.svg';
 
 const Main = () => {
     let result = useQuery("prodcutList", productList);
@@ -146,7 +147,7 @@ const Main = () => {
                                             <li key={i}>
                                                 <div className="hoverBox">
                                                     <Link to={`/product/detail/${a.goods_code}`}>
-                                                        <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
+                                                        <img src={a.goods_img === "" ? noImg : a.goods_img} alt="상품이미지" />
                                                     </Link>
                                                     <ul>
                                                         <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
@@ -250,7 +251,13 @@ const Main = () => {
                                                         <img src={a.firstImg ? a.firstImg : a.goods_img ? a.goods_img : noImg} alt={`리뷰이미지` + i} />
                                                     </div>
                                                     <div className="content">
-                                                        <div className="star">★★★★★</div>
+                                                        <div className="star">
+                                                            {
+                                                                Array(a.grade).fill(
+                                                                    <Star fill='#ff7f23'></Star>
+                                                                )
+                                                            }
+                                                        </div>
                                                         <h4>{a.title.length === 16 ? a.title + '...' : a.title}</h4>
                                                         <p dangerouslySetInnerHTML={{ __html: a.content.length === 40 ? `${a.content} ...` : a.content }}></p>
                                                     </div>
