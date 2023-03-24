@@ -20,10 +20,10 @@ export const deliveryStatus = async (req) => {
                 const res = await axios.get(url);
                 arr.push(res.data.state.text);
             } catch (err) {
-                arr.push("");
+                arr.push("알 수 없는 에러");
             }
         } else {
-            arr.push("");
+            arr.push("주문접수");
         }
     }
     return arr;

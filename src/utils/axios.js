@@ -171,6 +171,14 @@ export const buyProductList = async (data) => {
     return api;
 }
 
+// 메인 리뷰 리스트
+
+export const main_review = async () => {
+    const { data } = await API.MAIN_REVIEW.get();
+    return data;
+}
+
+
 //--------- 어드민 관련 시작 ---------
 
 //관리자용 대시보드

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
-import { productList } from 'utils/axios';
+import { productList, main_review } from 'utils/axios';
 import { comma } from 'utils/commaReplace';
 import addBasket from 'utils/addBasket';
 
@@ -16,7 +16,8 @@ import noImg from "assets/images/noImg.gif";
 
 const Main = () => {
     let result = useQuery("prodcutList", productList);
-    useEffect(() => { }, [result.isLoading]);
+    const mainReview = useQuery("main_review", main_review);
+    useEffect(() => { }, [result.isLoading, mainReview.isLoading]);
     return (
         <main>
             <Style.Banner>
@@ -235,7 +236,44 @@ const Main = () => {
             <Style.Review>
                 <div className="wrap">
                     <h3>REAL REVIEW</h3>
-                    <ul>
+
+                    {
+                        mainReview.data?.length > 0
+                            ? <ul>
+                                {
+                                    mainReview.data?.map((a, i) => {
+                                        return (
+                                            <li key={i}>
+
+                                                <a href="/community/review/all/1">
+                                                    <div>
+                                                        <img src={a.firstImg ? a.firstImg : a.goods_img ? a.goods_img : noImg} alt={`리뷰이미지` + i} />
+                                                    </div>
+                                                    <div className="content">
+                                                        <div className="star">★★★★★</div>
+                                                        <h4>{a.title.length === 16 ? a.title + '...' : a.title}</h4>
+                                                        <p dangerouslySetInnerHTML={{ __html: a.content.length === 40 ? `${a.content} ...` : a.content }}></p>
+                                                    </div>
+                                                    <div className="bar"></div>
+                                                    <div className="prodcutName">
+                                                        <div><img src={a.goods_img ? a.goods_img : noImg} alt={`제품이미지` + i} /></div>
+                                                        {a.goods_nm}
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 리뷰가 없습니다.</p>
+                    }
+
+
+
+
+
+
+                    {/* <ul>
                         <li>
                             <a href="#">
                                 <img src={best} alt="" />
@@ -308,9 +346,9 @@ const Main = () => {
                                 </div>
                             </a>
                         </li>
-                    </ul>
+                    </ul> */}
                     <div className="button">
-                        <a className="more" href="/community/review/photo/1">리뷰 모두 보기</a>
+                        <a className="more" href="/community/review/all/1">리뷰 모두 보기</a>
                     </div>
                 </div>
             </Style.Review>
