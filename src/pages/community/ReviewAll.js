@@ -76,7 +76,7 @@ const ReviewAll = () => {
                                     </div>
                                     <div className="reviewInfo">
                                         <ul>
-                                            <li><span>상품명</span> 상품이름입니다.</li>
+                                            <li><span>상품명</span>{a.goods_nm}</li>
                                             <li><span>작성자</span>{a.user_id}</li>
                                             <li><span>작성일</span> {a.create_date}</li>
                                         </ul>
