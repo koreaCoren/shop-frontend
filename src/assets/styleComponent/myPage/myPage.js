@@ -108,7 +108,11 @@ export const ReviewForm = styled.form`
         flex-direction: column;
         gap: 10px; 
         margin-top: 10px;
-
+        
+        p{
+            display: inline-block;
+            font-size: 16px;
+        }
         input, textarea{
             width: 100%;
         }
@@ -125,6 +129,21 @@ export const ReviewForm = styled.form`
             height: 300px;
         }
 `
+export const ReviewTitle = styled.div`
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        p{
+            font-size: 18px;
+            padding-left: 10px;
+        }
+        img{
+            width: 70px;
+            height: 70px;
+        }
+        `;
 
 export const Button = styled.div`
     text-align: center;
