@@ -39,8 +39,8 @@ const Detail = ({ result, setOrderData }) => {
             for (let i = 0; i < result.data[0].length; i++) {
                 if (result.data[0][i].goods_code === productCode) {
                     setProductDetail(result.data[0][i]);
-                    setStar(result.data[1][result.data[0][i].goods_code].avg_grade.substring(0, 3));
-                    setStars(result.data[1][result.data[0][i].goods_code].grade_count)
+                    setStar(result.data[1][result.data[0][i].goods_code]?.avg_grade.substring(0, 3));
+                    setStars(result.data[1][result.data[0][i].goods_code]?.grade_count)
                 };
             };
         };
@@ -119,7 +119,6 @@ const Detail = ({ result, setOrderData }) => {
     const moveScroll = (location) => {
         location.current.scrollIntoView({ behavior: "smooth" })
     }
-
     return (
         productDetail === undefined
             ? <Loading />
@@ -141,7 +140,12 @@ const Detail = ({ result, setOrderData }) => {
                                 <Style.DetailInfo>
                                     <li>
                                         <b>평점</b>
-                                        <span><Star style={{ paddingBottom: "5px" }} fill='#ffd900' />{star}({stars})</span>
+                                        {
+                                            star === undefined
+                                                ? <span>리뷰없음</span>
+                                                : <span><Star style={{ paddingBottom: "5px" }} fill='#ffd900' />{star}({stars})
+                                                </span>
+                                        }
                                     </li>
                                     <li><b>판매가</b><span className="pay">{comma(productDetail?.goods_price)}원</span></li>
                                     <li><b>할인률</b><span>{productDetail?.goods_sale}%</span></li>
