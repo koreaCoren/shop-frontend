@@ -18,10 +18,10 @@ const SideMenu = () => {
     return (
         <Ul>
             <li><Link to="/myPage/order/1">마이페이지</Link></li>
-            <li className={url === 0 ? "on" : ""}><Link to="/myPage/order/1"><i className='fa-solid fa-file-invoice-dollar'></i><p>주문내역</p></Link></li>
-            <li className={url === 1 ? "on" : ""}><Link to="/myPage/address"><i className='fa-solid fa-truck'></i><p>기본 배송지 관리</p></Link></li>
-            <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i><p>상품 후기 작성</p></Link></li>
-            <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i><p>개인 정보 수정</p></Link></li>
+            <li className={url === 0 ? "on" : ""}><Link to="/myPage/order/1"><i className='fa-solid fa-file-invoice-dollar'></i><p>주문 내역</p></Link></li>
+            <li className={url === 1 ? "on" : ""}><Link to="/myPage/address"><i className='fa-solid fa-truck'></i><p>배송지 관리</p></Link></li>
+            <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i><p>상품 후기</p></Link></li>
+            <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i><p>정보 수정</p></Link></li>
         </Ul>
     );
 };
