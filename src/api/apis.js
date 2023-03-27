@@ -164,6 +164,10 @@ export const DELIVERY_INPUT = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_delivery`
 })
 
+// 배송사 업데이트
+export const CARRIER_UPDATE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_carrier`
+})
 
 //--------- 어드민 관련 끝 ---------
 
