@@ -354,12 +354,16 @@ export const ReviewBoard = styled.div`
     @media(max-width:700px){
         .wrap > ul.all > li{
             flex-direction: column;
+            align-items: start;
             gap: 15px;
         }
         .wrap > ul.all > li > .reviewInfo{
             order: -1;
             width: 100%;
         }
+        .wrap > ul.all > li > .content{
+            border-right: none;
+        } 
     }
     @media(max-width:500px){
         nav{
@@ -387,5 +391,36 @@ export const ReviewBoard = styled.div`
         .photoReviewDetail{
             width: 98%;
         }
+    }
+`
+
+export const Popup = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    .popupBg{
+        width: 100%;
+        height: 100%;
+        background-color: #00000077;
+    }
+    img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 10;
+        max-width:90%;
+        max-height: 90%;
+    }
+    i{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #fff;
+        font-size: 40px;
+        z-index: 10;
+        cursor: pointer;
     }
 `
