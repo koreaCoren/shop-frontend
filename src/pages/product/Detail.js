@@ -5,6 +5,7 @@ import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { settingFav, getFavList } from 'utils/axios';
 
+import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
 import loginCheck from 'utils/loginCheck';
 
@@ -12,12 +13,14 @@ import * as Style from "assets/styleComponent/product/detail"
 import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
-import { comma } from 'utils/commaReplace';
+import { ReactComponent as Star } from 'assets/images/star.svg';
 
 const Detail = ({ result, setOrderData }) => {
     const nav = useNavigate();
     const { productCode } = useParams();
     const [productDetail, setProductDetail] = useState();
+    const [star, setStar] = useState();
+    const [stars, setStars] = useState(0);
     const [count, setCount] = useState(1);
     const [deliveryPay, setDeliveryPay] = useState(2500);
     const [lightOn, setLightOn] = useState();
@@ -26,7 +29,6 @@ const Detail = ({ result, setOrderData }) => {
     const DescriptionRef = useRef();
     const returnRef = useRef();
 
-
     const favControll = useMutation(settingFav);
     const favList = useMutation(getFavList);
 
@@ -34,13 +36,14 @@ const Detail = ({ result, setOrderData }) => {
     useEffect(() => {
         selFav();
         if (result.isLoading === false) {
-            for (let i = 0; i < result.data.length; i++) {
-                if (result.data[i].goods_code === productCode) {
-                    setProductDetail(result.data[i]);
+            for (let i = 0; i < result.data[0].length; i++) {
+                if (result.data[0][i].goods_code === productCode) {
+                    setProductDetail(result.data[0][i]);
+                    setStar(result.data[1][result.data[0][i].goods_code].avg_grade.substring(0, 3));
+                    setStars(result.data[1][result.data[0][i].goods_code].grade_count)
                 };
             };
         };
-
     }, [result.isLoading]);
 
     //상품갯수증가
@@ -136,6 +139,10 @@ const Detail = ({ result, setOrderData }) => {
                             <h2>{productDetail?.goods_nm}</h2>
                             <div className="info">
                                 <Style.DetailInfo>
+                                    <li>
+                                        <b>평점</b>
+                                        <span><Star style={{ paddingBottom: "5px" }} fill='#ffd900' />{star}({stars})</span>
+                                    </li>
                                     <li><b>판매가</b><span className="pay">{comma(productDetail?.goods_price)}원</span></li>
                                     <li><b>할인률</b><span>{productDetail?.goods_sale}%</span></li>
                                     <li><b>국내해외배송</b><span>국내배송</span></li>

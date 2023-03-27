@@ -15,7 +15,10 @@ const Products = ({ result }) => {
     const COUNT = 12;
     const nav = useNavigate();
     const { categoryCode, boardPage } = useParams();
+    const [star, setStar] = useState();
+    const [stars, setStars] = useState(0);
     const [productList, setProductList] = useState();
+
     const [select, setSelect] = useState("최신순");
 
     const compareDates = (a, b) => {
@@ -56,12 +59,12 @@ const Products = ({ result }) => {
 
     const reset = () => {
         const arr = [];
-        for (let i = 0; i < result.data?.length; i++) {
-            let getCateCode = String(result?.data[i].cate_code);
+        for (let i = 0; i < result.data[0]?.length; i++) {
+            let getCateCode = String(result?.data[0][i].cate_code);
             if (getCateCode === categoryCode) {
-                arr.push(result?.data[i]);
+                arr.push(result?.data[0][i]);
             } else if (getCateCode.substring(0, 2) === categoryCode) {
-                arr.push(result?.data[i]);
+                arr.push(result?.data[0][i]);
             }
         }
         setProductList(arr);

@@ -10,10 +10,10 @@ const StarGrade = ({ settingStar }) => {
 
     const fillStarIdx = (num, e) => {
         if (e === "enter" && hoverIdx >= num) {
-            return "#ff7f23";
+            return "#ffd900";
         }
         if (e === "leave" && clickIdx >= num) {
-            return "#ff7f23";
+            return "#ffd900";
         }
         return "#eeeeee";
     };
