@@ -16,6 +16,15 @@ export const Div = styled.div`
             padding: 5px;
             border-radius: 5px;
         }
+        .warning{
+            color: black;
+            animation: CC 3s infinite;
+        }
+    }
+    @keyframes CC{
+        50%{ 
+            color: tomato;
+            }
     }
 `
 
