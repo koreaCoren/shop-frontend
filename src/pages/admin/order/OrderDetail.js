@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
-import { orderManagementDetail } from 'utils/axios';
+import { orderManagementDetail, updateInvoice } from 'utils/axios';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 
@@ -14,7 +14,9 @@ const OrderDetail = () => {
     const { mutateAsync, isLoading, isSuccess } = useMutation(orderManagementDetail);
     const [detail, setDetail] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
-    const [invoiceNumber, setInvoiceNumber] = useState("");
+    const [invoiceNumber, setInvoiceNumber] = useState(detail[0]?.delivery);
+
+    const sendOCData = useMutation(updateInvoice);
 
     const getDetail = async () => {
         let price = 0;
@@ -47,6 +49,14 @@ const OrderDetail = () => {
 
     const onChange = (e) => {
         setInvoiceNumber(e.target.value);
+    }
+
+    const changeInvoiceCode = async () =>{
+        const data = {
+            "orderCode" : orderCode,
+            "invoiceCode" : invoiceNumber
+        }
+        await sendOCData.mutateAsync(data);
     }
 
     useEffect(() => {
@@ -89,7 +99,7 @@ const OrderDetail = () => {
                             <li>결제 완료 여부 : {detail[0].order_complete === "Y" ? "결제완료" : "미결제"}</li>
                             <li>
                                 송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' value={invoiceNumber} onChange={onChange} />
-                                <button>수정</button>
+                                <button onClick={changeInvoiceCode}>수정</button>
                             </li>
                         </Style.Content>
                     </Common.Container>

@@ -139,6 +139,11 @@ export const ORDER_MANAGEMENT = axios.create({
 export const ORDER_MANAGEMENT_DETAIL = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/sel_code_orders`
 })
+
+// 어드민 주문 관리 송장번호 수정
+export const UPDATE_INVOICE_CODE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/order/update_invoice`
+}) 
 // 기본 배송지 설정
 export const DEFAULT_DELIVERY = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/default_carrier`

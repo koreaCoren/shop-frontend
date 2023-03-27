@@ -328,6 +328,18 @@ export const orderManagementDetail = async (data) => {
     return api;
 }
 
+// 어드민 주문관리 송장번호 수정
+export const updateInvoice = async (data) => {
+    const api = await API.UPDATE_INVOICE_CODE.post("", data).then((res) => {
+        data.result = res.data;
+        alert("송장번호 수정이 완료되었습니다.");
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 
 // 기본 배송지 설정
 export const defaultDeliveryUpdate = async (data) => {
