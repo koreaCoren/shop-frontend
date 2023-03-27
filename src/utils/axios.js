@@ -375,6 +375,17 @@ export const deliveryUpdate = async (data) => {
     return api;
 }
 
+// 배송사 업데이트
+export const carrierUpdate = async (data) => {
+    const api = await API.CARRIER_UPDATE.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신이 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
 //--------- 어드민 관련 끝 ---------
 
 // -------- 주문 시작 --------------

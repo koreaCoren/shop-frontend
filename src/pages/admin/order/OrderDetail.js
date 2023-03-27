@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
-import { orderManagementDetail } from 'utils/axios';
+import { orderManagementDetail, carrierUpdate } from 'utils/axios';
+import { getDeliveryList } from 'utils/delivery';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 
@@ -15,20 +16,49 @@ const OrderDetail = () => {
     const [detail, setDetail] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [invoiceNumber, setInvoiceNumber] = useState("");
+    const update = useMutation(carrierUpdate);
+    const [carrier, setCarrier] = useState("");
+    const [carrierList, setCarrierList] = useState();
+    // const selectResult = useQuery("defaultSelect", defaultSelect);
+
+    const setDelivery = async () => {
+        const arr = await getDeliveryList();
+        const data = {};
+        arr.data.forEach(el => {
+            if (el.id === carrier) {
+                data.orderCode = orderCode;
+                data.carrier = carrier;
+            }
+        });
+        update.mutateAsync(data);
+        alert("저장완료");
+    }
 
     const getDetail = async () => {
         let price = 0;
+        const arr = await getDeliveryList();
         const data = {
             orderCode: orderCode,
         }
         await mutateAsync(data);
+        setCarrierList(arr.data);
         setDetail(data.detail);
         setInvoiceNumber(data.detail[0].delivery);
         for (let i = 0; i < data.detail.length; i++) {
             price = price + Number(data.detail[i].order_pay);
             setTotalPrice(price);
         }
+        console.log(data.detail[0].carrier);
+        if (arr.data) {
+            arr.data.forEach(el => {
+                if (el.id === data.detail[0].carrier) {
+                    setCarrier(el.name);
+                }
+            })
+        };
+
     }
+
 
     const cardType = () => {
         switch (detail[0].gopaymethod) {
@@ -45,8 +75,21 @@ const OrderDetail = () => {
         }
     }
 
+
     const onChange = (e) => {
-        setInvoiceNumber(e.target.value);
+        const name = e.target.name;
+        const value = e.target.value;
+        switch (name) {
+            case "orderCarrier":
+                setCarrier(value);
+                break;
+            case "invoiceNumber":
+                setInvoiceNumber(value);
+                break;
+
+            default:
+                break;
+        }
     }
 
     useEffect(() => {
@@ -87,8 +130,26 @@ const OrderDetail = () => {
                             <li>상품 총 금액 : {totalPrice}</li>
                             <li>결제 유형 : {cardType()}</li>
                             <li>결제 완료 여부 : {detail[0].order_complete === "Y" ? "결제완료" : "미결제"}</li>
+                            <li>배송사 :
+                                <div className="select">
+                                    <select name="orderCarrier" onChange={onChange}>
+                                        <option value="">{carrier}</option>
+                                        {
+                                            carrierList?.map((a, i) => {
+                                                return (
+                                                    <option key={i} value={a.id}>{a.name}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    <i className="fa-solid fa-sort-down"></i>
+                                </div>
+
+                                <button onClick={setDelivery}>수정</button>
+
+                            </li>
                             <li>
-                                송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' value={invoiceNumber} onChange={onChange} />
+                                송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' name='invoiceNumber' value={invoiceNumber} onChange={onChange} />
                                 <button>수정</button>
                             </li>
                         </Style.Content>

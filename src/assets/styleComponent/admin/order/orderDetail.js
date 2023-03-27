@@ -29,4 +29,9 @@ export const Content = styled.ul`
         border-radius: 5px;
         cursor: pointer;
     }
+    .select select{
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+    }
 `
