@@ -60,7 +60,6 @@ export const MAIN_REVIEW = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/sel_main_review`
 })
 
-
 //--------- 어드민 관련 시작 ---------
 
 // 어드민 대시보드
@@ -119,7 +118,6 @@ export const PRODUCT_DELETE_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/del_goods`,
 })
 
-
 // 어드민 카테고리 리스트
 export const CATEGORY_LIST_API = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/goods/sel_category`,
@@ -143,7 +141,7 @@ export const ORDER_MANAGEMENT_DETAIL = axios.create({
 // 어드민 주문 관리 송장번호 수정
 export const UPDATE_INVOICE_CODE = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/order/update_invoice`
-}) 
+})
 // 기본 배송지 설정
 export const DEFAULT_DELIVERY = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/default_carrier`

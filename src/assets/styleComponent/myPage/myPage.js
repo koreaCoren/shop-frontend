@@ -5,7 +5,7 @@ export const InDiv = styled.div`
 background-color: white;
 width: 100%;
 height: 100%;
-padding: 30px;
+padding: 15px;
 .contents{
     display: flex;
     flex-direction: column;

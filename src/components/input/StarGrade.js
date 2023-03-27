@@ -2,17 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 import { useState } from 'react';
 
-import {ReactComponent as Star} from 'assets/images/star.svg';
+import { ReactComponent as Star } from 'assets/images/star.svg';
 
-const StarGrade = ({settingStar}) => {
+const StarGrade = ({ settingStar }) => {
     const [hoverIdx, setHoverIdx] = useState(0);
     const [clickIdx, setClickIdx] = useState(0);
 
     const fillStarIdx = (num, e) => {
-        if(e ==="enter" && hoverIdx >= num){
+        if (e === "enter" && hoverIdx >= num) {
             return "#ff7f23";
         }
-        if(e ==="leave" && clickIdx >= num){
+        if (e === "leave" && clickIdx >= num) {
             return "#ff7f23";
         }
         return "#eeeeee";
@@ -26,7 +26,7 @@ const StarGrade = ({settingStar}) => {
     return (
         <StarView>
             <p>평점</p>
-            {[1,2,3,4,5].map((num) => (
+            {[1, 2, 3, 4, 5].map((num) => (
                 <button
                     key={num}
                     type="button"
@@ -36,13 +36,13 @@ const StarGrade = ({settingStar}) => {
                         clickStarIdx(num);
                     }}
                 >
-                <Star
-                    key={num}
-                    fill={fillStarIdx(
-                        num,
-                        hoverIdx === 0 ? "leave" : "enter"
-                    )}
-                />
+                    <Star
+                        key={num}
+                        fill={fillStarIdx(
+                            num,
+                            hoverIdx === 0 ? "leave" : "enter"
+                        )}
+                    />
                 </button>
             ))}
         </StarView>
