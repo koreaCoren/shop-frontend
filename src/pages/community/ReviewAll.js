@@ -4,6 +4,8 @@ import { useMutation } from 'react-query';
 
 import { boardRead } from 'utils/axios';
 
+import * as Style from "assets/styleComponent/community/review"
+
 import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
@@ -12,8 +14,15 @@ const ReviewAll = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
+    const [imageSrc, setImageSrc] = useState();
+    const [isImage, setIsImage] = useState(false);
     const [more, setMore] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
+
+    const imagePopup = (src) => {
+        setIsImage(true);
+        setImageSrc(src);
+    }
 
     const getBoard = async () => {
         const data = {}
@@ -31,7 +40,6 @@ const ReviewAll = () => {
 
     useEffect(() => {
         getBoard();
-        console.log(boardList);
     }, [nav])
 
     return (
@@ -55,21 +63,21 @@ const ReviewAll = () => {
                                         <div className="imageView">
                                             {
                                                 a.firstImg !== ""
-                                                    ? <img src={a.firstImg} alt="" />
+                                                    ? <img onClick={() => { imagePopup(a.firstImg) }} src={a.firstImg} alt="" />
                                                     : null
                                             }
                                             {
                                                 a.secondImg !== ""
-                                                    ? <img src={a.secondImg} alt="" />
+                                                    ? <img onClick={() => { imagePopup(a.secondImg) }} src={a.secondImg} alt="" />
                                                     : null
                                             }
                                         </div>
                                     </div>
                                     <div className="reviewInfo">
                                         <ul>
-                                            <li><span>상품명</span> 상품이름입니다.</li>
+                                            <li><span>상품명</span>{a.goods_nm}</li>
                                             <li><span>작성자</span>{a.user_id}</li>
-                                            <li><span>작성일</span> {a.create_date}</li>
+                                            <li><span>작성일</span>{a.create_date}</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -77,6 +85,12 @@ const ReviewAll = () => {
                         })
                     }
                 </ul>
+
+                <Style.Popup style={isImage === true ? { display: "block" } : { display: "none" }}>
+                    <div onClick={() => { setIsImage(false) }} className="popupBg"></div>
+                    <img src={imageSrc} alt="" />
+                    <i onClick={() => { setIsImage(false) }} className="fa-solid fa-xmark"></i>
+                </Style.Popup>
 
                 <div className="pagention">
                     <a href="#"><i className="fa-solid fa-angles-left"></i></a>
