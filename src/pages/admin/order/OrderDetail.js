@@ -19,7 +19,6 @@ const OrderDetail = () => {
     const update = useMutation(carrierUpdate);
     const [carrier, setCarrier] = useState("");
     const [carrierList, setCarrierList] = useState();
-    // const selectResult = useQuery("defaultSelect", defaultSelect);
 
     const setDelivery = async () => {
         const arr = await getDeliveryList();
@@ -91,6 +90,7 @@ const OrderDetail = () => {
                 break;
         }
     }
+
 
     useEffect(() => {
         getDetail();
