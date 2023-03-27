@@ -91,6 +91,7 @@ export const DetailInfo = styled.ul`
      li {
         display: grid;
         grid-template-columns: 150px 1fr;
+        align-items: center;
     }
 
      li:not(:last-child) {

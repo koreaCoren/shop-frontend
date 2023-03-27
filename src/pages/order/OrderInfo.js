@@ -128,12 +128,8 @@ const OrderInfo = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(orderTotalPrice) > 0 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
             payStatus: 0,
-            //서버
-            // returnUrl: `${process.env.REACT_APP_API_URL}/order/ini_transaction?orderCode=${orderCode}`,
-            // closeUrl: "http://lifehim.com/close",
-            //로컬
-            returnUrl: `http://localhost:3000/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
-            closeUrl: "http://localhost:3000/close",
+            returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
+            closeUrl: `${process.env.REACT_APP_URL}/close`,
         })
 
         const data = {
