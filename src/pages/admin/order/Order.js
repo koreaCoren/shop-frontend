@@ -67,7 +67,11 @@ const Order = () => {
                                             <li>주문자 이름 : {a.buyer_name}</li>
                                             <li>주문자 번호 : {a.buyer_tel}</li>
                                             <li>총 상품 금액 : {comma(a.total_price)}</li>
-                                            <li>배송 현황 : {state[i]}</li>
+                                            {
+                                                state[i] !== "송장 에러"
+                                                    ? (<li>배송 현황 : {state[i]}</li>)
+                                                    : (<li>배송 현황 : <span className='warning'>{state[i]}</span></li>)
+                                            }
                                             <li>주문일자 : {a.order_date}</li>
                                         </ul>
                                     </Style.Div>
