@@ -9,7 +9,8 @@ import * as Style from "assets/styleComponent/community/review"
 import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
-import {ReactComponent as Star} from 'assets/images/star.svg';
+import { ReactComponent as Star } from 'assets/images/star.svg';
+import Pageing from 'components/board/Pageing';
 
 const ReviewAll = () => {
     const nav = useNavigate();
@@ -20,7 +21,6 @@ const ReviewAll = () => {
     const [isImage, setIsImage] = useState(false);
     const [more, setMore] = useState();
     const { mutateAsync, isSuccess } = useMutation(boardRead);
-    const [star,setStar] = useState([]);
 
     const imagePopup = (src) => {
         setIsImage(true);
@@ -57,9 +57,9 @@ const ReviewAll = () => {
                                     <div className="content">
                                         <div className="star">
                                             {
-                                                Array(a.grade).fill(
-                                                    <Star fill='#ff7f23'></Star>
-                                                )
+                                                [...Array(a.grade)].map((a, i) => (
+                                                    <Star key={i} fill='#ff7f23'></Star>
+                                                ))
                                             }
                                         </div>
                                         <h3>{a.title}</h3>
@@ -101,13 +101,7 @@ const ReviewAll = () => {
                     <i onClick={() => { setIsImage(false) }} className="fa-solid fa-xmark"></i>
                 </Style.Popup>
 
-                <div className="pagention">
-                    <a href="#"><i className="fa-solid fa-angles-left"></i></a>
-                    <a href="#"><i className="fa-solid fa-angle-left"></i></a>
-                    <span>1</span>
-                    <a href="#"><i className="fa-solid fa-angle-right"></i></a>
-                    <a href="#"><i className="fa-solid fa-angles-right"></i></a>
-                </div>
+                <Pageing boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/review/all"} />
             </>
     );
 };

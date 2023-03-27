@@ -26,7 +26,6 @@ const ReviewWrite = () => {
     const goods_name = location.state.goods_name;
     const goods_img = location.state.goods_img;
 
-
     const write = useMutation(boardWrite);
     const token = useMutation(tokenCheck);
 

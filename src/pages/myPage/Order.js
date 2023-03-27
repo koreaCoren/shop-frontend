@@ -36,40 +36,41 @@ const Order = ({ }) => {
     }, [isLoading, nav])
 
     return (
-        <Common.InDiv>
-            <SubTitle h2={"주문 내역"} h3={"최대 지난 3년간의 주문 내역까지 확인할 수 있어요"} clickEvent={null} clickText={null} />
-            {
-                isSuccess &&
-                sliceBoard?.map((a, i) => {
-                    return (
-                        <div className='contents' key={i}>
-                            <Style.Div>
-                                <div>
-                                    {a.order_date.substr(0, 10)} ({a.order_date.substr(11, 5)})
-                                </div>
-                                <div>
-                                    <Link to={`/myPage/orderDetail/${a.orderCode}`} state={{ orderCode: a.orderCode }}> 상세보기 {'>'}</Link>
-                                </div>
-                            </Style.Div>
-                            <Common.Line></Common.Line>
+        isLoading === true
+            ? <Loading />
+            : <Common.InDiv>
+                <SubTitle h2={"주문 내역"} h3={"최대 지난 3년간의 주문 내역까지 확인할 수 있어요"} clickEvent={null} clickText={null} />
+                {
+                    isSuccess &&
+                    sliceBoard?.map((a, i) => {
+                        return (
+                            <div className='contents' key={i}>
+                                <Style.Div>
+                                    <div>
+                                        {a.order_date.substr(0, 10)} ({a.order_date.substr(11, 5)})
+                                    </div>
+                                    <div>
+                                        <Link to={`/myPage/orderDetail/${a.orderCode}`} state={{ orderCode: a.orderCode }}> 상세보기 {'>'}</Link>
+                                    </div>
+                                </Style.Div>
+                                <Common.Line></Common.Line>
 
-                            <img src={a.goods_img} alt="" />
-                            <Style.Div>
-                                <ul>
-                                    <li><Style.SubTitle>상품명</Style.SubTitle> {a.goods_name}</li>
-                                    <li><Style.SubTitle>주문번호</Style.SubTitle> {a.orderCode}</li>
-                                    <li><Style.SubTitle>총 상품개수</Style.SubTitle> {a.total_count}개</li>
-                                    <li><Style.SubTitle>총 주문금액</Style.SubTitle> {comma(a.total_price)}원</li>
-                                </ul>
-                            </Style.Div>
-                        </div >
-                    )
-                })
-            }
+                                <img src={a.goods_img} alt="" />
+                                <Style.Div>
+                                    <ul>
+                                        <li><Style.SubTitle>상품명</Style.SubTitle> {a.goods_name}</li>
+                                        <li><Style.SubTitle>주문번호</Style.SubTitle> {a.orderCode}</li>
+                                        <li><Style.SubTitle>총 상품개수</Style.SubTitle> {a.total_count}개</li>
+                                        <li><Style.SubTitle>총 주문금액</Style.SubTitle> {comma(a.total_price)}원</li>
+                                    </ul>
+                                </Style.Div>
+                            </div >
+                        )
+                    })
+                }
 
-            <Pageing count={count} boardPage={boardPage} boardLength={board?.length} url={"/myPage/order"} />
-            {isLoading && <Loading />}
-        </Common.InDiv >
+                <Pageing count={count} boardPage={boardPage} boardLength={board?.length} url={"/myPage/order"} />
+            </Common.InDiv >
 
     );
 };
