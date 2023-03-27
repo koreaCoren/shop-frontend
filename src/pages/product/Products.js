@@ -78,7 +78,9 @@ const Products = ({ result }) => {
     }, [select]);
 
     useEffect(() => {
-        reset();
+        if (result.isLoading !== true) {
+            reset();
+        }
     }, [result.isLoading, nav]);
 
     const onChange = (e) => {
@@ -94,44 +96,45 @@ const Products = ({ result }) => {
     }
 
     return (
-        <div style={{ paddingBottom: "50px", }}>
-            <Style.Products>
-                <div className='wrap'>
-                    <div className="banner">
-                        <img src={banner} alt="" />
+        result.isLoading === true
+            ? <Loading />
+            : <div style={{ paddingBottom: "50px", }}>
+                <Style.Products>
+                    <div className='wrap'>
+                        <div className="banner">
+                            <img src={banner} alt="" />
+                        </div>
+                        <div className="flexBox" style={{ marginBottom: "20px" }}>
+                            <Searching board={productList} setBoardList={setProductList} searchType={"product"} reset={reset} />
+                            <Style.Select>
+                                <select name="select" onChange={onChange}>
+                                    <option value="최신순">최신순</option>
+                                    <option value="오래된순">오래된순</option>
+                                    <option value="비싼 가격순">비싼 가격순</option>
+                                    <option value="낮은 가격순">낮은 가격순</option>
+                                </select>
+                                <i className="fa-solid fa-sort-down"></i>
+                            </Style.Select>
+                        </div>
+                        <ul>
+                            {
+                                productList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
+                                    return (
+                                        <li key={i}>
+                                            <Link to={`/product/detail/${a.goods_code}`}>
+                                                <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
+                                                <h3>{a.goods_nm}</h3>
+                                                <h4>{comma(a.goods_price)} 원</h4>
+                                            </Link>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
                     </div>
-                    <div className="flexBox" style={{ marginBottom: "20px" }}>
-                        <Searching board={productList} setBoardList={setProductList} searchType={"product"} reset={reset} />
-                        <Style.Select>
-                            <select name="select" onChange={onChange}>
-                                <option value="최신순">최신순</option>
-                                <option value="오래된순">오래된순</option>
-                                <option value="비싼 가격순">비싼 가격순</option>
-                                <option value="낮은 가격순">낮은 가격순</option>
-                            </select>
-                            <i className="fa-solid fa-sort-down"></i>
-                        </Style.Select>
-                    </div>
-                    <ul>
-                        {
-                            productList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
-                                return (
-                                    <li key={i}>
-                                        <Link to={`/product/detail/${a.goods_code}`}>
-                                            <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
-                                            <h3>{a.goods_nm}</h3>
-                                            <h4>{comma(a.goods_price)} 원</h4>
-                                        </Link>
-                                    </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
-            </Style.Products>
-            <Pageing count={COUNT} boardPage={boardPage} boardLength={productList?.length} url={`/product/products/${categoryCode}`} />
-            {result.isLoading && <Loading />}
-        </div>
+                </Style.Products>
+                <Pageing count={COUNT} boardPage={boardPage} boardLength={productList?.length} url={`/product/products/${categoryCode}`} />
+            </div>
     );
 };
 
