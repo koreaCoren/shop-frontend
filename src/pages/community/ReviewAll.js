@@ -58,7 +58,7 @@ const ReviewAll = () => {
                                         <div className="star">
                                             {
                                                 [...Array(a.grade)].map((a, i) => (
-                                                    <Star key={i} fill='#ff7f23'></Star>
+                                                    <Star key={i} fill='#ffd900'></Star>
                                                 ))
                                             }
                                         </div>

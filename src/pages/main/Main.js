@@ -14,71 +14,75 @@ import best from "assets/images/main/best.jpg";
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
+import Loading from 'components/loding/Loading';
 
 const Main = () => {
     let result = useQuery("prodcutList", productList);
     const mainReview = useQuery("main_review", main_review);
     useEffect(() => { }, [result.isLoading, mainReview.isLoading]);
     return (
-        <main>
-            <Style.Banner>
-                <img src={mainbanner} alt="" />
-                <div className="content">
-                    <div>
-                        <h2>
-                            귀한분께 드리는 <br />
-                            <b>더 귀한 말굽버섯</b>
-                        </h2>
-                    </div>
-                    <a href="#">Shop Now</a>
-                </div>
-            </Style.Banner>
-
-            <Style.BrandStory>
-                <div className="wrap">
-                    <h2>Brand Story</h2>
-                    <h3>라이프힘이 <br />특별한 이유</h3>
-
-                    <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
-                    <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
-                    <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
-                </div>
-            </Style.BrandStory>
-
-            <Style.ViewMore>
-                <div className="wrap">
-                    <div></div>
-                    <h2>VIEW MORE</h2>
-                    <ul>
-                        <li>
+        result.isLoading === false
+            ? mainReview.isLoading === true
+                ? <Loading />
+                : <main>
+                    <Style.Banner>
+                        <img src={mainbanner} alt="" />
+                        <div className="content">
                             <div>
-                                <h3>
-                                    <span>100% 말굽버섯 생산</span>
-                                    <p>첨가물 없이 순수한 영양분 그대로</p>
-                                </h3>
+                                <h2>
+                                    귀한분께 드리는 <br />
+                                    <b>더 귀한 말굽버섯</b>
+                                </h2>
                             </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>100% 말굽버섯 생산</span>
-                                    <p>첨가물 없이 순수한 영양분 그대로</p>
-                                </h3>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <h3>
-                                    <span>100% 말굽버섯 생산</span>
-                                    <p>첨가물 없이 순수한 영양분 그대로</p>
-                                </h3>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </Style.ViewMore>
+                            <a href="#">Shop Now</a>
+                        </div>
+                    </Style.Banner>
 
-            {/* <Style.LifeHim>
+                    <Style.BrandStory>
+                        <div className="wrap">
+                            <h2>Brand Story</h2>
+                            <h3>라이프힘이 <br />특별한 이유</h3>
+
+                            <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
+                            <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
+                            <p>라이프힘이 특별한 이유에 대한 설명을 기술하시오.</p>
+                        </div>
+                    </Style.BrandStory>
+
+                    <Style.ViewMore>
+                        <div className="wrap">
+                            <div></div>
+                            <h2>VIEW MORE</h2>
+                            <ul>
+                                <li>
+                                    <div>
+                                        <h3>
+                                            <span>100% 말굽버섯 생산</span>
+                                            <p>첨가물 없이 순수한 영양분 그대로</p>
+                                        </h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h3>
+                                            <span>100% 말굽버섯 생산</span>
+                                            <p>첨가물 없이 순수한 영양분 그대로</p>
+                                        </h3>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <h3>
+                                            <span>100% 말굽버섯 생산</span>
+                                            <p>첨가물 없이 순수한 영양분 그대로</p>
+                                        </h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </Style.ViewMore>
+
+                    {/* <Style.LifeHim>
                 <div className="flexContainer">
                     <div className="content">
                         <h3>Life Him</h3>
@@ -135,152 +139,152 @@ const Main = () => {
                 </div>
             </Style.LifeHim> */}
 
-            <Style.Best>
-                <div className="wrap">
-                    <h3>라이프힘 베스트</h3>
-                    {
-                        result.data?.length > 0
-                            ? <ul>
-                                {
-                                    result.data?.slice(0, 4).map((a, i) => {
-                                        return (
-                                            <li key={i}>
-                                                <div className="hoverBox">
-                                                    <Link to={`/product/detail/${a.goods_code}`}>
-                                                        <img src={a.goods_img === "" ? noImg : a.goods_img} alt="상품이미지" />
-                                                    </Link>
-                                                    <ul>
-                                                        <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
-                                                    </ul>
-                                                    {
-                                                        a.goods_sale > 0
-                                                            ? <div className="sale">{a.goods_sale}% <br /> 할인!</div>
-                                                            : null
-                                                    }
-                                                </div>
-                                                <div className="name">{a.goods_nm}</div>
-                                                {
-                                                    Number(a.goods_sale) <= 0
-                                                        ? <div className="pay">{
-                                                            comma(a.goods_price)}원
-                                                        </div>
-                                                        : <div className="pay discount">
-                                                            <p>
-                                                                {comma(a.goods_price)}원
-                                                            </p>
-                                                            <p>{comma(Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))))}원</p>
-                                                        </div>
-                                                }
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                            : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 상품이 없습니다.</p>
-                    }
-                    {/* <ul>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                    </ul> */}
-                </div>
-            </Style.Best>
-
-            <Style.Review>
-                <div className="wrap">
-                    <h3>REAL REVIEW</h3>
-
-                    {
-                        mainReview.data?.length > 0
-                            ? <ul>
-                                {
-                                    mainReview.data?.map((a, i) => {
-                                        return (
-                                            <li key={i}>
-
-                                                <a href="/community/review/all/1">
-                                                    <div>
-                                                        <img src={a.firstImg ? a.firstImg : a.goods_img ? a.goods_img : noImg} alt={`리뷰이미지` + i} />
-                                                    </div>
-                                                    <div className="content">
-                                                        <div className="star">
+                    <Style.Best>
+                        <div className="wrap">
+                            <h3>라이프힘 베스트</h3>
+                            {
+                                result.data[0]?.length > 0
+                                    ? <ul>
+                                        {
+                                            result.data[0]?.slice(0, 4).map((a, i) => {
+                                                return (
+                                                    <li key={i}>
+                                                        <div className="hoverBox">
+                                                            <Link to={`/product/detail/${a.goods_code}`}>
+                                                                <img src={a.goods_img === "" ? noImg : a.goods_img} alt="상품이미지" />
+                                                            </Link>
+                                                            <ul>
+                                                                <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
+                                                            </ul>
                                                             {
-                                                                Array(a.grade).fill(
-                                                                    <Star fill='#ff7f23'></Star>
-                                                                )
+                                                                a.goods_sale > 0
+                                                                    ? <div className="sale">{a.goods_sale}% <br /> 할인!</div>
+                                                                    : null
                                                             }
                                                         </div>
-                                                        <h4>{a.title.length === 16 ? a.title + '...' : a.title}</h4>
-                                                        <p dangerouslySetInnerHTML={{ __html: a.content.length === 40 ? `${a.content} ...` : a.content }}></p>
-                                                    </div>
-                                                    <div className="bar"></div>
-                                                    <div className="prodcutName">
-                                                        <div><img src={a.goods_img ? a.goods_img : noImg} alt={`제품이미지` + i} /></div>
-                                                        {a.goods_nm}
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        )
-                                    })
-                                }
-                            </ul>
-                            : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 리뷰가 없습니다.</p>
-                    }
+                                                        <div className="name">{a.goods_nm}</div>
+                                                        {
+                                                            Number(a.goods_sale) <= 0
+                                                                ? <div className="pay">{
+                                                                    comma(a.goods_price)}원
+                                                                </div>
+                                                                : <div className="pay discount">
+                                                                    <p>
+                                                                        {comma(a.goods_price)}원
+                                                                    </p>
+                                                                    <p>{comma(Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01)))))}원</p>
+                                                                </div>
+                                                        }
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                    : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 상품이 없습니다.</p>
+                            }
+                            {/* <ul>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                        <li>
+                            <div className="hoverBox">
+                                <a href="#">
+                                    <img src={best} alt="" />
+                                </a>
+                                <ul>
+                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
+                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
+                                </ul>
+                            </div>
+                            <div className="name">제품명을 입력 해주세요</div>
+                            <div className="text">
+                                건강한 한 포 습관, 말굽버섯 <br />
+                                이곳에는 상품 요약 설명을 적어주세요
+                            </div>
+                            <div className="pay">140,000</div>
+                        </li>
+                    </ul> */}
+                        </div>
+                    </Style.Best>
+
+                    <Style.Review>
+                        <div className="wrap">
+                            <h3>REAL REVIEW</h3>
+
+                            {
+                                mainReview.data?.length > 0
+                                    ? <ul>
+                                        {
+                                            mainReview.data?.map((a, i) => {
+                                                return (
+                                                    <li key={i}>
+
+                                                        <a href="/community/review/all/1">
+                                                            <div>
+                                                                <img src={a.firstImg ? a.firstImg : a.goods_img ? a.goods_img : noImg} alt={`리뷰이미지` + i} />
+                                                            </div>
+                                                            <div className="content">
+                                                                <div className="star">
+                                                                    {
+                                                                        [...Array(a.grade)].map((a, i) => (
+                                                                            <Star key={i} fill='#ffd900'></Star>
+                                                                        ))
+                                                                    }
+                                                                </div>
+                                                                <h4>{a.title.length === 16 ? a.title + '...' : a.title}</h4>
+                                                                <p dangerouslySetInnerHTML={{ __html: a.content.length === 40 ? `${a.content} ...` : a.content }}></p>
+                                                            </div>
+                                                            <div className="bar"></div>
+                                                            <div className="prodcutName">
+                                                                <div><img src={a.goods_img ? a.goods_img : noImg} alt={`제품이미지` + i} /></div>
+                                                                {a.goods_nm}
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                    : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 리뷰가 없습니다.</p>
+                            }
 
 
 
 
 
 
-                    {/* <ul>
+                            {/* <ul>
                         <li>
                             <a href="#">
                                 <img src={best} alt="" />
@@ -354,12 +358,13 @@ const Main = () => {
                             </a>
                         </li>
                     </ul> */}
-                    <div className="button">
-                        <a className="more" href="/community/review/all/1">리뷰 모두 보기</a>
-                    </div>
-                </div>
-            </Style.Review>
-        </main>
+                            <div className="button">
+                                <a className="more" href="/community/review/all/1">리뷰 모두 보기</a>
+                            </div>
+                        </div>
+                    </Style.Review>
+                </main>
+            : <Loading />
     );
 };
 
