@@ -68,7 +68,6 @@ export const ReviewBoard = styled.div`
     .wrap > ul.all > li > .content p{
         font-size: 16px;
         line-height: 1.2;
-        max-height: 40px;
         overflow: hidden;
     }
     .wrap > ul.all > li > .content.on p{

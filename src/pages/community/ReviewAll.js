@@ -14,6 +14,7 @@ import Pageing from 'components/board/Pageing';
 
 const ReviewAll = () => {
     const nav = useNavigate();
+    const regex = /.*<br>.*/;
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState();
@@ -63,12 +64,28 @@ const ReviewAll = () => {
                                             }
                                         </div>
                                         <h3>{a.title}</h3>
-                                        <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
-                                        <button onClick={() => {
-                                            i === more
-                                                ? setMore(null)
-                                                : setMore(i)
-                                        }}>더보기</button>
+                                        {
+                                            regex.test(a.content)
+                                                ? <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
+                                                : a.content.length > 50
+                                                    ? <p dangerouslySetInnerHTML={i === more ? { __html: a.content } : { __html: a.content.substring(0, 50) + "..." }}></p>
+                                                    : <p dangerouslySetInnerHTML={{ __html: a.content }}></p>
+                                        }
+                                        {
+                                            regex.test(a.content)
+                                                ? <button onClick={() => {
+                                                    i === more
+                                                        ? setMore(null)
+                                                        : setMore(i)
+                                                }}>더보기</button>
+                                                : a.content.length > 50
+                                                    ? <button onClick={() => {
+                                                        i === more
+                                                            ? setMore(null)
+                                                            : setMore(i)
+                                                    }}>더보기</button>
+                                                    : null
+                                        }
                                         <div className="imageView">
                                             {
                                                 a.firstImg !== ""

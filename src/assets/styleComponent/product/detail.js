@@ -11,6 +11,9 @@ export const Info = styled.div`
     grid-gap: 50px;
     border-bottom: 1px solid rgb(230,230,230);
     padding-bottom: 20px;
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const ImageInfo = styled.div`
@@ -80,6 +83,7 @@ export const Content = styled.div`
         margin: 20px 0px 50px;
         font-weight: bold;
     }
+    
 `
 
 
@@ -110,6 +114,35 @@ export const DetailInfo = styled.ul`
 
      li span.pay {
         color: #d1b064;
+    }
+    @media screen and (max-width:600px){
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 20px 0px;
+
+        li {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+        }
+
+        li:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        li b {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        li span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        li span.pay {
+            color: #d1b064;
+        }
     }
 `
 
@@ -201,7 +234,9 @@ export const fav = styled.div`
     cursor: pointer;
 `
 
-export const Description = styled.div``
+export const Description = styled.div`
+    
+`
 export const DescriptionMenu = styled.div`
     cursor: pointer;
     ul{
@@ -215,7 +250,7 @@ export const DescriptionMenu = styled.div`
         font-size: 18px;
     }
 
-    ul li:nth-child(2) {
+    ul li:not(:nth-child(1)) {
         color: rgb(180,180,180);
     }
 
@@ -238,6 +273,16 @@ export const OrderMenu = styled.div`
 export const DescriptionShow = styled.div`
     padding: 40px 0;
     border-bottom: 1px solid rgb(230,230,230);
+    
+
+    @media screen and (max-width: 600px) {
+        img{
+            width: 100%;
+        }
+        div{
+            max-width: 100%;
+        }
+    }
 `
 
 export const Review = styled.div`
@@ -248,6 +293,21 @@ export const Review = styled.div`
         font-size: 24px;
         padding-bottom: 20px;
     }
+    .nav{
+    cursor: pointer;
+    ul{
+        text-align: center;
+    }
+    ul li{
+        display: inline-block;
+        text-align: center;
+        padding: 30px;
+        font-size: 18px;
+    }
+    ul li:not(:nth-child(2)) {
+        color: rgb(180,180,180);
+    }
+}
 
     .grid{
         display: grid;
@@ -341,7 +401,7 @@ h4{
         padding: 30px;
         font-size: 18px;
     }
-    ul li:nth-child(1) {
+    ul li:not(:nth-child(3)) {
         color: rgb(180,180,180);
     }
 }

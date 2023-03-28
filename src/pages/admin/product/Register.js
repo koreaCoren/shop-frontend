@@ -81,7 +81,7 @@ const Register = () => {
                 setImageCode(arr);
             }
         }
-            
+
         const data = {
             goods_code: createCode(),
             goods_nm: productName,
@@ -146,7 +146,7 @@ const Register = () => {
                     <ProductInput title="할인률" type="text" name="discount" placeholder="할인률(% 적용 숫자만 적어주세요)" onChange={onChange} />
                     <ProductInput title="판매 수량" type="text" name="sell" placeholder="판매 수량" onChange={onChange} />
                     <ProductInput title="재고" type="text" name="stock" placeholder="재고" onChange={onChange} />
-                    <ImageUpload title="상품썸네일" thumbnail={thumbnail} setThumbnail={setThumbnail} />
+                    <ImageUpload title="상품썸네일<br>(사이즈289*300)" thumbnail={thumbnail} setThumbnail={setThumbnail} />
                     <Textarea title="상품상세설명" name="detailCotent" placeholder="상품상세설명" onChange={onChange} setProductContent={setProductContent} setImageCode={setImageCode} type="product" />
                     <ProductOption title="상품 옵션 선택" setProductOption={setProductOption} />
                     <Style.ProductRegister type='submit'>상품 등록</Style.ProductRegister>
