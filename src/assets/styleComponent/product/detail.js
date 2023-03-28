@@ -83,6 +83,7 @@ export const Content = styled.div`
         margin: 20px 0px 50px;
         font-weight: bold;
     }
+    
 `
 
 
@@ -113,6 +114,35 @@ export const DetailInfo = styled.ul`
 
      li span.pay {
         color: #d1b064;
+    }
+    @media screen and (max-width:600px){
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 20px 0px;
+
+        li {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+        }
+
+        li:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        li b {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        li span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        li span.pay {
+            color: #d1b064;
+        }
     }
 `
 
