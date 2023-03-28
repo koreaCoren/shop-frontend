@@ -50,7 +50,6 @@ const Detail = ({ result, setOrderData }) => {
             };
         };
         getReviewList();
-        console.log(result);
     }, [result.isLoading]);
 
     //상품갯수증가
@@ -234,8 +233,8 @@ const Detail = ({ result, setOrderData }) => {
                             </ul>
                         </div>
                         <h2>상품 후기</h2>
-                        
                             {
+                                review !== undefined &&
                                 review.map((a,i) => {
                                     return (
                                         <div>
@@ -258,8 +257,6 @@ const Detail = ({ result, setOrderData }) => {
                                     )
                                 })
                             }
-                        
-                        
                     </Style.Review>
                         {/* <Style.QnA>
                         <h2>상품 문의</h2>
