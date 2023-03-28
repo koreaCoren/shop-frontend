@@ -11,6 +11,9 @@ export const Info = styled.div`
     grid-gap: 50px;
     border-bottom: 1px solid rgb(230,230,230);
     padding-bottom: 20px;
+    @media screen and (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const ImageInfo = styled.div`
@@ -201,7 +204,9 @@ export const fav = styled.div`
     cursor: pointer;
 `
 
-export const Description = styled.div``
+export const Description = styled.div`
+    
+`
 export const DescriptionMenu = styled.div`
     cursor: pointer;
     ul{
@@ -238,6 +243,16 @@ export const OrderMenu = styled.div`
 export const DescriptionShow = styled.div`
     padding: 40px 0;
     border-bottom: 1px solid rgb(230,230,230);
+    
+
+    @media screen and (max-width: 600px) {
+        img{
+            width: 100%;
+        }
+        div{
+            max-width: 100%;
+        }
+    }
 `
 
 export const Review = styled.div`
