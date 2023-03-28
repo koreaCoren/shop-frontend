@@ -48,12 +48,14 @@ export const Products = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 15px;
+        }
     }
     @media screen and (max-width: 600px){
         ul{
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 15px;
+        }
     }
     @media screen and (max-width: 450px){
         ul{
@@ -82,5 +84,10 @@ export const Select = styled.label`
         right: 10px;
         transform: translateY(-70%);
         color: #757575;
+    }
+    @media screen and (max-width: 600px){
+        select{
+            width: 150px;
+        }
     }
 `;
