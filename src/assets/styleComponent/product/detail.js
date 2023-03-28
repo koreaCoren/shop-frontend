@@ -215,7 +215,7 @@ export const DescriptionMenu = styled.div`
         font-size: 18px;
     }
 
-    ul li:nth-child(2) {
+    ul li:not(:nth-child(1)) {
         color: rgb(180,180,180);
     }
 
@@ -248,6 +248,21 @@ export const Review = styled.div`
         font-size: 24px;
         padding-bottom: 20px;
     }
+    .nav{
+    cursor: pointer;
+    ul{
+        text-align: center;
+    }
+    ul li{
+        display: inline-block;
+        text-align: center;
+        padding: 30px;
+        font-size: 18px;
+    }
+    ul li:not(:nth-child(2)) {
+        color: rgb(180,180,180);
+    }
+}
 
     .grid{
         display: grid;
@@ -341,7 +356,7 @@ h4{
         padding: 30px;
         font-size: 18px;
     }
-    ul li:nth-child(1) {
+    ul li:not(:nth-child(3)) {
         color: rgb(180,180,180);
     }
 }

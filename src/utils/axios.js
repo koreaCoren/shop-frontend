@@ -578,6 +578,17 @@ export const settingFav = async (data) => {
     return api;
 }
 
+//리뷰 리스트 받기
+export const reqReview = async (data) =>{
+    const api = await API.REQ_REIVEW.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api
+}
+
 
 // -------- 개인정보 끝 --------------
 
