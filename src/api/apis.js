@@ -241,6 +241,11 @@ export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
 })
 
+//리뷰 리스트 받기
+export const REQ_REIVEW = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_goods_review`,
+})
+
 //---------마이페이지 끝 --------
 
 //--------- 상품 관련 ----------
