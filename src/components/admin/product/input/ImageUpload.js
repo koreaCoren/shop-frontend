@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
 
 const ProductInput = ({ title, setThumbnail, thumbnail }) => {
@@ -17,7 +17,7 @@ const ProductInput = ({ title, setThumbnail, thumbnail }) => {
 
     return (
         <Div>
-            <span>{title}</span>
+            <span dangerouslySetInnerHTML={{ __html: title }}></span>
             <div>
                 <input type="file" accept="image/*" onChange={onFileChange} />
                 <img src={thumbnail} />
@@ -37,7 +37,7 @@ const Div = styled.div`
     }
     img{
         display: block;
-        margin-top: 10px;
+        padding-top: 10px;
         max-width: 300px;
     }
 `;
