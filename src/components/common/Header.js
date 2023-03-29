@@ -28,7 +28,7 @@ const Header = () => {
 
     return (
         <header style={{ boxShadow: "0px 0px 5px #00000033" }}>
-            <Login className='pc'>
+            <Login>
                 <div className="wrap">
                     {
                         sessionStorage.getItem("loginCheck") === "success"
@@ -185,7 +185,7 @@ const Login = styled.div`
         }
     }
     @media (max-width: 1200px) {
-        padding: 0px 15px;
+        display: none;
     }
 `
 const Head = styled.div`
@@ -255,6 +255,7 @@ const Head = styled.div`
         height: 100vh;
         z-index: 10;
         opacity: 0;
+        box-shadow: -2px -2px 8px #00000077;
     }
 
     .mobile .menuBox.on{
