@@ -376,9 +376,9 @@ export const nullInvoice = async () => {
     return data;
 }
 
-// 송장번호 업데이트(미완)
+// 송장번호 개별 업데이트
 export const deliveryUpdate = async (data) => {
-    const api = await API.DELIVERY_INPUT.post("", data).then((res) => {
+    const api = await API.DELIVERY_UPDATE.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신이 실패했습니다.\n" + error);
@@ -576,6 +576,17 @@ export const settingFav = async (data) => {
         window.location.replace("/");
     })
     return api;
+}
+
+//리뷰 리스트 받기
+export const reqReview = async (data) => {
+    const api = await API.REQ_REIVEW.post("", data).then((res) => {
+        data.result = res.data;
+    }).catch((error) => {
+        alert("서버와 통신을 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api
 }
 
 

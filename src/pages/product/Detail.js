@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { settingFav, getFavList } from 'utils/axios';
+import { settingFav, getFavList, reqReview  } from 'utils/axios';
 
 import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
@@ -25,16 +25,21 @@ const Detail = ({ result, setOrderData }) => {
     const [deliveryPay, setDeliveryPay] = useState(2500);
     const [lightOn, setLightOn] = useState();
     const [fav, setFav] = useState(0);
+    const [review, setReview] = useState();
 
     const DescriptionRef = useRef();
     const returnRef = useRef();
+    const reviewRef = useRef();
 
-    const favControll = useMutation(settingFav);
-    const favList = useMutation(getFavList);
+    const reviewList = useMutation(reqReview);
+    // const favControll = useMutation(settingFav);
+    // const favList = useMutation(getFavList);
+
+    
 
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
-        selFav();
+        // selFav();
         if (result.isLoading === false) {
             for (let i = 0; i < result.data[0].length; i++) {
                 if (result.data[0][i].goods_code === productCode) {
@@ -44,6 +49,7 @@ const Detail = ({ result, setOrderData }) => {
                 };
             };
         };
+        getReviewList();
     }, [result.isLoading]);
 
     //상품갯수증가
@@ -59,7 +65,19 @@ const Detail = ({ result, setOrderData }) => {
         }
         setCount(count - 1);
     }
+    //리뷰리스트 가져오기
+    const getReviewList = async () => {
+        const data = {
+            boardType: "review",
+            boardPage: 1,
+            goodsCode: productCode,
 
+        }
+        await reviewList.mutateAsync(data);
+        setReview(data.result);
+        console.log(data.result);
+    }
+    /* 좋아요는 당분간 봉인
     // 좋아요 리스트
     const selFav = async () => {
         const data = {
@@ -91,6 +109,7 @@ const Detail = ({ result, setOrderData }) => {
             window.location.replace("/login");
         }
     }
+    */
 
     //구매 클릭
     const orderClick = () => {
@@ -183,14 +202,11 @@ const Detail = ({ result, setOrderData }) => {
 
                     <Style.Description>
                         <Style.DescriptionMenu>
-                            {/* <ul>
-                                <li className='lightOn'><span>상품설명</span></li>
-                                <li className=''><span>상품후기</span></li>
-                                <li className=''><span>상품문의</span></li>
-                                <li className=''><span>교환/반품</span></li>
-                            </ul> */}
                             <ul ref={DescriptionRef}>
                                 <li>상세정보</li>
+                                <li onClick={() => {
+                                    moveScroll(reviewRef);
+                                }}>상품후기</li>
                                 <li onClick={() => {
                                     moveScroll(returnRef);
                                 }}>교환/반품</li>
@@ -202,29 +218,46 @@ const Detail = ({ result, setOrderData }) => {
                         <Style.DescriptionShow>
                             <div dangerouslySetInnerHTML={{ __html: productDetail?.goods_detail }}></div>
                         </Style.DescriptionShow>
-                        {/* <Style.Review>
+                        <Style.Review>
+                        <div className="nav">
+                            <ul ref={reviewRef}>
+                                <li onClick={() => {
+                                    moveScroll(DescriptionRef)
+                                }}>상세정보</li>
+                                <li onClick={() => {
+                                    moveScroll(reviewRef);
+                                }}>상품후기</li>
+                                <li onClick={() => {
+                                    moveScroll(returnRef);
+                                }}>교환/반품</li>
+                            </ul>
+                        </div>
                         <h2>상품 후기</h2>
-                        <div className='grid'>
-                            <div className='userId'>PKD</div>
-                            <div className='reviewDetail'>
-                                <p className='optionList'>노르웨이숲 + 캣타워</p>
-                                <p>
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae labore, quaerat illo quis suscipit vel quos nesciunt rerum voluptatem iste dolorem placeat nihil atque ipsum corrupti, autem quo nulla? Totam?
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti magnam recusandae nulla officia eveniet cumque quidem exercitationem, rerum nostrum, culpa sed veniam impedit pariatur aperiam sapiente, laboriosam molestiae nesciunt. Libero!
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum ipsum praesentium placeat fuga repellendus, atque ab est optio adipisci ullam eligendi unde hic magni dolore neque numquam perferendis voluptate odio?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae magni ipsa atque repellendus ut omnis non debitis vitae. Beatae pariatur, aut illum asperiores nostrum quas veritatis id ea quaerat maxime!
-                                </p>
-                                <p>2023-02-01</p>
-                            </div>
-                        </div>
-                        <div className='grid'>
-                            <div className='userId'>Admin</div>
-                            <div className='reviewDetail'>
-                                <p className='optionList'>옵션명</p>
-                                <p>애용애용애요오옹애용애요오옹애용</p>
-                                <p>2023-01-29</p>
-                            </div>
-                        </div>
-                    </Style.Review> */}
+                            {
+                                review !== undefined &&
+                                review.map((a,i) => {
+                                    return (
+                                        <div>
+                                            <div className='grid'>
+                                                <div className='userId'>{a.user_id}</div>
+                                                <div className='reviewDetail'>
+                                                    <p className='optionList'>{a.title}</p>
+                                                    <p>{a.content}</p>
+                                                    <p>{a.create_date}</p>
+                                                    <div className="star">
+                                                        {
+                                                            [...Array(a.grade)].map((a, i) => (
+                                                                <Star key={i} fill='#ffd900'></Star>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                    </Style.Review>
                         {/* <Style.QnA>
                         <h2>상품 문의</h2>
                         <span>배송관련, 주문(취소/교환/환불/관련) 문의 및 요청사항은 마이페이지 1:1문의에 남겨주세요.</span>
@@ -271,9 +304,14 @@ const Detail = ({ result, setOrderData }) => {
                             <div className='nav'>
                                 <ul ref={returnRef}>
                                     <li onClick={() => {
-                                        moveScroll(DescriptionRef);
+                                        moveScroll(DescriptionRef)
                                     }}>상세정보</li>
-                                    <li>교환/반품</li>
+                                    <li onClick={() => {
+                                        moveScroll(reviewRef);
+                                    }}>상품후기</li>
+                                    <li onClick={() => {
+                                        moveScroll(returnRef);
+                                    }}>교환/반품</li>
                                 </ul>
                             </div>
                             <div className='info'>

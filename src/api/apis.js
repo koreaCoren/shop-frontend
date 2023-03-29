@@ -157,9 +157,13 @@ export const NULL_INVOICE = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/sel_delivery_null`
 })
 
-// 송장 번호 업데이트
+// 송장 번호 전체 업데이트
 export const DELIVERY_INPUT = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_delivery`
+})
+// 송장 번호 개별 업데이트
+export const DELIVERY_UPDATE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_each_delivery`
 })
 
 // 배송사 업데이트
@@ -239,6 +243,11 @@ export const GET_FAV_LIST = axios.create({
 //상품 좋아요
 export const SET_FAV = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/user/set_fav`,
+})
+
+//리뷰 리스트 받기
+export const REQ_REIVEW = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/board/sel_goods_review`,
 })
 
 //---------마이페이지 끝 --------

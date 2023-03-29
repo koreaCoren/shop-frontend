@@ -93,4 +93,9 @@ export const Select = styled.label`
         transform: translateY(-70%);
         color: #757575;
     }
+    @media screen and (max-width: 600px){
+        select{
+            width: 150px;
+        }
+    }
 `;
