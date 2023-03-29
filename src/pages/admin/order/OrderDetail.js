@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from 'react-query';
 
-import { orderManagementDetail, carrierUpdate } from 'utils/axios';
+import { orderManagementDetail, carrierUpdate, deliveryUpdate } from 'utils/axios';
 import { getDeliveryList } from 'utils/delivery';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
@@ -16,11 +16,12 @@ const OrderDetail = () => {
     const [detail, setDetail] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [invoiceNumber, setInvoiceNumber] = useState("");
-    const update = useMutation(carrierUpdate);
+    const updateCarrier = useMutation(carrierUpdate);
+    const updateDelivery = useMutation(deliveryUpdate);
     const [carrier, setCarrier] = useState("");
     const [carrierList, setCarrierList] = useState();
 
-    const setDelivery = async () => {
+    const setCarrierCode = async () => {
         const arr = await getDeliveryList();
         const data = {};
         arr.data.forEach(el => {
@@ -29,7 +30,17 @@ const OrderDetail = () => {
                 data.carrier = carrier;
             }
         });
-        update.mutateAsync(data);
+        updateCarrier.mutateAsync(data);
+        alert("저장완료");
+    }
+
+    const setDelivery = async () => {
+        const data = {
+            orderCode: orderCode,
+            delivery: invoiceNumber,
+        }
+        console.log(data);
+        updateDelivery.mutateAsync(data);
         alert("저장완료");
     }
 
@@ -47,7 +58,6 @@ const OrderDetail = () => {
             price = price + Number(data.detail[i].order_pay);
             setTotalPrice(price);
         }
-        console.log(data.detail[0].carrier);
         if (arr.data) {
             arr.data.forEach(el => {
                 if (el.id === data.detail[0].carrier) {
@@ -145,12 +155,11 @@ const OrderDetail = () => {
                                     <i className="fa-solid fa-sort-down"></i>
                                 </div>
 
-                                <button onClick={setDelivery}>수정</button>
-
+                                <button onClick={setCarrierCode}>수정</button>
                             </li>
                             <li>
                                 송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' name='invoiceNumber' value={invoiceNumber} onChange={onChange} />
-                                <button>수정</button>
+                                <button onClick={setDelivery}>수정</button>
                             </li>
                         </Style.Content>
                     </Common.Container>

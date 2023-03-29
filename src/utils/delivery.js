@@ -14,7 +14,7 @@ export const track = async (carrier, delivery, trackResult) => {
 export const deliveryStatus = async (req) => {
     let arr = [];
     for (const el of req) {
-        if (el.carrier !== "" || el.delivery !== "") {
+        if (el.carrier !== "" && el.delivery !== "") {
             const url = `https://apis.tracker.delivery/carriers/${el.carrier}/tracks/${el.delivery}`;
             try {
                 const res = await axios.get(url);
@@ -22,6 +22,10 @@ export const deliveryStatus = async (req) => {
             } catch (err) {
                 arr.push("송장 에러");
             }
+        } else if (el.carrier === "" && el.delivery !== "") {
+            arr.push("배송사 미입력");
+        } else if (el.delivery === "" && el.carrier !== "") {
+            arr.push("송장 미입력");
         } else {
             arr.push("주문접수");
         }

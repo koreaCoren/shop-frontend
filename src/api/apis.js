@@ -157,9 +157,13 @@ export const NULL_INVOICE = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/sel_delivery_null`
 })
 
-// 송장 번호 업데이트
+// 송장 번호 전체 업데이트
 export const DELIVERY_INPUT = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_delivery`
+})
+// 송장 번호 개별 업데이트
+export const DELIVERY_UPDATE = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URL}/delivery/upd_order_each_delivery`
 })
 
 // 배송사 업데이트
