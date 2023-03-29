@@ -1,108 +1,134 @@
 import styled from "styled-components";
 
-export const Contents = styled.div`
-    
-    color: rgb(51, 51, 51); 
-    .flex60 {
-        flex-basis: 60px;
+export const SettingAddress = styled.div`
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 15px 0px;
+    padding: 15px;
+    h2{
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
     }
-    .flex360 {
-        flex-basis: 360px;
-    }
-    .flex120 {
-        flex-basis: 120px;
-    }
-    .flex100 {
-        flex-basis: 100px;
-    }  
-    .flex580 {
-        display: flex;
-        flex-basis: 580px;
-    }  
-`
 
-export const Column = styled.ul`
-    display: flex;
-    padding: 20px;    
-    border-bottom: 1px solid black;
-    text-align: center;
-    line-height: 10px;
-    font-weight: 500;       
-    align-items: center;
-    justify-content: space-between;  
-        
-    @media screen and (max-width: 700px){
-        display   :none ;
-    }
-`
-
-export const Ctnt = styled.ul`
-    text-align: center;
-    display: flex;
-    padding: 20px;  
-    align-items: center;
-    justify-content: space-between;
-    @media screen and (max-width:700px){
-        padding: 10px 0px;
-        .mobile {
-            display: block;
-        }
-        .flex60:nth-child(2){
-            display: none;
-        }
-        .flex580 {
-            flex-direction: column;
-            .flex60, .flex100, .flex120, .flex360{
-                flex-basis: 0;
-            }
-            .flex360{
-                span:nth-child(2){
-                    display: block;
-                }
-            }
-            .flex120{
-                display: flex;
-    justify-content: space-evenly;
-            }
-        }
-        
-    } 
-`
-
-export const Shipping = styled.div`
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    form{
+    ul{
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
-        border-radius: 10px;
-        padding: 20px;
-        width: 80%;
+        gap: 10px;
     }
-    form div{
+
+    ul li label{
+        display: flex;
+        align-items: center;
+    }
+
+    ul li label span{
         font-size: 16px;
-        line-height: 1.7;
+        width:100px;
+        line-height: 32px;
     }
-    div:not(.btn, .daumPost){
-        padding-bottom: 10px;
-        display: grid;
-        grid-template-columns: 1fr 4fr;
-    }
-    input[type=text]{
+
+    ul li label input{
+        flex:1;
+        border: 1px solid #ccc;
+        line-height: 30px;
+        padding: 0px 5px;
         border-radius: 5px;
-        border: 1px solid gray;
-        height: 25px;
     }
-    .btn{
+
+    ul li:nth-child(2) label{
+        align-items: flex-start;
+    }
+
+    ul li:nth-child(2) label span{
+        display: flex;
+        align-items: center;
+    }
+
+    ul li:nth-child(2) span i{
+        padding: 0px 5px;
+        cursor: pointer;
+    }
+
+    ul li:nth-child(2) label div{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+    }
+
+    ul li:nth-child(2) label div input{
+        flex: 1;
+    }
+
+    ul li:last-child{
         text-align: center;
     }
-    .btn input[type=button]{
-        background: black;
-        color: white;
-        padding: 5px 15px;
+
+    ul li button{
+        padding: 8px 15px;
         border-radius: 5px;
+        background-color: #1a6dff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    @media (max-width:500px) {
+        ul li label{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        ul li label input{
+            width: 100% !important;
+        }
+
+        ul li:nth-child(2) label div{
+            width: 100%;
+        }
+    }
+`
+export const Container = styled.div`
+    ul li{
+        width: 100%;
+        padding: 15px 0px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    ul li h2{
+        font-size: 22px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    ul li h2 span{
+        color: #1a6dff;
+    }
+
+    ul li p{
+        font-size: 16px;
+        line-height: 1.5;
     }
     
+    ul li .buttons{
+        display: flex;
+        gap: 5px;
+    }
+
+    ul li .buttons button{
+        margin-top: 5px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #333;
+        cursor: pointer;
+    }
+    
+    ul li .buttons button.setting{
+        background-color: #1a6dff;
+    }
 `

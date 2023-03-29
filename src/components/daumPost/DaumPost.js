@@ -32,7 +32,7 @@ const DaumPost = ({ setAddress, setZoneCode, setIsPostOpen }) => {
                 transform: "translate(-50%,-50%)",
             }}>
                 <button onClick={() => { setIsPostOpen(false) }}>창 닫기</button>
-                <DaumPostcode style={{
+                <DaumPostcode className='post' style={{
                     width: "400px",
                     height: "500px",
                 }} onComplete={handleComplete}></DaumPostcode>
@@ -54,6 +54,13 @@ const Container = styled.div`
         padding: 5px 20px;
         border-radius:50px;
         cursor: pointer;
+    }
+
+    @media (max-width:400px) {
+        .post{
+            width: 320px !important;
+            height: 400px !important;
+        }
     }
 `
 

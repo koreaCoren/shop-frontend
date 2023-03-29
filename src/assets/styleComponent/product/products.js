@@ -32,7 +32,6 @@ export const Products = styled.div`
 
     ul li img{
         width: 100%;
-        height: 250px;
     }
 
     ul li h3{
@@ -43,25 +42,34 @@ export const Products = styled.div`
     ul li h4{
         font-size: 16px;
     }
-    @media screen and (max-width: 850px){
+
+    @media (max-width:800px) {
         ul{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 15px;
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
-    @media screen and (max-width: 600px){
+
+    @media (max-width:600px) {
+        input, select{
+            width: 170px !important;
+        }
+
         ul{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 15px;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        ul li h3{
+            font-size: 16px;
+        }
+
+        ul li h4{
+            font-size: 14px;
         }
     }
-    @media screen and (max-width: 450px){
-        ul{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 15px;
+
+    @media (max-width: 400px) {
+        input, select{
+            width: 140px !important;
         }
     }
 `

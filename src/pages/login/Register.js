@@ -23,8 +23,30 @@ const Register = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        const phoneRegex = /^01([0|1|6|7|8|9])(\d{3}|\d{4})(\d{4})$/;
         const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-        if (!emailRegex.test(eamil)) {
+
+        if (name === "") {
+            alert("이름 입력해주세요.");
+            return;
+        } else if (id === "") {
+            alert("아이디 입력해주세요.");
+            return;
+        } else if (password === "") {
+            alert("비밀번호 입력해주세요.");
+            return;
+        } else if (telll === "") {
+            alert("전화번호 입력해주세요.");
+            return;
+        } else if (eamil === "") {
+            alert("이메일 입력해주세요.");
+            return;
+        }
+
+        if (!phoneRegex.test(telll)) {
+            alert("전화번호 형식이 아닙니다.");
+            return;
+        } else if (!emailRegex.test(eamil)) {
             alert("이메일 형식이 아닙니다.");
             return;
         };

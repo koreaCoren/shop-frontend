@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import { user, userDeleted } from 'utils/axios';
+import { formatPhoneNumber } from 'utils/setPhoneNumber';
 import Searching from 'components/board/Searching';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
@@ -62,7 +63,7 @@ const UserList = () => {
                                             <li>아이디 : {a.user_id}</li>
                                             <li>이메일 : {a.user_email}</li>
                                             <li>이름 : {a.user_nm}</li>
-                                            <li>연락처 : {a.user_tel}</li>
+                                            <li>연락처 : {formatPhoneNumber(a.user_tel)}</li>
                                             <li>주소 : {a.user_addr}</li>
                                             <li>가입일자 : {a.user_insdate}</li>
                                         </ul>
