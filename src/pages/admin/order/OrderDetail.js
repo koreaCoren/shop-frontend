@@ -47,7 +47,6 @@ const OrderDetail = () => {
             price = price + Number(data.detail[i].order_pay);
             setTotalPrice(price);
         }
-        console.log(data.detail[0].carrier);
         if (arr.data) {
             arr.data.forEach(el => {
                 if (el.id === data.detail[0].carrier) {
