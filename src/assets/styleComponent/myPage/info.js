@@ -13,7 +13,7 @@ align-items: center;
 padding: 30px;
 flex-direction: column;
 border: 1px solid #ddd;
-border-radius: 15px;    
+border-radius: 5px;    
 
 >div{
     display: flex;
@@ -35,28 +35,33 @@ input{
 }
 
 input[type="button"]{
-    border: 1px solid #70707070;
-    background-color: white;
-    color: #444;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: #fff;
     font-size: 16px;
+    font-weight: 600;
     letter-spacing: 18px;
     padding: 5px;
     width: 100%;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
-    margin-top: 20px;
+    font-family: var(--main-font) !important;
+    margin-top: 10px;
 }
+
 input[type="submit"]{
-    border: 1px solid #70707070;
-    background-color: white;
-    color: #444;
+    border: 1px solid #ddd;
+    background-color: #333;
+    color: #fff;
     font-size: 16px;
+    font-weight: 600;
     letter-spacing: 18px;
     padding: 5px;
     width: 100%;
-    height: 50px;
+    height: 40px;
     cursor: pointer;
-    margin-top: 20px;
+    font-family: var(--main-font) !important;
+    margin-top: 10px;
 }
 
 .inputTitle{
@@ -65,22 +70,19 @@ input[type="submit"]{
 }
 
 @media screen and (max-width: 800px) {
-    padding: 10px;
-    input{
     width: 100%;
-    line-height: 24px;
+    padding: 15px 15px;
+    > div div:nth-child(2){
+        flex: 1;
+    }
+    input{
+        width: 100%;
+        line-height: 24px;
     }
     input[type="submit"]{
-    border: 1px solid #70707070;
-    background-color: white;
-    color: #444;
-    font-size: 14px;
-    letter-spacing: 8px;
-    padding: 5px;
-    width: 60%;
-    height: 40px;
-    cursor: pointer;
-    margin-top: 20px;
+        font-size: 14px;
+        width: 60%;
+        height: 40px;
     }
 }
 `

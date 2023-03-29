@@ -104,7 +104,7 @@ const Products = ({ result }) => {
                         <div className="banner">
                             <img src={banner} alt="" />
                         </div>
-                        <div className="flexBox" style={{ marginBottom: "20px" }}>
+                        <div className="flexBox" style={{ paddingBottom: "10px", marginBottom: "10px", borderBottom: "1px solid #ccc" }}>
                             <Searching board={productList} setBoardList={setProductList} searchType={"product"} reset={reset} />
                             <Style.Select>
                                 <select name="select" onChange={onChange}>

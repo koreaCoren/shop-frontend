@@ -43,7 +43,7 @@ const Title = styled.div`
         text-align: right;
         cursor: pointer;
     }
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 500px) {
         padding-bottom: 20px;
         .new{
             font-size: 14px;

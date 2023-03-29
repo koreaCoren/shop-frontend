@@ -45,6 +45,12 @@ input[type=submit]{
         cursor: pointer;
         margin-top: 20px;
 };
+@media screen and (max-width: 500px){
+    .contents{
+        padding: 30px 0px;
+    }
+}
+
 @media screen and (max-width: 400px){
     padding: 15px;
     margin-top: 20px;

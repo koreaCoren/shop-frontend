@@ -82,63 +82,6 @@ const Main = () => {
                         </div>
                     </Style.ViewMore>
 
-                    {/* <Style.LifeHim>
-                <div className="flexContainer">
-                    <div className="content">
-                        <h3>Life Him</h3>
-                        <p>
-                            라이프힘으로 자연에서 유래된 <br />
-                            건강하고 활기찬 선물을 <br />
-                            사랑하는 사람에게 전해보세요
-                        </p>
-                        <div className="slideButton">
-                            <div className="slideBt prev"><i className="fa-solid fa-angle-left"></i></div>
-                            <div className="slideBt next"><i className="fa-solid fa-angle-right"></i></div>
-                        </div>
-                    </div>
-                    <div className="swiper mySwiper slider">
-                        <div className="swiper-wrapper">
-                            <div className="swiper-slide slide">
-                                <div className="hoverBox">
-                                    <a href="#"><img src="./image/main/이미지4.jpg" alt="" /></a>
-                                    <ul>
-                                        <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                        <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div className="name">상품명</div>
-                                <div className="text">말굽버섯 진액</div>
-                                <div className="pay">140,000원</div>
-                            </div>
-                            <div className="swiper-slide slide">
-                                <div className="hoverBox">
-                                    <a href="#"><img src="./image/main/이미지5.jpg" alt="" /></a>
-                                    <ul>
-                                        <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                        <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div className="name">상품명</div>
-                                <div className="text">말굽버섯 진액</div>
-                                <div className="pay">140,000원</div>
-                            </div>
-                            <div className="swiper-slide slide">
-                                <div className="hoverBox">
-                                    <a href="#"><img src="./image/main/이미지6.jpg" alt="" /></a>
-                                    <ul>
-                                        <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                        <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div className="name">상품명</div>
-                                <div className="text">말굽버섯 진액</div>
-                                <div className="pay">140,000원</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Style.LifeHim> */}
-
                     <Style.Best>
                         <div className="wrap">
                             <h3>라이프힘 베스트</h3>
@@ -182,59 +125,6 @@ const Main = () => {
                                     </ul>
                                     : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 상품이 없습니다.</p>
                             }
-                            {/* <ul>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                        <li>
-                            <div className="hoverBox">
-                                <a href="#">
-                                    <img src={best} alt="" />
-                                </a>
-                                <ul>
-                                    <li><a href="#"><i className="fa-solid fa-heart"></i></a></li>
-                                    <li><a href="#"><i className="fa-solid fa-basket-shopping"></i></a></li>
-                                </ul>
-                            </div>
-                            <div className="name">제품명을 입력 해주세요</div>
-                            <div className="text">
-                                건강한 한 포 습관, 말굽버섯 <br />
-                                이곳에는 상품 요약 설명을 적어주세요
-                            </div>
-                            <div className="pay">140,000</div>
-                        </li>
-                    </ul> */}
                         </div>
                     </Style.Best>
 

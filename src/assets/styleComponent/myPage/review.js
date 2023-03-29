@@ -19,6 +19,7 @@ export const ReviewList = styled.ul`
         border: 1px solid #ddd;
         border-radius: 7px;
         width: 125px;
+        height: 100px;
     }
     li > div .content{
         flex: 1;
@@ -41,15 +42,20 @@ export const ReviewList = styled.ul`
         border-radius: 7px;
     }
     @media screen and (max-width:500px){
-        display: grid;
         grid-template-columns: 1fr 1fr;
         li > div{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 0px;
-    }
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 0px;
+        }
+        li > div .content h4{
+            font-size: 17px;
+        }
+        li > div a{
+            font-size: 14px;
+            text-align: center;
+            width: 125px;
+        }
     }
 `

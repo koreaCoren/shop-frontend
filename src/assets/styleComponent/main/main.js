@@ -415,7 +415,6 @@ export const Best = styled.div`
 
     .wrap>ul li .hoverBox a img {
         width: 100%;
-        height: 300px;
         margin-bottom: 30px;
     }
 

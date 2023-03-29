@@ -32,7 +32,6 @@ export const Products = styled.div`
 
     ul li img{
         width: 100%;
-        height: 250px;
     }
 
     ul li h3{
@@ -42,6 +41,36 @@ export const Products = styled.div`
     
     ul li h4{
         font-size: 16px;
+    }
+
+    @media (max-width:800px) {
+        ul{
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width:600px) {
+        input, select{
+            width: 170px !important;
+        }
+
+        ul{
+            grid-template-columns: 1fr 1fr;
+        }
+
+        ul li h3{
+            font-size: 16px;
+        }
+
+        ul li h4{
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        input, select{
+            width: 140px !important;
+        }
     }
 `
 

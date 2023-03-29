@@ -11,6 +11,10 @@ export const Info = styled.div`
     grid-gap: 50px;
     border-bottom: 1px solid rgb(230,230,230);
     padding-bottom: 20px;
+
+    @media(max-width:800px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const ImageInfo = styled.div`
@@ -58,6 +62,20 @@ export const ImageInfo = styled.div`
     button i {
         margin-right: 5px;
     }
+
+    @media(max-width:800px) {
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            height: unset;
+            width: unset;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        ul {
+            justify-content: center;
+        }
+    }
 `
 
 export const Content = styled.div`
@@ -79,6 +97,36 @@ export const Content = styled.div`
         font-size: 18px;
         margin: 20px 0px 50px;
         font-weight: bold;
+    }
+
+    @media(max-width:500px) {
+        .info .button {
+            flex-direction: column;
+        }
+
+         .info ul li {
+            grid-template-columns: 100px 1fr;
+        }
+
+        .info ul li b {
+            font-size: 16px;
+        }
+
+        .info ul li span {
+            font-size: 16px;
+        }
+
+        .info .total span {
+            font-size: 18px;
+        }
+
+        .info .total span b {
+            font-size: 18px;
+        }
+
+        .info .total>b {
+            font-size: 20px;
+        }
     }
 `
 
