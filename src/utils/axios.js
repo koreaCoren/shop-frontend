@@ -43,11 +43,14 @@ export const register = async (data) => {
     const api = await API.REGISTER_API.post("", data).then((res) => {
         if (res.data.id === false) {
             alert("중복된 아이디입니다.");
+            data.isSuccess = false;
             return;
         } else if (res.data.email === false) {
             alert("중복된 이메일입니다.");
+            data.isSuccess = false;
             return;
         } else {
+            data.isSuccess = true;
             alert("회원가입 완료되었습니다.");
         }
     }).catch((error) => {
