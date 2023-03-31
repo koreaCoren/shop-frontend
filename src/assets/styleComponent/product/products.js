@@ -32,6 +32,7 @@ export const Products = styled.div`
 
     ul li img{
         width: 100%;
+        height: 231px;
     }
 
     ul li h3{

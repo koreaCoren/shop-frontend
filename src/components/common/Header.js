@@ -100,10 +100,11 @@ const Header = () => {
                                     sessionStorage.getItem("loginCheck") === "success"
                                         ? <ul className='user flexBox'>
                                             <li>{sessionStorage.getItem("userId")}님 로그인중</li>
-                                            <li>로그아웃</li>
+                                            <li onClick={logout}>로그아웃</li>
                                         </ul>
-                                        : <ul className='user'>
-                                            <li>로그인</li>
+                                        : <ul className='user flexBox'>
+                                            <li><Link to={"login"}>로그인</Link></li>
+                                            <li><Link to={"loginRegister"}>회원가입</Link></li>
                                         </ul>
                                 }
 
