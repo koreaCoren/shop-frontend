@@ -137,17 +137,6 @@ export const boardDetail = async (data) => {
     return api;
 }
 
-// 게시글 조회수 상승
-export const boardView = async (data) => {
-    const api = await API.VIEW_BOARD.post("", data).then((res) => {
-
-    }).catch((error) => {
-        alert("서버와 통신 실패했습니다.\n" + error);
-        window.location.replace("/");
-    });
-    return api;
-}
-
 // 게시글 삭제
 export const boardDelete = async (data) => {
     const api = await API.DELETE_BOARD.post("", data).then((res) => {

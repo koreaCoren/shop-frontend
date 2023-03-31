@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
 
 import Loading from 'components/loding/Loading';
-import { boardDelete, boardDetail, boardRead, boardView } from 'utils/axios';
+import { boardDelete, boardDetail } from 'utils/axios';
 import adminCheck from 'utils/adminCheck';
 
 import * as Style from "assets/styleComponent/community/detail";
@@ -13,7 +13,6 @@ const NoticeDetail = () => {
     const nav = useNavigate();
     const [readDetail, setReadDetail] = useState();
     const result = useMutation(boardDetail);
-    const view = useMutation(boardView);
     const deleted = useMutation(boardDelete);
 
     const read = async () => {
@@ -23,7 +22,6 @@ const NoticeDetail = () => {
         }
         await result.mutateAsync(data);
         setReadDetail(data.result);
-        viewUp(data.result);
     }
 
     const boardDel = async () => {
@@ -37,17 +35,8 @@ const NoticeDetail = () => {
         }
     }
 
-    const viewUp = async (Iboard) => {
-        const data = {
-            type: "notice",
-            i_board: Iboard.i_board,
-        }
-        await view.mutateAsync(data);
-    }
-
     useEffect(() => {
         read();
-        console.log(readDetail);
     }, [nav])
 
     return (
