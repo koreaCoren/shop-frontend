@@ -62,14 +62,16 @@ const Register = () => {
 
         await loginRegister.mutateAsync(data);
 
-        await loginSuccess.mutateAsync({
-            id: id,
-            pw: password
-        });
+        if (data.isSuccess) {
+            await loginSuccess.mutateAsync({
+                id: id,
+                pw: password,
+            });
 
-        if (sessionStorage.getItem("loginCheck") === "success") {
-            nav("/");
-        };
+            if (sessionStorage.getItem("loginCheck") === "success") {
+                nav("/");
+            };
+        }
     };
 
     useEffect(() => {
