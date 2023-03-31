@@ -387,6 +387,10 @@ export const ReviewBoard = styled.div`
         }
     }
     @media(max-width:500px){
+        .wrap > ul.all > li >.content h3{
+            font-size: 20px;
+        }
+
         .photoReviewDetail{
             width: 98%;
         }

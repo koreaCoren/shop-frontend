@@ -7,6 +7,9 @@ export const Banner = styled.div`
     position: relative;
     font-family: 'Nanum Myeongjo', serif !important;
     overflow: hidden;
+    > img{
+        width: 100%;
+    }
 
     .content{
         position: absolute;
@@ -415,6 +418,7 @@ export const Best = styled.div`
 
     .wrap>ul li .hoverBox a img {
         width: 100%;
+        height: 231px;
         margin-bottom: 30px;
     }
 
@@ -645,6 +649,12 @@ export const Review = styled.div`
 
         ul li a .prodcutName {
             display: none;
+        }
+        
+        .button .more{
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 20px;
         }
     }
 `

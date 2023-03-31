@@ -21,10 +21,15 @@ const UserList = () => {
     const deleted = useMutation(userDeleted);
 
     const userDelete = async (index) => {
-        const data = {
-            user_id: board[index].user_id,
+        const confirm = window.confirm("정말로 삭제하시겠습니까?");
+        if (confirm) {
+            const data = {
+                user_id: board.list[index].user_id,
+            }
+            await deleted.mutateAsync(data);
+        } else {
+            return;
         }
-        await deleted.mutateAsync(data);
     }
 
     const getUser = async () => {

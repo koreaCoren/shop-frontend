@@ -1,7 +1,6 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-
-
+import { comma } from 'utils/commaReplace';
 
 const Chart = ({ data, day }) => {
     const testA = {
@@ -105,7 +104,7 @@ const Chart = ({ data, day }) => {
                     }}
                 >
                     <strong>
-                        {id} : {value}원
+                        {id} : {comma(value)}원
                     </strong>
                 </div>
             )}
