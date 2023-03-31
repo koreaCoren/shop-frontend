@@ -23,7 +23,7 @@ const NoticeDetail = () => {
         }
         await result.mutateAsync(data);
         setReadDetail(data.result);
-        viewUp(data.result);
+        // viewUp(data.result);
     }
 
     const boardDel = async () => {
