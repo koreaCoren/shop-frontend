@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
 import Input from "components/input/Input";
-import { register } from "utils/axios";
+import { login, register } from "utils/axios";
 import loginCheck from "utils/loginCheck";
 
 import * as Style from "assets/styleComponent/login/login";
@@ -19,7 +19,8 @@ const Register = () => {
     const [eamil, setEmail] = useState("");
     // const [address, setAddress] = useState("");
 
-    const { mutateAsync, isLoading } = useMutation(register);
+    const loginRegister = useMutation(register);
+    const loginSuccess = useMutation(login);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -57,11 +58,20 @@ const Register = () => {
             pw: password,
             tell: telll,
             email: eamil,
-            // address: address,
         };
 
-        mutateAsync(data);
-        // nav("/");
+        await loginRegister.mutateAsync(data);
+
+        if (data.isSuccess) {
+            await loginSuccess.mutateAsync({
+                id: id,
+                pw: password,
+            });
+
+            if (sessionStorage.getItem("loginCheck") === "success") {
+                nav("/");
+            };
+        }
     };
 
     useEffect(() => {

@@ -43,11 +43,14 @@ export const register = async (data) => {
     const api = await API.REGISTER_API.post("", data).then((res) => {
         if (res.data.id === false) {
             alert("중복된 아이디입니다.");
+            data.isSuccess = false;
             return;
         } else if (res.data.email === false) {
             alert("중복된 이메일입니다.");
+            data.isSuccess = false;
             return;
         } else {
+            data.isSuccess = true;
             alert("회원가입 완료되었습니다.");
         }
     }).catch((error) => {
@@ -130,17 +133,6 @@ export const boardRead = async (data) => {
 export const boardDetail = async (data) => {
     const api = await API.DETAIL_BOARD.post("", data).then((res) => {
         data.result = res.data;
-    }).catch((error) => {
-        alert("서버와 통신 실패했습니다.\n" + error);
-        window.location.replace("/");
-    });
-    return api;
-}
-
-// 게시글 조회수 상승
-export const boardView = async (data) => {
-    const api = await API.VIEW_BOARD.post("", data).then((res) => {
-
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
         window.location.replace("/");

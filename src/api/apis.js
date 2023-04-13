@@ -40,11 +40,6 @@ export const DETAIL_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/detail_board`
 })
 
-// 게시글 조회수 상승
-export const VIEW_BOARD = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/board/view_up`
-})
-
 // 게시글 삭제
 export const DELETE_BOARD = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
