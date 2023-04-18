@@ -29,7 +29,7 @@ const NoticeDetail = () => {
         if (ok) {
             const data = {
                 type: "notice",
-                i_board: readDetail.i_board,
+                i_board: readDetail.detail.i_board,
             }
             await deleted.mutateAsync(data);
         }

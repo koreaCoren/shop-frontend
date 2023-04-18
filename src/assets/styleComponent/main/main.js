@@ -416,6 +416,10 @@ export const Best = styled.div`
         border-radius: 50%;
     }
 
+    .wrap>ul li .hoverBox a {
+        width: 100%;
+    }
+    
     .wrap>ul li .hoverBox a img {
         width: 100%;
         height: 231px;

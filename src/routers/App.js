@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+import { useCookies } from "react-cookie";
+import moment from "moment/moment";
 
 import { tokenCheck, userCount } from "utils/axios";
 import Header from "components/common/Header";
@@ -16,8 +18,6 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-import { useCookies } from "react-cookie";
-import moment from "moment/moment";
 
 function App() {
     const nav = useNavigate();

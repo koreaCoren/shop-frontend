@@ -1,7 +1,7 @@
 import * as API from "../api/apis";
 
 //로그인
-export const login = async (data) => {
+export const login = async (data, test) => {
     const api = await API.LOGIN_API.post("", data).then((res) => {
         if (res.data.loginCheck === "success") {
             sessionStorage.setItem("loginCheck", "success");
@@ -104,7 +104,7 @@ export const boardWrite = async (data) => {
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "review") {
-                window.location.replace(`/community/${data.type}/photo/1`);
+                window.location.replace(`/community/${data.type}/all/1`);
             } else {
                 window.location.replace(`/community/${data.type}/1`);
             }
@@ -164,7 +164,6 @@ export const buyProductList = async (data) => {
 }
 
 // 메인 리뷰 리스트
-
 export const main_review = async () => {
     const { data } = await API.MAIN_REVIEW.get();
     return data;
@@ -178,7 +177,6 @@ export const sel_dash = async () => {
     const { data } = await API.SEL_DASH.get();
     return data;
 }
-
 
 // 상품 판매 현황
 export const sellByDateList = async () => {
@@ -199,10 +197,6 @@ export const userAccessCount = async () => {
 }
 
 // 유저 리스트
-// export const user = async () => {
-//     const { data } = await API.USER.get();
-//     return data;
-// }
 export const user = async (data) => {
     const api = await API.USER.post("", data).then((res) => {
         data.result = res.data;
@@ -332,7 +326,6 @@ export const updateInvoice = async (data) => {
     return api;
 }
 
-
 // 기본 배송지 설정
 export const defaultDeliveryUpdate = async (data) => {
     const api = await API.DEFAULT_DELIVERY.post("", data).then((res) => {
@@ -419,6 +412,17 @@ export const orderCodeList = async (data) => {
 // 주문하기
 export const order = async (data) => {
     const api = await API.ORDER.post("", data).then((res) => {
+
+    }).catch((error) => {
+        alert("서버와 통신 실패했습니다.\n" + error);
+        window.location.replace("/");
+    })
+    return api;
+}
+
+// 주문취소
+export const orderCancel = async (data) => {
+    const api = await API.ORDER_CANCEL.post("", data).then((res) => {
 
     }).catch((error) => {
         alert("서버와 통신 실패했습니다.\n" + error);
@@ -580,7 +584,6 @@ export const reqReview = async (data) => {
     })
     return api
 }
-
 
 // -------- 개인정보 끝 --------------
 

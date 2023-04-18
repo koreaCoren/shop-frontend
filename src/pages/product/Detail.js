@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { settingFav, getFavList, reqReview  } from 'utils/axios';
+import { settingFav, getFavList, reqReview } from 'utils/axios';
 
 import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
@@ -34,8 +34,6 @@ const Detail = ({ result, setOrderData }) => {
     const reviewList = useMutation(reqReview);
     // const favControll = useMutation(settingFav);
     // const favList = useMutation(getFavList);
-
-    
 
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
@@ -75,7 +73,6 @@ const Detail = ({ result, setOrderData }) => {
         }
         await reviewList.mutateAsync(data);
         setReview(data.result);
-        console.log(data.result);
     }
     /* 좋아요는 당분간 봉인
     // 좋아요 리스트
@@ -219,23 +216,23 @@ const Detail = ({ result, setOrderData }) => {
                             <div dangerouslySetInnerHTML={{ __html: productDetail?.goods_detail }}></div>
                         </Style.DescriptionShow>
                         <Style.Review>
-                        <div className="nav">
-                            <ul ref={reviewRef}>
-                                <li onClick={() => {
-                                    moveScroll(DescriptionRef)
-                                }}>상세정보</li>
-                                <li onClick={() => {
-                                    moveScroll(reviewRef);
-                                }}>상품후기</li>
-                                <li onClick={() => {
-                                    moveScroll(returnRef);
-                                }}>교환/반품</li>
-                            </ul>
-                        </div>
-                        <h2>상품 후기</h2>
+                            <div className="nav">
+                                <ul ref={reviewRef}>
+                                    <li onClick={() => {
+                                        moveScroll(DescriptionRef)
+                                    }}>상세정보</li>
+                                    <li onClick={() => {
+                                        moveScroll(reviewRef);
+                                    }}>상품후기</li>
+                                    <li onClick={() => {
+                                        moveScroll(returnRef);
+                                    }}>교환/반품</li>
+                                </ul>
+                            </div>
+                            <h2>상품 후기</h2>
                             {
                                 review !== undefined &&
-                                review.map((a,i) => {
+                                review.map((a, i) => {
                                     return (
                                         <div>
                                             <div className='grid'>
@@ -257,7 +254,7 @@ const Detail = ({ result, setOrderData }) => {
                                     )
                                 })
                             }
-                    </Style.Review>
+                        </Style.Review>
                         {/* <Style.QnA>
                         <h2>상품 문의</h2>
                         <span>배송관련, 주문(취소/교환/환불/관련) 문의 및 요청사항은 마이페이지 1:1문의에 남겨주세요.</span>

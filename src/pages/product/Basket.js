@@ -14,15 +14,13 @@ const Basket = ({ setOrderData }) => {
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
-
-
     //전체 선택
     const allCheck = (checked) => {
         if (checked) {
             const arr = [];
-            
+
             basketData.forEach(el => {
-                if(el.goods_stock != 0){
+                if (el.goods_stock != 0) {
                     arr.push(el.goods_code);
                 }
             });
@@ -150,13 +148,13 @@ const Basket = ({ setOrderData }) => {
                                         <li>
                                             {
                                                 a.goods_stock != 0
-                                                ?<input type="checkbox"
-                                                onChange={(e) => singCheck(e.target.checked, a.goods_code)}
-                                                checked={checkData.includes(a.goods_code) ? true : false}
-                                                />
-                                                :<input type="checkbox" disabled />
+                                                    ? <input type="checkbox"
+                                                        onChange={(e) => singCheck(e.target.checked, a.goods_code)}
+                                                        checked={checkData.includes(a.goods_code) ? true : false}
+                                                    />
+                                                    : <input type="checkbox" disabled />
                                             }
-                                            
+
                                         </li>
                                         <li>
                                             <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
@@ -164,8 +162,8 @@ const Basket = ({ setOrderData }) => {
                                                 <div className="title">{a.goods_nm}</div>
                                                 {
                                                     a.goods_stock == 0
-                                                    ?<div className='stockZero'>재고 부족</div>
-                                                    :""
+                                                        ? <div className='stockZero'>재고 부족</div>
+                                                        : ""
                                                 }
                                             </div>
                                         </li>
