@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 
-import { orderCodeList } from 'utils/axios';
+import { orderCancel, orderCodeList } from 'utils/axios';
 import { track } from 'utils/delivery';
 import SubTitle from 'components/myPage/SubTitle';
 import Loading from 'components/loding/Loading';
@@ -11,20 +11,22 @@ import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
 
 const OrderDetail = ({ }) => {
+    const DELIVERY_PRICE = 2500;
+    const nav = useNavigate();
     const location = useLocation();
     const { orderCode } = useParams();
     const [list, setList] = useState();
     const [state, setState] = useState();
-    const nav = useNavigate();
-    const { mutateAsync, isSuccess, isLoading } = useMutation(orderCodeList);
-    const deliveryPrice = 2500;
+    const order = useMutation(orderCodeList);
+    const cancel = useMutation(orderCancel);
     let trackResult = [];
+
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
             orderCode: orderCode,
         };
-        await mutateAsync(data);
+        await order.mutateAsync(data);
         setList(data.result);
         await track(data.result[0].carrier, data.result[0].delivery, trackResult);
         setState(...trackResult);
@@ -36,13 +38,13 @@ const OrderDetail = ({ }) => {
     }, [])
 
     return (
-        isSuccess === false
+        order.isSuccess === false
             ? <Loading />
             : <Common.InDiv>
                 <SubTitle h2={"주문 내역상세"} h3={null} clickEvent={null} clickText={"1:1문의하기"} />
                 <Style.CodeTitle> 주문번호 {list ? list[0].orderCode : ''}</Style.CodeTitle>
                 {
-                    isSuccess &&
+                    order.isSuccess &&
                     list?.map((a, i) => {
                         return (
                             <div className='contents' key={i}>
@@ -118,11 +120,11 @@ const OrderDetail = ({ }) => {
                         </li>
                         <li>
                             <div>배송비</div>
-                            <div>{deliveryPrice} 원</div>
+                            <div>{DELIVERY_PRICE} 원</div>
                         </li>
                         <li>
                             <div>결제금액</div>
-                            <div>{list ? list[0].total_price + list[0].total_sale + deliveryPrice : '0'} 원</div>
+                            <div>{list ? list[0].total_price + list[0].total_sale + DELIVERY_PRICE : '0'} 원</div>
                         </li>
                         <li>
                             <div>결제일시</div>
@@ -157,6 +159,10 @@ const OrderDetail = ({ }) => {
                     </ul>
                 </Style.ListDiv>
                 <Common.Line></Common.Line>
+
+                <Common.Button style={{ marginTop: "10px" }}>
+                    <button>주문 취소</button>
+                </Common.Button>
             </Common.InDiv >
     );
 };
