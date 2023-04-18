@@ -10,7 +10,6 @@ import addBasket from 'utils/addBasket';
 import * as Style from "assets/styleComponent/main/main"
 
 import mainbanner from "assets/images/main/mainBanner.jpg";
-import best from "assets/images/main/best.jpg";
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
@@ -257,6 +256,5 @@ const Main = () => {
             : <Loading />
     );
 };
-
 
 export default Main;

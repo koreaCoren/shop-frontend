@@ -21,7 +21,9 @@ const Login = () => {
             id: id,
             pw: password
         };
+
         await mutateAsync(data);
+
         if (sessionStorage.getItem("loginCheck") === "success") {
             nav("/");
         };

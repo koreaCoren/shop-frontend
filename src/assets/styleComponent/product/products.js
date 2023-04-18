@@ -68,9 +68,18 @@ export const Products = styled.div`
         }
     }
 
+    @media (max-width: 500px) {
+        ul li img{
+            height: 180px;
+        }
+    }
+
     @media (max-width: 400px) {
         input, select{
             width: 140px !important;
+        }
+        ul li img{
+            height: 160px;
         }
     }
 `

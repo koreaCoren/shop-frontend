@@ -2,9 +2,9 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
     app.use(
-        "/api",
+        "/shop-backend",
         createProxyMiddleware({
-            target: process.env.REACT_APP_URL,
+            target: "http://192.168.0.86",
             changeOrigin: true,
         })
     );
