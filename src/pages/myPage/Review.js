@@ -1,35 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from 'react-query';
+
+import { getBuyProduct } from "api/user.js";
+
+import { comma } from 'utils/commaReplace';
 
 import SubTitle from 'components/myPage/SubTitle';
-import { buyProductList } from 'utils/axios';
-import { comma } from 'utils/commaReplace';
+import Loading from 'components/loding/Loading';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/review"
 
 import noImg from "assets/images/noImg.gif";
-import Loading from 'components/loding/Loading';
 
 const Review = () => {
-    const [boardList, setBoardList] = useState();
-    const { mutateAsync, isSuccess } = useMutation(buyProductList);
-
-    const getProductReview = async () => {
-        const data = {
-            user_id: sessionStorage.getItem("userId"),
-        }
-        await mutateAsync(data);
-        setBoardList(data.result)
-    }
+    const [boardList, setBoardList] = useState(null);
 
     useEffect(() => {
-        getProductReview();
+        getBuyProduct({ user_id: sessionStorage.getItem("userId") }, setBoardList);
     }, [])
 
     return (
-        isSuccess !== true
+        boardList === null
             ? <Loading />
             : <Common.InDiv>
                 <SubTitle h2={"상품후기 작성"} h3={"구매하신 상품후기를 작성 하실 수 있습니다."} clickEvent={null} clickText={null} />

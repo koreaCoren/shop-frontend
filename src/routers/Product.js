@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useQuery } from 'react-query';
 
-import { productList } from 'utils/axios';
+import { getProdcut } from 'api/product.js';
+
 import Detail from 'pages/product/Detail';
 import Products from 'pages/product/Products';
 import Basket from 'pages/product/Basket';
 
 const Product = ({ setOrderData }) => {
-    let result = useQuery("prodcutList", productList);
+    const [productList, setProductList] = useState(null);
+
+    useEffect(() => {
+        getProdcut(setProductList);
+    }, []);
 
     return (
         <>
             <Routes>
-                <Route path='detail/:productCode' element={<Detail result={result} setOrderData={setOrderData} />}></Route>
-                <Route path='products/:categoryCode/:boardPage' element={<Products result={result} setOrderData={setOrderData} />}></Route>
+                <Route path='detail/:productCode' element={<Detail result={productList} setOrderData={setOrderData} />}></Route>
+                <Route path='products/:categoryCode/:boardPage' element={<Products result={productList} setOrderData={setOrderData} />}></Route>
                 <Route path='basket' element={<Basket setOrderData={setOrderData} />}></Route>
             </Routes>
         </>

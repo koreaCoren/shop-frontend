@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
 
-import { address, insertAddress, deleteAddress, insDefaultAddr } from 'utils/axios';
+import { getAddress, addAddress, setDefaultAddress, deleteAddress } from 'api/user.js';
+
 import { formatPhoneNumber } from 'utils/setPhoneNumber';
+
 import Loading from 'components/loding/Loading';
 import DaumPost from 'components/daumPost/DaumPost';
 import SubTitle from 'components/myPage/SubTitle';
 
-import * as Common from "assets/styleComponent/myPage/myPage"
-import * as Style from "assets/styleComponent/myPage/address"
+import * as Common from "assets/styleComponent/myPage/myPage";
+import * as Style from "assets/styleComponent/myPage/address";
 
 const Address = () => {
     const id = sessionStorage.getItem("userId");
-    const [list, setBoard] = useState("");
+    const [list, setList] = useState(null);
     const [shipName, setShipName] = useState("");
     const [shipAddress, setShipAddress] = useState("");
     const [shipPhone, setShipPhone] = useState("");
@@ -21,21 +22,6 @@ const Address = () => {
     const [insetAddress, setinsetAddress] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [isPostOpen, setIsPostOpen] = useState(false);
-
-    const destination = useMutation(address); // 배송지 불러오기
-    const userShipAdd = useMutation(insertAddress); // 신규 배송지 추가
-    const userShipDel = useMutation(deleteAddress); // 배송지 삭제
-    const DefaultAddr = useMutation(insDefaultAddr); // 기본 배송지로 설정
-
-    //유저 배송지 받기
-    const getAddrData = async () => {
-        const data = {
-            userId: sessionStorage.getItem('userId'),
-            token: sessionStorage.getItem("token")
-        };
-        await destination.mutateAsync(data);
-        setBoard(data.result);
-    }
 
     //배송지 추가
     const onSubmit = async (e) => {
@@ -67,18 +53,16 @@ const Address = () => {
             ship_phone: shipPhone,
             ship_receiver: shipReceiver
         };
-        await userShipAdd.mutateAsync(data);
-        setShowShipping(false);
+
+        addAddress(data, setShowShipping);
     }
 
     //배송지 삭제
     const delShpping = async (addrValue) => {
-        if (window.confirm("정말로 삭제 하시겠습니까?")) {
-            const data = {
-                i_addr: addrValue
-            }
-            await userShipDel.mutateAsync(data);
+        const data = {
+            i_addr: addrValue
         }
+        deleteAddress(data);
     }
 
     //기본 배송지 설정
@@ -87,11 +71,15 @@ const Address = () => {
             user_id: id,
             i_addr: addrValue
         }
-        await DefaultAddr.mutateAsync(data);
+        setDefaultAddress(data);
     }
 
     useEffect(() => {
-        getAddrData();
+        const data = {
+            userId: sessionStorage.getItem('userId'),
+            token: sessionStorage.getItem("token")
+        };
+        getAddress(data, setList);
     }, [])
 
     const onChange = (e) => {
@@ -116,7 +104,7 @@ const Address = () => {
     }
 
     return (
-        destination.isSuccess !== true
+        list === null
             ? <Loading />
             : <Common.InDiv>
                 <SubTitle h2={"배송지 관리"} h3={"배송지에 따라 상품유형 및 배송정보가 달라질 수 있습니다."} clickEvent={() => { setShowShipping(!showShipping) }} clickText={"+ 새 배송지 추가"} />

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation, useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 
-import { categoryList, productEditor, reqGoodsData } from 'utils/axios';
+import { updateProduct, getDetailProdcut } from 'api/product.js';
+import { getCategory } from 'api/category.js';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
@@ -31,18 +31,11 @@ const Modfiy = () => {
     const [optionData, setOptionData] = useState([]);
     const { productCode } = useParams();
 
-    const result = useQuery("categoryList", categoryList);
-    const { mutateAsync, isLoading } = useMutation(productEditor);
-    const getGoods = useMutation(reqGoodsData);
-
-
     useEffect(() => {
         // 카테고리 가져오기
-        if (result.isLoading === false) {
-            setFirstCategory(result.data);
-        }
+        getCategory(setFirstCategory);
         getProductData();
-    }, [result.isLoading])
+    }, [])
 
     useEffect(() => {
         // 카테고리 1번 선택하면 2번에 카테고리 1번 하위 카테고리 가져오기
@@ -57,7 +50,7 @@ const Modfiy = () => {
         const data = {
             goods_code: productCode
         }
-        await getGoods.mutateAsync(data);
+        await getDetailProdcut(data);
 
         let cateData = data.result.goods_data.cate_code;
         let str = cateData.toString();
@@ -121,11 +114,11 @@ const Modfiy = () => {
             goods_option: productOption,
             type: "product",
         }
-        await mutateAsync(data);
+
+        updateProduct(data);
     }
 
     const onChange = (e) => {
-        console.log(e);
         const value = e.target.value;
         const name = e.target.name;
         switch (name) {
@@ -161,7 +154,7 @@ const Modfiy = () => {
 
 
     return (
-        getGoods.isSuccess === false
+        productName === ""
             ? <Loading />
             : <>
                 <form onSubmit={onSubmit}>

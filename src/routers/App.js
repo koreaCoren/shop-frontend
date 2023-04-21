@@ -18,15 +18,18 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
+import { getBoard } from "api/board";
 
 function App() {
     const nav = useNavigate();
     const location = useLocation();
     const [header, setHeader] = useState(true);
+    const [user, setUser] = useState();
     const [orderData, setOrderData] = useState();
     const [cookies, setCookies] = useCookies();
     const token = useMutation(tokenCheck);
     const userAccessCheck = useMutation(userCount);
+    const [test, settest] = useState();
 
     // 방문자 체크
     const accessCheck = async () => {
@@ -36,6 +39,7 @@ function App() {
             userAccessCheck.mutate("나 등장~!");
         }
     }
+
 
     // 어드민페이지 들어오면 헤더 삭제
     const adminPageCheck = () => {
@@ -47,16 +51,22 @@ function App() {
         }
     }
 
+    //토큰체크 후 유저 정보 저장
+    const tokenCheckIsSetUserInfo = async () => {
+        const data = {}
+        await token.mutateAsync(data);
+        setUser(data);
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
         accessCheck();
         adminPageCheck();
-        token.mutateAsync();
+        tokenCheckIsSetUserInfo();
     }, [nav])
-
     return (
         <>
-            {header && <Header></Header>}
+            {header && <Header user={user}></Header>}
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/admin/*" element={<Admin />} />

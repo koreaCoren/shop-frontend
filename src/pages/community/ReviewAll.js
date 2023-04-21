@@ -1,53 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useMutation } from 'react-query';
+// ========== 현재 안씀 ===========//
 
-import { boardRead } from 'utils/axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+
+import { getBoard } from 'api/board.js';
+
+import Loading from 'components/loding/Loading';
+import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/community/review"
 
-import noImg from "assets/images/noImg.gif";
-import Loading from 'components/loding/Loading';
-
 import { ReactComponent as Star } from 'assets/images/star.svg';
-import Pageing from 'components/board/Pageing';
 
 const ReviewAll = () => {
     const nav = useNavigate();
     const regex = /.*<br>.*/;
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
-    const [boardList, setBoardList] = useState();
+    const [boardList, setBoardList] = useState(null);
     const [imageSrc, setImageSrc] = useState();
     const [isImage, setIsImage] = useState(false);
     const [more, setMore] = useState();
-    const { mutateAsync, isSuccess } = useMutation(boardRead);
 
     const imagePopup = (src) => {
         setIsImage(true);
         setImageSrc(src);
     }
 
-    const getBoard = async () => {
-        const data = {}
+    useEffect(() => {
+        const data = {
+            boardPage: boardPage,
+            boardType: "review"
+        }
         if (searchParams.get("search") === null) {
-            data.boardPage = boardPage;
-            data.boardType = "review";
-        } else {
-            data.boardPage = boardPage;
-            data.boardType = "review";
             data.search = searchParams.get("search");
         }
-        await mutateAsync(data);
-        setBoardList(data.result);
-    }
-
-    useEffect(() => {
-        getBoard();
+        getBoard(data, setBoardList);
     }, [nav])
 
     return (
-        isSuccess !== true
+        boardList === null
             ? <Loading />
             : <>
                 <ul className="all">
