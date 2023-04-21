@@ -2,8 +2,12 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 
+import { addBoard } from 'api/board.js';
+import { getCategory } from 'api/category.js';
+
 import { categoryList, productRegister } from 'utils/axios';
 import createCode from 'utils/createCode';
+
 import ImageUpload from 'components/admin/product/input/ImageUpload';
 import ProductInput from 'components/admin/product/input/Input';
 import ProductOption from 'components/admin/product/input/ProductOption';
@@ -28,15 +32,9 @@ const Register = () => {
     const [productOption, setProductOption] = useState("");
     const [imageCode, setImageCode] = useState([]);
 
-    const result = useQuery("categoryList", categoryList);
-    const { mutateAsync, isLoading } = useMutation(productRegister);
-
     useEffect(() => {
-        // 카테고리 가져오기
-        if (result.isLoading === false) {
-            setFirstCategory(result.data);
-        }
-    }, [result.isLoading])
+        getCategory(setFirstCategory)
+    }, [])
 
     useEffect(() => {
         // 카테고리 1번 선택하면 2번에 카테고리 1번 하위 카테고리 가져오기
@@ -96,7 +94,8 @@ const Register = () => {
             goods_option: productOption,
             type: "product",
         }
-        await mutateAsync(data);
+
+        addBoard(data);
     }
 
     const onChange = (e) => {

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
 
-import { orderList } from 'utils/axios';
+import { getOrder } from 'api/order.js';
+
 import { comma } from 'utils/commaReplace';
+
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 import SubTitle from 'components/myPage/SubTitle';
@@ -12,37 +13,27 @@ import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
 
 const Order = ({ }) => {
-    const nav = useNavigate();
     const { boardPage } = useParams();
-    const [count, setCount] = useState(4);
-    const [board, setBoard] = useState();
-    const [sliceBoard, setSliceBoard] = useState();
-    const { mutateAsync, isSuccess, isLoading } = useMutation(orderList);
-
-    const getOrderData = async () => {
-        const data = {
-            user_id: sessionStorage.getItem('userId'),
-        };
-        await mutateAsync(data);
-        setBoard(data.result);
-    }
+    const [board, setBoard] = useState(null);
 
     useEffect(() => {
-        getOrderData();
+        const data = {
+            boardPage: boardPage,
+            boardType: "order",
+            admin: false,
+            user_id: sessionStorage.getItem("userId"),
+        };
+
+        getOrder(data, setBoard);
     }, [])
 
-    useEffect(() => {
-        setSliceBoard(board?.slice((boardPage - 1) * count, (boardPage - 1) * count + count))
-    }, [isLoading, nav])
-
     return (
-        isLoading === true
+        board === null
             ? <Loading />
             : <Common.InDiv>
                 <SubTitle h2={"주문 내역"} h3={"최대 지난 3년간의 주문 내역까지 확인할 수 있어요"} clickEvent={null} clickText={null} />
                 {
-                    isSuccess &&
-                    sliceBoard?.map((a, i) => {
+                    board.list.map((a, i) => {
                         return (
                             <div className='contents' key={i}>
                                 <Style.Div>
@@ -69,9 +60,8 @@ const Order = ({ }) => {
                     })
                 }
 
-                <Pageing count={count} boardPage={boardPage} boardLength={board?.length} url={"/myPage/order"} />
+                <Pageing boardPage={boardPage} boardLength={board.count.page_count} url={"/myPage/order"} />
             </Common.InDiv >
-
     );
 };
 export default Order;

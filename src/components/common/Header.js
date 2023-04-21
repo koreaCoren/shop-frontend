@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 import logo from "assets/images/logo.png"
 
-const Header = () => {
+const Header = ({ user }) => {
     const nav = useNavigate();
     const [categorys, setCategorys] = useState([]);
     const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -31,15 +31,12 @@ const Header = () => {
             <Login>
                 <div className="wrap">
                     {
-                        sessionStorage.getItem("loginCheck") === "success"
+                        user?.result === "ok"
                             ? <ul>
                                 <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
                                 <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
                                 <li><Link to={"product/basket"}>장바구니</Link></li>
-                                {
-                                    sessionStorage.getItem("userId")
-                                    && <li><Link to={"myPage/order/1"}>마이페이지</Link></li>
-                                }
+                                <li><Link to={"myPage/order/1"}>마이페이지</Link></li>
                                 {
                                     sessionStorage.getItem("userId") === "admin"
                                         || sessionStorage.getItem("userId") === "pkd"
@@ -97,7 +94,7 @@ const Header = () => {
                                     : "menuBox"
                             }>
                                 {
-                                    sessionStorage.getItem("loginCheck") === "success"
+                                    user?.result === "ok"
                                         ? <ul className='user flexBox'>
                                             <li>{sessionStorage.getItem("userId")}님 로그인중</li>
                                             <li onClick={logout}>로그아웃</li>
@@ -116,7 +113,7 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     {
-                                        sessionStorage.getItem("userId")
+                                        user?.result === "ok"
                                         && <li>
                                             <Link to={"myPage/order/1"}>
                                                 <i className="fa-solid fa-user"></i>

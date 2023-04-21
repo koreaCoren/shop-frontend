@@ -1,46 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+
+import { getDetailBoard, deleteBoard } from 'api/board.js';
+
+import adminCheck from 'utils/adminCheck';
 
 import Loading from 'components/loding/Loading';
-import { boardDelete, boardDetail } from 'utils/axios';
-import adminCheck from 'utils/adminCheck';
 
 import * as Style from "assets/styleComponent/community/detail";
 
 const NoticeDetail = () => {
     const { boardPage } = useParams();
     const nav = useNavigate();
-    const [readDetail, setReadDetail] = useState();
-    const result = useMutation(boardDetail);
-    const deleted = useMutation(boardDelete);
+    const [readDetail, setReadDetail] = useState(null);
 
-    const read = async () => {
+    const boardDel = async () => {
+        const data = {
+            type: "notice",
+            i_board: readDetail.detail.i_board,
+        }
+        deleteBoard(data);
+    }
+
+    useEffect(() => {
         const data = {
             i_board: boardPage,
             boardType: "notice",
         }
-        await result.mutateAsync(data);
-        setReadDetail(data.result);
-    }
-
-    const boardDel = async () => {
-        const ok = window.confirm("정말로 삭제하시겠습니까?");
-        if (ok) {
-            const data = {
-                type: "notice",
-                i_board: readDetail.detail.i_board,
-            }
-            await deleted.mutateAsync(data);
-        }
-    }
-
-    useEffect(() => {
-        read();
+        getDetailBoard(data, setReadDetail);
     }, [nav])
 
     return (
-        result.isSuccess !== true
+        readDetail === null
             ? <Loading />
             : <Style.Detail>
                 <div className="wrap">

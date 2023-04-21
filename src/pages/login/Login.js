@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 
-import { login } from "utils/axios";
+import { login } from "api/login";
+
 import loginCheck from 'utils/loginCheck';
 import LoginInput from 'components/input/Input';
 
@@ -13,8 +13,6 @@ const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
-    const { mutateAsync, isLoading } = useMutation(login);
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -22,11 +20,7 @@ const Login = () => {
             pw: password
         };
 
-        await mutateAsync(data);
-
-        if (sessionStorage.getItem("loginCheck") === "success") {
-            nav("/");
-        };
+        login(data);
     };
 
     useEffect(() => {

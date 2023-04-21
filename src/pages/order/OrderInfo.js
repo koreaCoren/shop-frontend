@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from 'react-query';
-import DaumPost from 'components/daumPost/DaumPost';
 
+import { requestOrder } from 'api/order.js'
+import { getDefaultAddress } from 'api/user.js'
+
+import DaumPost from 'components/daumPost/DaumPost';
 import Inicis from 'components/inicis/Inicis';
-import { order, addressList } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/order/order"
 
@@ -24,11 +25,8 @@ const OrderInfo = ({ orderData }) => {
     const [userAddr, setUserAddr] = useState("");
     const [checkAddr, setCheckAddr] = useState("new");
 
-    const { mutateAsync, isLoading } = useMutation(order);
-    const getUserAddr = useMutation(addressList);
-
     useEffect(() => {
-        getAddrData();
+        getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
     }, [])
 
     const checkRadio = (e) => {
@@ -45,15 +43,6 @@ const OrderInfo = ({ orderData }) => {
             setAddress("");
             setBuyerDetailAddress("");
         }
-    }
-
-    //기본 배송지 불러오기
-    const getAddrData = async () => {
-        const data = {
-            user_id: sessionStorage.getItem('userId')
-        }
-        await getUserAddr.mutateAsync(data);
-        setUserAddr(data.result);
     }
 
     const onChange = (e) => {
@@ -112,7 +101,6 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
-
         const date = new Date();
         const yy = date.getFullYear().toString().substring(2);
         const mm = (("00" + (date.getMonth() + 1)).slice(-2));
@@ -149,7 +137,7 @@ const OrderInfo = ({ orderData }) => {
             receiver: receiver
         }
 
-        mutateAsync(data);
+        requestOrder(data);
         setIsPurchase(isPurchase + 1);
     }
 

@@ -1,11 +1,12 @@
 /* eslint-disable no-fallthrough */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
+
+import { signup } from "api/signup.js";
+
+import loginCheck from "utils/loginCheck";
 
 import Input from "components/input/Input";
-import { login, register } from "utils/axios";
-import loginCheck from "utils/loginCheck";
 
 import * as Style from "assets/styleComponent/login/login";
 
@@ -18,9 +19,6 @@ const Register = () => {
     const [telll, setTell] = useState("");
     const [eamil, setEmail] = useState("");
     // const [address, setAddress] = useState("");
-
-    const loginRegister = useMutation(register);
-    const loginSuccess = useMutation(login);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -60,18 +58,7 @@ const Register = () => {
             email: eamil,
         };
 
-        await loginRegister.mutateAsync(data);
-
-        if (data.isSuccess) {
-            await loginSuccess.mutateAsync({
-                id: id,
-                pw: password,
-            });
-
-            if (sessionStorage.getItem("loginCheck") === "success") {
-                nav("/");
-            };
-        }
+        signup(data);
     };
 
     useEffect(() => {

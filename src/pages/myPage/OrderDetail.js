@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
+import { useParams } from 'react-router-dom';
 
-import { orderCancel, orderCodeList } from 'utils/axios';
+import { getOrderCode, cancelOrder } from 'api/order.js';
+
 import { track } from 'utils/delivery';
+
 import SubTitle from 'components/myPage/SubTitle';
 import Loading from 'components/loding/Loading';
 
@@ -12,13 +13,9 @@ import * as Style from "assets/styleComponent/myPage/order"
 
 const OrderDetail = ({ }) => {
     const DELIVERY_PRICE = 2500;
-    const nav = useNavigate();
-    const location = useLocation();
     const { orderCode } = useParams();
-    const [list, setList] = useState();
+    const [list, setList] = useState(null);
     const [state, setState] = useState();
-    const order = useMutation(orderCodeList);
-    const cancel = useMutation(orderCancel);
     let trackResult = [];
 
     const getOrderDetailData = async () => {
@@ -26,25 +23,25 @@ const OrderDetail = ({ }) => {
             user_id: sessionStorage.getItem('userId'),
             orderCode: orderCode,
         };
-        await order.mutateAsync(data);
-        setList(data.result);
+
+        getOrderCode(data, setList);
+
         await track(data.result[0].carrier, data.result[0].delivery, trackResult);
         setState(...trackResult);
     }
-
 
     useEffect(() => {
         getOrderDetailData();
     }, [])
 
     return (
-        order.isSuccess === false
+        list === null
             ? <Loading />
             : <Common.InDiv>
                 <SubTitle h2={"주문 내역상세"} h3={null} clickEvent={null} clickText={"1:1문의하기"} />
                 <Style.CodeTitle> 주문번호 {list ? list[0].orderCode : ''}</Style.CodeTitle>
                 {
-                    order.isSuccess &&
+                    list !== null &&
                     list?.map((a, i) => {
                         return (
                             <div className='contents' key={i}>
