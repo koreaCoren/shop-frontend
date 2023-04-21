@@ -38,17 +38,17 @@ const Detail = ({ result, setOrderData }) => {
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
         // selFav();
-        if (result.isLoading === false) {
-            for (let i = 0; i < result.data[0].length; i++) {
-                if (result.data[0][i].goods_code === productCode) {
-                    setProductDetail(result.data[0][i]);
-                    setStar(result.data[1][result.data[0][i].goods_code]?.avg_grade.substring(0, 3));
-                    setStars(result.data[1][result.data[0][i].goods_code]?.grade_count)
+        if (result !== null) {
+            for (let i = 0; i < result[0].length; i++) {
+                if (result[0][i].goods_code === productCode) {
+                    setProductDetail(result[0][i]);
+                    setStar(result[1][result[0][i].goods_code]?.avg_grade.substring(0, 3));
+                    setStars(result[1][result[0][i].goods_code]?.grade_count)
                 };
             };
         };
         getReviewList();
-    }, [result.isLoading]);
+    }, [result]);
 
     //상품갯수증가
     const countUp = () => {
@@ -113,10 +113,12 @@ const Detail = ({ result, setOrderData }) => {
         if (loginCheck(true) === true) {
             return;
         }
+
         if (productDetail?.goods_stock == 0) {
             alert("재고가 없습니다. 판매자에게 문의바랍니다");
             return
         }
+
         const data = {
             product_code: productCode,
             product_name: productDetail?.goods_nm,
@@ -127,6 +129,7 @@ const Detail = ({ result, setOrderData }) => {
             prodcut_count: count,
             total_price: Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count
         }
+
         setOrderData([data]);
         nav("/order/info");
     }
@@ -234,7 +237,7 @@ const Detail = ({ result, setOrderData }) => {
                                 review !== undefined &&
                                 review.map((a, i) => {
                                     return (
-                                        <div>
+                                        <div key={i}>
                                             <div className='grid'>
                                                 <div className='userId'>{a.user_id}</div>
                                                 <div className='reviewDetail'>

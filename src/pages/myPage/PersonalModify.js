@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from "react-query";
 import { useNavigate } from 'react-router-dom';
 
+import { login } from "api/login.js"
+
 import loginCheck from 'utils/loginCheck';
-import { login } from "utils/axios";
+
 import LoginInput from 'components/input/Input';
 import SubTitle from 'components/myPage/SubTitle';
 
@@ -11,10 +12,9 @@ import * as Common from "assets/styleComponent/myPage/myPage";
 import * as Style from "assets/styleComponent/myPage/info";
 
 
-const PersonalModify = ({ }) => {
+const PersonalModify = () => {
     const nav = useNavigate();
     const [password, setPassword] = useState("");
-    const { mutateAsync, isLoading } = useMutation(login);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -22,8 +22,8 @@ const PersonalModify = ({ }) => {
             id: sessionStorage.getItem("userId"),
             pw: password
         };
-        const confirm = await mutateAsync(data);
-        if (confirm === "ok") {
+        const passwordCheck = await login(data);
+        if (passwordCheck === "ok") {
             nav("/myPage/info");
         } else {
             nav("/");

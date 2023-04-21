@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useMutation, useQuery } from 'react-query';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 
-import { categoryList, categorySave } from 'utils/axios';
+import { getCategory, addCategory } from 'api/category.js';
+
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 import Register from './Register';
@@ -13,17 +13,12 @@ import * as Common from "assets/styleComponent/admin/common";
 
 const Category = () => {
     const nav = useNavigate();
-    const [category, setCategory] = useState();
-    const [categorys, setCategorys] = useState([]);
-    const result = useQuery("categoryList", categoryList);
-    const { mutateAsync, isLoading } = useMutation(categorySave);
-
+    const [category, setCategory] = useState(null);
+    const [categorys, setCategorys] = useState(null);
 
     useEffect(() => {
-        if (result.isLoading === false) {
-            setCategorys(result.data);
-        }
-    }, [result.isLoading]);
+        getCategory(setCategorys);
+    }, []);
 
     // 상위 카테고리 생성
     const createCategory = () => {
@@ -92,8 +87,7 @@ const Category = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        await mutateAsync(categorys);
-        alert("저장완료")
+        // addCategory();
     };
 
     const onChange = (e) => {
@@ -109,66 +103,66 @@ const Category = () => {
     };
 
     return (
-        <>
-            <Top title={"카테고리"} isButton={true} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
-            <Style.Save onClick={onSubmit}>저장</Style.Save>
-            <Common.Padding>
-                {
-                    categorys.map((a, i) => {
-                        return (
-                            <Common.Container key={i}>
-                                <Style.Flex>
-                                    <Style.CateInfo>
-                                        <li>분류코드 : {a.cate_code}</li>
-                                        <li>카테고리명 : {a.cate}</li>
-                                    </Style.CateInfo>
-                                    <Style.Buttons>
-                                        <Link to={`registerLowCate?index=${i}`}>추가</Link>
-                                        <button onClick={() => { deleteCategory(i) }}>삭제</button>
-                                        <Link to={`updateCate?index=${i}`}>수정</Link>
-                                    </Style.Buttons>
-                                </Style.Flex>
-                                {
-                                    a.lowCategory?.map((b, j) => {
-                                        return (
-                                            <Common.Container key={j}>
-                                                <Style.Flex>
-                                                    <Style.CateInfo>
-                                                        <li>분류코드 : {b.cate_code}</li>
-                                                        <li>카테고리명 : {b.cate}</li>
-                                                    </Style.CateInfo>
-                                                    <Style.Buttons>
-                                                        <button onClick={() => { deleteLowCategory(i, j) }}>삭제</button>
-                                                        <Link to={`updateLowCate?index=${i}&lowIndex=${j}`}>수정</Link>
-                                                    </Style.Buttons>
-                                                </Style.Flex>
-                                            </Common.Container>
-                                        )
-                                    })
-                                }
-                            </Common.Container>
-                        )
-                    })
-                }
-            </Common.Padding>
+        categorys === null
+            ? <Loading />
+            : <>
+                <Top title={"카테고리"} isButton={true} buttonTitle={"카테고리 추가"} buttonLink={"registerCate"} />
+                <Style.Save onClick={onSubmit}>저장</Style.Save>
+                <Common.Padding>
+                    {
+                        categorys.map((a, i) => {
+                            return (
+                                <Common.Container key={i}>
+                                    <Style.Flex>
+                                        <Style.CateInfo>
+                                            <li>분류코드 : {a.cate_code}</li>
+                                            <li>카테고리명 : {a.cate}</li>
+                                        </Style.CateInfo>
+                                        <Style.Buttons>
+                                            <Link to={`registerLowCate?index=${i}`}>추가</Link>
+                                            <button onClick={() => { deleteCategory(i) }}>삭제</button>
+                                            <Link to={`updateCate?index=${i}`}>수정</Link>
+                                        </Style.Buttons>
+                                    </Style.Flex>
+                                    {
+                                        a.lowCategory?.map((b, j) => {
+                                            return (
+                                                <Common.Container key={j}>
+                                                    <Style.Flex>
+                                                        <Style.CateInfo>
+                                                            <li>분류코드 : {b.cate_code}</li>
+                                                            <li>카테고리명 : {b.cate}</li>
+                                                        </Style.CateInfo>
+                                                        <Style.Buttons>
+                                                            <button onClick={() => { deleteLowCategory(i, j) }}>삭제</button>
+                                                            <Link to={`updateLowCate?index=${i}&lowIndex=${j}`}>수정</Link>
+                                                        </Style.Buttons>
+                                                    </Style.Flex>
+                                                </Common.Container>
+                                            )
+                                        })
+                                    }
+                                </Common.Container>
+                            )
+                        })
+                    }
+                </Common.Padding>
 
-            <Routes>
-                <Route path="registerCate" element={
-                    <Register onChange={onChange} category={createCategory} title="카테고리 추가" />
-                }></Route>
-                <Route path="registerLowCate" element={
-                    <Register onChange={onChange} category={createLowCategory} title="하위 카테고리 추가" />
-                }></Route>
-                <Route path="updateCate" element={
-                    <Register onChange={onChange} category={updateCategory} title="카테고리 수정" />
-                }></Route>
-                <Route path="updateLowCate" element={
-                    <Register onChange={onChange} category={updateLowCategory} title="하위 카테고리 수정" />
-                }></Route>
-            </Routes>
-
-            {result.isLoading && <Loading />}
-        </>
+                <Routes>
+                    <Route path="registerCate" element={
+                        <Register onChange={onChange} category={createCategory} title="카테고리 추가" />
+                    }></Route>
+                    <Route path="registerLowCate" element={
+                        <Register onChange={onChange} category={createLowCategory} title="하위 카테고리 추가" />
+                    }></Route>
+                    <Route path="updateCate" element={
+                        <Register onChange={onChange} category={updateCategory} title="카테고리 수정" />
+                    }></Route>
+                    <Route path="updateLowCate" element={
+                        <Register onChange={onChange} category={updateLowCategory} title="하위 카테고리 수정" />
+                    }></Route>
+                </Routes>
+            </>
     );
 };
 

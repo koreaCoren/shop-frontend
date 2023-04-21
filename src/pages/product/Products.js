@@ -15,8 +15,6 @@ const Products = ({ result }) => {
     const COUNT = 12;
     const nav = useNavigate();
     const { categoryCode, boardPage } = useParams();
-    const [star, setStar] = useState();
-    const [stars, setStars] = useState(0);
     const [productList, setProductList] = useState();
 
     const [select, setSelect] = useState("최신순");
@@ -59,12 +57,12 @@ const Products = ({ result }) => {
 
     const reset = () => {
         const arr = [];
-        for (let i = 0; i < result.data[0]?.length; i++) {
-            let getCateCode = String(result?.data[0][i].cate_code);
+        for (let i = 0; i < result[0].length; i++) {
+            let getCateCode = String(result[0][i].cate_code);
             if (getCateCode === categoryCode) {
-                arr.push(result?.data[0][i]);
+                arr.push(result[0][i]);
             } else if (getCateCode.substring(0, 2) === categoryCode) {
-                arr.push(result?.data[0][i]);
+                arr.push(result[0][i]);
             }
         }
         setProductList(arr);
@@ -78,10 +76,10 @@ const Products = ({ result }) => {
     }, [select]);
 
     useEffect(() => {
-        if (result.isLoading !== true) {
+        if (result !== null) {
             reset();
         }
-    }, [result.isLoading, nav]);
+    }, [result, nav]);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -96,7 +94,7 @@ const Products = ({ result }) => {
     }
 
     return (
-        result.isLoading === true
+        result === null
             ? <Loading />
             : <div style={{ paddingBottom: "50px", }}>
                 <Style.Products>

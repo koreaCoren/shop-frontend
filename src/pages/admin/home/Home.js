@@ -1,37 +1,34 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { getProductSaleStatus, getAccumulateSell } from 'api/product.js';
+import { getUserAccessCount } from 'api/user.js';
+import { getTotalOrderStatus } from 'api/order.js';
 
 import BarChart from 'components/admin/chart/BarChart';
 import DonutChart from 'components/admin/chart/DonutChart';
 import LineChart from 'components/admin/chart/LineChart';
-import LinkButton from 'components/admin/product/button/LinkButton';
+import Loading from 'components/loding/Loading';
 
 import * as Common from 'assets/styleComponent/admin/common';
 import * as Style from 'assets/styleComponent/admin/home/Home';
 
-import { accumulateSell, sellByDateList, userAccessCount, sel_dash } from 'utils/axios';
-import { useEffect } from 'react';
-import Loading from 'components/loding/Loading';
 
 const Home = () => {
     const [product, setProduct] = useState(7);
     const [visitor, setVisitor] = useState(7);
     const [isDataLoading, setIsDataLoading] = useState(false);
-    const bar = useQuery("sellByDateList", sellByDateList);
-    const donut = useQuery("accumulateSell", accumulateSell);
-    const line = useQuery("userAccessCount", userAccessCount);
-    const dash = useQuery("sel_dash", sel_dash);
-
+    const [bar, setBar] = useState(null);
+    const [donut, setDonut] = useState(null);
+    const [line, setLine] = useState(null);
+    const [dash, setDash] = useState(null);
 
     useEffect(() => {
-        if (donut.isLoading === false &&
-            bar.isLoading === false &&
-            line.isLoading === false
-        ) {
-            setIsDataLoading(true);
-        }
-    }, [donut.isLoading, bar.isLoading, line.isLoading])
+        getProductSaleStatus(setBar);
+        getAccumulateSell(setDonut);
+        getUserAccessCount(setLine);
+        getTotalOrderStatus(setDash);
+    }, [])
 
     const onChenge = (e) => {
         const name = e.target.name;
@@ -50,7 +47,7 @@ const Home = () => {
     }
 
     return (
-        isDataLoading === false
+        bar === null || donut === null || line === null || dash === null
             ? <Loading />
             : <Common.Padding>
                 <Style.ChartGrid>
@@ -67,7 +64,7 @@ const Home = () => {
                             </div>
                         </Style.Title>
                         <div style={{ width: "100%", maxHeight: "400px", height: "100%" }}>
-                            <BarChart data={bar.data} day={product} />
+                            <BarChart data={bar?.data} day={product} />
                         </div>
                     </Common.Container>
                     <Common.Container>
@@ -75,7 +72,7 @@ const Home = () => {
                             <h3>누적 판매 TOP 5</h3>
                         </Style.Title>
                         <div style={{ width: "100%", maxHeight: "400px", height: "100%" }}>
-                            <DonutChart data={donut.data} />
+                            <DonutChart data={donut?.data} />
                         </div>
                     </Common.Container>
                 </Style.ChartGrid>
@@ -87,15 +84,15 @@ const Home = () => {
                                 <div>
                                     <span>
                                         <h4>입금</h4>
-                                        <div>{dash.data?.input === null ? 0 : dash.data?.input}건</div>
+                                        <div>{dash?.data.input === null ? 0 : dash?.data.input}건</div>
                                     </span>
                                     <span>
                                         <h4>배송</h4>
-                                        <div>{dash.data?.delivering === null ? 0 : dash.data?.delivering}건</div>
+                                        <div>{dash?.data.delivering === null ? 0 : dash?.data.delivering}건</div>
                                     </span>
                                     <span>
                                         <h4>완료</h4>
-                                        <div>{dash.data?.complete === null ? 0 : dash.data?.complete}건</div>
+                                        <div>{dash?.data.complete === null ? 0 : dash?.data.complete}건</div>
                                     </span>
                                 </div>
                             </li>
@@ -106,9 +103,9 @@ const Home = () => {
                                         <h4>송장 미입력</h4>
                                         <div>
                                             <Link className='mvpage' to={"/admin/delivery"}>
-                                                {dash.data?.delivery_not === null
+                                                {dash?.data.delivery_not === null
                                                     ? 0
-                                                    : dash.data?.delivery_not}건
+                                                    : dash?.data.delivery_not}건
                                             </Link>
                                         </div>
                                         {/* <LinkButton link={"/admin/delivery"} title={"바로가기"} /> */}
@@ -122,7 +119,7 @@ const Home = () => {
                                         <h4>위험</h4>
                                         <div>
                                             <Link className='mvpage' to={"/admin/product"}>
-                                                {dash.data?.warning === null ? 0 : dash.data?.warning}건
+                                                {dash?.data.warning === null ? 0 : dash?.data.warning}건
                                             </Link>
                                         </div>
                                     </span>
@@ -130,7 +127,7 @@ const Home = () => {
                                         <h4>부족</h4>
                                         <div>
                                             <Link className='mvpage' to={"/admin/product"}>
-                                                {dash.data?.shortage === null ? 0 : dash.data?.shortage}건
+                                                {dash?.data.shortage === null ? 0 : dash?.data.shortage}건
                                             </Link>
                                         </div>
                                     </span>
@@ -151,7 +148,7 @@ const Home = () => {
                             </div>
                         </Style.Title>
                         <div style={{ width: "100%", maxHeight: "370px", height: "100%" }}>
-                            <LineChart data={line.data} day={visitor} />
+                            <LineChart data={line?.data} day={visitor} />
                         </div>
                     </Common.Container>
                     <Common.Container>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
 
-import { boardWrite, tokenCheck } from 'utils/axios';
+import { addBoard } from "api/board.js"
+
 import adminCheck from 'utils/adminCheck';
 import createCode from 'utils/createCode';
+
 import LoginInput from 'components/input/Input';
 import TextEditor from 'components/editor/Editor';
 
@@ -16,9 +17,6 @@ const NoticeWrite = () => {
     const [content, setContent] = useState("");
     const [imageCode, setImageCode] = useState([]);
 
-    const write = useMutation(boardWrite);
-    const token = useMutation(tokenCheck);
-
     useEffect(() => {
         if (adminCheck(true) === false) {
             nav("/");
@@ -26,13 +24,16 @@ const NoticeWrite = () => {
     }, [])
 
     const onSubmit = async (e) => {
+        if (adminCheck(true) === false) {
+            nav("/");
+        }
+
         e.preventDefault();
+
         const date = new Date();
         const yy = date.getFullYear().toString().substring(2);
         const mm = (("00" + (date.getMonth() + 1)).slice(-2));
         const dd = (("00" + date.getDate()).slice(-2));
-
-        await token.mutateAsync();
 
         let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
@@ -57,7 +58,7 @@ const NoticeWrite = () => {
             type: "notice",
         }
 
-        await write.mutateAsync(data);
+        addBoard(data);
     }
 
     const onChange = (e) => {

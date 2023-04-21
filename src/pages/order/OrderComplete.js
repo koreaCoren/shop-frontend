@@ -1,35 +1,26 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useMutation } from 'react-query';
 
-import { orderSuccess } from 'utils/axios';
+import { completeOrder } from 'api/order.js';
+
 import Loading from 'components/loding/Loading';
 
 import * as Style from 'assets/styleComponent/order/orderComplete'
 
 const OrderComplete = () => {
-    const [success, setSuccess] = useState();
-    const { mutateAsync, isLoading, isSuccess } = useMutation(orderSuccess);
-
-    const getSuccsssData = async () => {
-        const location = window.location;
-        const params = new URLSearchParams(location.search);
-        const data = {
-            orderCode: params.get("orderCode"),
-        };
-
-        await mutateAsync(data);
-        setSuccess(data.result);
-    }
+    const [success, setSuccess] = useState(null);
 
     useEffect(() => {
-        getSuccsssData();
+        const location = window.location;
+        const params = new URLSearchParams(location.search);
+
+        completeOrder({ orderCode: params.get("orderCode") }, setSuccess);
     }, [])
 
     return (
-        <>
-            {
-                isSuccess &&
+        success === null
+            ? <Loading />
+            : <>
                 <Style.Content>
                     <i className="fa-solid fa-gift"></i>
                     <h2>고객님, 주문이 완료되었습니다.</h2>
@@ -42,9 +33,7 @@ const OrderComplete = () => {
                         "주문/배송조회" 에서 하실 수 있습니다.
                     </p>
                 </Style.Content>
-            }
-            {isLoading && <Loading />}
-        </>
+            </>
     );
 };
 

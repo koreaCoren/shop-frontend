@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
 
-import { productDelete, productList } from 'utils/axios';
+import { getProdcut, deleteProduct } from 'api/product.js';
+
 import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/admin/product/list"
@@ -11,24 +11,27 @@ import * as Common from "assets/styleComponent/admin/common"
 import noImg from "assets/images/noImg.gif";
 
 const List = () => {
-    const result = useQuery("prodcutList", productList);
+    const [list, setList] = useState(null);
 
-    const { mutateAsync } = useMutation(productDelete);
+    useEffect(() => {
+        getProdcut(setList);
+    }, [])
 
-    const onDelete = (data) => {
-        const ok = window.confirm("정말로 삭제 하시겠습니까?");
-        if (ok) {
-            mutateAsync({ goods_code: data.goods_code, goods_img: data.goods_img, goods_nm: data.goods_nm });
-            window.location.reload();
+    const onDelete = (delProduct) => {
+        const data = {
+            goods_code: delProduct.goods_code,
+            goods_img: delProduct.goods_img,
+            goods_nm: delProduct.goods_nm
         }
+        deleteProduct(data);
     }
 
     return (
-        result.isLoading === true
+        list === null
             ? <Loading />
             : <>
                 {
-                    result.data[0].map((a, i) => {
+                    list[0].map((a, i) => {
                         return (
                             <Common.Container key={i}>
                                 <ul>

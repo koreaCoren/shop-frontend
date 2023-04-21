@@ -42,7 +42,7 @@ export const DETAIL_BOARD = axios.create({
 
 // 게시글 삭제
 export const DELETE_BOARD = axios.create({
-    baseURL: `${process.env.REACT_APP_API_URL}/board/del_notice`
+    baseURL: `${process.env.REACT_APP_API_URL}/board/del_board`
 })
 
 // 구매한 상품 리스트 (리뷰용)

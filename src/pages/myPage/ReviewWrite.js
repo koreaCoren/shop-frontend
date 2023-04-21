@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { boardWrite, tokenCheck } from 'utils/axios';
+import { addBoard } from "api/board.js";
+
 import createCode from 'utils/createCode';
+
 import SubTitle from 'components/myPage/SubTitle';
 import LoginInput from 'components/input/Input';
 import StartGrade from 'components/input/StarGrade';
@@ -26,17 +28,12 @@ const ReviewWrite = () => {
     const goods_name = location.state.goods_name;
     const goods_img = location.state.goods_img;
 
-    const write = useMutation(boardWrite);
-    const token = useMutation(tokenCheck);
-
     const onSubmit = async (e) => {
         e.preventDefault();
         const date = new Date();
         const yy = date.getFullYear().toString().substring(2);
         const mm = (("00" + (date.getMonth() + 1)).slice(-2));
         const dd = (("00" + date.getDate()).slice(-2));
-
-        await token.mutateAsync();
 
         const data = {
             user_id: sessionStorage.getItem("userId"),
@@ -52,7 +49,7 @@ const ReviewWrite = () => {
             grade: star
         }
 
-        await write.mutateAsync(data);
+        addBoard(data);
     }
 
     const onChange = (e) => {

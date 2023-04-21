@@ -1,41 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+
+import { getOrder } from 'api/order.js';
 
 import { deliveryStatus } from 'utils/delivery';
 import { comma } from 'utils/commaReplace';
-import { orderManagement } from 'utils/axios';
+
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
+import Searching from 'components/board/Searching';
 
 import * as Style from 'assets/styleComponent/admin/order/order';
 import * as Common from 'assets/styleComponent/admin/common';
-import Searching from 'components/board/Searching';
 
 const Order = () => {
     const nav = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
-    const [board, setBoard] = useState();
+    const [board, setBoard] = useState(null);
     const [state, setState] = useState([]);
-    const result = useMutation(orderManagement);
-
-    const getOrder = async () => {
-        const data = {};
-        if (searchParams.get("search") === null) {
-            data.boardPage = boardPage;
-            data.boardType = "order";
-        } else {
-            data.boardPage = boardPage;
-            data.boardType = "order";
-            data.search = searchParams.get("search");
-        }
-        await result.mutateAsync(data);
-
-        setBoard(data.result);
-        getDeliveryStatus(data.result.list);
-    }
 
     const getDeliveryStatus = async (req) => {
         const data = await deliveryStatus(req);
@@ -43,11 +27,25 @@ const Order = () => {
     }
 
     useEffect(() => {
-        getOrder()
+        const data = {
+            boardPage: boardPage,
+            boardType: "order",
+            admin: true
+        };
+
+        if (searchParams.get("search") !== null) {
+            data.search = searchParams.get("search");
+        }
+
+        getOrder(data, setBoard);
     }, [nav, searchParams.get("search")])
 
+    useEffect(() => {
+        board !== null && getDeliveryStatus(board.list);
+    }, [board])
+
     return (
-        result.isSuccess !== true
+        board === null
             ? <Loading />
             : <>
                 <Top title={"주문 관리"} isButton={false} />

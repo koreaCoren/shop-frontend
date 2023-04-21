@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
 
-import { user, userDeleted } from 'utils/axios';
+import { getUserList, deleteUser } from 'api/user.js';
+
 import { formatPhoneNumber } from 'utils/setPhoneNumber';
+
 import Searching from 'components/board/Searching';
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
@@ -16,34 +17,21 @@ const UserList = () => {
     const nav = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const { boardPage } = useParams();
-    const [board, setBoard] = useState();
-    const users = useMutation(user);
-    const deleted = useMutation(userDeleted);
+    const [board, setBoard] = useState(null);
 
     const userDelete = async (index) => {
-        const confirm = window.confirm("정말로 삭제하시겠습니까?");
-        if (confirm) {
-            const data = {
-                user_id: board.list[index].user_id,
-            }
-            await deleted.mutateAsync(data);
-        } else {
-            return;
-        }
+        deleteUser({ user_id: board.list[index].user_id });
     }
 
     const getUser = async () => {
-        const data = {}
-        if (searchParams.get("search") === null) {
-            data.boardPage = boardPage;
-            data.boardType = "user";
-        } else {
-            data.boardPage = boardPage;
-            data.boardType = "user";
+        const data = {
+            boardPage: boardPage,
+            boardType: "user"
+        }
+        if (searchParams.get("search") !== null) {
             data.search = searchParams.get("search");
         }
-        await users.mutateAsync(data);
-        setBoard(data.result);
+        getUserList(data, setBoard);
     }
 
     useEffect(() => {
@@ -51,7 +39,7 @@ const UserList = () => {
     }, [nav, searchParams.get("search")])
 
     return (
-        users.isSuccess !== true
+        board === null
             ? <Loading />
             : <>
                 <Top title={"회원 관리"} isButton={false} />

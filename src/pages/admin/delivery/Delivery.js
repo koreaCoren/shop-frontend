@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+
+import { setDefaultCarrier, addInvoice, getDefaultSelect, getUndefinedInvoice } from "api/delivery.js";
 
 import Top from 'components/admin/Top';
-import { defaultSelect, defaultDeliveryUpdate, nullInvoice, deliveryInput } from 'utils/axios';
 
 import * as Style from "assets/styleComponent/admin/delivery/delivery";
 import * as Common from "assets/styleComponent/admin/common";
@@ -12,11 +12,9 @@ import Loading from 'components/loding/Loading';
 const Delivery = () => {
     const [defaultDelivery, setDefaultDelivery] = useState();
     const [deliveryList, setDeliveryList] = useState();
+    const [defaultSelect, setDefaultSelect] = useState(null);
+    const [incoviceResult, setSncoviceResult] = useState(null);
     const [deliveryNumber, setDeliveryNumber] = useState();
-    const update = useMutation(defaultDeliveryUpdate);
-    const input = useMutation(deliveryInput);
-    const selectResult = useQuery("defaultSelect", defaultSelect);
-    const incoviceResult = useQuery("nullInvoice", nullInvoice);
 
     const setDelivery = async () => {
         const arr = await getDeliveryList();
@@ -27,9 +25,7 @@ const Delivery = () => {
                 data.default_carrier = defaultDelivery;
             }
         });
-        update.mutateAsync(data);
-        alert("저장완료");
-        selectResult.refetch();
+        setDefaultCarrier(data);
     }
 
     const onSubmit = async (e) => {
@@ -38,10 +34,10 @@ const Delivery = () => {
         const data = [];
         for (let i = 1; i < arr.length; i = i + 2) {
             if (arr[i + 1].value !== '') {
-                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: selectResult.data?.default_carrier })
+                data.push({ orderCode: arr[i].value, deliveryNumber: arr[i + 1].value, carrier: defaultSelect.data?.default_carrier })
             }
         }
-        input.mutateAsync(data);
+        addInvoice(data);
     };
 
     const getList = async () => {
@@ -51,12 +47,13 @@ const Delivery = () => {
 
     useEffect(() => {
         getList();
+        getDefaultSelect(setDefaultSelect);
+        getUndefinedInvoice(setSncoviceResult);
     }, [])
 
     useEffect(() => {
-        setDefaultDelivery(selectResult.data?.carrier_name);
-    }, [selectResult.isLoading])
-
+        defaultSelect !== null && setDefaultDelivery(defaultSelect.data?.carrier_name);
+    }, [defaultSelect])
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -74,7 +71,7 @@ const Delivery = () => {
         }
     }
     return (
-        incoviceResult.isLoading
+        incoviceResult === null
             ? <Loading />
             : <>
                 <Top title={"배송 관리"} isButton={false} />

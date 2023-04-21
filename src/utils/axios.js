@@ -1,11 +1,9 @@
 import * as API from "../api/apis";
 
 //로그인
-export const login = async (data, test) => {
+export const login = async (data) => {
     const api = await API.LOGIN_API.post("", data).then((res) => {
         if (res.data.loginCheck === "success") {
-            sessionStorage.setItem("loginCheck", "success");
-            sessionStorage.setItem("userId", res.data.userId);
             sessionStorage.setItem("token", res.data.token);
             return 'ok';
         } else {
@@ -21,20 +19,8 @@ export const login = async (data, test) => {
 
 //로그아웃
 export const logout = async () => {
-    const userId = sessionStorage.getItem('userId');
-    const data = {
-        userId: userId
-    }
-
-    await API.LOGOUT_API.post("", data).then((res) => {
-
-    }).catch((error) => {
-        alert("서버와 통신 실패했습니다.\n" + error);
-        window.location.replace("/");
-    })
-    sessionStorage.removeItem("loginCheck");
-    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
     window.location.replace("/");
 }
 
@@ -60,30 +46,94 @@ export const register = async (data) => {
     return api;
 }
 
-//토큰체크
-export const tokenCheck = async () => {
-    const data = {
-        token: sessionStorage.getItem("token"),
-        userId: sessionStorage.getItem("userId"),
+//(구)토큰체크
+// export const tokenCheck = async () => {
+//     const data = {
+//         token: sessionStorage.getItem("token"),
+//         userId: sessionStorage.getItem("userId"),
+//     }
+//     const api = await API.TOKEN.post("", data).then((res) => {
+//         if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
+//             sessionStorage.removeItem("loginCheck");
+//             sessionStorage.removeItem('userId');
+//             sessionStorage.removeItem('token');
+//         }
+//         if (sessionStorage.getItem("token") === null ||
+//             sessionStorage.getItem("loginCheck") === null ||
+//             sessionStorage.getItem("userId") === null) {
+//             sessionStorage.removeItem("loginCheck");
+//             sessionStorage.removeItem('userId');
+//             sessionStorage.removeItem('token');
+//         }
+//     }).catch((error) => {
+//         alert("서버와 통신 실패했습니다.\n" + error);
+//         window.location.replace("/");
+//     });
+//     return api;
+// }
+
+// 토큰체크
+export const tokenCheck = async (data) => {
+    const token = sessionStorage.getItem("token");
+
+    if (token !== null) {
+        const userId = sessionStorage.getItem("userId");
+
+        const headers = {
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+        };
+
+        const api = await API.TOKEN.post("", data, {
+            headers: headers,
+        }).then((res) => {
+            console.log(res.data);
+            if (res.data.result === "ok") {
+                if (userId === null) {
+                    sessionStorage.setItem("userId", res.data.id);
+                } else {
+                    if (res.data.res === "renew") {
+                        sessionStorage.setItem("token", res.data.Atoken);
+                        sessionStorage.setItem("userId", res.data.id);
+                    } else if (userId !== res.data.id) {
+                        tokenError("아이디값이랑 토큰값 불일치로 인해 로그아웃 됩니다.");
+                    }
+                }
+                data.result = res.data.result;
+            } else {
+                if (res.data.error === "E00") {
+                    tokenError("올바르지 않은 토큰값 로그아웃 됩니다.\n error code : E00");
+                } else if (res.data.error === "E01") {
+                    tokenError("액세스 토큰 만료. \n error code : E01");
+                } else if (res.data.error === "E02") {
+                    tokenError("다른 브라우저에서 로그인을 시도하여 로그아웃 됩니다. \n error code : E02");
+                } else if (res.data.error === "E03") {
+                    tokenError("리프레시 토큰 만료. \n error code : E03");
+                } else if (res.data.error === "E05") {
+                    tokenError("토큰값이 일치하지 않습니다 로그아웃 됩니다. \n error code : E05");
+                } else if (res.data.error === "E06") {
+                    tokenError("다른 브라우저에서 로그인을 시도하여 로그아웃 됩니다. \n error code : E06");
+                } else if (res.data.error === "E07") {
+                    tokenError("알 수 없는 에러으로 로그아웃 됩니다. \n error code : E07");
+                } else {
+                    tokenError("알 수 없는 에러으로 로그아웃 됩니다. \n error code : unknown");
+                }
+            }
+        }).catch((error) => {
+            alert("서버와 통신 실패했습니다.\n" + error);
+            window.location.replace("/");
+            return;
+        });
+
+        return api;
     }
-    const api = await API.TOKEN.post("", data).then((res) => {
-        if (res.data.result !== "ok" && sessionStorage.getItem("token") !== null) {
-            sessionStorage.removeItem("loginCheck");
-            sessionStorage.removeItem('userId');
-            sessionStorage.removeItem('token');
-        }
-        if (sessionStorage.getItem("token") === null ||
-            sessionStorage.getItem("loginCheck") === null ||
-            sessionStorage.getItem("userId") === null) {
-            sessionStorage.removeItem("loginCheck");
-            sessionStorage.removeItem('userId');
-            sessionStorage.removeItem('token');
-        }
-    }).catch((error) => {
-        alert("서버와 통신 실패했습니다.\n" + error);
+
+    function tokenError(msg) {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("userId");
+        alert(msg);
         window.location.replace("/");
-    });
-    return api;
+    }
 }
 
 // 접속자 집계
@@ -100,7 +150,6 @@ export const userCount = async (data) => {
 //게시판 글쓰기
 export const boardWrite = async (data) => {
     const api = await API.EDITOR_REGISTER.post("", data).then((res) => {
-        console.log(res);
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "review") {
