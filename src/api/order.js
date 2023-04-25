@@ -35,7 +35,7 @@ const getDetailOrder = async (data, success) => {
 // 주문취소
 const cancelOrder = async (data) => {
     try {
-        const res = await axios.post("/order/???", data);
+        const res = await axios.post("/order/cancel_order", data);
     } catch (error) {
         handleApiError(error);
     }
