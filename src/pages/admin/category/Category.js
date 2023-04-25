@@ -87,7 +87,7 @@ const Category = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        // addCategory();
+        addCategory(categorys);
     };
 
     const onChange = (e) => {
