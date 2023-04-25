@@ -75,6 +75,16 @@ const getTotalOrderStatus = async (success) => {
     }
 }
 
+// 주문 리스트 다운로드
+const downOrderList = async (success) => {
+    try {
+        const res = await axios.get("/order/admin_orders");
+        success(res);
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+
 export {
     getOrder,
     getOrderCode,
@@ -82,5 +92,7 @@ export {
     cancelOrder,
     requestOrder,
     completeOrder,
-    getTotalOrderStatus
+    getTotalOrderStatus,
+    downOrderList
 };
+

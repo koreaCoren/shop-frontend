@@ -10,6 +10,7 @@ import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
 import Searching from 'components/board/Searching';
+import Download from 'components/admin/download/OrderDown';
 
 import * as Style from 'assets/styleComponent/admin/order/order';
 import * as Common from 'assets/styleComponent/admin/common';
@@ -20,11 +21,14 @@ const Order = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState(null);
     const [state, setState] = useState([]);
+    const [list, setList] = useState();
 
     const getDeliveryStatus = async (req) => {
         const data = await deliveryStatus(req);
         setState(data);
     }
+
+
 
     useEffect(() => {
         const data = {
@@ -43,16 +47,16 @@ const Order = () => {
     useEffect(() => {
         board !== null && getDeliveryStatus(board.list);
     }, [board])
-
     return (
         board === null
             ? <Loading />
             : <>
                 <Top title={"주문 관리"} isButton={false} />
                 <Common.Padding>
-                    <Common.Container>
+                    <Common.TopContainer>
                         <Searching board={board.list} setBoardList={setBoard} searchType={"order"} />
-                    </Common.Container>
+                        <Download></Download>
+                    </Common.TopContainer>
                     {
                         board.list?.map((a, i) => {
                             return (

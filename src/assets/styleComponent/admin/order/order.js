@@ -36,3 +36,10 @@ export const DetailButton = styled(Link)`
     padding: 0px 50px;
     border-radius: 5px;
 `
+export const DownloadButton = styled(Link)`
+    line-height: 30px;
+    background-color: #1a6dff;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 5px;
+`
