@@ -16,6 +16,7 @@ const OrderDetail = ({ }) => {
     const { orderCode } = useParams();
     const [list, setList] = useState(null);
     const [state, setState] = useState();
+
     let trackResult = [];
 
     const getOrderDetailData = async () => {
@@ -28,6 +29,13 @@ const OrderDetail = ({ }) => {
 
         await track(data.result[0].carrier, data.result[0].delivery, trackResult);
         setState(...trackResult);
+    }
+
+    const refundOrder = async () => {
+        const data = {
+            orderCode : orderCode
+        };
+        cancelOrder(data);
     }
 
     useEffect(() => {
@@ -158,7 +166,10 @@ const OrderDetail = ({ }) => {
                 <Common.Line></Common.Line>
 
                 <Common.Button style={{ marginTop: "10px" }}>
-                    <button>주문 취소</button>
+                    <button 
+                    onClick={() => {
+                        refundOrder();
+                    }}>주문 취소</button>
                 </Common.Button>
             </Common.InDiv >
     );
