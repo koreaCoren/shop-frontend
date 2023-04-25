@@ -12,9 +12,9 @@ const getCategory = async (success) => {
 }
 
 // 카테고리 생성
-const addCategory = async () => {
+const addCategory = async (data) => {
     try {
-        const res = await axios.post("/goods/ins_category");
+        const res = await axios.post("/goods/ins_category", data);
         alert("저장완료");
     } catch (error) {
         handleApiError(error);
