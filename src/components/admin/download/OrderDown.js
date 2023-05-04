@@ -4,11 +4,9 @@ import * as saveAs from "file-saver";
 
 import { downOrderList } from 'api/order.js';
 
-
 import * as Style from 'assets/styleComponent/admin/order/order';
 
 const Download = () => {
-
     const [list, setList] = useState();
 
     let today = new Date();
@@ -86,18 +84,13 @@ const Download = () => {
         saveAs.saveAs(excelFile, excelFileName + excelFileExtension);
     }
 
-    useEffect(() => {
-        downOrderList(setList);
-    }, [])
-
-
     const down = async () => {
         excelDownload(list.data);
     }
 
-
-
-
+    useEffect(() => {
+        downOrderList(setList);
+    }, [])
 
     return (
         <Style.DownloadButton onClick={down}>주문정보 다운로드</Style.DownloadButton>
