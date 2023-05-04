@@ -87,7 +87,7 @@ export const tokenCheck = async (data) => {
         const api = await API.TOKEN.post("", data, {
             headers: headers,
         }).then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.result === "ok") {
                 if (userId === null) {
                     sessionStorage.setItem("userId", res.data.id);

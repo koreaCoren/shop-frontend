@@ -13,7 +13,6 @@ const OrderComplete = () => {
     useEffect(() => {
         const location = window.location;
         const params = new URLSearchParams(location.search);
-
         completeOrder({ orderCode: params.get("orderCode") }, setSuccess);
     }, [])
 

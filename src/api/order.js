@@ -55,7 +55,7 @@ const completeOrder = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_ini_orders", data);
         if (res.data[0].resultCode === "0000") {
-            success({ ...res.data[0].result });
+            success(res.data[0]);
         } else {
             alert("알수없는 에러로 실패하였습니다. \n관리자에게 문의 부탁드립니다.");
             window.location.replace("/");
