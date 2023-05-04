@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import { addBoard } from "api/board.js";

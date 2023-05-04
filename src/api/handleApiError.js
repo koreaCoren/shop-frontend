@@ -20,4 +20,11 @@ const handleApiError = async (error) => {
     console.log(error.config);
 };
 
-export { handleApiError };
+function handleTokenError(msg) {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userId");
+    alert(msg);
+    window.location.replace("/");
+}
+
+export { handleApiError, handleTokenError };

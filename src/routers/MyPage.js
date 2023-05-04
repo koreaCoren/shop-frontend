@@ -8,7 +8,6 @@ import Address from 'pages/myPage/Address';
 import Info from 'pages/myPage/Info';
 import Order from 'pages/myPage/Order';
 import OrderDetail from 'pages/myPage/OrderDetail';
-import Pick from 'pages/myPage/Pick';
 import Review from 'pages/myPage/Review';
 import ReviewWrite from 'pages/myPage/ReviewWrite';
 import PersonalModify from 'pages/myPage/PersonalModify';
@@ -33,7 +32,6 @@ const MyPage = () => {
                     <Route path="/info" element={<Info />} />
                     <Route path="/order/:boardPage" element={<Order />} />
                     <Route path="/orderDetail/:orderCode" element={<OrderDetail />} />
-                    {/* <Route path="/pick" element={<Pick />} /> */}
                     <Route path="/address" element={<Address />} />
                     <Route path="/review" element={<Review />} />
                     <Route path="/reviewWrite/:productCode/:orderCode" element={<ReviewWrite />} />

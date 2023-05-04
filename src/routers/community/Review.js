@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
 import ReviewPhoto from 'pages/community/ReviewPhoto';
 import ReviewAll from 'pages/community/ReviewAll';
