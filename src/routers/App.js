@@ -4,7 +4,9 @@ import { useMutation } from "react-query";
 import { useCookies } from "react-cookie";
 import moment from "moment/moment";
 
-import { tokenCheck, userCount } from "utils/axios";
+import { tokenCheck } from "api/token";
+import { updateUserAccessCount } from "api/user";
+
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
 import Close from "components/inicis/Close";
@@ -18,7 +20,6 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-import { getBoard } from "api/board";
 
 function App() {
     const nav = useNavigate();
@@ -27,16 +28,13 @@ function App() {
     const [user, setUser] = useState();
     const [orderData, setOrderData] = useState();
     const [cookies, setCookies] = useCookies();
-    const token = useMutation(tokenCheck);
-    const userAccessCheck = useMutation(userCount);
-    const [test, settest] = useState();
 
     // 방문자 체크
     const accessCheck = async () => {
         const expires = moment().add('10', 'm').toDate();
         if (cookies.userCount !== 'true') {
             setCookies('userCount', true, { expires });
-            userAccessCheck.mutate("나 등장~!");
+            updateUserAccessCount("나 등장~!")
         }
     }
 
@@ -52,17 +50,17 @@ function App() {
     }
 
     //토큰체크 후 유저 정보 저장
-    const tokenCheckIsSetUserInfo = async () => {
-        const data = {}
-        await token.mutateAsync(data);
-        setUser(data);
-    }
+    // const tokenCheckIsSetUserInfo = async () => {
+    //     const data = {}
+    //     await token.mutateAsync(data);
+    //     setUser(data);
+    // }
 
     useEffect(() => {
         window.scrollTo(0, 0);
         accessCheck();
         adminPageCheck();
-        tokenCheckIsSetUserInfo();
+        tokenCheck(setUser);
     }, [nav])
     return (
         <>

@@ -64,4 +64,21 @@ const getAccumulateSell = async (success) => {
     }
 }
 
-export { getProdcut, getDetailProdcut, deleteProduct, updateProduct, getProductSaleStatus, getAccumulateSell };
+const getProductReivew = async (data, success) => {
+    try {
+        const res = await axios.post("/board/sel_goods_review", data);
+        success(res);
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+
+export {
+    getProdcut,
+    getDetailProdcut,
+    deleteProduct,
+    updateProduct,
+    getProductSaleStatus,
+    getAccumulateSell,
+    getProductReivew
+};

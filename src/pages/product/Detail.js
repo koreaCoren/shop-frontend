@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { settingFav, getFavList, reqReview } from 'utils/axios';
 
 import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
@@ -14,6 +13,7 @@ import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
+import { getProductReivew } from 'api/product';
 
 const Detail = ({ result, setOrderData }) => {
     const nav = useNavigate();
@@ -31,7 +31,6 @@ const Detail = ({ result, setOrderData }) => {
     const returnRef = useRef();
     const reviewRef = useRef();
 
-    const reviewList = useMutation(reqReview);
     // const favControll = useMutation(settingFav);
     // const favList = useMutation(getFavList);
 
@@ -64,15 +63,13 @@ const Detail = ({ result, setOrderData }) => {
         setCount(count - 1);
     }
     //리뷰리스트 가져오기
-    const getReviewList = async () => {
+    const getReviewList = () => {
         const data = {
             boardType: "review",
             boardPage: 1,
             goodsCode: productCode,
-
         }
-        await reviewList.mutateAsync(data);
-        setReview(data.result);
+        getProductReivew(data, setReview)
     }
     /* 좋아요는 당분간 봉인
     // 좋아요 리스트
@@ -235,7 +232,7 @@ const Detail = ({ result, setOrderData }) => {
                             <h2>상품 후기</h2>
                             {
                                 review !== undefined &&
-                                review.map((a, i) => {
+                                review.data.map((a, i) => {
                                     return (
                                         <div key={i}>
                                             <div className='grid'>

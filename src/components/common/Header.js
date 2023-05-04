@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { categoryList, logout } from 'utils/axios';
 import Loading from 'components/loding/Loading';
 
 import styled from 'styled-components';
 
 import logo from "assets/images/logo.png"
+import { getCategory } from 'api/category';
+import { logout } from 'api/logout';
 
 const Header = ({ user }) => {
     const nav = useNavigate();
-    const [categorys, setCategorys] = useState([]);
+    const [categorys, setCategorys] = useState(null);
     const [isMobileMenu, setIsMobileMenu] = useState(false);
     const [mobileMenuNum, setMobileMenuNum] = useState(0);
     const [isMenuBox, setIsMenuBox] = useState(false);
-    const result = useQuery("categoryList", categoryList);
 
     useEffect(() => {
-        setCategorys(result.data);
-    }, [result.isLoading])
+        getCategory(setCategorys);
+    }, [])
 
     useEffect(() => {
         setIsMobileMenu(false);
@@ -27,124 +26,49 @@ const Header = ({ user }) => {
     }, [nav])
 
     return (
-        <header style={{ boxShadow: "0px 0px 5px #00000033" }}>
-            <Login>
-                <div className="wrap">
-                    {
-                        user?.result === "ok"
-                            ? <ul>
-                                <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
-                                <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
-                                <li><Link to={"product/basket"}>장바구니</Link></li>
-                                <li><Link to={"myPage/order/1"}>마이페이지</Link></li>
-                                {
-                                    sessionStorage.getItem("userId") === "admin"
-                                        || sessionStorage.getItem("userId") === "pkd"
-                                        || sessionStorage.getItem("userId") === "asd"
-                                        ? <li><Link to={"admin"}>관리자</Link></li>
-                                        : null
-                                }
-                            </ul>
-                            : <ul>
-                                <li><Link to={"login"}>로그인</Link></li>
-                                <li><Link to={"loginRegister"}>회원가입</Link></li>
-                                <li><Link to={"product/basket"}>장바구니</Link></li>
-                            </ul>
-                    }
-                </div>
-            </Login>
 
-            <Head>
-                <div className="wrap">
-                    <div className="flexBox">
-                        <a href="/"><h1><img src={logo} alt="" /></h1></a>
-                        <nav className='pc'>
-                            <ul>
-                                {
-                                    categorys?.map((a, i) => {
-                                        return (
-                                            <li key={i}>
-                                                <Link to={`/product/products/${(a.cate_code)}/1`}>{a.cate}</Link>
-                                                <ol>
-                                                    {
-                                                        a.lowCategory?.map((b, j) => {
-                                                            return (
-                                                                <li key={j}><Link to={`/product/products/${b.cate_code}/1`}>{b.cate}</Link></li>
-                                                            )
-                                                        })
-                                                    }
-                                                </ol>
-                                            </li>
-                                        )
-                                    })
-                                }
-                                <li><Link to={"community/review/all/1"}>리뷰보기</Link></li>
-                                <li><Link to={"community/notice/1"}>공지사항</Link></li>
-                            </ul>
-                        </nav>
-
-                        <div className="mobile">
-                            <button onClick={() => { setIsMenuBox(!isMenuBox) }}>
-                                <i className="fa-solid fa-bars"></i>
-                            </button>
-
-                            <div className={
-                                isMenuBox === true
-                                    ? "menuBox on"
-                                    : "menuBox"
-                            }>
-                                {
-                                    user?.result === "ok"
-                                        ? <ul className='user flexBox'>
-                                            <li>{sessionStorage.getItem("userId")}님 로그인중</li>
-                                            <li onClick={logout}>로그아웃</li>
-                                        </ul>
-                                        : <ul className='user flexBox'>
-                                            <li><Link to={"login"}>로그인</Link></li>
-                                            <li><Link to={"loginRegister"}>회원가입</Link></li>
-                                        </ul>
-                                }
-
-                                <ul className='nav'>
-                                    <li>
-                                        <Link to={"product/basket"}>
-                                            <i className="fa-solid fa-basket-shopping"></i>
-                                            장바구니
-                                        </Link>
-                                    </li>
+        categorys === null
+            ? <Loading />
+            : < header style={{ boxShadow: "0px 0px 5px #00000033" }
+            }>
+                <Login>
+                    <div className="wrap">
+                        {
+                            user?.result === "ok"
+                                ? <ul>
+                                    <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
+                                    <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
+                                    <li><Link to={"product/basket"}>장바구니</Link></li>
+                                    <li><Link to={"myPage/order/1"}>마이페이지</Link></li>
                                     {
-                                        user?.result === "ok"
-                                        && <li>
-                                            <Link to={"myPage/order/1"}>
-                                                <i className="fa-solid fa-user"></i>
-                                                마이페이지
-                                            </Link>
-                                        </li>
+                                        sessionStorage.getItem("userId") === "admin"
+                                            || sessionStorage.getItem("userId") === "pkd"
+                                            || sessionStorage.getItem("userId") === "asd"
+                                            ? <li><Link to={"admin"}>관리자</Link></li>
+                                            : null
                                     }
                                 </ul>
+                                : <ul>
+                                    <li><Link to={"login"}>로그인</Link></li>
+                                    <li><Link to={"loginRegister"}>회원가입</Link></li>
+                                    <li><Link to={"product/basket"}>장바구니</Link></li>
+                                </ul>
+                        }
+                    </div>
+                </Login>
 
-                                <ul className='menu'>
+                <Head>
+                    <div className="wrap">
+                        <div className="flexBox">
+                            <a href="/"><h1><img src={logo} alt="" /></h1></a>
+                            <nav className='pc'>
+                                <ul>
                                     {
                                         categorys?.map((a, i) => {
                                             return (
                                                 <li key={i}>
-                                                    {
-                                                        a.lowCategory.length <= 0
-                                                            ? <Link to={`/product/products/${(a.cate_code)}/1`}>{a.cate}</Link>
-                                                            : <span
-                                                                onClick={() => {
-                                                                    setIsMobileMenu(!isMobileMenu);
-                                                                    setMobileMenuNum(i);
-                                                                }}
-                                                            >{a.cate}</span>
-                                                    }
-                                                    <ol style={
-                                                        isMobileMenu === true
-                                                            ? mobileMenuNum === i
-                                                                ? { maxHeight: `${a.lowCategory.length * 40}px` }
-                                                                : { maxHeight: `0px` }
-                                                            : { maxHeight: `0px` }
-                                                    }>
+                                                    <Link to={`/product/products/${(a.cate_code)}/1`}>{a.cate}</Link>
+                                                    <ol>
                                                         {
                                                             a.lowCategory?.map((b, j) => {
                                                                 return (
@@ -160,15 +84,91 @@ const Header = ({ user }) => {
                                     <li><Link to={"community/review/all/1"}>리뷰보기</Link></li>
                                     <li><Link to={"community/notice/1"}>공지사항</Link></li>
                                 </ul>
+                            </nav>
+
+                            <div className="mobile">
+                                <button onClick={() => { setIsMenuBox(!isMenuBox) }}>
+                                    <i className="fa-solid fa-bars"></i>
+                                </button>
+
+                                <div className={
+                                    isMenuBox === true
+                                        ? "menuBox on"
+                                        : "menuBox"
+                                }>
+                                    {
+                                        user?.result === "ok"
+                                            ? <ul className='user flexBox'>
+                                                <li>{sessionStorage.getItem("userId")}님 로그인중</li>
+                                                <li onClick={logout}>로그아웃</li>
+                                            </ul>
+                                            : <ul className='user flexBox'>
+                                                <li><Link to={"login"}>로그인</Link></li>
+                                                <li><Link to={"loginRegister"}>회원가입</Link></li>
+                                            </ul>
+                                    }
+
+                                    <ul className='nav'>
+                                        <li>
+                                            <Link to={"product/basket"}>
+                                                <i className="fa-solid fa-basket-shopping"></i>
+                                                장바구니
+                                            </Link>
+                                        </li>
+                                        {
+                                            user?.result === "ok"
+                                            && <li>
+                                                <Link to={"myPage/order/1"}>
+                                                    <i className="fa-solid fa-user"></i>
+                                                    마이페이지
+                                                </Link>
+                                            </li>
+                                        }
+                                    </ul>
+
+                                    <ul className='menu'>
+                                        {
+                                            categorys?.map((a, i) => {
+                                                return (
+                                                    <li key={i}>
+                                                        {
+                                                            a.lowCategory.length <= 0
+                                                                ? <Link to={`/product/products/${(a.cate_code)}/1`}>{a.cate}</Link>
+                                                                : <span
+                                                                    onClick={() => {
+                                                                        setIsMobileMenu(!isMobileMenu);
+                                                                        setMobileMenuNum(i);
+                                                                    }}
+                                                                >{a.cate}</span>
+                                                        }
+                                                        <ol style={
+                                                            isMobileMenu === true
+                                                                ? mobileMenuNum === i
+                                                                    ? { maxHeight: `${a.lowCategory.length * 40}px` }
+                                                                    : { maxHeight: `0px` }
+                                                                : { maxHeight: `0px` }
+                                                        }>
+                                                            {
+                                                                a.lowCategory?.map((b, j) => {
+                                                                    return (
+                                                                        <li key={j}><Link to={`/product/products/${b.cate_code}/1`}>{b.cate}</Link></li>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </ol>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                        <li><Link to={"community/review/all/1"}>리뷰보기</Link></li>
+                                        <li><Link to={"community/notice/1"}>공지사항</Link></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Head>
-
-
-            {result.isLoading && <Loading />}
-        </header>
+                </Head>
+            </header >
     );
 };
 

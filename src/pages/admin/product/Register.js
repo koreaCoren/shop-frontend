@@ -5,7 +5,6 @@ import { useMutation, useQuery } from 'react-query';
 import { addBoard } from 'api/board.js';
 import { getCategory } from 'api/category.js';
 
-import { categoryList, productRegister } from 'utils/axios';
 import createCode from 'utils/createCode';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
