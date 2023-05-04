@@ -21,7 +21,6 @@ const Order = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState(null);
     const [state, setState] = useState([]);
-    const [list, setList] = useState();
 
     const getDeliveryStatus = async (req) => {
         const data = await deliveryStatus(req);

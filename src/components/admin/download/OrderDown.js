@@ -84,7 +84,7 @@ const Download = () => {
         saveAs.saveAs(excelFile, excelFileName + excelFileExtension);
     }
 
-    const down = () => {
+    const down = async () => {
         excelDownload(list.data);
     }
 
