@@ -86,8 +86,8 @@ const Download = () => {
         saveAs.saveAs(excelFile, excelFileName + excelFileExtension);
     }
 
-    useEffect(async () => {
-        await downOrderList(setList);
+    useEffect(() => {
+        downOrderList(setList);
     }, [])
 
 
