@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
 import { useCookies } from "react-cookie";
 import moment from "moment/moment";
 

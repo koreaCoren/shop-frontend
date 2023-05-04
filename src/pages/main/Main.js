@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getProdcut } from 'api/product';

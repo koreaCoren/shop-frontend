@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
 
 import { addBoard } from 'api/board.js';
 import { getCategory } from 'api/category.js';

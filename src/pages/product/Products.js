@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';

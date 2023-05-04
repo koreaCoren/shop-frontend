@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useMutation } from 'react-query';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { comma } from 'utils/commaReplace';
 import Loading from 'components/loding/Loading';
