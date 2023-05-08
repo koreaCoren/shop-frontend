@@ -30,6 +30,8 @@ const List = () => {
         list === null
             ? <Loading />
             : <>
+                <Common.Container>
+                </Common.Container>
                 {
                     list[0].map((a, i) => {
                         return (

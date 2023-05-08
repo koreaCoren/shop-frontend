@@ -9,6 +9,7 @@ import Inicis from 'components/inicis/Inicis';
 import * as Style from "assets/styleComponent/order/order"
 
 import noImg from "assets/images/noImg.gif";
+import Loading from 'components/loding/Loading';
 
 const OrderInfo = ({ orderData }) => {
     const [orderMap, setOrderMap] = useState([...orderData]);
@@ -34,11 +35,13 @@ const OrderInfo = ({ orderData }) => {
         calcPayment();
     }, [])
 
-    useEffect(() => {   
-        (Number(userAddr.user_point) - point) >= 0
-        ? setTotalPay(sumPay+2500-point)
-        : setTotalPay(sumPay+2500-Number(userAddr.user_point));
-    },[point])
+    useEffect(() => {
+        if (userAddr !== undefined || userAddr !== "") {
+            (Number(userAddr.user_point) - point) >= 0
+                ? setTotalPay(sumPay + 2500 - point)
+                : setTotalPay(sumPay + 2500 - Number(userAddr.user_point));
+        }
+    }, [point, userAddr])
 
     const checkRadio = (e) => {
         if (e.target.value === "old") {
@@ -85,7 +88,7 @@ const OrderInfo = ({ orderData }) => {
 
     const calcPayment = () => {
         let sum = 0;
-        for(let i=0; i<orderData.length; i++){
+        for (let i = 0; i < orderData.length; i++) {
             sum += orderData[i].total_price;
         }
         setSumPay(sum);
@@ -155,7 +158,7 @@ const OrderInfo = ({ orderData }) => {
             // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "N", //환불여부
             receiver: receiver,
-            point:point
+            point: point
         }
 
         requestOrder(data);
@@ -163,9 +166,11 @@ const OrderInfo = ({ orderData }) => {
     }
 
     return (
-        <Style.Order>
-            <div className="wrap">
-                <Style.Title>주문/결제</Style.Title>
+        userAddr === ""
+            ? <Loading />
+            : <Style.Order>
+                <div className="wrap">
+                    <Style.Title>주문/결제</Style.Title>
                     <Style.Purchase >
                         <ul className='title'>
                             <li>상품정보</li>
@@ -176,112 +181,112 @@ const OrderInfo = ({ orderData }) => {
                         {
                             orderMap.map((a, i) => {
                                 return (
-                                        <ul className="productInfo" key={i}>
-                                            <li>
-                                                <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
-                                                <div className="content">
-                                                    <div className="title">{a.product_name}</div>
-                                                </div>
-                                            </li>
-                                            <li>{a.prodcut_count}개</li>
-                                            <li>{a.sale}%</li>
-                                            <li>{a.total_price}원</li>
-                                        </ul>
-                                        )
-                                    })
+                                    <ul className="productInfo" key={i}>
+                                        <li>
+                                            <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
+                                            <div className="content">
+                                                <div className="title">{a.product_name}</div>
+                                            </div>
+                                        </li>
+                                        <li>{a.prodcut_count}개</li>
+                                        <li>{a.sale}%</li>
+                                        <li>{a.total_price}원</li>
+                                    </ul>
+                                )
+                            })
                         }
                     </Style.Purchase>
-                
 
-                <Style.Info>
-                    
-                    <Style.Payment>
-                        <Style.Form>
-                            <Style.SubTitle>배송 정보</Style.SubTitle>
-                            <div>
-                                <label htmlFor="">
-                                    <span>직접 입력</span>
-                                    <input type="radio" value="new" name="addr" onChange={checkRadio} />
-                                    <span>기본 배송지</span>
-                                    <input type="radio" value="old" name="addr" onChange={checkRadio} />
-                                </label>
-                            </div>
-                            <div>
-                                <span>주문자</span>
-                                <input type="text" onChange={onChange} name='buyerName' value={buyerName} />
-                            </div>
-                            <div>
-                                <span>받는 사람</span>
-                                <input type="text" onChange={onChange} name='receiver' value={receiver} />
-                            </div>
-                            <div>
-                                <span>연락처</span>
-                                <input type="text" onChange={onChange} name='buyerTel' value={buyerTel} />
-                            </div>
-                            <div>
+
+                    <Style.Info>
+
+                        <Style.Payment>
+                            <Style.Form>
+                                <Style.SubTitle>배송 정보</Style.SubTitle>
+                                <div>
+                                    <label htmlFor="">
+                                        <span>직접 입력</span>
+                                        <input type="radio" value="new" name="addr" onChange={checkRadio} />
+                                        <span>기본 배송지</span>
+                                        <input type="radio" value="old" name="addr" onChange={checkRadio} />
+                                    </label>
+                                </div>
+                                <div>
+                                    <span>주문자</span>
+                                    <input type="text" onChange={onChange} name='buyerName' value={buyerName} />
+                                </div>
+                                <div>
+                                    <span>받는 사람</span>
+                                    <input type="text" onChange={onChange} name='receiver' value={receiver} />
+                                </div>
+                                <div>
+                                    <span>연락처</span>
+                                    <input type="text" onChange={onChange} name='buyerTel' value={buyerTel} />
+                                </div>
+                                <div>
+                                    {
+                                        checkAddr === "new"
+                                            ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
+                                            : <span>주소</span>
+                                    }
+                                    <input readOnly name='orderAddress' value={address} />
+                                    <input type="text" onChange={onChange} name='buyerDetailAddress' value={buyerDetailAddress} placeholder='상세주소입력' />
+                                </div>
                                 {
-                                    checkAddr === "new"
-                                        ? <span className='address' onClick={() => { setIsPostOpen(true) }}>주소찾기</span>
-                                        : <span>주소</span>
+                                    isPostOpen && <DaumPost
+                                        setIsPostOpen={setIsPostOpen}
+                                        setZoneCode={setZoneCode}
+                                        setAddress={setAddress}
+                                    ></DaumPost>
                                 }
-                                <input readOnly name='orderAddress' value={address} />
-                                <input type="text" onChange={onChange} name='buyerDetailAddress' value={buyerDetailAddress} placeholder='상세주소입력' />
-                            </div>
-                            {
-                                isPostOpen && <DaumPost
-                                    setIsPostOpen={setIsPostOpen}
-                                    setZoneCode={setZoneCode}
-                                    setAddress={setAddress}
-                                ></DaumPost>
-                            }
-                        </Style.Form>
-                        <Style.payForm>
-                            <Style.SubTitle>결제 정보</Style.SubTitle>
-                            <div>
-                                <span>총 상품금액</span>
-                                <span>{sumPay}원</span>    
-                            </div>
-                            <div>
-                                <span>배송비</span>
-                                <span>2,500원</span>    
-                            </div>
-                            <div>
-                                <span>보유 적립금 <span className='light'></span> </span>
-                                <span>{(userAddr.user_point - point) >= 0 
+                            </Style.Form>
+                            <Style.payForm>
+                                <Style.SubTitle>결제 정보</Style.SubTitle>
+                                <div>
+                                    <span>총 상품금액</span>
+                                    <span>{sumPay}원</span>
+                                </div>
+                                <div>
+                                    <span>배송비</span>
+                                    <span>2,500원</span>
+                                </div>
+                                <div>
+                                    <span>보유 적립금 <span className='light'></span> </span>
+                                    <span>{(userAddr.user_point - point) >= 0
                                         ? userAddr.user_point - point
                                         : 0}</span>
-                            </div>
-                            <div className='point'>
-                                <span>사용 적립금</span>
-                                <input type="text" 
-                                    onChange={onChange} 
-                                    name='point' 
-                                    value={(point < userAddr.user_point)
-                                        ? point > 0
-                                            ? point
-                                            : 0
-                                        : userAddr.user_point} />
-                                {/* <button 
+                                </div>
+                                <div className='point'>
+                                    <span>사용 적립금</span>
+                                    <input type="text"
+                                        onChange={onChange}
+                                        name='point'
+                                        value={(point < userAddr.user_point)
+                                            ? point > 0
+                                                ? point
+                                                : 0
+                                            : userAddr.user_point} />
+                                    {/* <button 
                                 onClick={() => {
                                     pointUse(point);
                                 }
                                 }>사 용</button> */}
-                            </div>
-                            <div>
-                                <span className='totalPay'>
-                                    총 결제금액
-                                </span>
-                                <span className='totalPay'>
-                                    {totalPay}원
-                                </span>
-                            </div>
-                            <button className='submit' onClick={payment}>결제하기</button>
-                        </Style.payForm>
-                    </Style.Payment>
-                </Style.Info>
-                <Inicis payData={payData} isPurchase={isPurchase} />
-            </div>
-        </Style.Order >
+                                </div>
+                                <div>
+                                    <span className='totalPay'>
+                                        총 결제금액
+                                    </span>
+                                    <span className='totalPay'>
+                                        {totalPay}원
+                                    </span>
+                                </div>
+                                <button className='submit' onClick={payment}>결제하기</button>
+                            </Style.payForm>
+                        </Style.Payment>
+                    </Style.Info>
+                    <Inicis payData={payData} isPurchase={isPurchase} />
+                </div>
+            </Style.Order >
     );
 };
 export default OrderInfo;
