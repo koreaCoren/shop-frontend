@@ -30,7 +30,7 @@ const Searching = ({ board, setBoardList, searchType, reset }) => {
         product: {
             prop: "goods_nm",
             placeholder: "상품명 검색"
-        }
+        },
     };
 
     const search = () => {

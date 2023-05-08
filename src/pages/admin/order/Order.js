@@ -27,8 +27,6 @@ const Order = () => {
         setState(data);
     }
 
-
-
     useEffect(() => {
         const data = {
             boardPage: boardPage,
@@ -46,6 +44,7 @@ const Order = () => {
     useEffect(() => {
         board !== null && getDeliveryStatus(board.list);
     }, [board])
+
     return (
         board === null
             ? <Loading />
