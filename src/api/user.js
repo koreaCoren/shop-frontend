@@ -1,7 +1,7 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 
-// 회원 방문 카운팅
+// 회원 방문자 수 가져오기
 const getUserAccessCount = async (success) => {
     try {
         const res = await axios.get("/data/sel_user_count");
@@ -11,6 +11,7 @@ const getUserAccessCount = async (success) => {
     }
 }
 
+// 회원 방문 카운팅
 const updateUserAccessCount = async (data) => {
     try {
         const res = await axios.get("/data/user_count", data);

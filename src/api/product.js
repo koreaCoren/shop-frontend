@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 
 // 상품 리스트 가져오기
 const getProdcut = async (success) => {
@@ -12,10 +12,10 @@ const getProdcut = async (success) => {
 }
 
 // 상품 상세 정보 가져오기
-const getDetailProdcut = async (data) => {
+const getDetailProdcut = async (data, success) => {
     try {
         const res = await axios.post("/goods/detail_goods", data);
-        data.result = res.data.result;
+        success(res.data.result);
     } catch (error) {
         handleApiError(error);
     }
@@ -64,6 +64,7 @@ const getAccumulateSell = async (success) => {
     }
 }
 
+// 상품 리뷰 가져오기
 const getProductReivew = async (data, success) => {
     try {
         const res = await axios.post("/board/sel_goods_review", data);

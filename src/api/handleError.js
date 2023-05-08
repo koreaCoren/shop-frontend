@@ -1,5 +1,6 @@
 import axios from "./axios";
 
+// 통신에러
 const handleApiError = async (error) => {
     if (axios.isCancel(error)) {
         console.log("Request canceled:", error.message);
@@ -20,6 +21,7 @@ const handleApiError = async (error) => {
     console.log(error.config);
 };
 
+// 토큰에러
 function handleTokenError(msg) {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("userId");

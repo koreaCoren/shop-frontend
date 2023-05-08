@@ -12,41 +12,50 @@ import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
-import { getProductReivew } from 'api/product';
+import { getProductReivew, getDetailProdcut } from 'api/product';
 
-const Detail = ({ result, setOrderData }) => {
+const Detail = ({ setOrderData }) => {
     const nav = useNavigate();
     const { productCode } = useParams();
-    const [productDetail, setProductDetail] = useState();
-    const [star, setStar] = useState();
-    const [stars, setStars] = useState(0);
-    const [count, setCount] = useState(1);
-    const [deliveryPay, setDeliveryPay] = useState(2500);
-    const [lightOn, setLightOn] = useState();
-    const [fav, setFav] = useState(0);
+    const [productDetail, setProductDetail] = useState(null);
     const [review, setReview] = useState();
+    const [count, setCount] = useState(1);
+
+    const [option, setOption] = useState(null);
+    const [optionValue, setOptionValue] = useState(0);
+
+    const [avgStar, setAvgStar] = useState();
+    const [totalStar, setTotalStar] = useState(0);
+
+    const [price, setPrice] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [deliveryPay, setDeliveryPay] = useState(2500);
 
     const DescriptionRef = useRef();
     const returnRef = useRef();
     const reviewRef = useRef();
 
-    // const favControll = useMutation(settingFav);
-    // const favList = useMutation(getFavList);
-
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
         // selFav();
-        if (result !== null) {
-            for (let i = 0; i < result[0].length; i++) {
-                if (result[0][i].goods_code === productCode) {
-                    setProductDetail(result[0][i]);
-                    setStar(result[1][result[0][i].goods_code]?.avg_grade.substring(0, 3));
-                    setStars(result[1][result[0][i].goods_code]?.grade_count)
-                };
-            };
-        };
+        getDetailProdcut({ goods_code: productCode }, setProductDetail);
         getReviewList();
-    }, [result]);
+    }, []);
+
+    useEffect(() => {
+        if (productDetail?.review_avg.grade_count !== 0) {
+            setAvgStar(productDetail?.review_avg.avg_grade.substring(0, 3));
+            setTotalStar(productDetail?.review_avg.grade_count);
+        }
+        if (productDetail?.option_data.length > 0) {
+            setOption(productDetail?.option_data);
+        }
+    }, [productDetail])
+
+    useEffect(() => {
+        setPrice(Math.ceil(productDetail?.goods_data.goods_price - (productDetail?.goods_data.goods_price * (productDetail?.goods_data.goods_sale * 0.01)) + optionValue));
+        setTotalPrice(price * count);
+    }, [optionValue, count, productDetail, price])
 
     //상품갯수증가
     const countUp = () => {
@@ -61,6 +70,7 @@ const Detail = ({ result, setOrderData }) => {
         }
         setCount(count - 1);
     }
+
     //리뷰리스트 가져오기
     const getReviewList = () => {
         const data = {
@@ -70,39 +80,6 @@ const Detail = ({ result, setOrderData }) => {
         }
         getProductReivew(data, setReview)
     }
-    /* 좋아요는 당분간 봉인
-    // 좋아요 리스트
-    const selFav = async () => {
-        const data = {
-            user_id: sessionStorage.getItem('userId'),
-            goods_code: productCode
-        };
-        await favList.mutateAsync(data);
-        setFav(data.result.is_fav);
-    }
-
-    //좋아요 클릭
-    const changeFav = () => {
-        setFav(fav => fav === 0 ? 1 : 0);
-        insFav(fav);
-    }
-
-    // 좋아요 클릭
-    const insFav = async () => {
-        fav === 0 ? setFav(1) : setFav(0);
-        if (sessionStorage.getItem('userId') !== null) {
-            const data = {
-                user_id: sessionStorage.getItem('userId'),
-                goods_code: productCode,
-                is_fav: fav === 0 ? 1 : 0,
-            }
-            await favControll.mutateAsync(data);
-        } else {
-            alert("로그인이 필요합니다.");
-            window.location.replace("/login");
-        }
-    }
-    */
 
     //구매 클릭
     const orderClick = () => {
@@ -110,20 +87,20 @@ const Detail = ({ result, setOrderData }) => {
             return;
         }
 
-        if (productDetail?.goods_stock == 0) {
+        if (productDetail.goods_data.goods_stock === 0) {
             alert("재고가 없습니다. 판매자에게 문의바랍니다");
             return
         }
 
         const data = {
             product_code: productCode,
-            product_name: productDetail?.goods_nm,
-            product_img: productDetail?.goods_img,
+            product_name: productDetail.goods_data.goods_nm,
+            product_img: productDetail.goods_data.goods_img,
             deliveryPay: deliveryPay,
-            price: productDetail?.goods_price,
-            sale: productDetail?.goods_sale,
+            price: productDetail.goods_data.goods_price,
+            sale: productDetail.goods_data.goods_sale,
             prodcut_count: count,
-            total_price: Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count
+            total_price: totalPrice
         }
 
         setOrderData([data]);
@@ -134,14 +111,21 @@ const Detail = ({ result, setOrderData }) => {
     const moveScroll = (location) => {
         location.current.scrollIntoView({ behavior: "smooth" })
     }
+
+    const onOptionChange = (e) => {
+        const value = e.target.value;
+        setOptionValue(Number(value));
+    }
+
     return (
-        productDetail === undefined
+        productDetail === null
             ? <Loading />
             : <Style.Padding>
                 <div className="wrap">
                     <Style.Info>
+
                         <Style.ImageInfo>
-                            <img src={productDetail?.goods_img === "" ? noImg : productDetail?.goods_img} alt="" />
+                            <img src={productDetail.goods_data.goods_img === "" ? noImg : productDetail.goods_data.goods_img} alt="" />
                             {/* 확대보기 버튼
                         <button>
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -149,49 +133,72 @@ const Detail = ({ result, setOrderData }) => {
                         </button>
                         */}
                         </Style.ImageInfo>
+
                         <Style.Content>
-                            <h2>{productDetail?.goods_nm}</h2>
+                            <h2>{productDetail.goods_data.goods_nm}</h2>
+
                             <div className="info">
+
                                 <Style.DetailInfo>
                                     <li>
                                         <b>평점</b>
                                         {
-                                            star === undefined
+                                            avgStar === undefined
                                                 ? <span>리뷰없음</span>
-                                                : <span><Star style={{ paddingBottom: "5px" }} fill='#ffd900' />{star}({stars})
+                                                : <span><Star style={{ paddingBottom: "5px" }} fill='#ffd900' />{avgStar}({totalStar})
                                                 </span>
                                         }
                                     </li>
-                                    <li><b>판매가</b><span className="pay">{comma(productDetail?.goods_price)}원</span></li>
-                                    <li><b>할인률</b><span>{productDetail?.goods_sale}%</span></li>
+                                    <li><b>판매가</b><span className="pay">{comma(productDetail.goods_data.goods_price)}원</span></li>
+                                    <li><b>할인률</b><span>{productDetail.goods_data.goods_sale}%</span></li>
                                     <li><b>국내해외배송</b><span>국내배송</span></li>
                                     <li><b>배송방법</b><span>택배</span></li>
                                     <li><b>배송비</b><span>{comma(deliveryPay)} (50,000 이상 구매시 무료)</span></li>
                                 </Style.DetailInfo>
+
                                 <p>(최소주문수량 1개 이상)</p>
+                                <Style.OptionSelect>
+                                    {
+                                        option?.length > 0
+                                            ? <select name='option' onChange={onOptionChange}>
+                                                <option value="0">선택 안함  + 0원</option>
+                                                {
+                                                    option?.map((a, i) => {
+                                                        return <option key={i} value={a.option_price}>
+                                                            {a.option_name} + {comma(a.option_price)}원
+                                                        </option>
+                                                    })
+                                                }
+                                            </select>
+                                            : null
+                                    }
+                                    <i className="fa-solid fa-sort-down"></i>
+                                </Style.OptionSelect>
+
                                 <Style.Quantity>
-                                    <div className="name">{productDetail?.goods_nm}</div>
+                                    <div className="name">{productDetail.goods_data.goods_nm}</div>
                                     <div className="num">
                                         <i className="fa-solid fa-minus" onClick={countDown}></i>
                                         <span>{count}</span>
                                         <i className="fa-solid fa-plus" onClick={countUp}></i>
                                     </div>
-                                    <div className="money">{comma(Math.ceil(productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))))}원</div>
+                                    <div className="money">{comma(price)}원</div>
                                 </Style.Quantity>
+
                                 <Style.Total>
                                     <span><b>총 상품가격</b></span>
-                                    <b>{comma(Math.ceil((productDetail?.goods_price - (productDetail?.goods_price * (productDetail?.goods_sale * 0.01))) * count))}원</b>
+                                    <b>{comma(totalPrice)}원</b>
                                 </Style.Total>
+
                                 <Style.ButtonBox>
-                                    {productDetail?.goods_stock == 0
+                                    {productDetail.goods_data.goods_stock == 0
                                         ? <Style.Button cursor={"default"} style={{ color: "tomato" }} >재고부족</Style.Button>
                                         : <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                     }
 
                                     <Style.Button onClick={() => { addBasket(productDetail, count) }}>장바구니 담기</Style.Button>
-                                    {/* <Style.fav onClick={() => { insFav() }}>{fav === 0 ? "♡" : "❤︎"}</Style.fav> */}
-                                    {/* <Style.Button>관련상품</Style.Button> */}
                                 </Style.ButtonBox>
+
                             </div>
                         </Style.Content>
                     </Style.Info>
@@ -208,12 +215,11 @@ const Detail = ({ result, setOrderData }) => {
                                 }}>교환/반품</li>
                             </ul>
                         </Style.DescriptionMenu>
-                        <Style.OrderMenu>
-                            <div></div>
-                        </Style.OrderMenu>
+
                         <Style.DescriptionShow>
-                            <div dangerouslySetInnerHTML={{ __html: productDetail?.goods_detail }}></div>
+                            <div dangerouslySetInnerHTML={{ __html: productDetail.goods_data.goods_detail }}></div>
                         </Style.DescriptionShow>
+
                         <Style.Review>
                             <div className="nav">
                                 <ul ref={reviewRef}>
@@ -254,48 +260,7 @@ const Detail = ({ result, setOrderData }) => {
                                 })
                             }
                         </Style.Review>
-                        {/* <Style.QnA>
-                        <h2>상품 문의</h2>
-                        <span>배송관련, 주문(취소/교환/환불/관련) 문의 및 요청사항은 마이페이지 1:1문의에 남겨주세요.</span>
-                        <table className='QnATable'>
-                            <thead>
-                                <tr>
-                                    <th className='title bold'>제     목</th>
-                                    <th className='user bold'>작 성 자</th>
-                                    <th className='date bold'>작 성 일</th>
-                                    <th className='QnA bold'>답변상태</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td onClick={() => {alert("애요옹~~??");}}>애용</td>
-                                    <td className='user'>asd</td>
-                                    <td className='date'>2023.02.01</td>
-                                    <td className='QnA'>답변완료</td>
-                                </tr>
-                                <tr>
-                                    <td onClick={() => {alert("애옹~~??");}}>재입고</td>
-                                    <td className='user'>PKD</td>
-                                    <td className='date'>2023.02.01</td>
-                                    <td className='QnA'>-</td>
-                                </tr>
-                                <tr>
-                                    <td onClick={() => {alert("애~~~~요옹??");}}>고영희씨</td>
-                                    <td className='user'>PKD</td>
-                                    <td className='date'>2023.01.23</td>
-                                    <td className='QnA'>답변완료</td>
-                                </tr>
-                                <tr>
-                                    <td onClick={() => {
-                                        alert("애옹!!!");
-                                        }}>안녕?</td>
-                                    <td className='user'>PKD</td>
-                                    <td className='date'>2023.01.31</td>
-                                    <td className='QnA'>-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </Style.QnA> */}
+
                         <Style.Return>
                             <div className='nav'>
                                 <ul ref={returnRef}>

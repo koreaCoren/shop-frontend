@@ -25,15 +25,12 @@ const OrderDetail = ({ }) => {
             orderCode: orderCode,
         };
 
-        getOrderCode(data, setList);
-
-        await track(data.result[0].carrier, data.result[0].delivery, trackResult);
-        setState(...trackResult);
+        await getOrderCode(data, setList);
     }
 
     const refundOrder = async () => {
         const data = {
-            orderCode : orderCode
+            orderCode: orderCode
         };
         cancelOrder(data);
     }
@@ -41,6 +38,13 @@ const OrderDetail = ({ }) => {
     useEffect(() => {
         getOrderDetailData();
     }, [])
+
+    useEffect(() => {
+        if (list !== null) {
+            track(list[0].carrier, list[0].delivery, trackResult);
+            setState(...trackResult);
+        }
+    }, [list])
 
     return (
         list === null
@@ -166,10 +170,10 @@ const OrderDetail = ({ }) => {
                 <Common.Line></Common.Line>
 
                 <Common.Button style={{ marginTop: "10px" }}>
-                    <button 
-                    onClick={() => {
-                        refundOrder();
-                    }}>주문 취소</button>
+                    <button
+                        onClick={() => {
+                            refundOrder();
+                        }}>주문 취소</button>
                 </Common.Button>
             </Common.InDiv >
     );

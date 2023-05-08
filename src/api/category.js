@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 
 // 카테고리 가져오기
 const getCategory = async (success) => {

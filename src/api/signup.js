@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 import { login } from "./login";
 
 // 회원가입
