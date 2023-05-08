@@ -12,7 +12,8 @@ export const Title = styled.h2`
 export const SubTitle = styled.h3`
     font-weight: 700;
     font-size: 20px;
-    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 `
 
 export const Purchase = styled.div`
@@ -54,18 +55,32 @@ export const Purchase = styled.div`
     }
     ul.productInfo li .content{}
 `
+export const Payment = styled.div`
+    padding: 10px;
+    display: flex;
+    justify-content:space-around;
+    gap: 150px;
+    
+`
 
 export const Info = styled.div`
     border: 1px solid #ddd;
     margin: 15px 0px;
     padding: 15px;
+
+    .submit{
+        background-color: #ddd;
+        padding: 10px 0px;
+        cursor: pointer;
+    }
 `
 
 export const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    flex: 1;
+    
     div{
         display: flex;
         flex-direction: column;
@@ -89,11 +104,46 @@ export const Form = styled.form`
     div input[type="radio"]{
         width: 50px;
     }
+`
 
-    
-    .submit{
+export const payForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex:1;
+
+    div{
+        display: flex;
+        gap: 5px;
+        justify-content: space-between;
+        padding-bottom: 10px;
+    }
+    div.point{
+        text-align:end;
+    }
+    div.point input[type="text"]{
+        text-align:end;
+    }
+    div.point button{
         background-color: #ddd;
-        padding: 10px 0px;
+        padding: 7px 10px;
         cursor: pointer;
+        margin-left:10px;
+    }
+    div span{
+        font-size:16px;
+    }
+    div span .light{
+        font-size:12px;
+        line-height:bottom;
+    }
+    div input[type="text"]{
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+    div .totalPay{
+        font-size:24px;
+        font-weight:bold;
+        padding-top:20px;
     }
 `
