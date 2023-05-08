@@ -1,6 +1,6 @@
-import { handleApiError } from './handleApiError';
+import { handleApiError } from './handleError';
 
-// 로그인
+// 로그아웃
 const logout = async () => {
     try {
         sessionStorage.removeItem('token');

@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 
 // 주문리스트 가져오기
 // 어드민일땐 모든 유저 주문정보 아니면 내 주문 정보
@@ -36,6 +36,9 @@ const getDetailOrder = async (data, success) => {
 const cancelOrder = async (data) => {
     try {
         const res = await axios.post("/order/cancel_order", data);
+        if (res.data.result.error === "E21") {
+            alert("주문취소에 실패했습니다 관리자에 문의 부탁드립니다.");
+        }
     } catch (error) {
         handleApiError(error);
     }

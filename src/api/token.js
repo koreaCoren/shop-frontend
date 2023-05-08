@@ -1,30 +1,53 @@
 import axios from './axios';
-import { handleApiError, handleTokenError } from './handleApiError';
+import { handleApiError, handleTokenError } from './handleError';
 
-// 로그인
+const getToken = () => {
+    return sessionStorage.getItem('token');
+};
+
+const getUserId = () => {
+    return sessionStorage.getItem('userId');
+};
+
+const setUserId = (userId) => {
+    sessionStorage.setItem('userId', userId);
+};
+
+const setToken = (token) => {
+    sessionStorage.setItem('token', token);
+};
+
+const getHeaders = () => {
+    const token = getToken();
+
+    return {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+    };
+};
+
+// 토큰체크
 const tokenCheck = async (success) => {
     try {
-        const token = sessionStorage.getItem("token");
+        const token = getToken();
 
-        if (token !== null) {
-            const userId = sessionStorage.getItem("userId");
+        if (token) {
+            const userId = getUserId();
+            const headers = getHeaders();
 
-            const headers = {
-                "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
-                "Content-Type": "application/json",
-            };
+            const res = await axios.post('/user/checkToken', null, {
+                headers: headers,
+            });
 
-            const res = await axios.post("/user/checkToken", {}, { headers: headers });
-
-            if (res.data.result === "ok") {
-                if (userId === null) {
-                    sessionStorage.setItem("userId", res.data.id);
+            if (res.data.result === 'ok') {
+                if (!userId) {
+                    setUserId(res.data.id);
                 } else {
-                    if (res.data.res === "renew") {
-                        sessionStorage.setItem("token", res.data.Atoken);
-                        sessionStorage.setItem("userId", res.data.id);
+                    if (res.data.res === 'renew') {
+                        setToken(res.data.Atoken);
+                        setUserId(res.data.id);
                     } else if (userId !== res.data.id) {
-                        handleTokenError("아이디값이랑 토큰값 불일치로 인해 로그아웃 됩니다.");
+                        handleTokenError('아이디값이랑 토큰값 불일치로 인해 로그아웃 됩니다.');
                     }
                 }
 

@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { handleApiError } from "./handleApiError";
+import { handleApiError } from "./handleError";
 
 // 게시글 가져오기
 const getBoard = async (data, success) => {

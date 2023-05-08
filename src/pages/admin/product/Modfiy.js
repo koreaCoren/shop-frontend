@@ -15,6 +15,7 @@ import * as Style from 'assets/styleComponent/admin/product/edit';
 import ProductOption from 'components/admin/product/input/ProductOption';
 
 const Modfiy = () => {
+    const [getProdcut, setProduct] = useState(null);
     const [productName, setProductName] = useState("");
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
@@ -47,25 +48,22 @@ const Modfiy = () => {
     }, [cate01])
 
     const getProductData = async () => {
-        const data = {
-            goods_code: productCode
-        }
-        await getDetailProdcut(data);
+        await getDetailProdcut({ goods_code: productCode }, setProduct);
 
-        let cateData = data.result.goods_data.cate_code;
+        let cateData = getProdcut.goods_data.cate_code;
         let str = cateData.toString();
         let firCate = str.slice(0, 2);
 
-        setProductName(data.result.goods_data.goods_nm);
+        setProductName(getProdcut.goods_data.goods_nm);
         setCate01(firCate);
         setCate02(str);
-        setPrice(data.result.goods_data.goods_price);
-        setDiscount(data.result.goods_data.goods_sale);
-        setSell(data.result.goods_data.goods_sell);
-        setStock(data.result.goods_data.goods_stock);
-        setThumbnail(data.result.goods_data.goods_img);
-        setProductContent(data.result.goods_data.goods_detail);
-        setOptionData(data.result.option_data);
+        setPrice(getProdcut.goods_data.goods_price);
+        setDiscount(getProdcut.goods_data.goods_sale);
+        setSell(getProdcut.goods_data.goods_sell);
+        setStock(getProdcut.goods_data.goods_stock);
+        setThumbnail(getProdcut.goods_data.goods_img);
+        setProductContent(getProdcut.goods_data.goods_detail);
+        setOptionData(getProdcut.option_data);
     }
 
     const onSubmit = async (e) => {
@@ -154,7 +152,7 @@ const Modfiy = () => {
 
 
     return (
-        productName === ""
+        getProdcut === null
             ? <Loading />
             : <>
                 <form onSubmit={onSubmit}>

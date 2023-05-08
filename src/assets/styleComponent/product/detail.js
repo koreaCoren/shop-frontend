@@ -95,7 +95,7 @@ export const Content = styled.div`
     .info p {
         color: #ccc;
         font-size: 18px;
-        margin: 20px 0px 50px;
+        margin: 20px 0px 20px;
         font-weight: bold;
     }
 
@@ -187,6 +187,27 @@ export const DetailInfo = styled.ul`
         li span.pay {
             color: #d1b064;
         }
+    }
+`
+
+export const OptionSelect = styled.div`
+    position: relative;
+    margin-bottom: 20px;
+
+    select{
+        width: 100%;
+        line-height: 40px;
+        border: 1px solid #ddd;
+        padding: 0px 10px;
+        font-family: 'Pretendard-Regular';
+    }
+
+    i{
+        position: absolute;
+        top: 40%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 20px;
     }
 `
 
@@ -311,8 +332,6 @@ export const DescriptionMenu = styled.div`
         color: white;
     }
 `
-export const OrderMenu = styled.div`
-`
 
 export const DescriptionShow = styled.div`
     padding: 40px 0;
@@ -375,57 +394,6 @@ export const Review = styled.div`
     
     `
 
-export const QnA = styled.div`
-    padding: 20px 0;
-
-    h2{
-        font-size: 24px;
-        padding-bottom: 20px;
-    }
-
-    span{
-        color: gray;
-    }
-
-    table{
-        padding: 20px 0;
-    }
-
-    table thead{
-        border-top: 2px solid black;
-        border-bottom: 1px solid black;
-    }
-
-    table .bold{
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    table .title{
-        width: 600px;
-        font-size: 16px;
-    }
-
-    table .user, .date, .QnA{
-        width: 160px;
-        
-        text-align: center;
-    }
-
-    table th, td{
-        padding: 10px 0;
-        padding-bottom: 1px solid;
-    }
-
-    table td{
-        border-bottom: 1px solid rgb(230,230,230);
-    }
-
-    table td:first-child{
-        padding-left: 10px;
-        cursor: pointer;
-    }
-`
 export const Return = styled.div`
 margin: 40px 0;
 h4{

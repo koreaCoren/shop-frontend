@@ -1,5 +1,5 @@
 import axios from './axios';
-import { handleApiError } from './handleApiError';
+import { handleApiError } from './handleError';
 
 // 로그인
 const login = async (data) => {

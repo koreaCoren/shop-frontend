@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import * as XLSX from 'xlsx/xlsx.mjs';
 import * as saveAs from "file-saver";
 
 import { downOrderList } from 'api/order.js';
-
-import * as Style from 'assets/styleComponent/admin/order/order';
 
 const Download = () => {
     const [list, setList] = useState();
@@ -93,8 +93,16 @@ const Download = () => {
     }, [])
 
     return (
-        <Style.DownloadButton onClick={down}>주문정보 다운로드</Style.DownloadButton>
+        <DownloadButton onClick={down}>주문정보 다운로드</DownloadButton>
     );
 };
+
+const DownloadButton = styled(Link)`
+    line-height: 30px;
+    background-color: #1a6dff;
+    color: #fff;
+    padding: 0px 10px;
+    border-radius: 5px;
+`
 
 export default Download;
