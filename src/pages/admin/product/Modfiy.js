@@ -35,8 +35,14 @@ const Modfiy = () => {
     useEffect(() => {
         // 카테고리 가져오기
         getCategory(setFirstCategory);
-        getProductData();
+        getDetailProdcut({ goods_code: productCode }, setProduct);
     }, [])
+
+    useEffect(() => {
+        if (getProdcut !== null) {
+            getProductData();
+        }
+    }, [getProdcut])
 
     useEffect(() => {
         // 카테고리 1번 선택하면 2번에 카테고리 1번 하위 카테고리 가져오기
@@ -47,11 +53,9 @@ const Modfiy = () => {
         }
     }, [cate01])
 
-    const getProductData = async () => {
-        await getDetailProdcut({ goods_code: productCode }, setProduct);
-
+    const getProductData = () => {
         let cateData = getProdcut.goods_data.cate_code;
-        let str = cateData.toString();
+        let str = String(cateData);
         let firCate = str.slice(0, 2);
 
         setProductName(getProdcut.goods_data.goods_nm);
