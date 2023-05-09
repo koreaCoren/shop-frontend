@@ -11,6 +11,8 @@ import * as Style from "assets/styleComponent/order/order"
 import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
+import {comma} from 'utils/commaReplace';
+
 const OrderInfo = ({ orderData }) => {
     const [order, setOrder] = useState([...orderData]);
     const [buyerName, setBuyerName] = useState("");
@@ -24,11 +26,13 @@ const OrderInfo = ({ orderData }) => {
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({});
     const delivery = '';
-    const [sumPay, setSumPay] = useState(0);
     const [userAddr, setUserAddr] = useState("");
     const [checkAddr, setCheckAddr] = useState("new");
-    const [orderTotalPrice, setOrderTotalPrice] = useState(0);
+    // const [orderTotalPrice, setOrderTotalPrice] = useState(0);
+    const [sumPay, setSumPay] = useState(0);
     const [totalPay, setTotalPay] = useState(0);
+    const [deliveryPay, setDeliverPay] = useState(2500);
+
 
     useEffect(() => {
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
@@ -38,8 +42,8 @@ const OrderInfo = ({ orderData }) => {
     useEffect(() => {
         if (userAddr !== undefined || userAddr !== "") {
             (Number(userAddr.user_point) - point) >= 0
-                ? setTotalPay(sumPay + 2500 - point)
-                : setTotalPay(sumPay + 2500 - Number(userAddr.user_point));
+                ? setTotalPay(sumPay + deliveryPay - point)
+                : setTotalPay(sumPay + deliveryPay - Number(userAddr.user_point));
         }
     }, [point, userAddr])
 
@@ -92,6 +96,9 @@ const OrderInfo = ({ orderData }) => {
             sum += orderData[i].total_price;
         }
         setSumPay(sum);
+        sum > 50000
+            ?setDeliverPay(0)
+            :setDeliverPay(2500);
     }
 
     const payment = (e) => {
@@ -138,7 +145,7 @@ const OrderInfo = ({ orderData }) => {
             buyerName: buyerName,
             buyerTel: Number(buyerTel),
             buyerEmail: "",
-            productPrice: Number(orderTotalPrice) > 0 ? Number(orderTotalPrice) : Number(orderTotalPrice) + 2500,
+            productPrice: Number(orderTotalPrice) > 0 ? Number(orderTotalPrice) : Number(orderTotalPrice) + deliveryPay,
             payStatus: 0,
             returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
             closeUrl: `${process.env.REACT_APP_URL}/close`,
@@ -159,7 +166,7 @@ const OrderInfo = ({ orderData }) => {
             // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "N", //환불여부
             receiver: receiver,
-            point: point
+            point: point,
         }
 
         requestOrder(data);
@@ -191,7 +198,7 @@ const OrderInfo = ({ orderData }) => {
                                         </li>
                                         <li>{a.prodcut_count}개</li>
                                         <li>{a.sale}%</li>
-                                        <li>{a.total_price}원</li>
+                                        <li>{comma(a.total_price)}원</li>
                                     </ul>
                                 )
                             })
@@ -245,16 +252,18 @@ const OrderInfo = ({ orderData }) => {
                                 <Style.SubTitle>결제 정보</Style.SubTitle>
                                 <div>
                                     <span>총 상품금액</span>
-                                    <span>{sumPay}원</span>
+                                    <span>{comma(sumPay)}원</span>
                                 </div>
                                 <div>
-                                    <span>배송비</span>
-                                    <span>2,500원</span>
+                                    <span>배송비
+                                        <span className='light'>(5만원 이상 무료)</span>
+                                    </span>
+                                    <span>{comma(deliveryPay)}원</span>
                                 </div>
                                 <div>
                                     <span>보유 적립금 <span className='light'></span> </span>
                                     <span>{(userAddr.user_point - point) >= 0
-                                        ? userAddr.user_point - point
+                                        ? comma(userAddr.user_point - point)
                                         : 0}</span>
                                 </div>
                                 <div className='point'>
@@ -278,7 +287,7 @@ const OrderInfo = ({ orderData }) => {
                                         총 결제금액
                                     </span>
                                     <span className='totalPay'>
-                                        {totalPay}원
+                                        {comma(totalPay)}원
                                     </span>
                                 </div>
                                 <button className='submit' onClick={payment}>결제하기</button>
