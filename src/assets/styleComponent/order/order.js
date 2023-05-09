@@ -60,7 +60,10 @@ export const Payment = styled.div`
     display: flex;
     justify-content:space-around;
     gap: 150px;
-    
+    @media(max-width:800px) {
+        flex-direction: column;
+        gap: 50px;
+    }
 `
 
 export const Info = styled.div`
@@ -134,7 +137,7 @@ export const payForm = styled.form`
         font-size:16px;
     }
     div span .light{
-        font-size:12px;
+        font-size:14px;
         line-height:bottom;
     }
     div input[type="text"]{
@@ -146,4 +149,8 @@ export const payForm = styled.form`
         font-weight:bold;
         padding-top:20px;
     }
+    @media(max-width:900px) {
+        
+    }
+    
 `
