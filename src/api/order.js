@@ -57,6 +57,8 @@ const cancelOrder = async (data) => {
         const res = await axios.post("/order/cancel_order", data);
         if (res.data.result.error === "E21") {
             alert("주문취소에 실패했습니다 관리자에 문의 부탁드립니다.");
+        } else {
+            alert("주문 취소 되었습니다");
         }
     } catch (error) {
         handleApiError(error);

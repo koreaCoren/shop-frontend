@@ -31,19 +31,23 @@ const OrderDetail = ({ }) => {
     }
     //주문취소
     const revokeOrder = async () => {
-        const data = {
-            orderCode: orderCode
-        };
-        cancelOrder(data);
+        if(window.confirm("주문을 취소하시겠습니까?")){
+            const data = {
+                orderCode: orderCode
+            };
+            cancelOrder(data);
+        }
     }
     //구매확정
     const confirmOrder = async () => {
-        const data = {
-            user_id: sessionStorage.getItem('userId'),
-            orderCode: orderCode,
-            savePoint: Math.ceil(list[0].total_price/100)
-        };
-        recognizeOrder(data);
+        if(window.confirm("구매확정 하시겠습니까?")){
+            const data = {
+                user_id: sessionStorage.getItem('userId'),
+                orderCode: orderCode,
+                savePoint: Math.ceil(list[0].total_price/100)
+            };
+            recognizeOrder(data);
+        }
     }
     //반품/환불 요청
     const refundOrder = async () => {
