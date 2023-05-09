@@ -7,12 +7,18 @@ import * as Style from "assets/styleComponent/product/basket"
 import { comma } from 'utils/commaReplace';
 
 import noImg from "assets/images/noImg.gif";
+import { getBasket } from 'api/basket';
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
+    const [product, setProduct] = useState(null);
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
+
+    useEffect(() => {
+        getBasket(basketData, setProduct);
+    }, [])
 
     //전체 선택
     const allCheck = (checked) => {
