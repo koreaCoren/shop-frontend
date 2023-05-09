@@ -13,6 +13,7 @@ import addBasket from 'utils/addBasket';
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
 import { getProductReivew, getDetailProdcut } from 'api/product';
+import createCode from 'utils/createCode';
 
 const Detail = ({ setOrderData }) => {
     const nav = useNavigate();
@@ -117,6 +118,25 @@ const Detail = ({ setOrderData }) => {
         location.current.scrollIntoView({ behavior: "smooth" })
     }
 
+    // 장바구니 담기
+    const addBasketData = () => {
+        const data = {
+            product_code: productCode,
+            product_name: productDetail.goods_data.goods_nm,
+            product_img: productDetail.goods_data.goods_img,
+            deliveryPay: deliveryPay,
+            price: productDetail.goods_data.goods_price,
+            sale: productDetail.goods_data.goods_sale,
+            option: optionValue.option_name,
+            prodcut_count: count,
+            basket_count: createCode(),
+            goods_stock: productDetail.goods_data.goods_stock,
+            total_price: totalPrice
+        }
+        return data;
+    }
+
+    // 옵션 변경
     const onOptionChange = (e) => {
         const value = e.target.value;
         if (value === "선택 안함" || value === 0) {
@@ -212,7 +232,7 @@ const Detail = ({ setOrderData }) => {
                                         : <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                     }
 
-                                    <Style.Button onClick={() => { addBasket(productCode); }}>장바구니 담기</Style.Button>
+                                    <Style.Button onClick={() => { addBasket(addBasketData(), count) }}>장바구니 담기</Style.Button>
                                 </Style.ButtonBox>
 
                             </div>
