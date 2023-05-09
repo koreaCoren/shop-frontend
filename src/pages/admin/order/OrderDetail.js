@@ -19,6 +19,7 @@ const OrderDetail = () => {
     const [invoiceNumber, setInvoiceNumber] = useState("");
     const [carrier, setCarrier] = useState("");
     const [carrierList, setCarrierList] = useState();
+    const [orderStatus, setOrderStatus] = useState();
 
     const setCarrierCode = async () => {
         const arr = await getDeliveryList();
@@ -93,6 +94,7 @@ const OrderDetail = () => {
 
     useEffect(() => {
         getDetailOrder({ orderCode: orderCode }, setDetail)
+        
     }, [])
 
     useEffect(() => {
@@ -132,7 +134,7 @@ const OrderDetail = () => {
                                 <li>주문 날짜 : {detail[0].order_date}</li>
                                 <li>상품 총 금액 : {totalPrice}</li>
                                 <li>결제 유형 : {cardType()}</li>
-                                <li>결제 완료 여부 : {detail[0].order_complete === "Y" ? "결제완료" : "미결제"}</li>
+                                <li>결제 완료 여부 : {orderStatus}</li>
                                 <li>배송사 :
                                     <div className="select">
                                         <select name="orderCarrier" onChange={onChange}>
