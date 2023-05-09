@@ -24,6 +24,10 @@ export const Purchase = styled.div`
         grid-template-columns: 50% 1fr 1fr 1fr ;
     }
 
+    ul:not(:last-child){
+        border-bottom: 1px solid #ddd;
+    }
+
     ul.title{
         border-bottom: 1px solid #ddd;
         align-items: center;

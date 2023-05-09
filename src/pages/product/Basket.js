@@ -7,18 +7,12 @@ import * as Style from "assets/styleComponent/product/basket"
 import { comma } from 'utils/commaReplace';
 
 import noImg from "assets/images/noImg.gif";
-import { getBasket } from 'api/basket';
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
     const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
-    const [product, setProduct] = useState(null);
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
-
-    useEffect(() => {
-        getBasket(basketData, setProduct);
-    }, [])
 
     //전체 선택
     const allCheck = (checked) => {
@@ -27,7 +21,7 @@ const Basket = ({ setOrderData }) => {
 
             basketData.forEach(el => {
                 if (el.goods_stock != 0) {
-                    arr.push(el.goods_code);
+                    arr.push(el.basket_count);
                 }
             });
             setCheckData(arr);
@@ -48,16 +42,20 @@ const Basket = ({ setOrderData }) => {
     // 장바구니 선택삭제
     const deleteBasket = () => {
         const arr = basketData;
-        for (let i = 0; i < arr.length; i++) {
-            for (let j = 0; j < checkData.length; j++) {
-                if (checkData[j] === arr[i].goods_code) {
-                    arr.splice(i, 1);
+        const confirm = window.confirm("정말로 삭제하시겠습니까?");
+        if (confirm) {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < checkData.length; j++) {
+                    if (checkData[j] === arr[i].basket_count) {
+                        arr.splice(i, 1);
+                    }
                 }
             }
+            sessionStorage.setItem("basket", JSON.stringify(arr));
+            setBasketData(arr);
+            setReload(basketData.length);
+            setCheckData([]);
         }
-        sessionStorage.setItem("basket", JSON.stringify(arr));
-        setBasketData(arr);
-        setReload(basketData.length);
     }
 
     // 장바구니 선택 구매
@@ -65,32 +63,12 @@ const Basket = ({ setOrderData }) => {
         const arr = [];
         for (let i = 0; i < basketData.length; i++) {
             for (let j = 0; j < checkData.length; j++) {
-                if (checkData[j] === basketData[i].goods_code) {
+                if (checkData[j] === basketData[i].basket_count) {
                     arr.push(basketData[i]);
                 }
             }
         }
         return arr;
-    }
-
-    //갯수 증가
-    const countUp = (i) => {
-        const data = JSON.parse(sessionStorage.getItem("basket"));
-        data[i].prodcut_count += 1;
-        sessionStorage.setItem("basket", JSON.stringify(data));
-        setBasketData(JSON.parse(sessionStorage.getItem("basket")));
-    }
-
-    //갯수 감소
-    const countDown = (i) => {
-        const data = JSON.parse(sessionStorage.getItem("basket"));
-        if (data[i].prodcut_count > 1) {
-            data[i].prodcut_count -= 1;
-        } else {
-            data[i].prodcut_count = 1;
-        }
-        sessionStorage.setItem("basket", JSON.stringify(data));
-        setBasketData(JSON.parse(sessionStorage.getItem("basket")));
     }
 
     //주문하기
@@ -110,13 +88,14 @@ const Basket = ({ setOrderData }) => {
         for (let i = 0; i < selectData.length; i++) {
             data.push(
                 {
-                    product_code: selectData[i].goods_code,
-                    product_name: selectData[i].goods_nm,
-                    product_img: selectData[i].goods_img,
-                    price: selectData[i].goods_price,
-                    sale: selectData[i].goods_sale,
+                    product_code: selectData[i].product_code,
+                    product_name: selectData[i].product_name,
+                    product_img: selectData[i].product_img,
+                    price: selectData[i].price,
+                    sale: selectData[i].sale,
                     prodcut_count: selectData[i].prodcut_count,
-                    total_price: Math.ceil(selectData[i]?.goods_price - (selectData[i].goods_price * (selectData[i].goods_sale * 0.01))) * selectData[i].prodcut_count
+                    option: selectData[i].option,
+                    total_price: selectData[i]?.total_price
                 }
             )
         }
@@ -139,7 +118,7 @@ const Basket = ({ setOrderData }) => {
                                 checked={checkData.length === basketData?.length ? true : false}
                             />
                         </li>
-                        <li>상품정보</li>
+                        <li>상품정보<br />(옵션)</li>
                         <li>수량</li>
                         <li>할인율</li>
                         <li>상품금액 <br />(할인적용)</li>
@@ -155,17 +134,17 @@ const Basket = ({ setOrderData }) => {
                                             {
                                                 a.goods_stock != 0
                                                     ? <input type="checkbox"
-                                                        onChange={(e) => singCheck(e.target.checked, a.goods_code)}
-                                                        checked={checkData.includes(a.goods_code) ? true : false}
+                                                        onChange={(e) => singCheck(e.target.checked, a.basket_count)}
+                                                        checked={checkData.includes(a.basket_count) ? true : false}
                                                     />
                                                     : <input type="checkbox" disabled />
                                             }
 
                                         </li>
                                         <li>
-                                            <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
+                                            <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                             <div className="content">
-                                                <div className="title">{a.goods_nm}</div>
+                                                <div className="title">{a.product_name} <br />{a.option === null ? "" : `(${a.option})`}</div>
                                                 {
                                                     a.goods_stock == 0
                                                         ? <div className='stockZero'>재고 부족</div>
@@ -174,19 +153,10 @@ const Basket = ({ setOrderData }) => {
                                             </div>
                                         </li>
                                         <li className='count'>
-                                            {a.prodcut_count > 1
-                                                ?
-                                                <button onClick={() => {
-                                                    countDown(i);
-                                                }}><span>-</span></button>
-                                                : <span className='none'>-</span>
-                                            }
                                             {a.prodcut_count}개
-                                            <button onClick={() => {
-                                                countUp(i);
-                                            }}><span>+</span></button></li>
-                                        <li>{a.goods_sale}%</li>
-                                        <li>{comma(Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))) * a.prodcut_count))}원</li>
+                                        </li>
+                                        <li>{a.sale}%</li>
+                                        <li>{comma(a.total_price)}원</li>
                                     </ul>
                                 )
                             })

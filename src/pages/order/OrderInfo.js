@@ -11,7 +11,7 @@ import * as Style from "assets/styleComponent/order/order"
 import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
-import {comma} from 'utils/commaReplace';
+import { comma } from 'utils/commaReplace';
 
 const OrderInfo = ({ orderData }) => {
     const [order, setOrder] = useState([...orderData]);
@@ -97,8 +97,8 @@ const OrderInfo = ({ orderData }) => {
         }
         setSumPay(sum);
         sum > 50000
-            ?setDeliverPay(0)
-            :setDeliverPay(2500);
+            ? setDeliverPay(0)
+            : setDeliverPay(2500);
     }
 
     const payment = (e) => {
@@ -173,6 +173,7 @@ const OrderInfo = ({ orderData }) => {
         setIsPurchase(isPurchase + 1);
     }
 
+    console.log(order);
     return (
         userAddr === ""
             ? <Loading />
@@ -193,7 +194,7 @@ const OrderInfo = ({ orderData }) => {
                                         <li>
                                             <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                             <div className="content">
-                                                <div className="title">{a.product_name} <br /> ({a.option})</div>
+                                                <div className="title">{a.product_name} <br /> {a.option === null ? "" : `(${a.option})`}</div>
                                             </div>
                                         </li>
                                         <li>{a.prodcut_count}개</li>
