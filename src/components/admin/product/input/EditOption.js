@@ -14,7 +14,6 @@ const EditOption = ({ title, setProductOption, data }) => {
             arr.push({ option_name: `${data[i].option_name}`, option_price: `${data[i].option_price}` });
         }
         setOption([...optionList, ...arr]);
-        // console.log(arr);
     }, [])
 
     // 옵션 추가
@@ -48,16 +47,12 @@ const EditOption = ({ title, setProductOption, data }) => {
     const onChange = (e) => {
         const value = e.target.value;
         const name = e.target.name;
-        // console.log(name);
         const arr = [];
         for (let i = 0; i < optionList.length; i++) {
             arr.push({ option_name: name });
 
         }
         setOptionName([...arr]);
-        console.log(optionName);
-        console.log(arr);
-
     };
 
 

@@ -10,7 +10,7 @@ import noImg from "assets/images/noImg.gif";
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
-    const [basketData, setBasketData] = useState(JSON.parse(sessionStorage.getItem("basket")));
+    const [basketData, setBasketData] = useState(JSON.parse(localStorage.getItem("basket")));
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
@@ -51,7 +51,7 @@ const Basket = ({ setOrderData }) => {
                     }
                 }
             }
-            sessionStorage.setItem("basket", JSON.stringify(arr));
+            localStorage.setItem("basket", JSON.stringify(arr));
             setBasketData(arr);
             setReload(basketData.length);
             setCheckData([]);

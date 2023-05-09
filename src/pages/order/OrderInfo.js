@@ -47,6 +47,17 @@ const OrderInfo = ({ orderData }) => {
         }
     }, [point, userAddr])
 
+    const calcPayment = () => {
+        let sum = 0;
+        for (let i = 0; i < orderData.length; i++) {
+            sum += orderData[i].total_price;
+        }
+        setSumPay(sum);
+        sum > 50000
+            ? setDeliverPay(0)
+            : setDeliverPay(2500);
+    }
+
     const checkRadio = (e) => {
         if (e.target.value === "old") {
             setBuyerName(userAddr.user_id);
@@ -63,48 +74,9 @@ const OrderInfo = ({ orderData }) => {
         }
     }
 
-    const onChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        switch (name) {
-            case "buyerName":
-                setBuyerName(value);
-                break;
-            case "receiver":
-                setReceiver(value);
-                break;
-            case "buyerTel":
-                setBuyerTel(value);
-                break;
-            case "receiver":
-                setReceiver(value);
-                break;
-            case "buyerDetailAddress":
-                setBuyerDetailAddress(value);
-                break;
-            case "point":
-                setPoint(value);
-                break;
-            default:
-                break;
-        }
-    }
-
-    const calcPayment = () => {
-        let sum = 0;
-        for (let i = 0; i < orderData.length; i++) {
-            sum += orderData[i].total_price;
-        }
-        setSumPay(sum);
-        sum > 50000
-            ? setDeliverPay(0)
-            : setDeliverPay(2500);
-    }
-
     const payment = (e) => {
         e.preventDefault();
         let orderDatas = [];
-        let orderTotalPrice = 0;
 
         for (let i = 0; i < order.length; i++) {
             orderDatas.push({
@@ -115,7 +87,6 @@ const OrderInfo = ({ orderData }) => {
                 order_count: order[i].prodcut_count, //상품 갯수
                 option: order[i].option, // 옵션
             })
-            orderTotalPrice = orderTotalPrice + order[i].total_price - point;
         }
 
         if (buyerName === "") {
@@ -145,7 +116,7 @@ const OrderInfo = ({ orderData }) => {
             buyerName: buyerName,
             buyerTel: Number(buyerTel),
             buyerEmail: "",
-            productPrice: Number(orderTotalPrice) > 0 ? Number(orderTotalPrice) : Number(orderTotalPrice) + deliveryPay,
+            productPrice: Number(totalPay),
             payStatus: 0,
             returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
             closeUrl: `${process.env.REACT_APP_URL}/close`,
@@ -173,7 +144,33 @@ const OrderInfo = ({ orderData }) => {
         setIsPurchase(isPurchase + 1);
     }
 
-    console.log(order);
+    const onChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        switch (name) {
+            case "buyerName":
+                setBuyerName(value);
+                break;
+            case "receiver":
+                setReceiver(value);
+                break;
+            case "buyerTel":
+                setBuyerTel(value);
+                break;
+            case "receiver":
+                setReceiver(value);
+                break;
+            case "buyerDetailAddress":
+                setBuyerDetailAddress(value);
+                break;
+            case "point":
+                setPoint(value);
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         userAddr === ""
             ? <Loading />
