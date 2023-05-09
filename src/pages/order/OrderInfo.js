@@ -12,7 +12,7 @@ import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
 const OrderInfo = ({ orderData }) => {
-    const [orderMap, setOrderMap] = useState([...orderData]);
+    const [order, setOrder] = useState([...orderData]);
     const [buyerName, setBuyerName] = useState("");
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
@@ -99,15 +99,16 @@ const OrderInfo = ({ orderData }) => {
         let orderDatas = [];
         let orderTotalPrice = 0;
 
-        for (let i = 0; i < orderData.length; i++) {
+        for (let i = 0; i < order.length; i++) {
             orderDatas.push({
-                goods_code: orderData[i].product_code, // 상품코드
-                goods_name: orderData[i].product_name, // 상품이름
-                goods_sale: orderData[i].sale, // 할인율
-                order_pay: orderData[i].total_price, // 총 상품가격
-                order_count: orderData[i].prodcut_count, //상품 갯수
+                goods_code: order[i].product_code, // 상품코드
+                goods_name: order[i].product_name, // 상품이름
+                goods_sale: order[i].sale, // 할인율
+                order_pay: order[i].total_price, // 총 상품가격
+                order_count: order[i].prodcut_count, //상품 갯수
+                option: order[i].option, // 옵션
             })
-            orderTotalPrice = orderTotalPrice + orderData[i].total_price - point;
+            orderTotalPrice = orderTotalPrice + order[i].total_price - point;
         }
 
         if (buyerName === "") {
@@ -173,19 +174,19 @@ const OrderInfo = ({ orderData }) => {
                     <Style.Title>주문/결제</Style.Title>
                     <Style.Purchase >
                         <ul className='title'>
-                            <li>상품정보</li>
+                            <li>상품정보<br />(옵션)</li>
                             <li>수량</li>
                             <li>할인율</li>
                             <li>상품금액 <br />(할인적용)</li>
                         </ul>
                         {
-                            orderMap.map((a, i) => {
+                            order.map((a, i) => {
                                 return (
                                     <ul className="productInfo" key={i}>
                                         <li>
                                             <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                             <div className="content">
-                                                <div className="title">{a.product_name}</div>
+                                                <div className="title">{a.product_name} <br /> ({a.option})</div>
                                             </div>
                                         </li>
                                         <li>{a.prodcut_count}개</li>
