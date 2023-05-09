@@ -83,3 +83,41 @@ export const Situation = styled.ul`
     }
     
 `
+
+export const List = styled.div`
+    padding-top:20px;
+    ul li{
+        display : flex;
+        justify-content: space-around;
+    }
+    ul li div.user{
+        flex:1
+    }
+    ul li div.order{
+        flex:2
+    }
+    ul li div.status{
+        flex:1
+    }
+    ul li.title{
+        border-bottom:1px solid #eee;
+        padding-bottom: 10px;
+        div{
+            font-size:20px;
+        }
+        
+    }
+    ul li.list{
+        div{
+            font-size:16px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        a{
+            text-decoration: underline;
+        }
+        div a.환불요청{
+            color:red;
+        }
+    }
+`

@@ -47,10 +47,13 @@ const OrderDetail = ({ }) => {
     }
     //반품/환불 요청
     const refundOrder = async () => {
-        const data = {
-            orderCode : orderCode
-        };
-        returnOrder(data);
+        if(window.confirm("환불 신청을 하시겠습니까?")){
+            const data = {
+                orderCode : orderCode
+            };
+            returnOrder(data);
+        }
+        
     }
     useEffect(() => {
         getOrderDetailData();
@@ -211,7 +214,7 @@ const OrderDetail = ({ }) => {
                             <button
                             onClick={() => {
                                 refundOrder();
-                            }}>환불 / 반품</button>
+                            }}>환불</button>
                         </Common.Button>
                     }
                     {
@@ -220,7 +223,7 @@ const OrderDetail = ({ }) => {
                             <button
                             onClick={() => {
                                 refundOrder();
-                            }}>환불 / 반품 처리중</button>
+                            }}>환불 처리중</button>
                         </Common.Button>
                     }
                     {
@@ -235,7 +238,7 @@ const OrderDetail = ({ }) => {
                         list[0].status === "환불완료" &&
                         <Common.Button style={{ marginTop: "10px" }}>
                                 <button>
-                                    환불 / 반품 처리 완료
+                                    환불 처리 완료
                                 </button>
                         </Common.Button>
                     }

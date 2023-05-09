@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getDetailOrder } from 'api/order.js';
+import { getDetailOrder, recognizeRefund } from 'api/order.js';
 import { updateCarrier, updateInvoice } from 'api/delivery.js';
 
 import { getDeliveryList } from 'utils/delivery';
@@ -11,6 +11,7 @@ import Loading from 'components/loding/Loading';
 
 import * as Style from 'assets/styleComponent/admin/order/orderDetail'
 import * as Common from 'assets/styleComponent/admin/common'
+import { data } from 'components/admin/chart/LineData';
 
 const OrderDetail = () => {
     const { orderCode } = useParams();
@@ -59,6 +60,15 @@ const OrderDetail = () => {
                 }
             })
         };
+    }
+
+    const confirmRefund = () => {
+        if(window.confirm("환불 처리 하시겠습니까?")){
+            const data = {
+                orderCode : detail[0].orderCode
+            }
+            recognizeRefund(data);
+        }
     }
 
     const cardType = () => {
@@ -121,7 +131,7 @@ const OrderDetail = () => {
                             )
                         })
                     }
-
+                
                     {
                         <Common.Container>
                             <Style.Content>
@@ -156,6 +166,19 @@ const OrderDetail = () => {
                                     송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' name='invoiceNumber' value={invoiceNumber} onChange={onChange} />
                                     <button onClick={setInvoice}>수정</button>
                                 </li>
+                                {
+                                    detail[0].status === "환불요청" &&
+                                    <li>
+                                        환불 요청중  
+                                        <button onClick={() => {
+                                            confirmRefund();
+                                        }}>환불승인</button>
+                                        <button>
+                                            환불거절
+                                        </button>
+                                    </li>
+                                }
+
                             </Style.Content>
                         </Common.Container>
                     }

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { getProductSaleStatus, getAccumulateSell } from 'api/product.js';
 import { getUserAccessCount } from 'api/user.js';
-import { getTotalOrderStatus } from 'api/order.js';
+import { getTotalOrderStatus, getRefundDataList } from 'api/order.js';
 
 import BarChart from 'components/admin/chart/BarChart';
 import DonutChart from 'components/admin/chart/DonutChart';
@@ -22,12 +22,15 @@ const Home = () => {
     const [donut, setDonut] = useState(null);
     const [line, setLine] = useState(null);
     const [dash, setDash] = useState(null);
+    const [orderList, setOrderList] = useState();
 
     useEffect(() => {
         getProductSaleStatus(setBar);
         getAccumulateSell(setDonut);
         getUserAccessCount(setLine);
         getTotalOrderStatus(setDash);
+
+        getRefundDataList(setOrderList);
     }, [])
 
     const onChenge = (e) => {
@@ -153,12 +156,32 @@ const Home = () => {
                     </Common.Container>
                     <Common.Container>
                         <Style.Title>
-                            <h3>상품 문의</h3>
+                            <h3>취소 / 환불</h3>
                         </Style.Title>
-
-                        <span style={{ width: "100%", fontSize: "30px", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center", height: "80%" }}>
-                            Comming Soon
-                        </span>
+                        <Style.List>
+                            <ul>
+                                <li className='title'>
+                                    <div className='user'>주문자</div>
+                                    <div className='order'>주문번호</div>
+                                    <div className='status'>상태</div>
+                                </li>
+                                {
+                                    orderList?.map((i, a) => {
+                                        return (
+                                            <li className='list'>
+                                                <div className='user'>{i.user_id}</div>
+                                                <div className='order'>{i.orderCode}</div>
+                                                <div className='status'>
+                                                   <Link 
+                                                    className={i.status}
+                                                    to={`/admin/orderDetail/${i.orderCode}`}>{i.status}</Link> 
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        </Style.List>
                     </Common.Container>
                 </Style.BoardGrid>
             </Common.Padding >
