@@ -31,11 +31,21 @@ const getDetailOrder = async (data, success) => {
         handleApiError(error);
     }
 }
+// 주문요청
+const requestOrder = async (data) => {
+    try {
+        const res = await axios.post("/order/ins_orders", data);
+    } catch (error) {
+        handleApiError(error);
+    }
+}
 
 //구매 확정
 const recognizeOrder = async (data) => {
     try{
         const res = await axios.post("/order/recognize_order", data);
+        alert("등록완료");
+        window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
     } catch(error){
         handleApiError(error);
     }
@@ -53,14 +63,16 @@ const cancelOrder = async (data) => {
     }
 }
 
-// 주문요청
-const requestOrder = async (data) => {
-    try {
-        const res = await axios.post("/order/ins_orders", data);
-    } catch (error) {
+//환불/반품 요청
+const returnOrder = async (data) => {
+    try{
+        const res = await axios.post("order/refund", data);
+    }catch(error){
         handleApiError(error);
     }
 }
+
+
 
 // 주문완료
 const completeOrder = async (data, success) => {
@@ -103,6 +115,7 @@ export {
     getDetailOrder,
     recognizeOrder,
     cancelOrder,
+    returnOrder,
     requestOrder,
     completeOrder,
     getTotalOrderStatus,
