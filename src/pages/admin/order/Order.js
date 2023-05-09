@@ -65,7 +65,7 @@ const Order = () => {
                                             <li>회원 ID : {a.user_id}</li>
                                             <li>상품명 : {a.goods_name}</li>
                                             <li>주문자 이름 : {a.buyer_name}</li>
-                                            <li>주문자 번호 : {a.buyer_tel}</li>
+                                            <li>주문 상태 : {a.status}</li>
                                             <li>총 상품 금액 : {comma(a.total_price)}</li>
                                             {
                                                 state[i] !== "송장 에러"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getOrderCode, cancelOrder } from 'api/order.js';
+import { getOrderCode, cancelOrder, recognizeOrder, returnOrder } from 'api/order.js';
 
 import { track } from 'utils/delivery';
 
@@ -10,6 +10,7 @@ import Loading from 'components/loding/Loading';
 
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
+
 
 const OrderDetail = ({ }) => {
     const DELIVERY_PRICE = 2500;
@@ -26,15 +27,31 @@ const OrderDetail = ({ }) => {
         };
 
         await getOrderCode(data, setList);
+        console.log(list);
     }
-
-    const refundOrder = async () => {
+    //주문취소
+    const revokeOrder = async () => {
         const data = {
             orderCode: orderCode
         };
         cancelOrder(data);
     }
-
+    //구매확정
+    const confirmOrder = async () => {
+        const data = {
+            user_id: sessionStorage.getItem('userId'),
+            orderCode: orderCode,
+            savePoint: Math.ceil(list[0].total_price/100)
+        };
+        recognizeOrder(data);
+    }
+    //반품/환불 요청
+    const refundOrder = async () => {
+        const data = {
+            orderCode : orderCode
+        };
+        returnOrder(data);
+    }
     useEffect(() => {
         getOrderDetailData();
     }, [])
@@ -139,6 +156,10 @@ const OrderDetail = ({ }) => {
                             <div>결제일시</div>
                             <div>{list ? list[0].order_date : '확인중'}</div>
                         </li>
+                        <li>
+                            <div>적립 예정금</div>
+                            <div>{list ? Math.ceil(list[0].total_price/100) : '0'} 원</div>
+                        </li>
                     </ul>
                 </Style.ListDiv>
 
@@ -168,14 +189,57 @@ const OrderDetail = ({ }) => {
                     </ul>
                 </Style.ListDiv>
                 <Common.Line></Common.Line>
-
-                <Common.Button style={{ marginTop: "10px" }}>
-                    <button
-                        onClick={() => {
-                            refundOrder();
-                        }}>주문 취소</button>
-                </Common.Button>
-            </Common.InDiv >
+                    {
+                        list[0].status === "결제완료" &&
+                            <Common.Button style={{ marginTop: "10px" }}>
+                                <button
+                                    onClick={() => {
+                                        revokeOrder();
+                                    }}>주문 취소
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        confirmOrder();
+                                    }}>
+                                    구매 확정
+                                </button>
+                            </Common.Button>
+                    }
+                    {
+                        list[0].status === "구매확정" &&
+                        <Common.Button style={{ marginTop: "10px" }}>
+                            <button
+                            onClick={() => {
+                                refundOrder();
+                            }}>환불 / 반품</button>
+                        </Common.Button>
+                    }
+                    {
+                        list[0].status === "환불요청" &&
+                        <Common.Button style={{ marginTop: "10px" }}>
+                            <button
+                            onClick={() => {
+                                refundOrder();
+                            }}>환불 / 반품 처리중</button>
+                        </Common.Button>
+                    }
+                    {
+                        list[0].status === "취소" &&
+                        <Common.Button style={{ marginTop: "10px" }}>
+                                <button>
+                                    취소 처리 완료
+                                </button>
+                        </Common.Button>
+                    }
+                    {
+                        list[0].status === "환불완료" &&
+                        <Common.Button style={{ marginTop: "10px" }}>
+                                <button>
+                                    환불 / 반품 처리 완료
+                                </button>
+                        </Common.Button>
+                    }
+        </Common.InDiv >
     );
 };
 export default OrderDetail;
