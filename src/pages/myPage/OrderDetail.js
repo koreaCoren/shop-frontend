@@ -190,7 +190,7 @@ const OrderDetail = ({ }) => {
                 </Style.ListDiv>
                 <Common.Line></Common.Line>
                     {
-                        list[0].status === "complete" &&
+                        list[0].status === "결제완료" &&
                             <Common.Button style={{ marginTop: "10px" }}>
                                 <button
                                     onClick={() => {
@@ -206,7 +206,7 @@ const OrderDetail = ({ }) => {
                             </Common.Button>
                     }
                     {
-                        list[0].status === "confirm" &&
+                        list[0].status === "구매확정" &&
                         <Common.Button style={{ marginTop: "10px" }}>
                             <button
                             onClick={() => {
@@ -215,7 +215,7 @@ const OrderDetail = ({ }) => {
                         </Common.Button>
                     }
                     {
-                        list[0].status === "refunding" &&
+                        list[0].status === "환불요청" &&
                         <Common.Button style={{ marginTop: "10px" }}>
                             <button
                             onClick={() => {
@@ -224,7 +224,7 @@ const OrderDetail = ({ }) => {
                         </Common.Button>
                     }
                     {
-                        list[0].status === "cancel" &&
+                        list[0].status === "취소" &&
                         <Common.Button style={{ marginTop: "10px" }}>
                                 <button>
                                     취소 처리 완료
@@ -232,7 +232,7 @@ const OrderDetail = ({ }) => {
                         </Common.Button>
                     }
                     {
-                        list[0].status === "refund" &&
+                        list[0].status === "환불완료" &&
                         <Common.Button style={{ marginTop: "10px" }}>
                                 <button>
                                     환불 / 반품 처리 완료
