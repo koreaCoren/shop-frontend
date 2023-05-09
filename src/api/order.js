@@ -32,6 +32,15 @@ const getDetailOrder = async (data, success) => {
     }
 }
 
+//구매 확정
+const recognizeOrder = async (data) => {
+    try{
+        const res = await axios.post("/order/recognize_order", data);
+    } catch(error){
+        handleApiError(error);
+    }
+}
+
 // 주문취소
 const cancelOrder = async (data) => {
     try {
@@ -92,6 +101,7 @@ export {
     getOrder,
     getOrderCode,
     getDetailOrder,
+    recognizeOrder,
     cancelOrder,
     requestOrder,
     completeOrder,

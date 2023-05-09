@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getOrderCode, cancelOrder } from 'api/order.js';
+import { getOrderCode, cancelOrder, recognizeOrder } from 'api/order.js';
 
 import { track } from 'utils/delivery';
 
@@ -33,6 +33,13 @@ const OrderDetail = ({ }) => {
             orderCode: orderCode
         };
         cancelOrder(data);
+    }
+
+    const confirmOrder = async () => {
+        const data = {
+            orderCode: orderCode
+        };
+        recognizeOrder(data);
     }
 
     useEffect(() => {
@@ -173,7 +180,14 @@ const OrderDetail = ({ }) => {
                     <button
                         onClick={() => {
                             refundOrder();
-                        }}>주문 취소</button>
+                        }}>주문 취소
+                    </button>
+                    <button
+                        onClick={() => {
+                            confirmOrder();
+                        }}>
+                        구매 확정
+                    </button>
                 </Common.Button>
             </Common.InDiv >
     );
