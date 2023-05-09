@@ -22,7 +22,11 @@ const Detail = ({ setOrderData }) => {
     const [count, setCount] = useState(1);
 
     const [option, setOption] = useState(null);
-    const [optionValue, setOptionValue] = useState(0);
+    const [optionValue, setOptionValue] = useState({
+        goods_code: null,
+        option_name: null,
+        option_price: 0
+    });
 
     const [avgStar, setAvgStar] = useState();
     const [totalStar, setTotalStar] = useState(0);
@@ -53,7 +57,7 @@ const Detail = ({ setOrderData }) => {
     }, [productDetail])
 
     useEffect(() => {
-        setPrice(Math.ceil(productDetail?.goods_data.goods_price - (productDetail?.goods_data.goods_price * (productDetail?.goods_data.goods_sale * 0.01)) + optionValue));
+        setPrice(Math.ceil(productDetail?.goods_data.goods_price - (productDetail?.goods_data.goods_price * (productDetail?.goods_data.goods_sale * 0.01)) + Number(optionValue.option_price)));
         setTotalPrice(price * count);
     }, [optionValue, count, productDetail, price])
 
@@ -99,6 +103,7 @@ const Detail = ({ setOrderData }) => {
             deliveryPay: deliveryPay,
             price: productDetail.goods_data.goods_price,
             sale: productDetail.goods_data.goods_sale,
+            option: optionValue.option_name,
             prodcut_count: count,
             total_price: totalPrice
         }
@@ -114,7 +119,18 @@ const Detail = ({ setOrderData }) => {
 
     const onOptionChange = (e) => {
         const value = e.target.value;
-        setOptionValue(Number(value));
+        if (value === "선택 안함" || value === 0) {
+            setOptionValue({
+                goods_code: null,
+                option_name: null,
+                option_price: 0
+            })
+        }
+        option.forEach(el => {
+            if (el.option_name === value) {
+                setOptionValue(el);
+            }
+        });
     }
 
     return (
@@ -161,10 +177,10 @@ const Detail = ({ setOrderData }) => {
                                     {
                                         option?.length > 0
                                             ? <select name='option' onChange={onOptionChange}>
-                                                <option value="0">선택 안함  + 0원</option>
+                                                <option value="선택 안함">선택 안함  + 0원</option>
                                                 {
                                                     option?.map((a, i) => {
-                                                        return <option key={i} value={a.option_price}>
+                                                        return <option key={i} value={a.option_name}>
                                                             {a.option_name} + {comma(a.option_price)}원
                                                         </option>
                                                     })
