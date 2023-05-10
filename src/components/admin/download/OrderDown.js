@@ -23,7 +23,7 @@ const Download = () => {
 
     const excelDownload = (excelData) => {
         const ws = XLSX.utils.aoa_to_sheet([
-            ['주문번호', '주문완료', '유저ID', '결제방식', '상품번호', '상품명', '할인율', '금액', '주문일자', '구매자', '주소', '연락처', '개수', '택배사', '송장번호', '취소 및 환불', '받는 사람', '취소 및 환불 일자', '주문완료', '리뷰']
+            ['주문번호', '주문완료', '유저ID', '결제방식', '상품번호', '상품명', '할인율', '금액', '주문일자', '구매자', '주소', '연락처', '개수', '택배사', '송장번호', '받는 사람', '취소 및 환불', '취소 및 환불 일자', '구매확정', '리뷰']
         ]);
 
         excelData.map((data) => {
@@ -46,9 +46,10 @@ const Download = () => {
                         data.개수,
                         data.택배사,
                         data.송장번호,
-                        data.취소및환불,
                         data.받는사람,
+                        data.취소및환불,
                         data.취소및환불일자,
+                        data.구매확정,
                         data.리뷰
                     ]
                 ],
@@ -85,6 +86,7 @@ const Download = () => {
     }
 
     const down = async () => {
+        console.log(list.data);
         excelDownload(list.data);
     }
 
