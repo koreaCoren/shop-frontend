@@ -6,6 +6,7 @@ import { getBoard } from 'api/board';
 
 import { comma } from 'utils/commaReplace';
 import addBasket from 'utils/addBasket';
+import createCode from 'utils/createCode';
 
 import Loading from 'components/loding/Loading';
 
@@ -101,7 +102,20 @@ const Main = () => {
                                                             <img src={a.goods_img === "" ? noImg : a.goods_img} alt="상품이미지" />
                                                         </Link>
                                                         <ul>
-                                                            <li onClick={() => { addBasket(a, 1) }}><i className="fa-solid fa-basket-shopping"></i></li>
+                                                            <li onClick={() => {
+                                                                addBasket({
+                                                                    product_code: a.goods_code,
+                                                                    product_name: a.goods_nm,
+                                                                    product_img: a.goods_img,
+                                                                    price: a.goods_price,
+                                                                    sale: a.goods_sale,
+                                                                    prodcut_count: 1,
+                                                                    option: null,
+                                                                    basket_count: createCode(),
+                                                                    goods_stock: a.goods_stock,
+                                                                    total_price: Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))))
+                                                                }, 1)
+                                                            }}><i className="fa-solid fa-basket-shopping"></i></li>
                                                         </ul>
                                                         {
                                                             a.goods_sale > 0

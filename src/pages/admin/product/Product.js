@@ -12,12 +12,10 @@ const Product = () => {
     const nav = useLocation();
     return (
         <>
-            {
-                nav.pathname === "/admin/product" && <Top title={"상품등록"} isButton={true} buttonTitle={"상품등록"} buttonLink={"register"} />
-            }
+            <Top title={"상품등록"} isButton={true} buttonTitle={"상품등록"} buttonLink={"/admin/product/register"} />
             <Common.Padding>
                 <Routes>
-                    <Route path='/' element={<List />} />
+                    <Route path='/:boardPage' element={<List />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/modfiy/:productCode' element={<Modfiy />}></Route>
                 </Routes>

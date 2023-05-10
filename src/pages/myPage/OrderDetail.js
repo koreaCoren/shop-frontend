@@ -11,7 +11,6 @@ import Loading from 'components/loding/Loading';
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
 
-
 const OrderDetail = ({ }) => {
     const DELIVERY_PRICE = 2500;
     const { orderCode } = useParams();
@@ -28,6 +27,7 @@ const OrderDetail = ({ }) => {
 
         await getOrderCode(data, setList);
     }
+
     //주문취소
     const revokeOrder = async () => {
         if (window.confirm("주문을 취소하시겠습니까?")) {
@@ -37,6 +37,7 @@ const OrderDetail = ({ }) => {
             cancelOrder(data);
         }
     }
+
     //구매확정
     const confirmOrder = async () => {
         if (window.confirm("구매확정 하시겠습니까?")) {
@@ -48,6 +49,7 @@ const OrderDetail = ({ }) => {
             recognizeOrder(data);
         }
     }
+
     //반품/환불 요청
     const refundOrder = async () => {
         if (window.confirm("환불 신청을 하시겠습니까?")) {
@@ -56,8 +58,8 @@ const OrderDetail = ({ }) => {
             };
             returnOrder(data);
         }
-
     }
+
     useEffect(() => {
         getOrderDetailData();
     }, [])

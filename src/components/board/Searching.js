@@ -31,6 +31,10 @@ const Searching = ({ board, setBoardList, searchType, reset }) => {
             prop: "goods_nm",
             placeholder: "상품명 검색"
         },
+        adminProduct: {
+            prop: "goods_nm",
+            placeholder: "상품명 검색"
+        },
     };
 
     const search = () => {
@@ -50,6 +54,8 @@ const Searching = ({ board, setBoardList, searchType, reset }) => {
                 el.del !== "Y" && el[searchTypes[searchType].prop].indexOf(searchValue) !== -1
             );
             setBoardList(arr);
+        } else if (searchType === "adminProduct") {
+
         }
     };
 
