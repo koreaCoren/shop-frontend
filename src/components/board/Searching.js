@@ -55,7 +55,13 @@ const Searching = ({ board, setBoardList, searchType, reset }) => {
             );
             setBoardList(arr);
         } else if (searchType === "adminProduct") {
-
+            const arr = [];
+            board.forEach(el => {
+                if (el[searchTypes[searchType].prop].indexOf(searchValue) !== -1) {
+                    arr.push(el);
+                }
+            });
+            setBoardList(arr);
         }
     };
 
