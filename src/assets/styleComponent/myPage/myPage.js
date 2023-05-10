@@ -153,7 +153,7 @@ export const ReviewTitle = styled.div`
 
 export const Button = styled.div`
     text-align: center;
-    margin-Top: "10px";
+    margin-Top: 10px;
     
     button{
         background-color: #444;

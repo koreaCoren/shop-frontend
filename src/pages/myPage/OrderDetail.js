@@ -248,7 +248,7 @@ const OrderDetail = ({ }) => {
                                 취소 처리중
                             </button>
                         </Common.Button>,
-                    취소 :
+                    취소완료 :
                         <Common.Button>
                             <button>
                                 취소 처리 완료
