@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
 import { comma } from 'utils/commaReplace';
+
 import Loading from 'components/loding/Loading';
 import Searching from 'components/board/Searching';
 import Pageing from 'components/board/Pageing';
