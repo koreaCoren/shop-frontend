@@ -31,6 +31,7 @@ const getDetailOrder = async (data, success) => {
         handleApiError(error);
     }
 }
+
 // 주문요청
 const requestOrder = async (data) => {
     try {
@@ -42,11 +43,11 @@ const requestOrder = async (data) => {
 
 //구매 확정
 const recognizeOrder = async (data) => {
-    try{
+    try {
         const res = await axios.post("/order/recognize_order", data);
         alert("등록완료");
         window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
-    } catch(error){
+    } catch (error) {
         handleApiError(error);
     }
 }
@@ -67,26 +68,25 @@ const cancelOrder = async (data) => {
 
 //환불/반품 요청
 const returnOrder = async (data) => {
-    try{
+    try {
         const res = await axios.post("order/refund_order", data);
         alert("환불 신청 완료");
         window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
-    }catch(error){
+    } catch (error) {
         handleApiError(error);
     }
 }
 
 //환불 승인
-const recognizeRefund = async (data)=> {
-    try{
+const recognizeRefund = async (data) => {
+    try {
         const res = await axios.post("order/refund_complete", data);
         alert("환불 처리 완료");
         window.location.replace(`/admin/orderDetail/${data.orderCode}`);
-    } catch(error){
+    } catch (error) {
         handleApiError(error);
     }
 }
-
 
 // 주문완료
 const completeOrder = async (data, success) => {
@@ -102,8 +102,6 @@ const completeOrder = async (data, success) => {
         handleApiError(error);
     }
 }
-
-
 
 // 주문 총 상황
 const getTotalOrderStatus = async (success) => {
@@ -127,10 +125,10 @@ const downOrderList = async (success) => {
 
 //취소, 환불인 데이터만 불러오기
 const getRefundDataList = async (success) => {
-    try{
+    try {
         const res = await axios.get("/order/get_refund_data");
         success(res.data);
-    } catch(error){
+    } catch (error) {
         handleApiError(error);
     }
 }
