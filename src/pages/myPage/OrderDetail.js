@@ -202,7 +202,7 @@ const OrderDetail = ({ }) => {
                 <Common.Line></Common.Line>
                 {{
                     결제완료 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button
                                 onClick={() => {
                                     revokeOrder("no");
@@ -215,7 +215,7 @@ const OrderDetail = ({ }) => {
                             </button>
                         </Common.Button>,
                     구매확정 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button
                                 onClick={() => {
                                     refundOrder();
@@ -223,7 +223,7 @@ const OrderDetail = ({ }) => {
                             </button>
                         </Common.Button>,
                     배송중 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button
                                 onClick={() => {
                                     revokeOrder("yes");
@@ -231,25 +231,25 @@ const OrderDetail = ({ }) => {
                             </button>
                         </Common.Button>,
                     환불요청 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button>
                                 환불 처리중
                             </button>
                         </Common.Button>,
                     환불완료 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button>
                                 환불 처리 완료
                             </button>
                         </Common.Button>,
                     취소요청 : 
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button>
                                 취소 처리중
                             </button>
                         </Common.Button>,
                     취소 :
-                        <Common.Button style={{ marginTop: "10px" }}>
+                        <Common.Button>
                             <button>
                                 취소 처리 완료
                             </button>
