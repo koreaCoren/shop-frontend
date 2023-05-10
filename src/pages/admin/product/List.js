@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { getProdcut, deleteProduct } from 'api/product.js';
 
 import Loading from 'components/loding/Loading';
+import Pageing from 'components/board/Pageing';
 
 import * as Style from "assets/styleComponent/admin/product/list"
 import * as Common from "assets/styleComponent/admin/common"
 
 import noImg from "assets/images/noImg.gif";
+import Searching from 'components/board/Searching';
 
 const List = () => {
+    const COUNT = 6;
+    const { boardPage } = useParams();
     const [list, setList] = useState(null);
 
     useEffect(() => {
@@ -31,9 +35,10 @@ const List = () => {
             ? <Loading />
             : <>
                 <Common.Container>
+                    <Searching board={list[0]} setBoardList={setList} searchType={"adminProduct"} reset={null} />
                 </Common.Container>
                 {
-                    list[0].map((a, i) => {
+                    list[0].slice((boardPage - 1) * COUNT, (boardPage * COUNT)).map((a, i) => {
                         return (
                             <Common.Container key={i}>
                                 <ul>
@@ -65,6 +70,7 @@ const List = () => {
                         )
                     })
                 }
+                <Pageing count={COUNT} boardPage={boardPage} boardLength={list[0]?.length} url={`/admin/product`} />
             </>
     );
 };
