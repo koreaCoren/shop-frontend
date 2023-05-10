@@ -15,7 +15,11 @@ const getDefaultSelect = async (success) => {
 const setDefaultCarrier = async (data) => {
     try {
         const res = await axios.post("/delivery/default_carrier", data);
-        alert("저장완료");
+        if (res.data.result === "fail") {
+            alert("기존 배송지와 같습니다.");
+        } else {
+            alert("저장완료");
+        }
     } catch (error) {
         handleApiError(error);
     }
