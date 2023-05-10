@@ -105,7 +105,6 @@ export const List = styled.div`
         div{
             font-size:20px;
         }
-        
     }
     ul li.list{
         div{
