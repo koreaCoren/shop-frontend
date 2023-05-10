@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getDetailOrder, recognizeRefund } from 'api/order.js';
+import { getDetailOrder, recognizeRefund, cancelOrder } from 'api/order.js';
 import { updateCarrier, updateInvoice } from 'api/delivery.js';
 
 import { getDeliveryList } from 'utils/delivery';
@@ -68,6 +68,16 @@ const OrderDetail = () => {
                 orderCode : detail[0].orderCode
             }
             recognizeRefund(data);
+        }
+    }
+
+    const revokeOrder = () => {
+        if (window.confirm("취소 처리 하시겠습니까?")) {
+            const data = {
+                orderCode: detail[0].orderCode,
+                checkDelivery: "no"
+            };
+            cancelOrder(data);
         }
     }
 
@@ -172,9 +182,21 @@ const OrderDetail = () => {
                                         환불 요청중  
                                         <button onClick={() => {
                                             confirmRefund();
-                                        }}>환불승인</button>
+                                        }}>승인</button>
                                         <button>
-                                            환불거절
+                                            거절
+                                        </button>
+                                    </li>
+                                }
+                                {
+                                    detail[0].status === "취소요청" &&
+                                    <li>
+                                        취소 요청중  
+                                        <button onClick={() => {
+                                            revokeOrder();
+                                        }}>승인</button>
+                                        <button>
+                                            거절
                                         </button>
                                     </li>
                                 }
