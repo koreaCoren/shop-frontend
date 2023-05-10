@@ -16,10 +16,21 @@ const List = () => {
     const COUNT = 6;
     const { boardPage } = useParams();
     const [list, setList] = useState(null);
+    const [copyList, setCopyList] = useState(null);
 
     useEffect(() => {
         getProdcut(setList);
     }, [])
+
+    useEffect(() => {
+        if (list !== null) {
+            reset();
+        }
+    }, [list])
+
+    const reset = () => {
+        setCopyList(list[0]);
+    }
 
     const onDelete = (delProduct) => {
         const data = {
@@ -31,14 +42,14 @@ const List = () => {
     }
 
     return (
-        list === null
+        copyList === null
             ? <Loading />
             : <>
                 <Common.Container>
-                    <Searching board={list[0]} setBoardList={setList} searchType={"adminProduct"} reset={null} />
+                    <Searching board={list[0]} setBoardList={setCopyList} searchType={"adminProduct"} reset={reset} />
                 </Common.Container>
                 {
-                    list[0].slice((boardPage - 1) * COUNT, (boardPage * COUNT)).map((a, i) => {
+                    copyList.slice((boardPage - 1) * COUNT, (boardPage * COUNT)).map((a, i) => {
                         return (
                             <Common.Container key={i}>
                                 <ul>
