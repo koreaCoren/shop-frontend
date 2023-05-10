@@ -93,16 +93,19 @@ const Ul = styled.ul`
     }
     ol.on{
         max-height: 80px;
-        padding: 10px 0px;
     }
     ol > li{
         display: block;
-        padding: 0px 15px;
+    }
+    ol > li :hover{
+        background-color: #aaa;
     }
     ol > li > a{
+        padding: 8px 15px;
         color: #fff;
         font-size: 12px;
         line-height: 2;
+        width: 100%;
     }
 `
 
