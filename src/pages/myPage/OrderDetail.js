@@ -29,10 +29,11 @@ const OrderDetail = ({ }) => {
         await getOrderCode(data, setList);
     }
     //주문취소
-    const revokeOrder = async () => {
+    const revokeOrder = async (checkDel) => {
         if (window.confirm("주문을 취소하시겠습니까?")) {
             const data = {
-                orderCode: orderCode
+                orderCode: orderCode,
+                checkDelivery: checkDel
             };
             cancelOrder(data);
         }
@@ -200,7 +201,7 @@ const OrderDetail = ({ }) => {
                     <Common.Button style={{ marginTop: "10px" }}>
                         <button
                             onClick={() => {
-                                revokeOrder();
+                                revokeOrder("no");
                             }}>주문 취소
                         </button>
                         <button
@@ -242,6 +243,17 @@ const OrderDetail = ({ }) => {
                     <Common.Button style={{ marginTop: "10px" }}>
                         <button>
                             환불 처리 완료
+                        </button>
+                    </Common.Button>
+                }
+                {
+                    list[0].status === "배송중" &&
+                    <Common.Button style={{ marginTop: "10px" }}>
+                        <button
+                        onClick={() => {
+                            revokeOrder("yes");
+                        }}>
+                            취소 요청
                         </button>
                     </Common.Button>
                 }
