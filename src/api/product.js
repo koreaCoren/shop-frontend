@@ -38,7 +38,7 @@ const updateProduct = async (data) => {
     try {
         const res = await axios.post("/goods/upd_goods", data);
         alert("수정완료");
-        window.location.replace("/admin/product");
+        window.location.replace("/admin/product/1");
     } catch (error) {
         handleApiError(error);
     }
