@@ -21,7 +21,7 @@ const OrderInfo = ({ orderData }) => {
     const [address, setAddress] = useState("");
     const [receiver, setReceiver] = useState("");
     const [zoneCode, setZoneCode] = useState("");
-    const [point, setPoint] = useState(0);
+    const [payPoint, setPayPoint] = useState(0);
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({});
@@ -41,11 +41,11 @@ const OrderInfo = ({ orderData }) => {
 
     useEffect(() => {
         if (userAddr !== undefined || userAddr !== "") {
-            (Number(userAddr.user_point) - point) >= 0
-                ? setTotalPay(sumPay + deliveryPay - point)
+            (Number(userAddr.user_point) - payPoint) >= 0
+                ? setTotalPay(sumPay + deliveryPay - payPoint)
                 : setTotalPay(sumPay + deliveryPay - Number(userAddr.user_point));
         }
-    }, [point, userAddr])
+    }, [payPoint, userAddr])
 
     const calcPayment = () => {
         let sum = 0;
@@ -137,7 +137,8 @@ const OrderInfo = ({ orderData }) => {
             // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "N", //환불여부
             receiver: receiver,
-            point: point,
+            pay_point: payPoint >= userAddr.user_point ? userAddr.user_point : payPoint,
+            save_point: Math.ceil(sumPay/100)
         }
 
         requestOrder(data);
@@ -163,8 +164,8 @@ const OrderInfo = ({ orderData }) => {
             case "buyerDetailAddress":
                 setBuyerDetailAddress(value);
                 break;
-            case "point":
-                setPoint(value);
+            case "payPoint":
+                setPayPoint(value);
                 break;
             default:
                 break;
@@ -260,18 +261,18 @@ const OrderInfo = ({ orderData }) => {
                                 </div>
                                 <div>
                                     <span>보유 적립금 <span className='light'></span> </span>
-                                    <span>{(userAddr.user_point - point) >= 0
-                                        ? comma(userAddr.user_point - point)
+                                    <span>{(userAddr.user_point - payPoint) >= 0
+                                        ? comma(userAddr.user_point - payPoint)
                                         : 0}</span>
                                 </div>
                                 <div className='point'>
                                     <span>사용 적립금</span>
                                     <input type="text"
                                         onChange={onChange}
-                                        name='point'
-                                        value={(point < userAddr.user_point)
-                                            ? point > 0
-                                                ? point
+                                        name='payPoint'
+                                        value={(payPoint < userAddr.user_point)
+                                            ? payPoint > 0
+                                                ? payPoint
                                                 : 0
                                             : userAddr.user_point} />
                                     {/* <button 
@@ -279,6 +280,10 @@ const OrderInfo = ({ orderData }) => {
                                     pointUse(point);
                                 }
                                 }>사 용</button> */}
+                                </div>
+                                <div>
+                                    <span>적립 예정금</span>
+                                    <span>{Math.ceil(sumPay/100)}</span>
                                 </div>
                                 <div>
                                     <span className='totalPay'>
