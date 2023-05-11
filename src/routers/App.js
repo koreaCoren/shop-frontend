@@ -38,7 +38,6 @@ function App() {
         }
     }
 
-
     // 어드민페이지, 에러페이지 들어오면 헤더 삭제
     const pageCheck = () => {
         if (/.*admin.*/.test(location.pathname) || /.*error.*/.test(location.pathname)) {
