@@ -16,6 +16,7 @@ const OrderDetail = ({ }) => {
     const { orderCode } = useParams();
     const [list, setList] = useState(null);
     const [state, setState] = useState();
+    const [status, setStatus] = useState("");
 
     let trackResult = [];
 
@@ -69,6 +70,7 @@ const OrderDetail = ({ }) => {
         if (list !== null) {
             track(list[0].carrier, list[0].delivery, trackResult);
             setState(...trackResult);
+            setStatus(list[0].status);
         }
     }, [list])
 
@@ -198,67 +200,61 @@ const OrderDetail = ({ }) => {
                     </ul>
                 </Style.ListDiv>
                 <Common.Line></Common.Line>
-                {
-                    list[0].status === "결제완료" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button
-                            onClick={() => {
-                                revokeOrder("no");
-                            }}>주문 취소
-                        </button>
-                        <button
-                            onClick={() => {
-                                confirmOrder();
-                            }}>
-                            구매 확정
-                        </button>
-                    </Common.Button>
-                }
-                {
-                    list[0].status === "구매확정" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button
-                            onClick={() => {
-                                refundOrder();
-                            }}>환불</button>
-                    </Common.Button>
-                }
-                {
-                    list[0].status === "환불요청" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button
-                            onClick={() => {
-                                refundOrder();
-                            }}>환불 처리중</button>
-                    </Common.Button>
-                }
-                {
-                    list[0].status === "취소" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button>
-                            취소 처리 완료
-                        </button>
-                    </Common.Button>
-                }
-                {
-                    list[0].status === "환불완료" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button>
-                            환불 처리 완료
-                        </button>
-                    </Common.Button>
-                }
-                {
-                    list[0].status === "배송중" &&
-                    <Common.Button style={{ marginTop: "10px" }}>
-                        <button
-                        onClick={() => {
-                            revokeOrder("yes");
-                        }}>
-                            취소 요청
-                        </button>
-                    </Common.Button>
-                }
+                {{
+                    결제완료 : 
+                        <Common.Button>
+                            <button
+                                onClick={() => {
+                                    revokeOrder("no");
+                                }}>주문 취소
+                            </button>
+                            <button
+                                onClick={() => {
+                                    confirmOrder();
+                                }}>구매 확정
+                            </button>
+                        </Common.Button>,
+                    구매확정 : 
+                        <Common.Button>
+                            <button
+                                onClick={() => {
+                                    refundOrder();
+                                }}>환불
+                            </button>
+                        </Common.Button>,
+                    배송중 : 
+                        <Common.Button>
+                            <button
+                                onClick={() => {
+                                    revokeOrder("yes");
+                                }}> 취소 요청
+                            </button>
+                        </Common.Button>,
+                    환불요청 : 
+                        <Common.Button>
+                            <button>
+                                환불 처리중
+                            </button>
+                        </Common.Button>,
+                    환불완료 : 
+                        <Common.Button>
+                            <button>
+                                환불 처리 완료
+                            </button>
+                        </Common.Button>,
+                    취소요청 : 
+                        <Common.Button>
+                            <button>
+                                취소 처리중
+                            </button>
+                        </Common.Button>,
+                    취소완료 :
+                        <Common.Button>
+                            <button>
+                                취소 처리 완료
+                            </button>
+                        </Common.Button>,
+                }[status]}
             </Common.InDiv >
     );
 };
