@@ -72,7 +72,7 @@ const List = () => {
                                             </ul>
                                         </Style.Div>
                                         <Style.Ul>
-                                            <li><Link to={`modfiy/${a.goods_code}`} >수정</Link></li>
+                                            <li><Link to={`/admin/product/modfiy/${a.goods_code}`} >수정</Link></li>
                                             <li><button type='button' onClick={() => { onDelete(a) }}>삭제</button></li>
                                         </Style.Ul>
                                     </Style.ProductList>
@@ -81,7 +81,7 @@ const List = () => {
                         )
                     })
                 }
-                <Pageing count={COUNT} boardPage={boardPage} boardLength={list[0]?.length} url={`/admin/product`} />
+                <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/admin/product`} />
             </>
     );
 };

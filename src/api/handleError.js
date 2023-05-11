@@ -29,4 +29,12 @@ function handleTokenError(msg) {
     window.location.replace("/");
 }
 
-export { handleApiError, handleTokenError };
+// 통신 성공했는데 에러 터짐
+function handleConnectionError(res) {
+    if (/.*error*./.test(res)) {
+        alert(`FATAL ERROR!!! 관리자에게 문의해주세요`);
+        window.location.replace("/error");
+    }
+}
+
+export { handleApiError, handleTokenError, handleConnectionError };

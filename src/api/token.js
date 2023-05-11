@@ -1,5 +1,5 @@
 import axios from './axios';
-import { handleApiError, handleTokenError } from './handleError';
+import { handleApiError, handleConnectionError, handleTokenError } from './handleError';
 
 const getToken = () => {
     return sessionStorage.getItem('token');
@@ -38,6 +38,8 @@ const tokenCheck = async (success) => {
             const res = await axios.post('/user/checkToken', null, {
                 headers: headers,
             });
+
+            handleConnectionError(res.data);
 
             if (res.data.result === 'ok') {
                 if (!userId) {

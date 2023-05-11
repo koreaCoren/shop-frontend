@@ -1,10 +1,11 @@
 import axios from "./axios";
-import { handleApiError } from "./handleError";
+import { handleApiError, handleConnectionError } from "./handleError";
 
 // 게시글 가져오기
 const getBoard = async (data, success) => {
     try {
         const res = await axios.post("/board/sel_board", data);
+        handleConnectionError(res.data);
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -15,6 +16,7 @@ const getBoard = async (data, success) => {
 const getDetailBoard = async (data, success) => {
     try {
         const res = await axios.post("/board/detail_board", data);
+        handleConnectionError(res.data);
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -25,6 +27,7 @@ const getDetailBoard = async (data, success) => {
 const addBoard = async (data) => {
     try {
         const res = await axios.post("/editor/ins_editor_data", data);
+        handleConnectionError(res.data);
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "product") {
@@ -46,6 +49,7 @@ const deleteBoard = async (data) => {
     try {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             const res = await axios.post("/board/del_board", data);
+            handleConnectionError(res.data);
             alert("삭제되었습니다.");
             window.location.replace(`/community/${data.type}/1`);
         }

@@ -12,9 +12,10 @@ import noImg from "assets/images/noImg.gif";
 import Loading from 'components/loding/Loading';
 
 import { comma } from 'utils/commaReplace';
+import { beforeunload } from 'utils/beforeunload';
 
 const OrderInfo = ({ orderData }) => {
-    const [order, setOrder] = useState([...orderData]);
+    const [order, setOrder] = useState();
     const [buyerName, setBuyerName] = useState("");
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
@@ -35,6 +36,10 @@ const OrderInfo = ({ orderData }) => {
 
 
     useEffect(() => {
+        if (orderData === null || orderData === undefined) {
+            window.location.replace("/");
+        }
+        setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
         calcPayment();
     }, [])
@@ -46,6 +51,11 @@ const OrderInfo = ({ orderData }) => {
                 : setTotalPay(sumPay + deliveryPay - Number(userAddr.user_point));
         }
     }, [payPoint, userAddr])
+
+    // 새로고침 막기
+    useEffect(() => {
+        beforeunload();
+    }, []);
 
     const calcPayment = () => {
         let sum = 0;
