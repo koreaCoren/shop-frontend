@@ -8,6 +8,7 @@ export const ChartGrid = styled.div`
     > div > div > div > div > svg{
         width: 100% !important;
     }
+    
 `
 
 export const BoardGrid = styled.div`
