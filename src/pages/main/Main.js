@@ -26,6 +26,7 @@ const Main = () => {
             boardType: "review"
         }, setMainReview);
     }, []);
+
     return (
         result === null || mainReview === null
             ? <Loading />

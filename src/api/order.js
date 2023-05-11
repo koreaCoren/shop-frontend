@@ -26,7 +26,7 @@ const getOrderCode = async (data, success) => {
 const getDetailOrder = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_code_orders", data);
-        success(res.data)
+        success(res.data);
     } catch (error) {
         handleApiError(error);
     }
