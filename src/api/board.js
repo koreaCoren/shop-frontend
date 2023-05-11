@@ -1,11 +1,13 @@
 import axios from "./axios";
-import { handleApiError } from "./handleError";
+import { handleApiError, handleConnectionError } from "./handleError";
 
 // 게시글 가져오기
 const getBoard = async (data, success) => {
     try {
         const res = await axios.post("/board/sel_board", data);
-        success(res.data);
+        if (handleConnectionError(res.data, success)) {
+            success(res.data);
+        };
     } catch (error) {
         handleApiError(error);
     }

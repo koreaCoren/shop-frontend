@@ -19,6 +19,7 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
+import Error from "components/error/Error";
 
 function App() {
     const nav = useNavigate();
@@ -38,10 +39,9 @@ function App() {
     }
 
 
-    // 어드민페이지 들어오면 헤더 삭제
-    const adminPageCheck = () => {
-        const regex = /.*admin.*/;
-        if (regex.test(location.pathname)) {
+    // 어드민페이지, 에러페이지 들어오면 헤더 삭제
+    const pageCheck = () => {
+        if (/.*admin.*/.test(location.pathname) || /.*error.*/.test(location.pathname)) {
             setHeader(false);
         } else {
             setHeader(true);
@@ -58,7 +58,7 @@ function App() {
     useEffect(() => {
         window.scrollTo(0, 0);
         accessCheck();
-        adminPageCheck();
+        pageCheck();
         tokenCheck(setUser);
     }, [nav])
     return (
@@ -74,6 +74,9 @@ function App() {
                 <Route path="/order/*" element={<Order orderData={orderData} />} />
                 <Route path="/close" element={<Close />} />
                 <Route path="/community/*" element={<Community />} />
+
+                {/* 에러 날때 밑에 파일로 보내줌 */}
+                <Route path="/error" element={<Error />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
