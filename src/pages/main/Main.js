@@ -27,6 +27,7 @@ const Main = () => {
         }, setMainReview);
     }, []);
 
+
     return (
         result === null || mainReview === null
             ? <Loading />
