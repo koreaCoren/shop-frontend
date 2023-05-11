@@ -1,10 +1,11 @@
 import axios from './axios';
-import { handleApiError } from './handleError';
+import { handleApiError, handleConnectionError } from './handleError';
 
 // 로그인
 const login = async (data) => {
     try {
         const res = await axios.post('/user/sel_user', data);
+        handleConnectionError(res.data);
         if (res.data.loginCheck === 'success') {
             sessionStorage.setItem('token', res.data.token);
             window.location.replace('/');

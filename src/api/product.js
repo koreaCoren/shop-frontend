@@ -1,10 +1,11 @@
 import axios from "./axios";
-import { handleApiError } from "./handleError";
+import { handleApiError, handleConnectionError } from "./handleError";
 
 // 상품 리스트 가져오기
 const getProdcut = async (success) => {
     try {
         const res = await axios.get("/goods/sel_goods");
+        handleConnectionError(res.data);
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -15,6 +16,7 @@ const getProdcut = async (success) => {
 const getDetailProdcut = async (data, success) => {
     try {
         const res = await axios.post("/goods/detail_goods", data);
+        handleConnectionError(res.data);
         success(res.data.result);
     } catch (error) {
         handleApiError(error);
@@ -26,6 +28,7 @@ const deleteProduct = async (data) => {
     try {
         if (window.confirm("정말로 삭제 하시겠습니까?")) {
             const res = await axios.post("/goods/del_goods", data);
+            handleConnectionError(res.data);
             window.location.reload();
         }
     } catch (error) {
@@ -37,6 +40,7 @@ const deleteProduct = async (data) => {
 const updateProduct = async (data) => {
     try {
         const res = await axios.post("/goods/upd_goods", data);
+        handleConnectionError(res.data);
         alert("수정완료");
         window.location.replace("/admin/product/1");
     } catch (error) {
@@ -48,6 +52,7 @@ const updateProduct = async (data) => {
 const getProductSaleStatus = async (success) => {
     try {
         const res = await axios.get("/data/sell_data_list");
+        handleConnectionError(res.data);
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -58,6 +63,7 @@ const getProductSaleStatus = async (success) => {
 const getAccumulateSell = async (success) => {
     try {
         const res = await axios.get("/data/cumulative_sales");
+        handleConnectionError(res.data);
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -68,6 +74,7 @@ const getAccumulateSell = async (success) => {
 const getProductReivew = async (data, success) => {
     try {
         const res = await axios.post("/board/sel_goods_review", data);
+        handleConnectionError(res.data);
         success(res);
     } catch (error) {
         handleApiError(error);
