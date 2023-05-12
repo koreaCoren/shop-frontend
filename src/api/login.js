@@ -8,7 +8,6 @@ const login = async (data) => {
         handleConnectionError(res.data);
         if (res.data.loginCheck === 'success') {
             sessionStorage.setItem('token', res.data.token);
-            window.location.replace('/');
             return 'ok';
         } else {
             alert('아이디 또는 비밀번호가 틀렸습니다.');

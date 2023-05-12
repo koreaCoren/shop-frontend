@@ -20,9 +20,11 @@ const PersonalModify = () => {
         e.preventDefault();
         const data = {
             id: sessionStorage.getItem("userId"),
-            pw: password
+            pw: password,
         };
+
         const passwordCheck = await login(data);
+
         if (passwordCheck === "ok") {
             nav("/myPage/info");
         } else {
