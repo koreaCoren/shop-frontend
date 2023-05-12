@@ -44,9 +44,7 @@ const OrderDetail = ({ }) => {
     const confirmOrder = async () => {
         if (window.confirm("구매확정 하시겠습니까?")) {
             const data = {
-                user_id: sessionStorage.getItem('userId'),
                 orderCode: orderCode,
-                savePoint: Math.ceil(list[0].total_price / 100)
             };
             recognizeOrder(data);
         }
@@ -154,6 +152,10 @@ const OrderDetail = ({ }) => {
                         <li>
                             <div>총 상품할인금액</div>
                             <div>{list ? list[0].total_sale : '0'} 원</div>
+                        </li>
+                        <li>
+                            <div>사용 적립금</div>
+                            <div>{list ? list[0].pay_point : '0'} 원</div>
                         </li>
                         <li>
                             <div>배송비</div>
