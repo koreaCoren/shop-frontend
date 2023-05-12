@@ -8,7 +8,10 @@ import { updateUserAccessCount } from "api/user";
 
 import Header from "components/common/Header";
 import Footer from "components/common/Footer";
+import Error from "components/error/Error";
+import NotFoundPage from "components/error/NotFoundPage";
 import Close from "components/inicis/Close";
+
 import Main from "pages/main/Main";
 import Login from "pages/login/Login";
 import Register from "pages/login/Register";
@@ -19,7 +22,6 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-import Error from "components/error/Error";
 
 function App() {
     const nav = useNavigate();
@@ -28,6 +30,8 @@ function App() {
     const [user, setUser] = useState();
     const [orderData, setOrderData] = useState();
     const [cookies, setCookies] = useCookies();
+    const hasRouter = location.pathname !== '/';
+    console.log(hasRouter);
 
     // 방문자 체크
     const accessCheck = async () => {
@@ -69,6 +73,7 @@ function App() {
 
                 {/* 에러 날때 밑에 파일로 보내줌 */}
                 <Route path="/error" element={<Error />} />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
