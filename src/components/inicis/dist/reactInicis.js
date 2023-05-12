@@ -195,7 +195,7 @@ var ReactInicis = function ReactInicis(_ref) {
         type: "hidden",
         readOnly: true,
         name: "acceptmethod",
-        value: "below1000:SKIN(#555)"
+        value: "SKIN(#555)"
     }), /*#__PURE__*/_react.default.createElement("input", {
         type: "hidden",
         readOnly: true,
