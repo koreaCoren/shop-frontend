@@ -20,7 +20,11 @@ const Login = () => {
             pw: password
         };
 
-        login(data);
+        const loginChek = await login(data);
+
+        if (loginChek === "ok") {
+            window.location.replace("/");
+        }
     };
 
     useEffect(() => {
