@@ -25,7 +25,6 @@ const Main = () => {
             boardPage: 1,
             boardType: "review"
         }, setMainReview);
-        window.location.replace("/error");
     }, []);
 
 
