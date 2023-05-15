@@ -85,7 +85,6 @@ const Delivery = () => {
                                         <option value="">{defaultDelivery}</option>
                                         {
                                             deliveryList?.map((a, i) => {
-                                                console.log(defaultDelivery);
                                                 return (
                                                     <option key={i} value={a.id}>{a.name}</option>
                                                 )
