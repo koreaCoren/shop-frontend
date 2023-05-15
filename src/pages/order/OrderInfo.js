@@ -87,72 +87,75 @@ const OrderInfo = ({ orderData }) => {
     const payment = (e) => {
         e.preventDefault();
         let orderDatas = [];
-
-        for (let i = 0; i < order.length; i++) {
-            orderDatas.push({
-                goods_code: order[i].product_code, // 상품코드
-                goods_name: order[i].product_name, // 상품이름
-                goods_sale: order[i].sale, // 할인율
-                order_pay: order[i].total_price, // 총 상품가격
-                order_count: order[i].prodcut_count, //상품 갯수
-                option: order[i].option, // 옵션
+        if(totalPay < 1000){
+            alert("1000원 이하는 결제가 불가능합니다.");
+        } else{
+            for (let i = 0; i < order.length; i++) {
+                orderDatas.push({
+                    goods_code: order[i].product_code, // 상품코드
+                    goods_name: order[i].product_name, // 상품이름
+                    goods_sale: order[i].sale, // 할인율
+                    order_pay: order[i].total_price, // 총 상품가격
+                    order_count: order[i].prodcut_count, //상품 갯수
+                    option: order[i].option, // 옵션
+                })
+            }
+    
+            if (buyerName === "") {
+                alert("주문자 입력해주세요");
+                return;
+            } else if (buyerTel === "") {
+                alert("연락처 입력해주세요");
+                return;
+            } else if (buyerDetailAddress === "") {
+                alert("상세주소 입력해주세요");
+                return;
+            } else if (receiver === "") {
+                alert("받는 사람을 입력해주세요");
+                return;
+            }
+    
+            const date = new Date();
+            const yy = date.getFullYear().toString().substring(2);
+            const mm = (("00" + (date.getMonth() + 1)).slice(-2));
+            const dd = (("00" + date.getDate()).slice(-2));
+            const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
+            const serialNumber = Math.floor((Math.random() * (999 - 100) + 100));
+            const orderCode = serialNumber + dd + mm + yy + time;
+    
+            setPayData({
+                productName: orderData[0].product_name,
+                buyerName: buyerName,
+                buyerTel: Number(buyerTel),
+                buyerEmail: "",
+                productPrice: Number(totalPay),
+                payStatus: 0,
+                returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
+                closeUrl: `${process.env.REACT_APP_URL}/close`,
             })
+    
+            const data = {
+                mid: "", // 이니시스 mid
+                mKey: "", // 이니시스 mkey
+                gopaymethod: "0", // 결제방법
+                order_code: orderCode, // 주문코드
+                user_id: sessionStorage.getItem("userId"), // 유저 아이디
+                order_data: orderDatas,
+                order_total_price: String(totalPay),
+                buyer_name: buyerName, // 주문자 이름
+                buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
+                buyer_tel: buyerTel, // 주문자 번호
+                delivery: delivery, // 주문처리현황
+                // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
+                refund: "N", //환불여부
+                receiver: receiver,
+                pay_point: payPoint >= userAddr.user_point ? userAddr.user_point : payPoint,
+                save_point: Math.ceil(sumPay/100)
+            }
+    
+            requestOrder(data);
+            setIsPurchase(isPurchase + 1);
         }
-
-        if (buyerName === "") {
-            alert("주문자 입력해주세요");
-            return;
-        } else if (buyerTel === "") {
-            alert("연락처 입력해주세요");
-            return;
-        } else if (buyerDetailAddress === "") {
-            alert("상세주소 입력해주세요");
-            return;
-        } else if (receiver === "") {
-            alert("받는 사람을 입력해주세요");
-            return;
-        }
-
-        const date = new Date();
-        const yy = date.getFullYear().toString().substring(2);
-        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
-        const dd = (("00" + date.getDate()).slice(-2));
-        const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
-        const serialNumber = Math.floor((Math.random() * (999 - 100) + 100));
-        const orderCode = serialNumber + dd + mm + yy + time;
-
-        setPayData({
-            productName: orderData[0].product_name,
-            buyerName: buyerName,
-            buyerTel: Number(buyerTel),
-            buyerEmail: "",
-            productPrice: Number(totalPay),
-            payStatus: 0,
-            returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
-            closeUrl: `${process.env.REACT_APP_URL}/close`,
-        })
-
-        const data = {
-            mid: "", // 이니시스 mid
-            mKey: "", // 이니시스 mkey
-            gopaymethod: "0", // 결제방법
-            order_code: orderCode, // 주문코드
-            user_id: sessionStorage.getItem("userId"), // 유저 아이디
-            order_data: orderDatas,
-            order_total_price: String(totalPay),
-            buyer_name: buyerName, // 주문자 이름
-            buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
-            buyer_tel: buyerTel, // 주문자 번호
-            delivery: delivery, // 주문처리현황
-            // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
-            refund: "N", //환불여부
-            receiver: receiver,
-            pay_point: payPoint >= userAddr.user_point ? userAddr.user_point : payPoint,
-            save_point: Math.ceil(sumPay/100)
-        }
-
-        requestOrder(data);
-        setIsPurchase(isPurchase + 1);
     }
 
     const onChange = (e) => {
