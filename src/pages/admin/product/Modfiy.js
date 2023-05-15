@@ -33,7 +33,6 @@ const Modfiy = () => {
     const { productCode } = useParams();
 
     useEffect(() => {
-        // 카테고리 가져오기
         getCategory(setFirstCategory);
         getDetailProdcut({ goods_code: productCode }, setProduct);
     }, [])

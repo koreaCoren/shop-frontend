@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { getProdcut, deleteProduct } from 'api/product.js';
+import { getCategory } from 'api/category';
 
 import Loading from 'components/loding/Loading';
 import Pageing from 'components/board/Pageing';
+import Searching from 'components/board/Searching';
+import LinkButton from 'components/admin/product/button/LinkButton';
 
 import * as Style from "assets/styleComponent/admin/product/list"
 import * as Common from "assets/styleComponent/admin/common"
 
 import noImg from "assets/images/noImg.gif";
-import Searching from 'components/board/Searching';
 
 const List = () => {
     const COUNT = 6;
     const { boardPage } = useParams();
     const [list, setList] = useState(null);
     const [copyList, setCopyList] = useState(null);
+    const [category, setCategory] = useState(null);
 
     useEffect(() => {
-        getProdcut(setList);
+        getProdcut({ sort_type: "all" }, setList);
+        getCategory(setCategory);
     }, [])
 
     useEffect(() => {
@@ -42,12 +46,13 @@ const List = () => {
     }
 
     return (
-        copyList === null
+        copyList === null || category === null
             ? <Loading />
             : <>
-                <Common.Container>
+                <Common.TopContainer>
                     <Searching board={list[0]} setBoardList={setCopyList} searchType={"adminProduct"} reset={reset} />
-                </Common.Container>
+                    <LinkButton title={"정렬 설정"} link={"/admin/product/setSorting"} />
+                </Common.TopContainer>
                 {
                     copyList.slice((boardPage - 1) * COUNT, (boardPage * COUNT)).map((a, i) => {
                         return (

@@ -4,6 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import List from 'pages/admin/product/List';
 import Register from 'pages/admin/product/Register';
 import Modfiy from 'pages/admin/product/Modfiy';
+import SetSorting from './SetSorting';
 import Top from "components/admin/Top";
 
 import * as Common from "assets/styleComponent/admin/common"
@@ -16,6 +17,7 @@ const Product = () => {
             <Common.Padding>
                 <Routes>
                     <Route path='/:boardPage' element={<List />} />
+                    <Route path='/setSorting' element={<SetSorting />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/modfiy/:productCode' element={<Modfiy />}></Route>
                 </Routes>
