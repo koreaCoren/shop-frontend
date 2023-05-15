@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const H2 = styled.div`
     margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: bold;
 `
 
 export const ProductRegister = styled.button`
