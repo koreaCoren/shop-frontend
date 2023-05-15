@@ -30,8 +30,6 @@ function App() {
     const [user, setUser] = useState();
     const [orderData, setOrderData] = useState();
     const [cookies, setCookies] = useCookies();
-    const hasRouter = location.pathname !== '/';
-    console.log(hasRouter);
 
     // 방문자 체크
     const accessCheck = async () => {

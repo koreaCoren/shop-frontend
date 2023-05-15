@@ -12,8 +12,9 @@ export const Container = styled.div`
     margin: 15px 0px;
 `
 export const TopContainer = styled.div`
-display:flex;
-justify-content: space-between;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #fff;
     border-radius: 5px;
     padding: 15px;
