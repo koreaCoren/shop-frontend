@@ -19,7 +19,7 @@ const ReviewPhoto = () => {
                                 이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
                                 패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                         </div>
-                        <div className="prodcutName">
+                        <div className="productName">
                             <div><img src={noImg} alt="" /></div>
                             더 진한 말굽버섯 1Box
                         </div>
@@ -39,7 +39,7 @@ const ReviewPhoto = () => {
                                 이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
                                 패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                         </div>
-                        <div className="prodcutName">
+                        <div className="productName">
                             <div><img src={noImg} alt="" /></div>
                             더 진한 말굽버섯 1Box
                         </div>

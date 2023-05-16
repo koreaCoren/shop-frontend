@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { updateProduct, getDetailProdcut } from 'api/product.js';
+import { updateProduct, getDetailProduct } from 'api/product.js';
 import { getCategory } from 'api/category.js';
 
 import ImageUpload from 'components/admin/product/input/ImageUpload';
@@ -15,7 +15,7 @@ import * as Style from 'assets/styleComponent/admin/product/edit';
 import ProductOption from 'components/admin/product/input/ProductOption';
 
 const Modfiy = () => {
-    const [getProdcut, setProduct] = useState(null);
+    const [getProduct, setProduct] = useState(null);
     const [productName, setProductName] = useState("");
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
@@ -34,14 +34,14 @@ const Modfiy = () => {
 
     useEffect(() => {
         getCategory(setFirstCategory);
-        getDetailProdcut({ goods_code: productCode }, setProduct);
+        getDetailProduct({ goods_code: productCode }, setProduct);
     }, [])
 
     useEffect(() => {
-        if (getProdcut !== null) {
+        if (getProduct !== null) {
             getProductData();
         }
-    }, [getProdcut])
+    }, [getProduct])
 
     useEffect(() => {
         // 카테고리 1번 선택하면 2번에 카테고리 1번 하위 카테고리 가져오기
@@ -53,20 +53,20 @@ const Modfiy = () => {
     }, [cate01])
 
     const getProductData = () => {
-        let cateData = getProdcut.goods_data.cate_code;
+        let cateData = getProduct.goods_data.cate_code;
         let str = String(cateData);
         let firCate = str.slice(0, 2);
 
-        setProductName(getProdcut.goods_data.goods_nm);
+        setProductName(getProduct.goods_data.goods_nm);
         setCate01(firCate);
         setCate02(str);
-        setPrice(getProdcut.goods_data.goods_price);
-        setDiscount(getProdcut.goods_data.goods_sale);
-        setSell(getProdcut.goods_data.goods_sell);
-        setStock(getProdcut.goods_data.goods_stock);
-        setThumbnail(getProdcut.goods_data.goods_img);
-        setProductContent(getProdcut.goods_data.goods_detail);
-        setOptionData(getProdcut.option_data);
+        setPrice(getProduct.goods_data.goods_price);
+        setDiscount(getProduct.goods_data.goods_sale);
+        setSell(getProduct.goods_data.goods_sell);
+        setStock(getProduct.goods_data.goods_stock);
+        setThumbnail(getProduct.goods_data.goods_img);
+        setProductContent(getProduct.goods_data.goods_detail);
+        setOptionData(getProduct.option_data);
     }
 
     const onSubmit = async (e) => {
@@ -155,7 +155,7 @@ const Modfiy = () => {
 
 
     return (
-        getProdcut === null
+        getProduct === null
             ? <Loading />
             : <>
                 <form onSubmit={onSubmit}>

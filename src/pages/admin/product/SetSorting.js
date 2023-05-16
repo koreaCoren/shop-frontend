@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductSelect from 'components/admin/product/input/Select';
 
 import { getCategory } from 'api/category';
-import { getProdcut, setProudctSorting } from 'api/product';
+import { getProduct, setProudctManualSorting, setProudctSorting } from 'api/product';
 
 import * as Common from "assets/styleComponent/admin/common"
 import * as Style from "assets/styleComponent/admin/product/sorting"
@@ -14,6 +14,7 @@ const SetSorting = () => {
     const [secondCategory, setSecondCategory] = useState([]);
     const [sorting, setSorting] = useState("선택해주세요");
     const [productList, setProductList] = useState(null);
+    const [sortingNum, setSortingNum] = useState(null);
 
     useEffect(() => {
         getCategory(setFirstCategory);
@@ -28,12 +29,21 @@ const SetSorting = () => {
         }
     }, [cate01])
 
+    useEffect(() => {
+        if (productList !== null) {
+            let arr = [];
+            for (let i = 0; i < productList[0]?.length; i++) {
+                arr.push({ rank: productList[0][i].rank, goods_code: productList[0][i]?.goods_code });
+            }
+            setSortingNum(arr);
+        }
+    }, [productList])
+
     const onSubmit = (e) => {
         e.preventDefault();
 
         if (cate01 === "선택해주세요" || cate01 === "") {
             alert("카테고리 1번 선택해주세요");
-            window.location.reload();
             return;
         }
 
@@ -58,26 +68,39 @@ const SetSorting = () => {
                 data.sort_type = "goods_stock";
                 data.direction = "asc";
                 break;
+            case "수동선택":
+                getProduct(data, setProductList);
+                break;
 
             default:
                 break;
         }
 
-        setProudctSorting(data);
+        if (sorting !== "수동선택") {
+            setProudctSorting(data);
+        }
     }
 
-    const manualSorting = () => {
-        if (cate01 === "선택해주세요" || cate01 === "") {
-            alert("카테고리 1번 선택해주세요");
-            window.location.reload();
-            return;
-        }
+    const onSave = async (e) => {
+        e.preventDefault();
+        const arr = sortingNum;
 
-        const data = {
+        sortingNum.forEach((el, i) => {
+            if (el.rank === "") {
+                arr[i].rank = "N";
+            }
+        });
+
+        const saveCheck = await setProudctManualSorting({
             cate_code: cate02 === "" || cate02 === "선택해주세요" ? cate01 : cate02,
-        }
+            sorting_data: arr
+        });
 
-        getProdcut(data, setProductList);
+        if (saveCheck === "ok") {
+            alert("저장 완료");
+        } else {
+            alert("알 수 없는 에러로 저장을 실패했습니다.");
+        }
     }
 
     const onChange = (e) => {
@@ -94,15 +117,30 @@ const SetSorting = () => {
                 break;
             case "sorting":
                 setSorting(value);
-                if (value === "수동선택") {
-                    manualSorting();
-                }
                 break;
 
             default:
                 break;
         }
     };
+
+    const onSortingChange = (e) => {
+        let arr = [...sortingNum];
+        const dataNum = e.target.dataset.num;
+        const value = e.target.value;
+        const name = e.target.name;
+        switch (name) {
+            case "sortingNum":
+                arr[dataNum].rank = value;
+                break;
+
+            default:
+                break;
+        }
+
+        setSortingNum(arr);
+    }
+
     return (
         <>
             <Common.Container>
@@ -124,23 +162,35 @@ const SetSorting = () => {
                             <i className="fa-solid fa-sort-down"></i>
                         </div>
                         {
-                            sorting === "수동선택" || sorting === "선택해주세요"
+                            sorting === "선택해주세요"
                                 ? null
-                                : <button onClick={onSubmit}>저장</button>
+                                : sorting === "수동선택"
+                                    ? <div className='buttons'>
+                                        <button onClick={onSubmit}>리스트 불러오기</button>
+                                        <button onClick={onSave}>정렬 저장</button>
+                                    </div>
+                                    : <button onClick={onSubmit}>저장</button>
                         }
 
                     </div>
                 </Style.Box>
             </Common.Container>
             {
-                productList !== null &&
+                productList !== null && sortingNum !== null &&
                 <Common.Container>
+                    <Style.Title>
+                        <li>상품 명</li>
+                        <li>정렬 순서</li>
+                    </Style.Title>
                     {
                         productList !== "not product"
                             ? productList[0].map((a, i) => {
-                                return <div key={i}>{a.goods_nm}</div>
+                                return <Style.List key={i}>
+                                    <li>{a.goods_nm}</li>
+                                    <li><input type="text" data-num={i} name="sortingNum" value={sortingNum[i]?.rank} onChange={onSortingChange} /></li>
+                                </Style.List>
                             })
-                            : "해당 카테고리는 상품이 없습니다."
+                            : <p>해당 카테고리는 상품이 없습니다</p>
                     }
                 </Common.Container>
             }

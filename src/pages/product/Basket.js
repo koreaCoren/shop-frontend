@@ -93,7 +93,7 @@ const Basket = ({ setOrderData }) => {
                     product_img: selectData[i].product_img,
                     price: selectData[i].price,
                     sale: selectData[i].sale,
-                    prodcut_count: selectData[i].prodcut_count,
+                    product_count: selectData[i].product_count,
                     option: selectData[i].option,
                     total_price: selectData[i]?.total_price
                 }
@@ -153,7 +153,7 @@ const Basket = ({ setOrderData }) => {
                                             </div>
                                         </li>
                                         <li className='count'>
-                                            {a.prodcut_count}개
+                                            {a.product_count}개
                                         </li>
                                         <li>{a.sale}%</li>
                                         <li>{comma(a.total_price)}원</li>

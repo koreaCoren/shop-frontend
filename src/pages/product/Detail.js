@@ -12,7 +12,7 @@ import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
-import { getProductReivew, getDetailProdcut } from 'api/product';
+import { getProductReivew, getDetailProduct } from 'api/product';
 import createCode from 'utils/createCode';
 
 const Detail = ({ setOrderData }) => {
@@ -43,7 +43,7 @@ const Detail = ({ setOrderData }) => {
     //해당 페이지 상품 디테일 가져오기
     useEffect(() => {
         // selFav();
-        getDetailProdcut({ goods_code: productCode }, setProductDetail);
+        getDetailProduct({ goods_code: productCode }, setProductDetail);
         getReviewList();
     }, []);
 
@@ -105,7 +105,7 @@ const Detail = ({ setOrderData }) => {
             price: productDetail.goods_data.goods_price,
             sale: productDetail.goods_data.goods_sale,
             option: optionValue.option_name,
-            prodcut_count: count,
+            product_count: count,
             total_price: totalPrice
         }
 
@@ -128,7 +128,7 @@ const Detail = ({ setOrderData }) => {
             price: productDetail.goods_data.goods_price,
             sale: productDetail.goods_data.goods_sale,
             option: optionValue.option_name,
-            prodcut_count: count,
+            product_count: count,
             basket_count: createCode(),
             goods_stock: productDetail.goods_data.goods_stock,
             total_price: totalPrice

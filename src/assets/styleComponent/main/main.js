@@ -592,7 +592,7 @@ export const Review = styled.div`
         background-color: #ccc;
     }
 
-    ul li a .prodcutName {
+    ul li a .productName {
         padding: 20px;
         display: flex;
         align-items: center;
@@ -600,7 +600,7 @@ export const Review = styled.div`
         font-size: 16px;
     }
 
-    ul li a .prodcutName div {
+    ul li a .productName div {
         display: flex;
         width: 50px;
         height: 50px;
@@ -608,7 +608,7 @@ export const Review = styled.div`
         border-radius: 50%;
     }
 
-    ul li a .prodcutName div img {
+    ul li a .productName div img {
         width: 100%;
         border-radius: 50%;
     }
@@ -651,7 +651,7 @@ export const Review = styled.div`
             display: none;
         }
 
-        ul li a .prodcutName {
+        ul li a .productName {
             display: none;
         }
         

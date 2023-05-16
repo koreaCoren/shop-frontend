@@ -87,20 +87,20 @@ const OrderInfo = ({ orderData }) => {
     const payment = (e) => {
         e.preventDefault();
         let orderDatas = [];
-        if(totalPay < 1000){
+        if (totalPay < 1000) {
             alert("1000원 이하는 결제가 불가능합니다.");
-        } else{
+        } else {
             for (let i = 0; i < order.length; i++) {
                 orderDatas.push({
                     goods_code: order[i].product_code, // 상품코드
                     goods_name: order[i].product_name, // 상품이름
                     goods_sale: order[i].sale, // 할인율
                     order_pay: order[i].total_price, // 총 상품가격
-                    order_count: order[i].prodcut_count, //상품 갯수
+                    order_count: order[i].product_count, //상품 갯수
                     option: order[i].option, // 옵션
                 })
             }
-    
+
             if (buyerName === "") {
                 alert("주문자 입력해주세요");
                 return;
@@ -114,7 +114,7 @@ const OrderInfo = ({ orderData }) => {
                 alert("받는 사람을 입력해주세요");
                 return;
             }
-    
+
             const date = new Date();
             const yy = date.getFullYear().toString().substring(2);
             const mm = (("00" + (date.getMonth() + 1)).slice(-2));
@@ -122,7 +122,7 @@ const OrderInfo = ({ orderData }) => {
             const time = (("00" + date.getHours().toString()).slice(-2)) + (("00" + date.getMinutes().toString()).slice(-2));
             const serialNumber = Math.floor((Math.random() * (999 - 100) + 100));
             const orderCode = serialNumber + dd + mm + yy + time;
-    
+
             setPayData({
                 productName: orderData[0].product_name,
                 buyerName: buyerName,
@@ -133,7 +133,7 @@ const OrderInfo = ({ orderData }) => {
                 returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${orderCode}`,
                 closeUrl: `${process.env.REACT_APP_URL}/close`,
             })
-    
+
             const data = {
                 mid: "", // 이니시스 mid
                 mKey: "", // 이니시스 mkey
@@ -150,9 +150,9 @@ const OrderInfo = ({ orderData }) => {
                 refund: "N", //환불여부
                 receiver: receiver,
                 pay_point: payPoint >= userAddr.user_point ? userAddr.user_point : payPoint,
-                save_point: Math.ceil(sumPay/100)
+                save_point: Math.ceil(sumPay / 100)
             }
-    
+
             requestOrder(data);
             setIsPurchase(isPurchase + 1);
         }
@@ -208,7 +208,7 @@ const OrderInfo = ({ orderData }) => {
                                                 <div className="title">{a.product_name} <br /> {a.option === null ? "" : `(${a.option})`}</div>
                                             </div>
                                         </li>
-                                        <li>{a.prodcut_count}개</li>
+                                        <li>{a.product_count}개</li>
                                         <li>{a.sale}%</li>
                                         <li>{comma(a.total_price)}원</li>
                                     </ul>
@@ -296,7 +296,7 @@ const OrderInfo = ({ orderData }) => {
                                 </div>
                                 <div>
                                     <span>적립 예정금</span>
-                                    <span>{Math.ceil(sumPay/100)}</span>
+                                    <span>{Math.ceil(sumPay / 100)}</span>
                                 </div>
                                 <div>
                                     <span className='totalPay'>

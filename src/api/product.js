@@ -2,13 +2,13 @@ import axios from "./axios";
 import { handleApiError, handleConnectionError } from "./handleError";
 
 // 상품 리스트 가져오기
-const getProdcut = async (data, success) => {
+const getProduct = async (data, success) => {
     try {
         if (data.sort_type !== "all") {
             data.sort_type = "none";
         }
         const res = await axios.post("/goods/sel_goods", data);
-        handleConnectionError(res.data);
+        // handleConnectionError(res.data);
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -16,7 +16,7 @@ const getProdcut = async (data, success) => {
 }
 
 // 상품 상세 정보 가져오기
-const getDetailProdcut = async (data, success) => {
+const getDetailProduct = async (data, success) => {
     try {
         const res = await axios.post("/goods/detail_goods", data);
         handleConnectionError(res.data);
@@ -85,23 +85,33 @@ const getProductReivew = async (data, success) => {
 }
 
 // 상품 정렬 설정
-const setProudctSorting = async (data, success) => {
+const setProudctSorting = async (data) => {
     try {
         const res = await axios.post("/goods/sort_goods_upd", data);
         handleConnectionError(res.data);
-        success(res);
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+// 상품 수동 정렬 설정
+const setProudctManualSorting = async (data) => {
+    try {
+        const res = await axios.post("/goods/goods_rank_upd", data);
+        handleConnectionError(res.data);
+        return "ok";
     } catch (error) {
         handleApiError(error);
     }
 }
 
 export {
-    getProdcut,
-    getDetailProdcut,
+    getProduct,
+    getDetailProduct,
     deleteProduct,
     updateProduct,
     getProductSaleStatus,
     getAccumulateSell,
     getProductReivew,
-    setProudctSorting
+    setProudctSorting,
+    setProudctManualSorting
 };

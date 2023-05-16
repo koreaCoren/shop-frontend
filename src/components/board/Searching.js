@@ -49,12 +49,7 @@ const Searching = ({ board, setBoardList, searchType, reset }) => {
             nav(`/admin/user/1?search=${searchValue}`);
         } else if (searchType === "order") {
             nav(`/admin/order/1?search=${searchValue}`);
-        } else if (searchType === "product") {
-            const arr = reset().filter(el =>
-                el.del !== "Y" && el[searchTypes[searchType].prop].indexOf(searchValue) !== -1
-            );
-            setBoardList(arr);
-        } else if (searchType === "adminProduct") {
+        } else if (searchType === "adminProduct" || searchType === "product") {
             const arr = [];
             board.forEach(el => {
                 if (el[searchTypes[searchType].prop].indexOf(searchValue) !== -1) {

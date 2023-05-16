@@ -9,7 +9,7 @@ import * as Style from "assets/styleComponent/main/mainProductList";
 import noImg from "assets/images/noImg.gif";
 
 const MainProductList = () => {
-    let result = useQuery("prodcutList", productList);
+    let result = useQuery("productList", productList);
 
     return (
         <Style.ProductList>
