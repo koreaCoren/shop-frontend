@@ -188,7 +188,7 @@ export const ReviewBoard = styled.div`
         background-color: #ccc;
         margin-top: 20px;
     }
-    .wrap > ul.photo li a .prodcutName{
+    .wrap > ul.photo li a .productName{
         padding: 20px 20px 20px;
         display: flex;
         align-items: center;
@@ -196,14 +196,14 @@ export const ReviewBoard = styled.div`
         font-size: 16px;
         border-top: 1px solid #ccc;
     }
-    .wrap > ul.photo li a .prodcutName div{
+    .wrap > ul.photo li a .productName div{
         width: 50px;
         height: 50px;
         border: 1px solid #ccc;
         border-radius: 50%;
         padding: 10px;
     }
-    .wrap > ul.photo li a .prodcutName div img{
+    .wrap > ul.photo li a .productName div img{
         width: 100%;
     }
 
@@ -379,7 +379,7 @@ export const ReviewBoard = styled.div`
         .wrap > ul.photo li a{
             border-left: 1px solid #ccc;
         }
-        .wrap > ul.photo li a .prodcutName{
+        .wrap > ul.photo li a .productName{
             display: none;
         }
         .photoReviewDetail{

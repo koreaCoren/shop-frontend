@@ -49,6 +49,11 @@ export const Box = styled.div`
         transform: translateY(-70%);
         color: #757575;
     }
+    .buttons{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
     button{
         line-height: 30px;
         background-color: #1a6dff;
@@ -58,3 +63,32 @@ export const Box = styled.div`
         cursor: pointer;
     }
 `;
+
+export const Title = styled.ul` 
+    display: grid;
+    grid-template-columns: 1fr 70px;
+    text-align: center;
+    border-bottom:1px solid #eee;
+    padding-bottom: 15px;
+    li{
+        font-size: 16px;
+        font-weight: bold;
+    }
+`
+
+export const List = styled.ul`
+    display: grid;
+    grid-template-columns: 1fr 70px;
+    align-items: center;
+    border-bottom:1px solid #eee;
+    padding: 10px 0px;
+    li:nth-child(2){
+        text-align: center;
+    }
+    input{
+        border: 1px solid #ccc;
+        width: 100%;
+        text-align: center;
+        padding: 5px 0px;
+    }
+`

@@ -31,7 +31,7 @@ const addBoard = async (data) => {
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "product") {
-                window.location.replace("/admin/product");
+                window.location.replace("/admin/product/1");
             } else {
                 const nextPage = data.type === "review" ? "all" : "1";
                 window.location.replace(`/community/${data.type}/${nextPage}`);

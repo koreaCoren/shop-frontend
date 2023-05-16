@@ -1,4 +1,4 @@
-import axios from "./axios";
+import axios from "axios";
 
 // 통신에러
 const handleApiError = async (error) => {
