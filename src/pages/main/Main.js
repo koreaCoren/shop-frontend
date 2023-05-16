@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getProdcut } from 'api/product';
+import { getProduct } from 'api/product';
 import { getBoard } from 'api/board';
 
 import { comma } from 'utils/commaReplace';
@@ -20,7 +20,7 @@ const Main = () => {
     const [mainReview, setMainReview] = useState(null);
 
     useEffect(() => {
-        getProdcut(setResult);
+        getProduct({ sort_type: "all" }, setResult);
         getBoard({
             boardPage: 1,
             boardType: "review"
@@ -111,7 +111,7 @@ const Main = () => {
                                                                     product_img: a.goods_img,
                                                                     price: a.goods_price,
                                                                     sale: a.goods_sale,
-                                                                    prodcut_count: 1,
+                                                                    product_count: 1,
                                                                     option: null,
                                                                     basket_count: createCode(),
                                                                     goods_stock: a.goods_stock,
@@ -176,7 +176,7 @@ const Main = () => {
                                                             <p dangerouslySetInnerHTML={{ __html: a.content.length === 40 ? `${a.content} ...` : a.content }}></p>
                                                         </div>
                                                         <div className="bar"></div>
-                                                        <div className="prodcutName">
+                                                        <div className="productName">
                                                             <div><img src={a.goods_img ? a.goods_img : noImg} alt={`제품이미지` + i} /></div>
                                                             {a.goods_nm}
                                                         </div>
@@ -207,7 +207,7 @@ const Main = () => {
                                         패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                                     <div className="bar"></div>
                                 </div>
-                                <div className="prodcutName">
+                                <div className="productName">
                                     <div><img src={best} alt="" /></div>
                                     더 진한 말굽버섯 1Box
                                 </div>
@@ -225,7 +225,7 @@ const Main = () => {
                                         패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                                     <div className="bar"></div>
                                 </div>
-                                <div className="prodcutName">
+                                <div className="productName">
                                     <div><img src={best} alt="" /></div>
                                     더 진한 말굽버섯 1Box
                                 </div>
@@ -243,7 +243,7 @@ const Main = () => {
                                         패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                                     <div className="bar"></div>
                                 </div>
-                                <div className="prodcutName">
+                                <div className="productName">
                                     <div><img src={best} alt="" /></div>
                                     더 진한 말굽버섯 1Box
                                 </div>
@@ -261,7 +261,7 @@ const Main = () => {
                                         패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
                                     <div className="bar"></div>
                                 </div>
-                                <div className="prodcutName">
+                                <div className="productName">
                                     <div><img src={best} alt="" /></div>
                                     더 진한 말굽버섯 1Box
                                 </div>

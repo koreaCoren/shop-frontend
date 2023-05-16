@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { getProdcut, deleteProduct } from 'api/product.js';
+import { getProduct, deleteProduct } from 'api/product.js';
 import { getCategory } from 'api/category';
 
 import Loading from 'components/loding/Loading';
@@ -22,7 +22,7 @@ const List = () => {
     const [category, setCategory] = useState(null);
 
     useEffect(() => {
-        getProdcut({ sort_type: "all" }, setList);
+        getProduct({ sort_type: "all" }, setList);
         getCategory(setCategory);
     }, [])
 

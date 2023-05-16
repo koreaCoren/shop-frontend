@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
+import { getProduct } from 'api/product';
+
 import { comma } from 'utils/commaReplace';
 
 import Loading from 'components/loding/Loading';
@@ -12,13 +14,18 @@ import * as Style from "assets/styleComponent/product/products";
 import banner from "assets/images/shop/banner.jpg";
 import noImg from "assets/images/noImg.gif";
 
-const Products = ({ result }) => {
+const Products = () => {
     const COUNT = 12;
     const nav = useNavigate();
     const { categoryCode, boardPage } = useParams();
-    const [productList, setProductList] = useState();
+    const [productList, setProductList] = useState(null);
+    const [copyList, setCopyList] = useState(null);
 
     const [select, setSelect] = useState("최신순");
+
+    useEffect(() => {
+        getProduct({ cate_code: categoryCode }, setProductList);
+    }, [categoryCode])
 
     const compareDates = (a, b) => {
         const dateA = new Date(a.date);
@@ -45,29 +52,19 @@ const Products = ({ result }) => {
 
     const sortData = () => {
         if (select === "비싼 가격순") {
-            const sorted = [...productList].sort((a, b) => Number(b.goods_price) - Number(a.goods_price));
-            setProductList(sorted);
+            const sorted = [...copyList].sort((a, b) => Number(b.goods_price) - Number(a.goods_price));
+            setCopyList(sorted);
         } else if (select === "낮은 가격순") {
-            const sorted = [...productList].sort((a, b) => Number(a.goods_price) - Number(b.goods_price));
-            setProductList(sorted);
+            const sorted = [...copyList].sort((a, b) => Number(a.goods_price) - Number(b.goods_price));
+            setCopyList(sorted);
         } else {
-            const sorted = [...productList].sort(compareDates);
-            setProductList(sorted);
+            const sorted = [...copyList].sort(compareDates);
+            setCopyList(sorted);
         }
     }
 
     const reset = () => {
-        const arr = [];
-        for (let i = 0; i < result[0].length; i++) {
-            let getCateCode = String(result[0][i].cate_code);
-            if (getCateCode === categoryCode) {
-                arr.push(result[0][i]);
-            } else if (getCateCode.substring(0, 2) === categoryCode) {
-                arr.push(result[0][i]);
-            }
-        }
-        setProductList(arr);
-        return arr;
+        setCopyList(productList[0]);
     }
 
     useEffect(() => {
@@ -77,10 +74,10 @@ const Products = ({ result }) => {
     }, [select]);
 
     useEffect(() => {
-        if (result !== null) {
+        if (productList !== null) {
             reset();
         }
-    }, [result, nav]);
+    }, [productList]);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -95,7 +92,7 @@ const Products = ({ result }) => {
     }
 
     return (
-        result === null
+        copyList === null
             ? <Loading />
             : <div style={{ paddingBottom: "50px", }}>
                 <Style.Products>
@@ -104,7 +101,7 @@ const Products = ({ result }) => {
                             <img src={banner} alt="" />
                         </div>
                         <div className="flexBox" style={{ paddingBottom: "10px", marginBottom: "10px", borderBottom: "1px solid #ccc" }}>
-                            <Searching board={productList} setBoardList={setProductList} searchType={"product"} reset={reset} />
+                            <Searching board={productList[0]} setBoardList={setCopyList} searchType={"product"} reset={reset} />
                             <Style.Select>
                                 <select name="select" onChange={onChange}>
                                     <option value="최신순">최신순</option>
@@ -117,7 +114,8 @@ const Products = ({ result }) => {
                         </div>
                         <ul>
                             {
-                                productList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
+                                productList !== "not product" &&
+                                copyList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
                                     return (
                                         <li key={i}>
                                             <Link to={`/product/detail/${a.goods_code}`}>
