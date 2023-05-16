@@ -78,11 +78,9 @@ const Products = () => {
     }, [select]);
 
     useEffect(() => {
-        console.log(copyList);
         if (productList !== null) {
             reset();
         }
-        console.log(copyList);
     }, [productList, categoryCode]);
 
     const onChange = (e) => {
@@ -122,7 +120,7 @@ const Products = () => {
                             productList !== "not product" && copyList !== "not product" ?
                                 <ul>
                                     {
-                                        copyList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
+                                        copyList?.slice((boardPage - 1) * COUNT, (boardPage * COUNT)).map((a, i) => {
                                             return (
                                                 <li key={i}>
                                                     <Link to={`/product/detail/${a.goods_code}`}>
@@ -139,7 +137,7 @@ const Products = () => {
                         }
                     </div>
                 </Style.Products>
-                <Pageing count={COUNT} boardPage={boardPage} boardLength={productList?.length} url={`/product/products/${categoryCode}`} />
+                <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/product/products/${categoryCode}`} />
             </div>
     );
 };
