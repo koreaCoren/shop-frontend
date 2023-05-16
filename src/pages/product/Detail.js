@@ -193,23 +193,23 @@ const Detail = ({ setOrderData }) => {
                                 </Style.DetailInfo>
 
                                 <p>(최소주문수량 1개 이상)</p>
-                                <Style.OptionSelect>
-                                    {
-                                        option?.length > 0
-                                            ? <select name='option' onChange={onOptionChange}>
-                                                <option value="선택 안함">선택 안함  + 0원</option>
-                                                {
-                                                    option?.map((a, i) => {
-                                                        return <option key={i} value={a.option_name}>
-                                                            {a.option_name} + {comma(a.option_price)}원
-                                                        </option>
-                                                    })
-                                                }
-                                            </select>
-                                            : null
-                                    }
-                                    <i className="fa-solid fa-sort-down"></i>
-                                </Style.OptionSelect>
+                                {
+                                    option?.length > 0
+                                        ?
+                                        <Style.OptionSelect><select name='option' onChange={onOptionChange}>
+                                            <option value="선택 안함">선택 안함  + 0원</option>
+                                            {
+                                                option?.map((a, i) => {
+                                                    return <option key={i} value={a.option_name}>
+                                                        {a.option_name} + {comma(a.option_price)}원
+                                                    </option>
+                                                })
+                                            }
+                                        </select>
+                                            <i className="fa-solid fa-sort-down"></i>
+                                        </Style.OptionSelect>
+                                        : null
+                                }
 
                                 <Style.Quantity>
                                     <div className="name">{productDetail.goods_data.goods_nm}</div>
