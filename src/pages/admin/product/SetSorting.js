@@ -86,7 +86,7 @@ const SetSorting = () => {
         const arr = sortingNum;
 
         sortingNum.forEach((el, i) => {
-            if (el.rank === "") {
+            if (el.rank === "" || el.rank === null) {
                 arr[i].rank = "N";
             }
         });

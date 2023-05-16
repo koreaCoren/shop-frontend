@@ -64,7 +64,9 @@ const Products = () => {
     }
 
     const reset = () => {
-        setCopyList(productList[0]);
+        if (productList !== "not product") {
+            setCopyList(productList[0]);
+        }
     }
 
     useEffect(() => {
@@ -74,10 +76,12 @@ const Products = () => {
     }, [select]);
 
     useEffect(() => {
+        console.log(copyList);
         if (productList !== null) {
             reset();
         }
-    }, [productList]);
+        console.log(copyList);
+    }, [productList, categoryCode]);
 
     const onChange = (e) => {
         const name = e.target.name;
@@ -112,22 +116,25 @@ const Products = () => {
                                 <i className="fa-solid fa-sort-down"></i>
                             </Style.Select>
                         </div>
-                        <ul>
-                            {
-                                productList !== "not product" &&
-                                copyList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
-                                    return (
-                                        <li key={i}>
-                                            <Link to={`/product/detail/${a.goods_code}`}>
-                                                <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
-                                                <h3>{a.goods_nm}</h3>
-                                                <h4>{comma(a.goods_price)} 원</h4>
-                                            </Link>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
+                        {
+                            productList !== "not product" ?
+                                <ul>
+                                    {
+                                        copyList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
+                                            return (
+                                                <li key={i}>
+                                                    <Link to={`/product/detail/${a.goods_code}`}>
+                                                        <img src={a.goods_img === "" ? noImg : a.goods_img} alt="" />
+                                                        <h3>{a.goods_nm}</h3>
+                                                        <h4>{comma(a.goods_price)} 원</h4>
+                                                    </Link>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                                : "아무것도 없음"
+                        }
                     </div>
                 </Style.Products>
                 <Pageing count={COUNT} boardPage={boardPage} boardLength={productList?.length} url={`/product/products/${categoryCode}`} />
