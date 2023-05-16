@@ -66,6 +66,8 @@ const Products = () => {
     const reset = () => {
         if (productList !== "not product") {
             setCopyList(productList[0]);
+        } else {
+            setCopyList("not product");
         }
     }
 
@@ -117,7 +119,7 @@ const Products = () => {
                             </Style.Select>
                         </div>
                         {
-                            productList !== "not product" ?
+                            productList !== "not product" && copyList !== "not product" ?
                                 <ul>
                                     {
                                         copyList?.slice((boardPage - 1) * COUNT, (boardPage - 1) * 10 + COUNT).map((a, i) => {
