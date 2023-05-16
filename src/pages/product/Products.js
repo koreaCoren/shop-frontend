@@ -67,7 +67,7 @@ const Products = () => {
         if (productList !== "not product") {
             setCopyList(productList[0]);
         } else {
-            setCopyList("not product");
+            setCopyList(productList);
         }
     }
 
