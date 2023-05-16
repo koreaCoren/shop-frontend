@@ -121,7 +121,7 @@ const Home = () => {
                                     <span>
                                         <h4>위험</h4>
                                         <div>
-                                            <Link className='mvpage' to={"/admin/product"}>
+                                            <Link className='mvpage' to={"/admin/product/1"}>
                                                 {dash?.data.warning === null ? 0 : dash?.data.warning}건
                                             </Link>
                                         </div>
@@ -129,7 +129,7 @@ const Home = () => {
                                     <span>
                                         <h4>부족</h4>
                                         <div>
-                                            <Link className='mvpage' to={"/admin/product"}>
+                                            <Link className='mvpage' to={"/admin/product/1"}>
                                                 {dash?.data.shortage === null ? 0 : dash?.data.shortage}건
                                             </Link>
                                         </div>
@@ -172,9 +172,9 @@ const Home = () => {
                                                 <div className='user'>{i.user_id}</div>
                                                 <div className='order'>{i.orderCode}</div>
                                                 <div className='status'>
-                                                   <Link 
-                                                    className={i.status}
-                                                    to={`/admin/orderDetail/${i.orderCode}`}>{i.status}</Link> 
+                                                    <Link
+                                                        className={i.status}
+                                                        to={`/admin/orderDetail/${i.orderCode}`}>{i.status}</Link>
                                                 </div>
                                             </li>
                                         )
