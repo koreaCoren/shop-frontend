@@ -7,8 +7,8 @@ import {
 import { nanoid } from "nanoid";
 
 const selector = "#payment-widget";
-const clientKey = "test_ck_OAQ92ymxN34mW7m9n5yVajRKXvdk";
-const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
+const clientKey = process.env.REACT_APP_TOSS_CLIENT_KEY;
+const customerKey = process.env.REACT_APP_TOSS_CUSTOMER_KEY;
 
 export function Toss({
     orderName,
