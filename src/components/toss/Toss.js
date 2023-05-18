@@ -20,7 +20,6 @@ export function Toss({
 }) {
     const paymentWidgetRef = useRef(null);
     const paymentMethodsWidgetRef = useRef(null);
-    const [price, setPrice] = useState(0);
 
     useEffect(() => {
         (async () => {
@@ -28,13 +27,13 @@ export function Toss({
 
             const paymentMethodsWidget = paymentWidget.renderPaymentMethods(
                 selector,
-                price
+                totalPay
             );
 
             paymentWidgetRef.current = paymentWidget;
             paymentMethodsWidgetRef.current = paymentMethodsWidget;
         })();
-    }, [price]);
+    }, [totalPay]);
 
     useEffect(() => {
         const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -44,10 +43,10 @@ export function Toss({
         }
 
         paymentMethodsWidget.updateAmount(
-            price,
+            totalPay,
             paymentMethodsWidget.UPDATE_REASON.COUPON
         );
-    }, [price]);
+    }, [totalPay]);
 
     return (
         <Pay>
