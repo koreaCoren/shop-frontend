@@ -22,6 +22,7 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
+import { Toss } from "components/toss/Toss";
 
 function App() {
     const nav = useNavigate();
@@ -72,6 +73,7 @@ function App() {
                 {/* 에러 날때 밑에 파일로 보내줌 */}
                 <Route path="/error" element={<Error />} />
                 <Route path="*" element={<NotFoundPage />} />
+                <Route path="/toss" element={<Toss />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
