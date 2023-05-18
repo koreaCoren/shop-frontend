@@ -46,7 +46,6 @@ export function Toss({
         if (paymentMethodsWidget == null) {
             return;
         }
-
         paymentMethodsWidget.updateAmount(
             price,
             paymentMethodsWidget.UPDATE_REASON.COUPON
@@ -72,7 +71,6 @@ export function Toss({
                         } catch (error) {
                             // handle error
                         }
-                        console.log(price);
                     }}
                 >
                     결제하기
