@@ -34,11 +34,7 @@ export function Toss({
             paymentWidgetRef.current = paymentWidget;
             paymentMethodsWidgetRef.current = paymentMethodsWidget;
         })();
-    }, []);
-
-    useEffect(() => {
-        setPrice(totalPay);
-    }, [totalPay]);
+    }, [price]);
 
     useEffect(() => {
         const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -73,7 +69,6 @@ export function Toss({
                         } catch (error) {
                             // handle error
                         }
-                        console.log(price);
                     }}
                 >
                     결제하기
