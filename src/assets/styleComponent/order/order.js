@@ -63,7 +63,7 @@ export const Payment = styled.div`
     padding: 10px;
     display: flex;
     justify-content:space-around;
-    gap: 150px;
+    gap: 50px;
     @media(max-width:800px) {
         flex-direction: column;
         gap: 50px;
@@ -111,6 +111,12 @@ export const Form = styled.form`
     div input[type="radio"]{
         width: 50px;
     }
+
+    @media (max-width: 500px) {
+        div input:not([type="radio"]){
+            width: 100%;
+        }
+    }
 `
 
 export const payForm = styled.form`
@@ -119,7 +125,7 @@ export const payForm = styled.form`
     gap: 10px;
     flex:1;
 
-    div{
+    >div{
         display: flex;
         gap: 5px;
         justify-content: space-between;
@@ -153,8 +159,9 @@ export const payForm = styled.form`
         font-weight:bold;
         padding-top:20px;
     }
-    @media(max-width:900px) {
-        
+    @media (max-width: 500px) {
+        div.point input[type="text"]{
+            width: 100px;
+        }   
     }
-    
 `
