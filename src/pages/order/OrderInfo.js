@@ -307,15 +307,16 @@ const OrderInfo = ({ orderData }) => {
 
                     {
                         // 토스 결제
+                        userAddr !== "" &&
                         PAY_TYPE === "토스" &&
                         <Style.Info style={{ padding: "0px" }}>
                             <Toss
                                 orderName={orderData[0].product_name}
                                 customerName={buyerName}
                                 customerEmail={null}
-                                successUrl={`${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${createCode()}`}
+                                successUrl={`${process.env.REACT_APP_URL}/shop-backend/backend/order/tos_ins?orderCode=${createCode()}`}
                                 failUrl={`${process.env.REACT_APP_URL}`}
-                                price={Number(totalPay)}
+                                totalPay={Number(totalPay)}
                             />
                         </Style.Info>
                     }
