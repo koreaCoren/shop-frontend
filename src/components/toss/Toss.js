@@ -55,7 +55,6 @@ export function Toss({
                 <button
                     onClick={async () => {
                         const paymentWidget = paymentWidgetRef.current;
-
                         try {
                             await paymentWidget?.requestPayment({
                                 orderId: nanoid(),
