@@ -11,6 +11,7 @@ import Footer from "components/common/Footer";
 import Error from "components/error/Error";
 import NotFoundPage from "components/error/NotFoundPage";
 import Close from "components/inicis/Close";
+import TossSuccess from "components/toss/TossSuccess";
 
 import Main from "pages/main/Main";
 import Login from "pages/login/Login";
@@ -22,7 +23,6 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-import { Toss } from "components/toss/Toss";
 
 function App() {
     const nav = useNavigate();
@@ -73,7 +73,9 @@ function App() {
                 {/* 에러 날때 밑에 파일로 보내줌 */}
                 <Route path="/error" element={<Error />} />
                 <Route path="*" element={<NotFoundPage />} />
-                <Route path="/toss" element={<Toss />} />
+
+                {/* 토스 데이터 전달용 */}
+                <Route path="/tossSuccess" element={<TossSuccess />} />
             </Routes>
             {header && <Footer></Footer>}
         </>
