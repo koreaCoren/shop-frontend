@@ -63,9 +63,9 @@ const OrderDetail = () => {
     }
 
     const confirmRefund = () => {
-        if(window.confirm("환불 처리 하시겠습니까?")){
+        if (window.confirm("환불 처리 하시겠습니까?")) {
             const data = {
-                orderCode : detail[0].orderCode
+                orderCode: detail[0].orderCode
             }
             recognizeRefund(data);
         }
@@ -114,7 +114,7 @@ const OrderDetail = () => {
 
     useEffect(() => {
         getDetailOrder({ orderCode: orderCode }, setDetail)
-        
+
     }, [])
 
     useEffect(() => {
@@ -141,7 +141,7 @@ const OrderDetail = () => {
                             )
                         })
                     }
-                
+
                     {
                         <Common.Container>
                             <Style.Content>
@@ -154,7 +154,30 @@ const OrderDetail = () => {
                                 <li>주문 날짜 : {detail[0].order_date}</li>
                                 <li>상품 총 금액 : {totalPrice}</li>
                                 <li>결제 유형 : {cardType()}</li>
-                                <li>결제 완료 여부 : {orderStatus}</li>
+                                <li>결제 완료 여부 : {detail[0].order_complete}</li>
+                                <li>주문상태 : {
+                                    detail[0].status === "환불요청" ?
+                                        <>
+                                            환불 요청중
+                                            <button onClick={() => {
+                                                confirmRefund();
+                                            }}>승인</button>
+                                            <button>
+                                                거절
+                                            </button>
+                                        </>
+                                        : detail[0].status === "취소요청" ? <>
+                                            취소 요청중
+                                            <button onClick={() => {
+                                                revokeOrder();
+                                            }}>승인</button>
+                                            <button>
+                                                거절
+                                            </button>
+                                        </>
+                                            : detail[0].status
+                                }
+                                </li>
                                 <li>배송사 :
                                     <div className="select">
                                         <select name="orderCarrier" onChange={onChange}>
@@ -176,30 +199,6 @@ const OrderDetail = () => {
                                     송장번호 : <input type="text" placeholder='송장번호를 입력해주세요' name='invoiceNumber' value={invoiceNumber} onChange={onChange} />
                                     <button onClick={setInvoice}>수정</button>
                                 </li>
-                                {
-                                    detail[0].status === "환불요청" &&
-                                    <li>
-                                        환불 요청중  
-                                        <button onClick={() => {
-                                            confirmRefund();
-                                        }}>승인</button>
-                                        <button>
-                                            거절
-                                        </button>
-                                    </li>
-                                }
-                                {
-                                    detail[0].status === "취소요청" &&
-                                    <li>
-                                        취소 요청중  
-                                        <button onClick={() => {
-                                            revokeOrder();
-                                        }}>승인</button>
-                                        <button>
-                                            거절
-                                        </button>
-                                    </li>
-                                }
 
                             </Style.Content>
                         </Common.Container>

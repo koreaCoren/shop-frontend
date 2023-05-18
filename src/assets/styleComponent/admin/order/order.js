@@ -35,4 +35,5 @@ export const DetailButton = styled(Link)`
     color: #fff;
     padding: 0px 50px;
     border-radius: 5px;
+    margin: 10px 3px 0px;
 `

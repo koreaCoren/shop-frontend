@@ -16,10 +16,11 @@ export function Toss({
     customerEmail,
     successUrl,
     failUrl,
-    price
+    totalPay,
 }) {
     const paymentWidgetRef = useRef(null);
     const paymentMethodsWidgetRef = useRef(null);
+    const [price, setPrice] = useState(0);
 
     useEffect(() => {
         (async () => {
@@ -34,6 +35,10 @@ export function Toss({
             paymentMethodsWidgetRef.current = paymentMethodsWidget;
         })();
     }, []);
+
+    useEffect(() => {
+        setPrice(totalPay);
+    }, [totalPay]);
 
     useEffect(() => {
         const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -67,6 +72,7 @@ export function Toss({
                         } catch (error) {
                             // handle error
                         }
+                        console.log(price);
                     }}
                 >
                     결제하기
