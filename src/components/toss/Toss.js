@@ -7,7 +7,7 @@ import {
 import { nanoid } from "nanoid";
 
 const selector = "#payment-widget";
-const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
+const clientKey = "test_ck_OAQ92ymxN34mW7m9n5yVajRKXvdk";
 const customerKey = "YbX2HuSlsC9uVJW6NMRMj";
 
 export function Toss({
