@@ -75,6 +75,7 @@ const Order = () => {
                                             <li>주문일자 : {a.order_date}</li>
                                         </ul>
                                     </Style.Div>
+                                    <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>구매 확정</Style.DetailButton>
                                     <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>자세히 보기</Style.DetailButton>
                                 </Common.Container>
                             )
