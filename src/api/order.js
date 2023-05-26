@@ -61,11 +61,11 @@ const recognizeOrder = async (data) => {
 const cancelOrder = async (data) => {
     try {
         const res = await axios.post("/order/cancel_order", data);
-        if(data.checkDelivery === "yes"){
+        if (data.checkDelivery === "yes") {
             alert("주문 취소 요청을 하였습니다.");
             window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
-        } 
-        else if(data.checkDelivery === "no"){
+        }
+        else if (data.checkDelivery === "no") {
             if (res.data.result.error === "E21") {
                 alert("주문취소에 실패했습니다. 관리자에게 문의 부탁드립니다.");
             } else {
@@ -73,7 +73,7 @@ const cancelOrder = async (data) => {
                 window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
             }
         }
-        
+
     } catch (error) {
         handleApiError(error);
     }
@@ -152,6 +152,17 @@ const getRefundDataList = async (success) => {
     }
 }
 
+// 구매확정
+const orderComplete = async (data) => {
+    try {
+        const res = await axios.post("/order/complete_orders", data);
+        handleConnectionError(res.data);
+        window.location.reload();
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+
 export {
     getOrder,
     getOrderCode,
@@ -164,6 +175,7 @@ export {
     completeOrder,
     getTotalOrderStatus,
     downOrderList,
-    getRefundDataList
+    getRefundDataList,
+    orderComplete
 };
 

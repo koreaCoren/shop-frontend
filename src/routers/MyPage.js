@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Banner from 'components/myPage/Banner';
@@ -15,6 +14,7 @@ import * as Style from "assets/styleComponent/myPage/myPage"
 
 const MyPage = () => {
     const nav = useNavigate();
+    const [infoData, setInfoData] = useState(null);
 
     useEffect(() => {
         if (!sessionStorage.getItem("userId")) {
@@ -29,13 +29,13 @@ const MyPage = () => {
             <Style.Div className="wrap">
                 <SideMenu></SideMenu>
                 <Routes>
-                    <Route path="/info" element={<Info />} />
+                    <Route path="/info" element={<Info infoData={infoData} />} />
                     <Route path="/order/:boardPage" element={<Order />} />
                     <Route path="/orderDetail/:orderCode" element={<OrderDetail />} />
                     <Route path="/address" element={<Address />} />
                     <Route path="/review" element={<Review />} />
                     <Route path="/reviewWrite/:productCode/:orderCode" element={<ReviewWrite />} />
-                    <Route path="/personalModify" element={<PersonalModify />} />
+                    <Route path="/personalModify" element={<PersonalModify setInfoData={setInfoData} infoData={infoData} />} />
                 </Routes>
             </Style.Div>
         </main>

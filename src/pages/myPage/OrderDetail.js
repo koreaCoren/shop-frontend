@@ -11,7 +11,7 @@ import Loading from 'components/loding/Loading';
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
 
-const OrderDetail = ({ }) => {
+const OrderDetail = () => {
     const DELIVERY_PRICE = 2500;
     const { orderCode } = useParams();
     const [list, setList] = useState(null);
@@ -203,7 +203,7 @@ const OrderDetail = ({ }) => {
                 </Style.ListDiv>
                 <Common.Line></Common.Line>
                 {{
-                    결제완료 : 
+                    결제완료:
                         <Common.Button>
                             <button
                                 onClick={() => {
@@ -216,7 +216,7 @@ const OrderDetail = ({ }) => {
                                 }}>구매 확정
                             </button>
                         </Common.Button>,
-                    구매확정 : 
+                    구매확정:
                         <Common.Button>
                             <button
                                 onClick={() => {
@@ -224,7 +224,7 @@ const OrderDetail = ({ }) => {
                                 }}>환불
                             </button>
                         </Common.Button>,
-                    배송중 : 
+                    배송중:
                         <Common.Button>
                             <button
                                 onClick={() => {
@@ -232,25 +232,25 @@ const OrderDetail = ({ }) => {
                                 }}> 취소 요청
                             </button>
                         </Common.Button>,
-                    환불요청 : 
+                    환불요청:
                         <Common.Button>
                             <button>
                                 환불 처리중
                             </button>
                         </Common.Button>,
-                    환불완료 : 
+                    환불완료:
                         <Common.Button>
                             <button>
                                 환불 처리 완료
                             </button>
                         </Common.Button>,
-                    취소요청 : 
+                    취소요청:
                         <Common.Button>
                             <button>
                                 취소 처리중
                             </button>
                         </Common.Button>,
-                    취소완료 :
+                    취소완료:
                         <Common.Button>
                             <button>
                                 취소 처리 완료

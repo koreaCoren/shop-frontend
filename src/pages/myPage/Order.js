@@ -12,7 +12,7 @@ import SubTitle from 'components/myPage/SubTitle';
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/order"
 
-const Order = ({ }) => {
+const Order = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState(null);
 

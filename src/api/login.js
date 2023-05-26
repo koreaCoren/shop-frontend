@@ -18,4 +18,15 @@ const login = async (data) => {
     }
 };
 
-export { login };
+// 비밀번호 확인
+const passwordCheck = async (data, success) => {
+    try {
+        const res = await axios.post('/user/check_pw', data);
+        handleConnectionError(res.data);
+        success(res.data)
+    } catch (error) {
+        handleApiError(error);
+    }
+};
+
+export { login, passwordCheck };

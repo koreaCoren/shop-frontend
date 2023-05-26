@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from "api/login.js"
+import { passwordCheck } from "api/login.js"
 
 import loginCheck from 'utils/loginCheck';
 
@@ -12,24 +12,20 @@ import * as Common from "assets/styleComponent/myPage/myPage";
 import * as Style from "assets/styleComponent/myPage/info";
 
 
-const PersonalModify = () => {
+const PersonalModify = ({ setInfoData }) => {
     const nav = useNavigate();
     const [password, setPassword] = useState("");
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
-            id: sessionStorage.getItem("userId"),
-            pw: password,
+            user_id: sessionStorage.getItem("userId"),
+            user_pw: password,
         };
 
-        const passwordCheck = await login(data);
+        await passwordCheck(data, setInfoData);
 
-        if (passwordCheck === "ok") {
-            nav("/myPage/info");
-        } else {
-            nav("/");
-        };
+        nav("/myPage/info");
     };
 
     useEffect(() => {
