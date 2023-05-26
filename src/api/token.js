@@ -35,9 +35,7 @@ const tokenCheck = async (success) => {
             const userId = getUserId();
             const headers = getHeaders();
 
-            const res = await axios.post('/user/checkToken', null, {
-                headers: headers,
-            });
+            const res = await axios.post('/user/checkToken', null, { headers: headers });
 
             handleConnectionError(res.data);
 

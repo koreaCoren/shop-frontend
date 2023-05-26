@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { getUserInfo, updateUser } from "api/user.js";
+import { updateUser } from "api/user.js";
 
 import Input from "components/input/Input";
 import Loading from 'components/loding/Loading';
@@ -9,8 +10,9 @@ import SubTitle from 'components/myPage/SubTitle';
 import * as Common from "assets/styleComponent/myPage/myPage"
 import * as Style from "assets/styleComponent/myPage/info"
 
-const Info = ({ }) => {
-    const [userData, setUserData] = useState(null);
+const Info = ({ infoData }) => {
+    const nav = useNavigate();
+    const [id, setId] = useState(null);
     const [name, setName] = useState("");
     const [tell, setTell] = useState("");
     const [email, setEmail] = useState("");
@@ -19,21 +21,26 @@ const Info = ({ }) => {
     const [changePW, setChangePW] = useState("");
 
     useEffect(() => {
+        console.log(infoData);
         getUserData();
     }, [])
 
     const getUserData = async () => {
-        const data = {
-            id: sessionStorage.getItem('userId')
-        };
-
-        await getUserInfo(data);
-
-        setUserData(data.result);
-        setTell(data.result.user_tel);
-        setName(data.result.user_nm);
-        setEmail(data.result.user_email);
-        setAddress(data.result.user_addr);
+        if (infoData !== null) {
+            if (infoData.result === "ok") {
+                setId(infoData.userData[0].user_id);
+                setTell(infoData.userData[0].user_tel);
+                setName(infoData.userData[0].user_nm);
+                setEmail(infoData.userData[0].user_email);
+                setAddress(infoData.userData[0].user_addr);
+            } else {
+                alert("비밀번호가 일치하지않습니다.");
+                nav("/myPage/personalModify");
+            }
+        } else {
+            alert("알 수 없는 경로로 진입하셨습니다.");
+            nav("/");
+        }
     }
 
     const onChange = (e) => {
@@ -41,6 +48,9 @@ const Info = ({ }) => {
         const value = e.target.value;
 
         switch (name) {
+            case "id":
+                setId(value);
+                break;
             case "name":
                 setName(value);
                 break;
@@ -67,7 +77,7 @@ const Info = ({ }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         let data = {
-            user_id: userData.user_id,
+            user_id: id,
             user_nm: name,
             user_tell: tell,
             user_email: email,
@@ -81,7 +91,7 @@ const Info = ({ }) => {
         await updateUser(data);
     }
     return (
-        userData === null
+        infoData === null
             ? <Loading />
             : <>
                 <Common.InDiv>
@@ -95,7 +105,7 @@ const Info = ({ }) => {
                                         <Input
                                             type="text"
                                             name="id"
-                                            value={userData.user_id}
+                                            value={id}
                                             readOnly={true} />
                                     </div>
                                 </div>

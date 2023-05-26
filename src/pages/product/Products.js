@@ -21,7 +21,7 @@ const Products = () => {
     const [productList, setProductList] = useState(null);
     const [copyList, setCopyList] = useState(null);
 
-    const [select, setSelect] = useState("최신순");
+    const [select, setSelect] = useState("기본순");
 
     useEffect(() => {
         getProduct({ cate_code: categoryCode }, setProductList);
@@ -51,7 +51,9 @@ const Products = () => {
     }
 
     const sortData = () => {
-        if (select === "비싼 가격순") {
+        if (select === "기본순") {
+            reset();
+        } else if (select === "비싼 가격순") {
             const sorted = [...copyList].sort((a, b) => Number(b.goods_price) - Number(a.goods_price));
             setCopyList(sorted);
         } else if (select === "낮은 가격순") {
@@ -108,6 +110,7 @@ const Products = () => {
                             <Searching board={productList[0]} setBoardList={setCopyList} searchType={"product"} reset={reset} />
                             <Style.Select>
                                 <select name="select" onChange={onChange}>
+                                    <option value="기본순">기본순</option>
                                     <option value="최신순">최신순</option>
                                     <option value="오래된순">오래된순</option>
                                     <option value="비싼 가격순">비싼 가격순</option>
