@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import { getOrder } from 'api/order.js';
+import { getOrder, orderComplete } from 'api/order.js';
 
 import { deliveryStatus } from 'utils/delivery';
 import { comma } from 'utils/commaReplace';
@@ -69,13 +69,16 @@ const Order = () => {
                                             <li>총 상품 금액 : {comma(a.total_price)}</li>
                                             {
                                                 state[i] !== "송장 에러"
-                                                    ? (<li>배송 현황 : {state[i]}</li>)
-                                                    : (<li>배송 현황 : <span className='warning'>{state[i]}</span></li>)
+                                                    ? <li>배송 현황 : {state[i]}</li>
+                                                    : <li>배송 현황 : <span className='warning'>{state[i]}</span></li>
                                             }
                                             <li>주문일자 : {a.order_date}</li>
                                         </ul>
                                     </Style.Div>
-                                    <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>구매 확정</Style.DetailButton>
+                                    {
+                                        a.complete === "N" &&
+                                        <Style.DetailButton onClick={() => { orderComplete({ order_code: a.orderCode }) }}>구매 확정</Style.DetailButton>
+                                    }
                                     <Style.DetailButton to={`/admin/orderDetail/${a?.orderCode}`}>자세히 보기</Style.DetailButton>
                                 </Common.Container>
                             )
