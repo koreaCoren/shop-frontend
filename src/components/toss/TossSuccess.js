@@ -15,7 +15,7 @@ const TossSuccess = () => {
             paymentKey: params.get("paymentKey"),
         }
         payMentRequest(data);
-    })
+    }, [])
 
     return (
         <Loading />
