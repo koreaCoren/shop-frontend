@@ -33,7 +33,7 @@ const addBoard = async (data) => {
             if (data.type === "product") {
                 window.location.replace("/admin/product/1");
             } else {
-                const nextPage = data.type === "review" ? "all" : "1";
+                const nextPage = data.type === "review" ? "all/1" : "1";
                 window.location.replace(`/community/${data.type}/${nextPage}`);
             }
         } else if (res.data.result === "fail") {

@@ -151,6 +151,17 @@ const getBuyProduct = async (data, success) => {
     }
 }
 
+// 비밀번호 확인
+const passwordCheck = async (data, success) => {
+    try {
+        const res = await axios.post('/user/check_pw', data);
+        handleConnectionError(res.data);
+        success(res.data)
+    } catch (error) {
+        handleApiError(error);
+    }
+};
+
 export {
     getUserAccessCount,
     updateUserAccessCount,
@@ -163,5 +174,6 @@ export {
     getDefaultAddress,
     setDefaultAddress,
     deleteAddress,
-    getBuyProduct
+    getBuyProduct,
+    passwordCheck
 };
