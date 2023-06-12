@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { passwordCheck } from "api/login.js"
+import { passwordCheck } from "api/user.js"
 
 import loginCheck from 'utils/loginCheck';
 

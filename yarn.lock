@@ -2410,19 +2410,19 @@
   "resolved" "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz"
   "version" "1.1.2"
 
-"@tosspayments/payment-widget__types@^0.0.12":
-  "integrity" "sha512-VhC8CMYbvDsqURritT5hQFXtge9n4Iw1r6KRLrmW8kAFB93KEfSSPJfTDMv2JDDrG+OFlN9ofAQ+6KOmhMtHxw=="
-  "resolved" "https://registry.npmjs.org/@tosspayments/payment-widget__types/-/payment-widget__types-0.0.12.tgz"
-  "version" "0.0.12"
+"@tosspayments/payment-widget__types@^0.0.13":
+  "integrity" "sha512-FfSll0uRf3iVefrS6SI2RUiyqsmKKp5tw0EDN0GK/l4PP7baBQmp0F55QlGLNDdTH1coemN4eKkz45NO4DMpNg=="
+  "resolved" "https://registry.npmjs.org/@tosspayments/payment-widget__types/-/payment-widget__types-0.0.13.tgz"
+  "version" "0.0.13"
   dependencies:
     "@tosspayments/payment-widget-types" "^0.0.4"
 
 "@tosspayments/payment-widget-sdk@^0.7.2":
-  "integrity" "sha512-qpo+3J9v9kqdYrgFrJEaZjqT5FtfOvnVQvxDPbpgmNiMyN73TSJ+3ZRZDg77u3cXvnUAhR558V0KIC9UhRJ0/g=="
-  "resolved" "https://registry.npmjs.org/@tosspayments/payment-widget-sdk/-/payment-widget-sdk-0.7.2.tgz"
-  "version" "0.7.2"
+  "integrity" "sha512-nkPgfBFm7Y8qtWkVIUQE3RavPNrrhMstGtq8IbfKTckUX8/WZHSCrzTUji7k9ptuloUq4d74fGGabWw9vYyzVg=="
+  "resolved" "https://registry.npmjs.org/@tosspayments/payment-widget-sdk/-/payment-widget-sdk-0.7.3.tgz"
+  "version" "0.7.3"
   dependencies:
-    "@tosspayments/payment-widget__types" "^0.0.12"
+    "@tosspayments/payment-widget__types" "^0.0.13"
 
 "@tosspayments/payment-widget-types@^0.0.4":
   "integrity" "sha512-XYazYhks+Ky/WVfUlaEDVQIYk93ALqw2CSQ5/d/ig+MREusucEMRCU6K4Iq/0aeZn3ElpA8X2mkXUP1htykOng=="

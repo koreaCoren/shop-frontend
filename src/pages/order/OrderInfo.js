@@ -16,7 +16,7 @@ import * as Style from "assets/styleComponent/order/order"
 
 import noImg from "assets/images/noImg.gif";
 
-const PAY_TYPE = "토스";
+const PAY_TYPE = "이니시스";
 
 const OrderInfo = ({ orderData }) => {
     const [order, setOrder] = useState();
@@ -90,6 +90,7 @@ const OrderInfo = ({ orderData }) => {
     const payment = (e) => {
         e.preventDefault();
         let orderDatas = [];
+        let orderCode = createCode();
         if (totalPay < 1000) {
             alert("1000원 이하는 결제가 불가능합니다.");
             return;
@@ -120,6 +121,8 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
+        
+
         setPayData({
             productName: orderData[0].product_name,
             buyerName: buyerName,
@@ -127,7 +130,7 @@ const OrderInfo = ({ orderData }) => {
             buyerEmail: "",
             productPrice: Number(totalPay),
             payStatus: 0,
-            returnUrl: `${process.env.REACT_APP_URL}/shop-backend/backend/order/ini_transaction?orderCode=${createCode()}`,
+            returnUrl: `${process.env.REACT_APP_URL}/backend/order/ini_transaction?orderCode=${orderCode}`,
             closeUrl: `${process.env.REACT_APP_URL}/close`,
         })
 
@@ -135,7 +138,7 @@ const OrderInfo = ({ orderData }) => {
             mid: "", // 이니시스 mid
             mKey: "", // 이니시스 mkey
             gopaymethod: "0", // 결제방법
-            order_code: createCode(), // 주문코드
+            order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
             order_data: orderDatas,
             order_total_price: String(totalPay),
