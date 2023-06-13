@@ -17,6 +17,7 @@ const LineChart = ({ day, data }) => {
             }
         ])
     }, [day])
+
     const options = {
         month: "short",
         day: "numeric",

@@ -8,7 +8,7 @@ const getProduct = async (data, success) => {
             data.sort_type = "none";
         }
         const res = await axios.post("/goods/sel_goods", data);
-        // handleConnectionError(res.data);
+        handleConnectionError(res.data);
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -89,6 +89,11 @@ const setProudctSorting = async (data) => {
     try {
         const res = await axios.post("/goods/sort_goods_upd", data);
         handleConnectionError(res.data);
+        if (res.data.result === "Success") {
+            alert("저장 완료");
+        } else {
+            alert("알 수 없는 이유로 저장 실패했습니다.");
+        }
     } catch (error) {
         handleApiError(error);
     }

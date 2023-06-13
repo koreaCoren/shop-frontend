@@ -1,5 +1,3 @@
-// ========== 현재 안씀 ===========//
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
@@ -35,6 +33,7 @@ const ReviewAll = () => {
         if (searchParams.get("search") === null) {
             data.search = searchParams.get("search");
         }
+        setBoardList(null);
         getBoard(data, setBoardList);
     }, [nav])
 

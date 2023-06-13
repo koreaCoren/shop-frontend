@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import ProductSelect from 'components/admin/product/input/Select';
 
 import { getCategory } from 'api/category';
@@ -8,6 +10,7 @@ import * as Common from "assets/styleComponent/admin/common"
 import * as Style from "assets/styleComponent/admin/product/sorting"
 
 const SetSorting = () => {
+    const nav = useNavigate();
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
     const [firstCategory, setFirstCategory] = useState([]);
@@ -33,7 +36,12 @@ const SetSorting = () => {
         if (productList !== null) {
             let arr = [];
             for (let i = 0; i < productList[0]?.length; i++) {
-                arr.push({ goods_rank: productList[0][i].goods_rank, goods_code: productList[0][i]?.goods_code });
+                arr.push({
+                    goods_rank: productList[0][i].goods_rank === undefined
+                        ? null
+                        : productList[0][i].goods_rank,
+                    goods_code: productList[0][i]?.goods_code
+                });
             }
             setSortingNum(arr);
         }
@@ -84,7 +92,6 @@ const SetSorting = () => {
     const onSave = async (e) => {
         e.preventDefault();
         const arr = sortingNum;
-
         sortingNum.forEach((el, i) => {
             if (el.goods_rank === "" || el.goods_rank === null) {
                 arr[i].goods_rank = "N";
