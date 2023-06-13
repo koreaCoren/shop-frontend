@@ -16,7 +16,7 @@ import * as Style from "assets/styleComponent/order/order"
 
 import noImg from "assets/images/noImg.gif";
 
-const PAY_TYPE = "토스";
+const PAY_TYPE = "이니시스";
 
 const OrderInfo = ({ orderData }) => {
     const [order, setOrder] = useState();

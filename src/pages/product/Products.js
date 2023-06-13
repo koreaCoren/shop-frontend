@@ -136,7 +136,7 @@ const Products = () => {
                                         })
                                     }
                                 </ul>
-                                : "아무것도 없음"
+                                : <p style={{ textAlign: "center", lineHeight: "200px", fontSize: "18px" }}>등록된 상품이 없습니다.</p>
                         }
                     </div>
                 </Style.Products>

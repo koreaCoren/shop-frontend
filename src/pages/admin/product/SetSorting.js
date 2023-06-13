@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import ProductSelect from 'components/admin/product/input/Select';
 
 import { getCategory } from 'api/category';
@@ -8,6 +10,7 @@ import * as Common from "assets/styleComponent/admin/common"
 import * as Style from "assets/styleComponent/admin/product/sorting"
 
 const SetSorting = () => {
+    const nav = useNavigate();
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
     const [firstCategory, setFirstCategory] = useState([]);
@@ -33,7 +36,12 @@ const SetSorting = () => {
         if (productList !== null) {
             let arr = [];
             for (let i = 0; i < productList[0]?.length; i++) {
-                arr.push({ rank: productList[0][i].rank, goods_code: productList[0][i]?.goods_code });
+                arr.push({
+                    goods_rank: productList[0][i].goods_rank === undefined
+                        ? null
+                        : productList[0][i].goods_rank,
+                    goods_code: productList[0][i]?.goods_code
+                });
             }
             setSortingNum(arr);
         }
@@ -84,10 +92,9 @@ const SetSorting = () => {
     const onSave = async (e) => {
         e.preventDefault();
         const arr = sortingNum;
-
         sortingNum.forEach((el, i) => {
-            if (el.rank === "" || el.rank === null) {
-                arr[i].rank = "N";
+            if (el.goods_rank === "" || el.goods_rank === null) {
+                arr[i].goods_rank = "N";
             }
         });
 
@@ -131,7 +138,7 @@ const SetSorting = () => {
         const name = e.target.name;
         switch (name) {
             case "sortingNum":
-                arr[dataNum].rank = value;
+                arr[dataNum].goods_rank = value;
                 break;
 
             default:
@@ -187,7 +194,7 @@ const SetSorting = () => {
                             ? productList[0].map((a, i) => {
                                 return <Style.List key={i}>
                                     <li>{a.goods_nm}</li>
-                                    <li><input type="text" data-num={i} name="sortingNum" value={sortingNum[i]?.rank} onChange={onSortingChange} /></li>
+                                    <li><input type="text" data-num={i} name="sortingNum" value={sortingNum[i]?.goods_rank} onChange={onSortingChange} /></li>
                                 </Style.List>
                             })
                             : <p>해당 카테고리는 상품이 없습니다</p>

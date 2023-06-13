@@ -73,7 +73,6 @@ const cancelOrder = async (data) => {
                 window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
             }
         }
-
     } catch (error) {
         handleApiError(error);
     }
