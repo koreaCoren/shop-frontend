@@ -77,6 +77,7 @@ const SetSorting = () => {
                 data.direction = "asc";
                 break;
             case "수동선택":
+                data.sort_type = "goods_rank";
                 getProduct(data, setProductList);
                 break;
 
