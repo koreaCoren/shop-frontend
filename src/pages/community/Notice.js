@@ -25,6 +25,7 @@ const Notice = () => {
         if (searchParams.get("search") !== null) {
             data.search = searchParams.get("search");
         }
+        setBoardList(null);
         getBoard(data, setBoardList);
     }, [nav, searchParams.get("search")])
 
