@@ -86,7 +86,6 @@ const Download = () => {
     }
 
     const down = async () => {
-        console.log(list.data);
         excelDownload(list.data);
     }
 

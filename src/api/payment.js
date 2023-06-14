@@ -6,6 +6,7 @@ const payMentRequest = async (data) => {
     try {
         const res = await axios.post("/order/tos_ins", data);
         handleConnectionError();
+        window.location.replace(`/myPage/order/1`);
     } catch (error) {
         handleApiError(error);
     }
