@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LoadingImage from "assets/images/loading.gif";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Loading = () => {
+    const nav = useNavigate();
+    useEffect(() => {
+        const timer = setInterval(() => {
+            alert("서버에서 데이터를 가져올 수 없습니다.");
+            nav("/error");
+        }, 30000);
+        return () => clearInterval(timer);
+    }, [])
+
     return (
         <Div>
             <Img src={LoadingImage} />
