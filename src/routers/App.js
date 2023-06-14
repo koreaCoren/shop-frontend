@@ -72,7 +72,7 @@ function App() {
 
                 {/* 에러 날때 밑에 파일로 보내줌 */}
                 <Route path="/error" element={<Error />} />
-                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/*" element={<NotFoundPage />} />
 
                 {/* 토스 데이터 전달용 */}
                 <Route path="/tossSuccess" element={<TossSuccess />} />
