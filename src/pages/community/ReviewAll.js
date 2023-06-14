@@ -43,63 +43,65 @@ const ReviewAll = () => {
             : <>
                 <ul className="all">
                     {
-                        boardList.list.map((a, i) => {
-                            return (
-                                <li key={i}>
-                                    <div className="content">
-                                        <div className="star">
+                        boardList.list.length > 0 ?
+                            boardList.list.map((a, i) => {
+                                return (
+                                    <li key={i}>
+                                        <div className="content">
+                                            <div className="star">
+                                                {
+                                                    [...Array(a.grade)].map((a, i) => (
+                                                        <Star key={i} fill='#ffd900'></Star>
+                                                    ))
+                                                }
+                                            </div>
+                                            <h3>{a.title}</h3>
                                             {
-                                                [...Array(a.grade)].map((a, i) => (
-                                                    <Star key={i} fill='#ffd900'></Star>
-                                                ))
+                                                regex.test(a.content)
+                                                    ? <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
+                                                    : a.content.length > 50
+                                                        ? <p dangerouslySetInnerHTML={i === more ? { __html: a.content } : { __html: a.content.substring(0, 50) + "..." }}></p>
+                                                        : <p dangerouslySetInnerHTML={{ __html: a.content }}></p>
                                             }
-                                        </div>
-                                        <h3>{a.title}</h3>
-                                        {
-                                            regex.test(a.content)
-                                                ? <p style={i === more ? { maxHeight: "unset" } : { maxHeight: "40px" }} dangerouslySetInnerHTML={{ __html: a.content }}></p>
-                                                : a.content.length > 50
-                                                    ? <p dangerouslySetInnerHTML={i === more ? { __html: a.content } : { __html: a.content.substring(0, 50) + "..." }}></p>
-                                                    : <p dangerouslySetInnerHTML={{ __html: a.content }}></p>
-                                        }
-                                        {
-                                            regex.test(a.content)
-                                                ? <button onClick={() => {
-                                                    i === more
-                                                        ? setMore(null)
-                                                        : setMore(i)
-                                                }}>더보기</button>
-                                                : a.content.length > 50
+                                            {
+                                                regex.test(a.content)
                                                     ? <button onClick={() => {
                                                         i === more
                                                             ? setMore(null)
                                                             : setMore(i)
                                                     }}>더보기</button>
-                                                    : null
-                                        }
-                                        <div className="imageView">
-                                            {
-                                                a.firstImg !== ""
-                                                    ? <img onClick={() => { imagePopup(a.firstImg) }} src={a.firstImg} alt="" />
-                                                    : null
+                                                    : a.content.length > 50
+                                                        ? <button onClick={() => {
+                                                            i === more
+                                                                ? setMore(null)
+                                                                : setMore(i)
+                                                        }}>더보기</button>
+                                                        : null
                                             }
-                                            {
-                                                a.secondImg !== ""
-                                                    ? <img onClick={() => { imagePopup(a.secondImg) }} src={a.secondImg} alt="" />
-                                                    : null
-                                            }
+                                            <div className="imageView">
+                                                {
+                                                    a.firstImg !== ""
+                                                        ? <img onClick={() => { imagePopup(a.firstImg) }} src={a.firstImg} alt="" />
+                                                        : null
+                                                }
+                                                {
+                                                    a.secondImg !== ""
+                                                        ? <img onClick={() => { imagePopup(a.secondImg) }} src={a.secondImg} alt="" />
+                                                        : null
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="reviewInfo">
-                                        <ul>
-                                            <li><span>상품명</span>{a.goods_nm}</li>
-                                            <li><span>작성자</span>{a.user_id}</li>
-                                            <li><span>작성일</span>{a.create_date}</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            )
-                        })
+                                        <div className="reviewInfo">
+                                            <ul>
+                                                <li><span>상품명</span>{a.goods_nm}</li>
+                                                <li><span>작성자</span>{a.user_id}</li>
+                                                <li><span>작성일</span>{a.create_date}</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                )
+                            })
+                            : <p style={{ textAlign: "center", lineHeight: "200px", fontSize: "18px" }}>등록된 리뷰가 없습니다</p>
                     }
                 </ul>
 

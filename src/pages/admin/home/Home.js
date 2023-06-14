@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { getProductSaleStatus, getAccumulateSell } from 'api/product.js';
 import { getUserAccessCount } from 'api/user.js';
-import { getTotalOrderStatus, getRefundDataList } from 'api/order.js';
+import { getUndefinedInvoice } from 'api/delivery';
+import { getRefundDataList } from 'api/order.js';
 
 import BarChart from 'components/admin/chart/BarChart';
 import DonutChart from 'components/admin/chart/DonutChart';
@@ -28,7 +29,7 @@ const Home = () => {
         getProductSaleStatus(setBar);
         getAccumulateSell(setDonut);
         getUserAccessCount(setLine);
-        getTotalOrderStatus(setDash);
+        getUndefinedInvoice(setDash);
 
         getRefundDataList(setOrderList);
     }, [])
@@ -106,9 +107,9 @@ const Home = () => {
                                         <h4>송장 미입력</h4>
                                         <div>
                                             <Link className='mvpage' to={"/admin/delivery"}>
-                                                {dash?.data.delivery_not === null
+                                                {dash?.data.length === 0
                                                     ? 0
-                                                    : dash?.data.delivery_not}건
+                                                    : dash?.data.length}건
                                             </Link>
                                         </div>
                                         {/* <LinkButton link={"/admin/delivery"} title={"바로가기"} /> */}
