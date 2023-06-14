@@ -4,7 +4,7 @@ import { handleApiError, handleConnectionError } from "./handleError";
 // 상품 리스트 가져오기
 const getProduct = async (data, success) => {
     try {
-        if (data.sort_type !== "all" || data.sort_type !== "goods_rank") {
+        if (data.sort_type !== "all" && data.sort_type !== "goods_rank") {
             data.sort_type = "none";
         }
         const res = await axios.post("/goods/sel_goods", data);
