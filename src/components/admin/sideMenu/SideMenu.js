@@ -105,8 +105,8 @@ const Ul = styled.ul`
         color: #fff;
         font-size: 12px;
         line-height: 2;
-        width: 100%;
-    }
+        width: 100%;        
+    }    
 `
 
 export default SideMenu;

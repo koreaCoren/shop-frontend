@@ -111,6 +111,18 @@ export const Detail = styled.div`
         border-bottom: 1px solid #ccc;
         min-height: 500px;
     }
+    .content .text-huge{        
+        font-size: 30px;
+    }
+    .content .text-big{        
+        font-size: 20px;
+    }
+    .content .text-small{        
+        font-size: 12px;
+    }
+    .content .text-tiny{        
+        font-size: 10px;
+    }
 
     .content>img {
         max-width: 100%;

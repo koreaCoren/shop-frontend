@@ -157,7 +157,7 @@ const Info = ({ infoData }) => {
                                             onChange={onChange} />
                                     </div>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <div className='inputTitle'>주소</div>
                                     <div>
                                         <Input
@@ -166,7 +166,7 @@ const Info = ({ infoData }) => {
                                             value={address}
                                             onChange={onChange} />
                                     </div>
-                                </div>
+                                </div> */}
                                 <div>
                                     <input
                                         type="button"

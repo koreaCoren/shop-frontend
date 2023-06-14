@@ -41,7 +41,6 @@ export function Toss({
         if (paymentMethodsWidget == null) {
             return;
         }
-
         paymentMethodsWidget.updateAmount(
             totalPay,
             paymentMethodsWidget.UPDATE_REASON.COUPON
@@ -55,7 +54,6 @@ export function Toss({
                 <button
                     onClick={async () => {
                         const paymentWidget = paymentWidgetRef.current;
-
                         try {
                             await paymentWidget?.requestPayment({
                                 orderId: nanoid(),
