@@ -40,10 +40,10 @@ const OrderInfo = ({ orderData }) => {
 
 
     useEffect(() => {
-        if (orderData === null || orderData === undefined) {
-            alert("새로고침으로 인해 주문정보가 없습니다.");
-            nav("/");
-        }
+        // if (orderData === null || orderData === undefined) {
+        //     alert("새로고침으로 인해 주문정보가 없습니다.");
+        //     nav("/");
+        // }
         setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
         calcPayment();
