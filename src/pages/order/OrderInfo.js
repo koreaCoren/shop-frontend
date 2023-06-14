@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { requestOrder } from 'api/order.js'
 import { getDefaultAddress } from 'api/user.js'
 
 import createCode from 'utils/createCode';
 import { comma } from 'utils/commaReplace';
-import { beforeunload } from 'utils/beforeunload';
 
 import DaumPost from 'components/daumPost/DaumPost';
 import Inicis from 'components/inicis/Inicis';
@@ -19,7 +19,8 @@ import noImg from "assets/images/noImg.gif";
 const PAY_TYPE = "이니시스";
 
 const OrderInfo = ({ orderData }) => {
-    const [order, setOrder] = useState();
+    const nav = useNavigate();
+    const [order, setOrder] = useState(null);
     const [buyerName, setBuyerName] = useState("");
     const [buyerTel, setBuyerTel] = useState("");
     const [buyerDetailAddress, setBuyerDetailAddress] = useState("");
@@ -55,11 +56,6 @@ const OrderInfo = ({ orderData }) => {
         }
     }, [payPoint, userAddr])
 
-    // 새로고침 막기
-    useEffect(() => {
-        beforeunload();
-    }, []);
-
     const calcPayment = () => {
         let sum = 0;
         for (let i = 0; i < orderData.length; i++) {
@@ -73,6 +69,14 @@ const OrderInfo = ({ orderData }) => {
 
     const checkRadio = (e) => {
         if (e.target.value === "old") {
+            if (userAddr === "fail") {
+                const ok = window.confirm("기본 배송지가 없습니다 등록하러 가시겠습니까?");
+                if (ok) {
+                    nav("/myPage/address");
+                }
+                e.target.checked = false;
+                return;
+            }
             setBuyerName(userAddr.user_id);
             setBuyerTel(userAddr.ship_phone);
             setReceiver(userAddr.ship_receiver);
@@ -121,7 +125,7 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
-        
+
 
         setPayData({
             productName: orderData[0].product_name,

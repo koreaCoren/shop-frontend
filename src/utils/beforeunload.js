@@ -1,4 +1,5 @@
-// 새로고침시 재확인
+// 새로고침시 재확인 
+// 현재 잘안됨
 const preventClose = (e) => {
     e.preventDefault();
     e.returnValue = "";
