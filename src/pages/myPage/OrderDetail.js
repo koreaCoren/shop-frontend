@@ -30,11 +30,11 @@ const OrderDetail = () => {
     }
 
     //주문취소
-    const revokeOrder = async (checkDel) => {
+    const revokeOrder = async (type) => {
         if (window.confirm("주문을 취소하시겠습니까?")) {
             const data = {
                 orderCode: orderCode,
-                checkDelivery: checkDel
+                cancelType: type
             };
             cancelOrder(data);
         }
@@ -208,7 +208,7 @@ const OrderDetail = () => {
                             <Common.Button>
                                 <button
                                     onClick={() => {
-                                        revokeOrder("no");
+                                        revokeOrder("requestPg");
                                     }}>주문 취소
                                 </button>
                                 <button
@@ -229,7 +229,7 @@ const OrderDetail = () => {
                             <Common.Button>
                                 <button
                                     onClick={() => {
-                                        revokeOrder("yes");
+                                        revokeOrder("requestAdmin");
                                     }}> 취소 요청
                                 </button>
                             </Common.Button>,
