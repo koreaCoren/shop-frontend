@@ -105,7 +105,10 @@ const Delivery = () => {
 
                             {
                                 incoviceResult.data.map((a, i) => {
+
                                     return (
+                                        a.status !== "취소완료" &&
+                                        a.status !== "cancel" &&
                                         <Style.Ul key={i}>
                                             <li>주문자 : {a.buyer_name}</li>
                                             <li>주문번호 : <input className="orderCode" type="text" name="orderCode" value={a.orderCode} tabIndex="-1" readOnly /></li>
