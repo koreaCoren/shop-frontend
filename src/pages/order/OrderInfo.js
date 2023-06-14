@@ -42,7 +42,8 @@ const OrderInfo = ({ orderData }) => {
 
     useEffect(() => {
         if (orderData === null || orderData === undefined) {
-            refresh();
+            nav("/");
+            return;
         }
         setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);

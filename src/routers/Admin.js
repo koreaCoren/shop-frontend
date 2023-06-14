@@ -14,6 +14,7 @@ import OrderDetail from 'pages/admin/order/OrderDetail';
 
 import styled from 'styled-components';
 import adminCheck from 'utils/adminCheck';
+import NotFoundPage from 'components/error/NotFoundPage';
 
 const Admin = () => {
     const nav = useNavigate();
