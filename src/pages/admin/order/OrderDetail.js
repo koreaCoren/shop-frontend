@@ -71,11 +71,11 @@ const OrderDetail = () => {
         }
     }
 
-    const revokeOrder = () => {
+    const revokeOrder = (type) => {
         if (window.confirm("취소 처리 하시겠습니까?")) {
             const data = {
                 orderCode: detail[0].orderCode,
-                checkDelivery: "no"
+                cancelType: type
             };
             cancelOrder(data);
         }
@@ -114,7 +114,6 @@ const OrderDetail = () => {
 
     useEffect(() => {
         getDetailOrder({ orderCode: orderCode }, setDetail)
-
     }, [])
 
     useEffect(() => {
@@ -169,9 +168,11 @@ const OrderDetail = () => {
                                         : detail[0].status === "취소요청" ? <>
                                             취소 요청중
                                             <button onClick={() => {
-                                                revokeOrder();
+                                                revokeOrder("requestPg");
                                             }}>승인</button>
-                                            <button>
+                                            <button onClick={() => {
+                                                revokeOrder("refusal");
+                                            }}>
                                                 거절
                                             </button>
                                         </>
