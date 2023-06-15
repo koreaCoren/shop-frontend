@@ -32,12 +32,12 @@ const sim = () => {
             border-radius: 50%;
             transform: translate(-50%, -50%);
             background-color :${randomValueFromArray(color)};
-            transition: all 2s;
+            transition: all 1s;
             z-index: ${index};
             `
             setTimeout(() => {
-                zz.style.width = "10000px";
-                zz.style.height = "10000px";
+                zz.style.width = "100px";
+                zz.style.height = "100px";
                 zz.style.borderRadius = "0px";
                 zz.style.opacity = "0.5";
             }, 1);
