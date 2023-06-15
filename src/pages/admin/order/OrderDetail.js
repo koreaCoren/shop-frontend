@@ -72,13 +72,22 @@ const OrderDetail = () => {
     }
 
     const revokeOrder = (type) => {
-        if (window.confirm("취소 처리 하시겠습니까?")) {
-            const data = {
-                orderCode: detail[0].orderCode,
-                cancelType: type
-            };
-            cancelOrder(data);
+        const data = {
+            orderCode: detail[0].orderCode,
+            cancelType: type
+        };
+        if (type === "refusal") {
+            if (!window.confirm("승인 거절하시겠습니까?")) {
+                return;
+            }
+        } else if (type === "requestPg") {
+            if (!window.confirm("취소 처리 하시겠습니까?")) {
+                return;
+            }
+        } else {
+            alert("알 수 없는 이유로 에러가 발생했습니다.");
         }
+        cancelOrder(data);
     }
 
     const cardType = () => {
