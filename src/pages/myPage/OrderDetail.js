@@ -142,7 +142,9 @@ const OrderDetail = () => {
                 <Style.Div>
                     <h2 className='botTitle'>결제정보</h2>
                 </Style.Div>
+
                 <Common.BoldLine></Common.BoldLine>
+
                 <Style.ListDiv>
                     <ul>
                         <li>
@@ -183,7 +185,9 @@ const OrderDetail = () => {
                 <Style.Div>
                     <h2 className='botTitle'>배송정보</h2>
                 </Style.Div>
+
                 <Common.BoldLine></Common.BoldLine>
+
                 <Style.ListDiv>
                     <ul>
                         <li>
@@ -198,9 +202,9 @@ const OrderDetail = () => {
                             <div>주소</div>
                             <div>{list ? list[0].buyer_addr : '확인중'}</div>
                         </li>
-
                     </ul>
                 </Style.ListDiv>
+
                 <Common.Line></Common.Line>
 
                 <Common.Button>
@@ -216,6 +220,7 @@ const OrderDetail = () => {
                             환불완료: <button>환불 처리 완료</button>,
                             취소요청: <button>취소 처리중</button>,
                             취소완료: <button>취소 처리 완료</button>,
+                            취소거절: <button>취소 거절됨</button>,
                         }[status]
                     }
                 </Common.Button>

@@ -164,27 +164,18 @@ const OrderDetail = () => {
                                 <li>결제 유형 : {cardType()}</li>
                                 <li>결제 완료 여부 : {detail[0].order_complete}</li>
                                 <li>주문상태 : {
-                                    detail[0].status === "환불요청" ?
-                                        <>
+                                    detail[0].status === "환불요청"
+                                        ? <>
                                             환불 요청중
-                                            <button onClick={() => {
-                                                confirmRefund();
-                                            }}>승인</button>
-                                            <button>
-                                                거절
-                                            </button>
+                                            <button onClick={() => { confirmRefund(); }}>승인</button>
+                                            <button>거절</button>
                                         </>
-                                        : detail[0].status === "취소요청" ? <>
-                                            취소 요청중
-                                            <button onClick={() => {
-                                                revokeOrder("requestPg");
-                                            }}>승인</button>
-                                            <button onClick={() => {
-                                                revokeOrder("refusal");
-                                            }}>
-                                                거절
-                                            </button>
-                                        </>
+                                        : detail[0].status === "취소요청"
+                                            ? <>
+                                                취소 요청중
+                                                <button onClick={() => { revokeOrder("requestPg"); }}>승인</button>
+                                                <button onClick={() => { revokeOrder("refusal"); }}>거절</button>
+                                            </>
                                             : detail[0].status
                                 }
                                 </li>
