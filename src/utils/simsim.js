@@ -11,8 +11,6 @@ const sim = () => {
     }
 
     window.addEventListener("load", () => {
-        const zz = document.createElement("div");
-        body.append(zz);
         index++;
 
         window.addEventListener('mousemove', (e) => {
@@ -32,15 +30,15 @@ const sim = () => {
             border-radius: 50%;
             transform: translate(-50%, -50%);
             background-color :${randomValueFromArray(color)};
-            transition: all 1s;
+            transition: all .5s;
             z-index: ${index};
             `
             setTimeout(() => {
-                zz.style.width = "100px";
-                zz.style.height = "100px";
+                zz.style.width = "200px";
+                zz.style.height = "200px";
                 zz.style.borderRadius = "0px";
                 zz.style.opacity = "0.5";
-            }, 1);
+            }, 0);
         })
     })
 
