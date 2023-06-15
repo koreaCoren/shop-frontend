@@ -61,20 +61,17 @@ const recognizeOrder = async (data) => {
 const cancelOrder = async (data) => {
     try {
         const res = await axios.post("/order/cancel_order", data);
-        handleConnectionError(res.data);
-        if (data.cancelType === "requestAdmin") {
+        if (data.checkDelivery === "yes") {
             alert("주문 취소 요청을 하였습니다.");
             window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
         }
-        else if (data.cancelType === "requestPg") {
+        else if (data.checkDelivery === "no") {
             if (res.data.result.error === "E21") {
                 alert("주문취소에 실패했습니다. 관리자에게 문의 부탁드립니다.");
             } else {
                 alert("주문 취소 되었습니다.");
                 window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
             }
-        } else if (data.cancelType === "refusal") {
-            alert("주문취소 요청을 거절하였습니다.");
         }
     } catch (error) {
         handleApiError(error);
