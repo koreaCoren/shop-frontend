@@ -6,6 +6,24 @@ const sim = () => {
         const random = Math.floor(Math.random() * array.length);
         return array[random];
     }
+    window.addEventListener("load", () => {
+        const zz = document.createElement("div");
+        body.append(zz);
+        index++;
+        zz.style = `position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100vh;
+        transform: translate(-50%, -50%);
+        background-color :${randomValueFromArray(color)};
+        z-index: ${index};
+        `
+        setInterval(() => {
+            zz.style.backgroundColor = randomValueFromArray(color);
+        }, 100);
+    })
+
     window.addEventListener("click", () => {
         const zz = document.createElement("div");
         body.append(zz);
