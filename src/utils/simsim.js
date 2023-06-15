@@ -29,7 +29,7 @@ const sim = () => {
             height: 0px;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            background-color :${randomValueFromArray(color)};
+            background-color :#${generateRandomSequence()};
             transition: all .5s;
             z-index: ${index};
             `
@@ -41,8 +41,20 @@ const sim = () => {
             }, 0);
         })
     })
+}
 
+function getRandomCharacter() {
+    const characters = 'abcdef0123456789';
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    return characters[randomIndex];
+}
 
+function generateRandomSequence() {
+    let sequence = '';
+    for (let i = 0; i < 6; i++) {
+        sequence += getRandomCharacter();
+    }
+    return sequence;
 }
 
 export default sim;
