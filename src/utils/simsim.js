@@ -40,7 +40,7 @@ const sim = () => {
                 zz.style.height = "10000px";
                 zz.style.borderRadius = "0px";
                 zz.style.opacity = "0.5";
-            }, 500);
+            }, 1);
         })
     })
 
