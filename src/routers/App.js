@@ -23,7 +23,7 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-// import sim from "utils/simsim";
+import sim from "utils/simsim";
 
 function App() {
     const nav = useNavigate();
@@ -52,7 +52,7 @@ function App() {
     }
 
     useEffect(() => {
-        // sim();
+        sim();
         window.scrollTo(0, 0);
         accessCheck();
         pageCheck();
