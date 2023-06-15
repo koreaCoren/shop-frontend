@@ -76,6 +76,10 @@ const Order = () => {
                                         </ul>
                                     </Style.Div>
                                     {
+                                        a.status !== "취소완료" &&
+                                        a.status !== "취소요청" &&
+                                        a.status !== "환불완료" &&
+                                        a.status !== "환불요청" &&
                                         a.complete === "N" &&
                                         <Style.DetailButton onClick={() => { orderComplete({ order_code: a.orderCode }) }}>구매 확정</Style.DetailButton>
                                     }
