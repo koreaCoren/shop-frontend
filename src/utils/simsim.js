@@ -5,14 +5,7 @@ const sim = () => {
     let x = 0;
     let y = 0;
 
-    function randomValueFromArray(array) {
-        const random = Math.floor(Math.random() * array.length);
-        return array[random];
-    }
-
     window.addEventListener("load", () => {
-        index++;
-
         window.addEventListener('mousemove', (e) => {
             x = e.clientX;
             y = e.clientY;
@@ -47,7 +40,7 @@ const sim = () => {
             });
         });
 
-        window.addEventListener('mouseup', function (event) {
+        window.addEventListener('mouseup', () => {
             isMouse = false;
         });
     })
