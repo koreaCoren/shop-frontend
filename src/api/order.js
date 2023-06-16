@@ -100,7 +100,7 @@ const recognizeRefund = async (data) => {
         const res = await axios.post("order/refund_complete", data);
         handleConnectionError(res.data);
         alert("환불 처리 완료");
-        window.location.replace(`/admin/orderDetail/${data.orderCode}`);
+        window.location.reload();
     } catch (error) {
         handleApiError(error);
     }

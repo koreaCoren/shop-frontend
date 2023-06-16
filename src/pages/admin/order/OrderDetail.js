@@ -62,13 +62,24 @@ const OrderDetail = () => {
         };
     }
 
-    const confirmRefund = () => {
-        if (window.confirm("환불 처리 하시겠습니까?")) {
-            const data = {
-                orderCode: detail[0].orderCode
-            }
-            recognizeRefund(data);
+    const confirmRefund = (type) => {
+        const data = {
+            orderCode: detail[0].orderCode,
+            type: type
         }
+        if (type === "refusal") {
+            if (!window.confirm("환불 거절 하시겠습니까?")) {
+                return;
+            }
+        } else if (type === "refund") {
+            if (!window.confirm("환불 처리 하시겠습니까?")) {
+                return;
+            }
+        } else {
+            alert("알 수 없는 이유로 에러가 발생했습니다.");
+            return;
+        }
+        recognizeRefund(data);
     }
 
     const revokeOrder = (type) => {
@@ -86,6 +97,7 @@ const OrderDetail = () => {
             }
         } else {
             alert("알 수 없는 이유로 에러가 발생했습니다.");
+            return;
         }
         cancelOrder(data);
     }
@@ -167,8 +179,8 @@ const OrderDetail = () => {
                                     detail[0].status === "환불요청"
                                         ? <>
                                             환불 요청중
-                                            <button onClick={() => { confirmRefund(); }}>승인</button>
-                                            <button>거절</button>
+                                            <button onClick={() => { confirmRefund("refund"); }}>승인</button>
+                                            <button onClick={() => { confirmRefund("refusal"); }}>거절</button>
                                         </>
                                         : detail[0].status === "취소요청"
                                             ? <>

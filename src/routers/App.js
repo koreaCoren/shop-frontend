@@ -52,7 +52,7 @@ function App() {
     }
 
     useEffect(() => {
-        sim();
+        // sim();
         window.scrollTo(0, 0);
         accessCheck();
         pageCheck();
