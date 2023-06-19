@@ -91,7 +91,10 @@ const Order = () => {
                         })
                     }
                 </Common.Padding>
-                <Pageing boardPage={boardPage} boardLength={board.count.page_count} url={"/admin/order"} />
+                {
+                    board.list.length > 0 &&
+                    <Pageing boardPage={boardPage} boardLength={board.count.page_count} url={"/admin/order"} />
+                }
             </>
     );
 };

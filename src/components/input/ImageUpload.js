@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import Input from "./Input";
 
 const ImageUpload = ({ setImageData }) => {
     const onFileChange = (event) => {
