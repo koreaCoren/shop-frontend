@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         "/shop-backend",
         createProxyMiddleware({
-            target: "http://lifehim.com",
+            target: "http://192.168.0.100",
             changeOrigin: true,
         })
     );
