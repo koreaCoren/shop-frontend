@@ -72,7 +72,7 @@ const Download = () => {
                 { wpx: 80 },
                 { wpx: 120 },
                 { wpx: 71 },
-                { wpx: 57 },
+                { wpx: 80 },
                 { wpx: 100 },
                 { wpx: 52 },
                 { wpx: 47 }
