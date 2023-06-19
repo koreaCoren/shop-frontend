@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { getOrderCode, cancelOrder, recognizeOrder, returnOrder } from 'api/order.js';
 
@@ -13,6 +13,7 @@ import * as Style from "assets/styleComponent/myPage/order"
 
 const OrderDetail = () => {
     const DELIVERY_PRICE = 2500;
+    const nav = useNavigate();
     const { orderCode } = useParams();
     const [list, setList] = useState(null);
     const [state, setState] = useState();
@@ -20,6 +21,7 @@ const OrderDetail = () => {
 
     let trackResult = [];
 
+    // 주문 상세 정보 가져오기
     const getOrderDetailData = async () => {
         const data = {
             user_id: sessionStorage.getItem('userId'),
@@ -62,7 +64,7 @@ const OrderDetail = () => {
 
     useEffect(() => {
         getOrderDetailData();
-    }, [])
+    }, [nav])
 
     useEffect(() => {
         if (list !== null) {
@@ -218,6 +220,7 @@ const OrderDetail = () => {
                             배송중: <button onClick={() => { revokeOrder("requestAdmin"); }}> 취소 요청</button>,
                             환불요청: <button>환불 처리중</button>,
                             환불완료: <button>환불 처리 완료</button>,
+                            환불거절: <button>환불 거절됨</button>,
                             취소요청: <button>취소 처리중</button>,
                             취소완료: <button>취소 처리 완료</button>,
                             취소거절: <button>취소 거절됨</button>,

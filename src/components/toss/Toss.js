@@ -10,14 +10,7 @@ const selector = "#payment-widget";
 const clientKey = process.env.REACT_APP_TOSS_CLIENT_KEY;
 const customerKey = process.env.REACT_APP_TOSS_CUSTOMER_KEY;
 
-export function Toss({
-    orderName,
-    customerName,
-    customerEmail,
-    successUrl,
-    failUrl,
-    totalPay,
-}) {
+export function Toss({ orderName, customerName, customerEmail, successUrl, failUrl, totalPay, }) {
     const paymentWidgetRef = useRef(null);
     const paymentMethodsWidgetRef = useRef(null);
 

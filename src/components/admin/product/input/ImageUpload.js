@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from "styled-components";
 
 const ProductInput = ({ title, setThumbnail, thumbnail }) => {
+    // 이미지 가져오기
     const onFileChange = (event) => {
         const { target: { files }, } = event;
         const theFile = files[0];

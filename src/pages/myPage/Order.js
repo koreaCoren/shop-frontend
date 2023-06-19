@@ -16,6 +16,7 @@ const Order = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState(null);
 
+    // 유저 주문 리스트 가져오기
     useEffect(() => {
         const data = {
             boardPage: boardPage,

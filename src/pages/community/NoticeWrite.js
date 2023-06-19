@@ -5,6 +5,7 @@ import { addBoard } from "api/board.js"
 
 import adminCheck from 'utils/adminCheck';
 import createCode from 'utils/createCode';
+import dateFormat from 'utils/dateFormat';
 
 import LoginInput from 'components/input/Input';
 import TextEditor from 'components/editor/Editor';
@@ -17,24 +18,22 @@ const NoticeWrite = () => {
     const [content, setContent] = useState("");
     const [imageCode, setImageCode] = useState([]);
 
+    // 관리자 체크
     useEffect(() => {
         if (adminCheck(true) === false) {
             nav("/");
         }
     }, [])
 
+    // 게시글 등록
     const onSubmit = async (e) => {
+        e.preventDefault();
+
         if (adminCheck(true) === false) {
             nav("/");
         }
 
-        e.preventDefault();
-
-        const date = new Date();
-        const yy = date.getFullYear().toString().substring(2);
-        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
-        const dd = (("00" + date.getDate()).slice(-2));
-
+        // 에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
         let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
             for (let j = 0; j < arr.length; j++) {
@@ -52,7 +51,7 @@ const NoticeWrite = () => {
             user_id: sessionStorage.getItem("userId"),
             title: title,
             content: content,
-            date: `${yy}/${mm}/${dd}`,
+            date: dateFormat(),
             image_code: imageCode,
             code: createCode(),
             type: "notice",

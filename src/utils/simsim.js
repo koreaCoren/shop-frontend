@@ -6,11 +6,6 @@ const sim = () => {
     let y = 0;
 
     window.addEventListener("load", () => {
-        window.addEventListener('mousemove', (e) => {
-            x = e.clientX;
-            y = e.clientY;
-        });
-
         window.addEventListener('mousedown', () => {
             isMouse = true;
             window.addEventListener('mousemove', (e) => {

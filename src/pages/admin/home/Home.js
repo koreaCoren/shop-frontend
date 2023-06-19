@@ -30,7 +30,6 @@ const Home = () => {
         getAccumulateSell(setDonut);
         getUserAccessCount(setLine);
         getTotalOrderStatus(setDash);
-
         getRefundDataList(setOrderList);
     }, [])
 

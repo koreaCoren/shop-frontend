@@ -191,7 +191,7 @@ var ReactInicis = function ReactInicis(_ref) {
         readOnly: true,
         name: "acceptmethod",
         value: "HPP(".concat(payData.telStatus, ")")
-    }),payData.payStatus === 0 && /*#__PURE__*/_react.default.createElement("input", {
+    }), payData.payStatus === 0 && /*#__PURE__*/_react.default.createElement("input", {
         type: "hidden",
         readOnly: true,
         name: "acceptmethod",

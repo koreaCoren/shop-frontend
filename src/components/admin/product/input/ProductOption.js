@@ -75,7 +75,9 @@ const ProductOption = ({ title, setProductOption, data }) => {
             arr.push({ option_name: optionName[i].value, option_price: price[i].value });
         }
         setProductOption([...arr]);
+        alert("옵션 저장 완료");
     }
+
     useEffect(() => { }, [optionList])
     return (
         <Div>

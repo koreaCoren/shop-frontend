@@ -11,6 +11,7 @@ export const track = async (carrier, delivery, trackResult) => {
     }
 }
 
+// 배송 상태
 export const deliveryStatus = async (req) => {
     let arr = [];
     for (const el of req) {

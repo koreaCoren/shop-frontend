@@ -9,7 +9,6 @@ import styled from 'styled-components';
  * @param {*} reset 상품리스트 리셋 상품관련만 필요 나머지 리스트는 null 넣으면됨
  * @returns 
  */
-
 const Searching = ({ board, setBoardList, searchType, reset }) => {
     const nav = useNavigate();
     const [searchValue, setSearchValue] = useState("");

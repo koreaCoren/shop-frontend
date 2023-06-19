@@ -22,11 +22,13 @@ const Order = () => {
     const [board, setBoard] = useState(null);
     const [state, setState] = useState([]);
 
+    // 배송 현황 상태
     const getDeliveryStatus = async (req) => {
         const data = await deliveryStatus(req);
         setState(data);
     }
 
+    // 주문관리 리스트 가져옴
     useEffect(() => {
         const data = {
             boardPage: boardPage,
