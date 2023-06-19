@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { addBoard } from "api/board.js";
 
 import createCode from 'utils/createCode';
+import dateFormat from 'utils/dateFormat';
 
 import SubTitle from 'components/myPage/SubTitle';
 import LoginInput from 'components/input/Input';
@@ -27,12 +28,9 @@ const ReviewWrite = () => {
     const goods_name = location.state.goods_name;
     const goods_img = location.state.goods_img;
 
+    // 리뷰 작성
     const onSubmit = async (e) => {
         e.preventDefault();
-        const date = new Date();
-        const yy = date.getFullYear().toString().substring(2);
-        const mm = (("00" + (date.getMonth() + 1)).slice(-2));
-        const dd = (("00" + date.getDate()).slice(-2));
 
         const data = {
             user_id: sessionStorage.getItem("userId"),
@@ -40,7 +38,7 @@ const ReviewWrite = () => {
             content: content.replace(/\r?\n/g, "<br>"),
             firstImage: firstImage,
             secondImage: secondImage,
-            date: `${yy}/${mm}/${dd}`,
+            date: dateFormat(),
             code: createCode(),
             order_code: orderCode,
             goods_code: productCode,

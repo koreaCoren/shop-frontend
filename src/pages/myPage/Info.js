@@ -21,10 +21,11 @@ const Info = ({ infoData }) => {
     const [changePW, setChangePW] = useState("");
 
     useEffect(() => {
-        console.log(infoData);
         getUserData();
     }, [])
 
+    // 유저 정보가져오기
+    // 비밀번호 체크 안하고 접근하면 메인으로
     const getUserData = async () => {
         if (infoData !== null) {
             if (infoData.result === "ok") {
@@ -74,6 +75,7 @@ const Info = ({ infoData }) => {
         }
     }
 
+    // 정보 수정 저장
     const onSubmit = async (e) => {
         e.preventDefault();
         let data = {

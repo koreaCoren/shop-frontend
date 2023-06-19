@@ -10,6 +10,8 @@ const Review = () => {
     const nav = useNavigate();
     const location = useLocation();
     const [url, setUrl] = useState(0);
+
+    // 리뷰 사진, 전체 리뷰 url 나누기
     useEffect(() => {
         const regexArr = [/.*photo.*/, /.*all.*/];
         for (let i = 0; i < regexArr.length; i++) {

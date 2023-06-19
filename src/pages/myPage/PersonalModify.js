@@ -16,6 +16,7 @@ const PersonalModify = ({ setInfoData }) => {
     const nav = useNavigate();
     const [password, setPassword] = useState("");
 
+    // 비밀번호 확인
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -27,12 +28,6 @@ const PersonalModify = ({ setInfoData }) => {
 
         nav("/myPage/info");
     };
-
-    useEffect(() => {
-        if (loginCheck(true) === true) {
-            nav("/");
-        }
-    }, []);
 
     const onChange = (e) => {
         const name = e.target.name;

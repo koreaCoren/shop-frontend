@@ -20,11 +20,13 @@ const ReviewAll = () => {
     const [isImage, setIsImage] = useState(false);
     const [more, setMore] = useState();
 
+    // 이미지 클릭시 큰 이미지 팝업
     const imagePopup = (src) => {
         setIsImage(true);
         setImageSrc(src);
     }
 
+    // 게시글 가져오기
     useEffect(() => {
         const data = {
             boardPage: boardPage,

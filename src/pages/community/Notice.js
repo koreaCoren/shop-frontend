@@ -17,6 +17,7 @@ const Notice = () => {
     const { boardPage } = useParams();
     const [boardList, setBoardList] = useState(null);
 
+    // 게시글가져오기
     useEffect(() => {
         const data = {
             boardPage: boardPage,

@@ -1,3 +1,4 @@
+// 관리자 체크
 const adminCheck = (isAlert) => {
     if (sessionStorage.getItem("userId") !== "admin" &&
         sessionStorage.getItem("userId") !== "asd" &&

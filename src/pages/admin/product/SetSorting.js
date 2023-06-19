@@ -32,6 +32,7 @@ const SetSorting = () => {
         }
     }, [cate01])
 
+    // 상품리스트 정렬번호 있으면 저장해서 가져오기
     useEffect(() => {
         if (productList !== null) {
             let arr = [];
@@ -47,6 +48,7 @@ const SetSorting = () => {
         }
     }, [productList])
 
+    // 정렬 저장
     const onSubmit = (e) => {
         e.preventDefault();
 
@@ -90,6 +92,7 @@ const SetSorting = () => {
         }
     }
 
+    // 상품 수동정렬 순서 저장
     const onSave = async (e) => {
         e.preventDefault();
         const arr = sortingNum;

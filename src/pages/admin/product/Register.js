@@ -44,6 +44,7 @@ const Register = () => {
         setCate02("");
     }, [cate01])
 
+    // 상품 등록
     const onSubmit = async (e) => {
         e.preventDefault();
         const numberRegex = /^[0-9]+$/;
@@ -83,7 +84,7 @@ const Register = () => {
             return;
         }
 
-        //에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
+        // 에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
         let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
             for (let j = 0; j < arr.length; j++) {

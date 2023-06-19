@@ -27,6 +27,7 @@ const Products = () => {
         getProduct({ cate_code: categoryCode }, setProductList);
     }, [categoryCode])
 
+    // 상품 날짜순 정렬
     const compareDates = (a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
@@ -50,6 +51,7 @@ const Products = () => {
         }
     }
 
+    // 상품 총 정렬
     const sortData = () => {
         if (select === "기본순") {
             reset();
@@ -65,6 +67,7 @@ const Products = () => {
         }
     }
 
+    // 상품 리스트 복사
     const reset = () => {
         if (productList !== "not product") {
             setCopyList(productList[0]);
@@ -73,12 +76,14 @@ const Products = () => {
         }
     }
 
+    // 상품 정렬
     useEffect(() => {
         if (productList?.length > 0) {
             sortData();
         }
     }, [select]);
 
+    // 상품 리셋 
     useEffect(() => {
         if (productList !== null) {
             reset();
