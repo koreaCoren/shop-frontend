@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { setDefaultCarrier, addInvoice, getDefaultSelect, getUndefinedInvoice } from "api/delivery.js";
 
 import Top from 'components/admin/Top';
+import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/admin/delivery/delivery";
 import * as Common from "assets/styleComponent/admin/common";
+
 import { getDeliveryList } from 'utils/delivery';
-import Loading from 'components/loding/Loading';
 
 const Delivery = () => {
     const [defaultDelivery, setDefaultDelivery] = useState();
@@ -16,6 +17,7 @@ const Delivery = () => {
     const [incoviceResult, setSncoviceResult] = useState(null);
     const [deliveryNumber, setDeliveryNumber] = useState();
 
+    // 기본 배송지 설정
     const setDelivery = async () => {
         const arr = await getDeliveryList();
         const data = {};
@@ -28,6 +30,7 @@ const Delivery = () => {
         setDefaultCarrier(data);
     }
 
+    // 송장 저장
     const onSubmit = async (e) => {
         e.preventDefault();
         const arr = e.target;
@@ -40,6 +43,7 @@ const Delivery = () => {
         addInvoice(data);
     };
 
+    // 배송지 종류 가져오기
     const getList = async () => {
         const arr = await getDeliveryList();
         setDeliveryList(arr.data);

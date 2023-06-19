@@ -32,10 +32,12 @@ const List = () => {
         }
     }, [list])
 
+    // 상품리스트 복사
     const reset = () => {
         setCopyList(list[0]);
     }
 
+    // 상품 삭제
     const onDelete = (delProduct) => {
         const data = {
             goods_code: delProduct.goods_code,

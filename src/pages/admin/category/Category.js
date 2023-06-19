@@ -16,6 +16,7 @@ const Category = () => {
     const [category, setCategory] = useState(null);
     const [categorys, setCategorys] = useState(null);
 
+    // 기존 카테고리 가져오기
     useEffect(() => {
         getCategory(setCategorys);
     }, []);
@@ -85,6 +86,7 @@ const Category = () => {
         nav("/admin/Category");
     };
 
+    // 카테고리 저장
     const onSubmit = async (e) => {
         e.preventDefault();
         addCategory(categorys);

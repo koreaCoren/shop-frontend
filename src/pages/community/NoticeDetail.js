@@ -14,6 +14,7 @@ const NoticeDetail = () => {
     const nav = useNavigate();
     const [readDetail, setReadDetail] = useState(null);
 
+    // 게시글 삭제
     const boardDel = async () => {
         const data = {
             type: "notice",
@@ -22,6 +23,7 @@ const NoticeDetail = () => {
         deleteBoard(data);
     }
 
+    // 게시글 상세 정보 가져오기
     useEffect(() => {
         const data = {
             i_board: boardPage,

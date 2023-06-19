@@ -11,14 +11,15 @@ import Review from 'pages/myPage/Review';
 import ReviewWrite from 'pages/myPage/ReviewWrite';
 import PersonalModify from 'pages/myPage/PersonalModify';
 import * as Style from "assets/styleComponent/myPage/myPage"
+import loginCheck from 'utils/loginCheck';
 
 const MyPage = () => {
     const nav = useNavigate();
     const [infoData, setInfoData] = useState(null);
 
+    // 로그인 체크
     useEffect(() => {
-        if (!sessionStorage.getItem("userId")) {
-            alert("접근불가능합니다.");
+        if (loginCheck(true) === true) {
             nav("/");
         }
     }, [nav])

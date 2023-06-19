@@ -22,6 +22,7 @@ const OrderDetail = () => {
     const [carrierList, setCarrierList] = useState();
     const [orderStatus, setOrderStatus] = useState();
 
+    // 배송사 설정
     const setCarrierCode = async () => {
         const arr = await getDeliveryList();
         const data = {};
@@ -34,6 +35,7 @@ const OrderDetail = () => {
         updateCarrier(data);
     }
 
+    // 송장번호 수정
     const setInvoice = async () => {
         const data = {
             orderCode: orderCode,
@@ -42,17 +44,22 @@ const OrderDetail = () => {
         updateInvoice(data);
     }
 
+    // 주문 정보 가져오기
     const getDetail = async () => {
         let price = 0;
 
+        // 배송사 리스트 가져오기
         const arr = await getDeliveryList();
         setCarrierList(arr.data);
 
+        // 송장 번호 가져와서 저장
         setInvoiceNumber(detail[0]?.delivery);
         for (let i = 0; i < detail[0].length; i++) {
             price = price + Number(detail[0][i].order_pay);
             setTotalPrice(price);
         }
+
+        // 설정되있는 배송사 저장
         if (arr.data) {
             arr.data.forEach(el => {
                 if (el.id === detail[0].carrier) {
@@ -62,15 +69,28 @@ const OrderDetail = () => {
         };
     }
 
-    const confirmRefund = () => {
-        if (window.confirm("환불 처리 하시겠습니까?")) {
-            const data = {
-                orderCode: detail[0].orderCode
-            }
-            recognizeRefund(data);
+    // 환불
+    const confirmRefund = (type) => {
+        const data = {
+            orderCode: detail[0].orderCode,
+            type: type
         }
+        if (type === "refusal") {
+            if (!window.confirm("환불 거절 하시겠습니까?")) {
+                return;
+            }
+        } else if (type === "refund") {
+            if (!window.confirm("환불 처리 하시겠습니까?")) {
+                return;
+            }
+        } else {
+            alert("알 수 없는 이유로 에러가 발생했습니다.");
+            return;
+        }
+        recognizeRefund(data);
     }
 
+    // 주문취소
     const revokeOrder = (type) => {
         const data = {
             orderCode: detail[0].orderCode,
@@ -86,10 +106,12 @@ const OrderDetail = () => {
             }
         } else {
             alert("알 수 없는 이유로 에러가 발생했습니다.");
+            return;
         }
         cancelOrder(data);
     }
 
+    // 카드 정보
     const cardType = () => {
         switch (detail[0].gopaymethod) {
             case "0":
@@ -167,8 +189,8 @@ const OrderDetail = () => {
                                     detail[0].status === "환불요청"
                                         ? <>
                                             환불 요청중
-                                            <button onClick={() => { confirmRefund(); }}>승인</button>
-                                            <button>거절</button>
+                                            <button onClick={() => { confirmRefund("refund"); }}>승인</button>
+                                            <button onClick={() => { confirmRefund("refusal"); }}>거절</button>
                                         </>
                                         : detail[0].status === "취소요청"
                                             ? <>

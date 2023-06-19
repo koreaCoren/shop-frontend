@@ -19,10 +19,12 @@ const UserList = () => {
     const { boardPage } = useParams();
     const [board, setBoard] = useState(null);
 
+    // 회원 삭제
     const userDelete = async (index) => {
         deleteUser({ user_id: board.list[index].user_id });
     }
 
+    // 회원 리스트 가져오기
     const getUser = async () => {
         const data = {
             boardPage: boardPage,

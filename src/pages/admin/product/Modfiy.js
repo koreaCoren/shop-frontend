@@ -52,6 +52,7 @@ const Modfiy = () => {
         }
     }, [cate01])
 
+    // 해당 상품 상세 정보가져오기
     const getProductData = () => {
         let cateData = getProduct.goods_data.cate_code;
         let str = String(cateData);
@@ -69,6 +70,7 @@ const Modfiy = () => {
         setOptionData(getProduct.option_data);
     }
 
+    // 상품 수정한거 저장
     const onSubmit = async (e) => {
         e.preventDefault();
         if (productName === "") {
@@ -87,7 +89,8 @@ const Modfiy = () => {
             alert("상품 재고 입력해주세요");
             return;
         }
-        //에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
+
+        // 에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
         let arr = imageCode;
         for (let i = 0; i < imageCode.length; i++) {
             for (let j = 0; j < arr.length; j++) {

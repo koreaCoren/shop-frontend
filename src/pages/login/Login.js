@@ -13,6 +13,7 @@ const Login = () => {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
+    // 로그인 요청
     const onSubmit = async (e) => {
         e.preventDefault();
         const data = {
@@ -27,6 +28,7 @@ const Login = () => {
         }
     };
 
+    // 로그인 되있으면 메인으로
     useEffect(() => {
         if (loginCheck(false) === false) {
             nav("/");

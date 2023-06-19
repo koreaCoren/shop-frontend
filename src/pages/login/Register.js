@@ -20,6 +20,7 @@ const Register = () => {
     const [eamil, setEmail] = useState("");
     // const [address, setAddress] = useState("");
 
+    // 회원가입
     const onSubmit = async (e) => {
         e.preventDefault();
         const phoneRegex = /^01([0|1|6|7|8|9])(\d{3}|\d{4})(\d{4})$/;
@@ -61,6 +62,7 @@ const Register = () => {
         signup(data);
     };
 
+    // 로그인 되있으면 메인으로
     useEffect(() => {
         if (loginCheck(false) === false) {
             nav("/");

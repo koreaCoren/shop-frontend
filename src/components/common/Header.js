@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import logo from "assets/images/logo.png"
 import { getCategory } from 'api/category';
 import { logout } from 'api/logout';
+import { getNotification, updateNotification } from 'api/notification';
 
 const Header = ({ user }) => {
     const nav = useNavigate();
@@ -15,14 +16,24 @@ const Header = ({ user }) => {
     const [isMobileMenu, setIsMobileMenu] = useState(false);
     const [mobileMenuNum, setMobileMenuNum] = useState(0);
     const [isMenuBox, setIsMenuBox] = useState(false);
+    const [isNotification, setIsNotification] = useState(false);
+    const [notification, setNotification] = useState(null);
+    const [checkNotification, setCheckNotification] = useState(0);
 
+    // 카테고리 가져옴
     useEffect(() => {
         getCategory(setCategorys);
     }, [])
 
+    // 알림 가져옴
+    useEffect(() => {
+        getNotification({ user_id: sessionStorage.getItem("userId") }, setNotification, setCheckNotification);
+    }, [nav, isNotification])
+
     useEffect(() => {
         setIsMobileMenu(false);
         setIsMenuBox(false);
+        setIsNotification(false)
     }, [nav])
 
     return (
@@ -35,20 +46,47 @@ const Header = ({ user }) => {
                     <div className="wrap">
                         {
                             user?.result === "ok"
-                                ? <ul>
+                                ? <ul className='userNav'>
                                     <li><h2>{sessionStorage.getItem("userId")}님 로그인중</h2></li>
                                     <li style={{ cursor: "pointer" }} onClick={logout}>로그아웃</li>
                                     <li><Link to={"product/basket"}>장바구니</Link></li>
                                     <li><Link to={"myPage/order/1"}>마이페이지</Link></li>
                                     {
-                                        sessionStorage.getItem("userId") === "admin"
-                                            || sessionStorage.getItem("userId") === "pkd"
-                                            || sessionStorage.getItem("userId") === "asd"
+                                        sessionStorage.getItem("userId") === "admin" ||
+                                            sessionStorage.getItem("userId") === "pkd" ||
+                                            sessionStorage.getItem("userId") === "asd"
                                             ? <li><Link to={"admin"}>관리자</Link></li>
                                             : null
                                     }
+                                    <li>
+                                        <div className='notification'
+                                            onClick={() => {
+                                                setIsNotification(!isNotification);
+                                                isNotification === true &&
+                                                    updateNotification({ user_id: sessionStorage.getItem("userId") });
+                                            }}>
+                                            <i className="fa-sharp fa-solid fa-bell" ></i>
+                                            <div className={checkNotification > 0 ? "on" : ""}>{checkNotification}</div>
+                                        </div>
+                                        <div className="notificationContainer">
+                                            <ul className={isNotification === true ? "on" : ""}>
+                                                {
+                                                    notification.map((a, i) => {
+                                                        return (
+                                                            <li key={i} className={a.check_yn === "N" ? "" : "reading"}>
+                                                                <Link to={`/myPage/orderDetail/${a.orderCode}`}>
+                                                                    <p>{a.content}</p>
+                                                                    <div>{a.send_date}</div>
+                                                                </Link>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+                                            </ul>
+                                        </div>
+                                    </li>
                                 </ul>
-                                : <ul>
+                                : <ul className='userNav'>
                                     <li><Link to={"login"}>로그인</Link></li>
                                     <li><Link to={"loginRegister"}>회원가입</Link></li>
                                     <li><Link to={"product/basket"}>장바구니</Link></li>
@@ -116,8 +154,8 @@ const Header = ({ user }) => {
                                             </Link>
                                         </li>
                                         {
-                                            user?.result === "ok"
-                                            && <li>
+                                            user?.result === "ok" &&
+                                            <li>
                                                 <Link to={"myPage/order/1"}>
                                                     <i className="fa-solid fa-user"></i>
                                                     마이페이지
@@ -174,12 +212,87 @@ const Header = ({ user }) => {
 
 const Login = styled.div`
     border-bottom: 1px solid #ccc;
-    ul{
+    .userNav{
         display: flex;
         justify-content: end ;
         gap: 15px;
-        li{
-            padding: 10px 0px;
+        >li{
+            padding: 10px 0px; 
+            position: relative;
+            .notification{
+                position: relative;
+                cursor: pointer;
+                i{
+                    color: #555;
+                }
+                > div{
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    background-color: red;
+                    font-size: 10px;
+                    border-radius: 50%;
+                    width: 12px;
+                    height: 12px;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    display: none;
+                }
+                >div.on{
+                    display: flex;
+                }
+            }
+            ul{
+                position: absolute;
+                width: 200px;
+                height: 300px;
+                max-width: 0px;
+                max-height: 0px;
+                transition: all .3s;
+                top: 90%;
+                right: 0;
+                background-color: #fff;
+                box-shadow: 2px 2px 5px #00000077;
+                z-index: 5;
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                opacity: 0;
+                ::-webkit-scrollbar {
+                    width: 5px; 
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: #555; 
+                    border-radius: 10px;
+                }::-webkit-scrollbar-track {
+                    background: #eee;  
+                }
+                li{
+                    padding: 5px 0px;
+                    border-bottom: 1px solid #ccc;
+                    color: #000;
+                    p{
+                        font-size: 12px;
+                    }
+                    div{
+                        text-align: right;
+                        margin-top: 10px;
+                        font-size: 10px;
+                    }
+                }
+                li.reading{
+                    p,div{
+                        color: #888;
+                    }
+                }
+            }
+            ul.on{
+                max-width: 200px;
+                max-height: 300px;
+                padding: 0px 5px;
+                opacity: 1;
+            }
         }
     }
     @media (max-width: 1200px) {

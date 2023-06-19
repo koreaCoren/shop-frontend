@@ -19,6 +19,7 @@ import NotFoundPage from 'components/error/NotFoundPage';
 const Admin = () => {
     const nav = useNavigate();
 
+    // 관리자 체크
     useEffect(() => {
         if (adminCheck(true) === false) {
             nav("/");

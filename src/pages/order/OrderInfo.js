@@ -41,6 +41,7 @@ const OrderInfo = ({ orderData }) => {
 
 
     useEffect(() => {
+        // 새로고침이나 이상하게 접근해서 주문 정보없으면 메인으로
         if (orderData === null || orderData === undefined) {
             nav("/");
             return;
@@ -50,6 +51,7 @@ const OrderInfo = ({ orderData }) => {
         calcPayment();
     }, [])
 
+    // 포인트 계산
     useEffect(() => {
         if (userAddr !== undefined || userAddr !== "") {
             (Number(userAddr.user_point) - payPoint) >= 0
@@ -58,6 +60,7 @@ const OrderInfo = ({ orderData }) => {
         }
     }, [payPoint, userAddr])
 
+    // 상품 총 가격 계산 및 특정 금액 이상이면 배달비 0원
     const calcPayment = () => {
         let sum = 0;
         for (let i = 0; i < orderData.length; i++) {
@@ -69,6 +72,7 @@ const OrderInfo = ({ orderData }) => {
             : setDeliverPay(2500);
     }
 
+    // 기본배송지 및 배송지 직접 입력
     const checkRadio = (e) => {
         if (e.target.value === "old") {
             if (userAddr === "fail") {
@@ -93,6 +97,7 @@ const OrderInfo = ({ orderData }) => {
         }
     }
 
+    // 결제
     const payment = (e) => {
         e.preventDefault();
         let orderDatas = [];
@@ -127,8 +132,7 @@ const OrderInfo = ({ orderData }) => {
             return;
         }
 
-
-
+        // 이니시스 전달용
         setPayData({
             productName: orderData[0].product_name,
             buyerName: buyerName,
@@ -140,6 +144,7 @@ const OrderInfo = ({ orderData }) => {
             closeUrl: `${process.env.REACT_APP_URL}/close`,
         })
 
+        // 백엔드 전달용
         const data = {
             mid: "", // 이니시스 mid
             mKey: "", // 이니시스 mkey
