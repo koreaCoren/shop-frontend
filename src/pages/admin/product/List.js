@@ -88,7 +88,10 @@ const List = () => {
                         )
                     })
                 }
-                <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/admin/product`} />
+                {
+                    copyList.length > 0 &&
+                    <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/admin/product`} />
+                }
             </>
     );
 };

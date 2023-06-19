@@ -39,6 +39,9 @@ const TextEditor = ({ setContent, setImageCode, width, type, value }) => {
             <CKEditor
                 config={{
                     extraPlugins: [uploadPlugin],
+                    mediaEmbed: {
+                        previewsInData: true
+                    }
                 }}
                 editor={ClassicEditor}
                 data={value}

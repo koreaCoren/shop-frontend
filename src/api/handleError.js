@@ -19,6 +19,7 @@ const handleApiError = async (error) => {
         console.log("Error", error.message);
     }
     console.log(error.config);
+    window.location.replace("/error");
 };
 
 // 토큰에러

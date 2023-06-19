@@ -113,7 +113,10 @@ const ReviewAll = () => {
                     <i onClick={() => { setIsImage(false) }} className="fa-solid fa-xmark"></i>
                 </Style.Popup>
 
-                <Pageing boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/review/all"} />
+                {
+                    boardList.list.length > 0 &&
+                    <Pageing boardPage={boardPage} boardLength={boardList?.count.page_count} url={"/community/review/all"} />
+                }
             </>
     );
 };

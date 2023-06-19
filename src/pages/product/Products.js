@@ -145,7 +145,10 @@ const Products = () => {
                         }
                     </div>
                 </Style.Products>
-                <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/product/products/${categoryCode}`} />
+                {
+                    productList !== "not product" && copyList !== "not product" &&
+                    <Pageing count={COUNT} boardPage={boardPage} boardLength={copyList?.length} url={`/product/products/${categoryCode}`} />
+                }
             </div>
     );
 };
