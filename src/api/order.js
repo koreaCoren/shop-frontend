@@ -77,7 +77,7 @@ const cancelOrder = async (data) => {
             alert("주문취소 요청을 거절하였습니다.");
             window.location.reload();
         } else {
-            console.log("asd");
+            alert("알 수 없는 에러가 발생했습니다. 관리자에게 문의 부탁드립니다.");
         }
     } catch (error) {
         handleApiError(error);

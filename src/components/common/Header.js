@@ -33,12 +33,11 @@ const Header = ({ user }) => {
     useEffect(() => {
         setIsMobileMenu(false);
         setIsMenuBox(false);
-        setIsNotification(false)
+        setIsNotification(false);
     }, [nav])
 
     return (
-
-        categorys === null
+        categorys === null || notification === null
             ? <Loading />
             : < header style={{ boxShadow: "0px 0px 5px #00000033" }
             }>
