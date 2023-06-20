@@ -23,6 +23,7 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
+import { encrypt } from "utils/crypto";
 // import sim from "utils/simsim";
 
 function App() {

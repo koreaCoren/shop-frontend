@@ -1,5 +1,6 @@
 import axios from "./axios";
 import { handleApiError, handleConnectionError } from "./handleError";
+import { encrypt } from "utils/crypto";
 
 // 게시글 가져오기
 const getBoard = async (data, success) => {
@@ -26,6 +27,7 @@ const getDetailBoard = async (data, success) => {
 // 게시글 작성
 const addBoard = async (data) => {
     try {
+        // const encryptedData = encrypt(String(data), process.env.REACT_APP_CRYPT_KEY);
         const res = await axios.post("/editor/ins_editor_data", data);
         handleConnectionError(res.data);
         if (res.data.result === "success") {
