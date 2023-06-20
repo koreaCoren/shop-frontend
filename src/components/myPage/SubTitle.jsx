@@ -25,7 +25,7 @@ const Title = styled.div`
     border-bottom: 1.5px solid black;
     padding-bottom: 30px;
     font-weight: bold;
-    > div{
+    > div:not(.new){
         display: flex;
         align-items: start;
         flex-direction: column;
@@ -39,9 +39,15 @@ const Title = styled.div`
         color: gray;
     }
     .new{
+        display: flex;
+        align-items: center;
+        gap: 5px;
         font-size: 20px;
         text-align: right;
         cursor: pointer;
+        i{
+            font-size: 20px;
+        }
     }
     @media screen and (max-width: 500px) {
         padding-bottom: 20px;
