@@ -22,7 +22,7 @@ const SideMenu = () => {
             <li className={url === 1 ? "on" : ""}><Link to="/myPage/address"><i className='fa-solid fa-truck'></i><p>배송지 관리</p></Link></li>
             <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i><p>상품 후기</p></Link></li>
             <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i><p>정보 수정</p></Link></li>
-            <li className={url === 4 ? "on" : ""}><Link to="/myPage/contact"><i className='fa-solid fa-house'></i><p>1 : 1 문의</p></Link></li>
+            <li className={url === 4 ? "on" : ""}><Link to="/myPage/contact"><i className='fa-solid fa-comment-dots'></i><p>1 : 1 문의</p></Link></li>
         </Ul>
     );
 };
