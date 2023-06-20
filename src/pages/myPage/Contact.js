@@ -63,7 +63,7 @@ const Contact = () => {
                         <div>왼쪽</div>
                     </li>
                     <li className='left'>
-                        <div>왼쪽</div>
+                        <div>해야지!</div>
                     </li>
                 </ul>
                 <div className="send">
