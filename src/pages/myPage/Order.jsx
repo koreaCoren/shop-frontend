@@ -34,7 +34,7 @@ const Order = () => {
             : <Common.InDiv>
                 <SubTitle h2={"주문 내역"} h3={"최대 지난 3년간의 주문 내역까지 확인할 수 있어요"} clickEvent={null} clickText={null} />
                 {
-                    board.list > 0 ?
+                    board.list.length > 0 ?
                         board.list.map((a, i) => {
                             return (
                                 <div className='contents' key={i}>
