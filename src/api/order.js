@@ -61,11 +61,11 @@ const recognizeOrder = async (data) => {
 const cancelOrder = async (data) => {
     try {
         const res = await axios.post("/order/cancel_order", data);
-        if (data.checkDelivery === "requestAdmin") {
+        if (data.cancelType === "requestAdmin") {
             alert("주문 취소 요청을 하였습니다.");
             window.location.reload();
         }
-        else if (data.checkDelivery === "requestPg") {
+        else if (data.cancelType === "requestPg") {
             if (res.data.result.error === "E21") {
                 alert("주문취소에 실패했습니다. 관리자에게 문의 부탁드립니다.");
                 window.location.reload();
@@ -76,6 +76,8 @@ const cancelOrder = async (data) => {
         } else if (data.cancelType === "refusal") {
             alert("주문취소 요청을 거절하였습니다.");
             window.location.reload();
+        } else {
+            console.log("asd");
         }
     } catch (error) {
         handleApiError(error);
