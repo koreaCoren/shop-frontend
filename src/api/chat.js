@@ -2,9 +2,9 @@ import axios from "./axios";
 import { handleConnectionError, handleApiError } from "./handleError";
 
 // 메시지 보내기
-const sendMessage = async (data) => {
+const updateMessage = async (data) => {
     try {
-        const res = await axios.post("", data);
+        const res = await axios.post("/chatTest", data);
         handleConnectionError(res.data);
     } catch (error) {
         handleApiError(error);
@@ -16,10 +16,10 @@ const getMessage = async (success) => {
     try {
         const res = await axios.get("");
         handleConnectionError(res.data);
-        success();
+        success(res.data);
     } catch (error) {
         handleApiError(error);
     }
 }
 
-export { sendMessage, getMessage }
+export { updateMessage, getMessage }

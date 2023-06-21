@@ -21,7 +21,8 @@ export const ChatContainer = styled.div`
         ::-webkit-scrollbar-thumb {
             background: #333; 
             border-radius: 10px;
-        }::-webkit-scrollbar-track {
+        }
+        ::-webkit-scrollbar-track {
             background: #eee;  
         }
     }
