@@ -27,7 +27,7 @@ const getDetailBoard = async (data, success) => {
 // 게시글 작성
 const addBoard = async (data) => {
     try {
-        const encryptedData = encrypt(JSON.stringify(data), process.env.REACT_APP_CRYPT_KEY);
+        const encryptedData = encrypt(JSON.stringify(data));
         const res = await axios.post("/editor/ins_editor_data", { encryptedData });
         handleConnectionError(res.data);
         if (res.data.result === "success") {
