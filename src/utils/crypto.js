@@ -1,14 +1,9 @@
 import CryptoJS from "crypto-js";
 
 // 암호화 함수
-// const encrypt = (message, secretKey) => {
-//     const encrypted = CryptoJS.AES.encrypt(message, secretKey).toString();
-//     return encrypted;
-// }
-
 const encrypt = (message, secretKey) => {
     const iv = CryptoJS.enc.Hex.parse("IvData1zqywxz2345");
-    const encrypted = CryptoJS.AES.encrypt(message, secretKey, {iv:iv});
+    const encrypted = CryptoJS.AES.encrypt(message, secretKey, { iv: iv });
     return encrypted.toString();
 }
 

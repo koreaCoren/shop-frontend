@@ -27,12 +27,9 @@ const getDetailBoard = async (data, success) => {
 // 게시글 작성
 const addBoard = async (data) => {
     try {
-        console.log(process.env.REACT_APP_CRYPT_KEY);
-        console.log(data);
         const encryptedData = encrypt(JSON.stringify(data), process.env.REACT_APP_CRYPT_KEY);
-        console.log(encryptedData);
-        const res = await axios.post("/editor/ins_editor_data", {encryptedData});
-
+        const res = await axios.post("/editor/ins_editor_data", { encryptedData });
+        handleConnectionError(res.data);
         if (res.data.result === "success") {
             alert("등록완료");
             if (data.type === "product") {
