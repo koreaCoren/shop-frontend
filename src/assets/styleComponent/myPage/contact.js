@@ -19,9 +19,10 @@ export const ChatContainer = styled.div`
             width: 5px; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #1a6dff; 
+            background: #333; 
             border-radius: 10px;
-        }::-webkit-scrollbar-track {
+        }
+        ::-webkit-scrollbar-track {
             background: #eee;  
         }
     }
@@ -65,7 +66,7 @@ export const ChatContainer = styled.div`
         top: 0px;
         line-height: 32px;
         padding: 0px 15px;
-        background-color: #333;
+        background-color: #1a6dff;
         color: #fff;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
