@@ -44,7 +44,7 @@ const addBoard = async (data) => {
             alert("알 수 없는 에러로 등록실패 했습니다.");
         }
     } catch (error) {
-        // handleApiError(error);
+        handleApiError(error);
     }
 }
 

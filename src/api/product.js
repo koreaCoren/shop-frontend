@@ -98,6 +98,7 @@ const setProudctSorting = async (data) => {
         handleApiError(error);
     }
 }
+
 // 상품 수동 정렬 설정
 const setProudctManualSorting = async (data) => {
     try {
