@@ -49,7 +49,6 @@ const OrderInfo = ({ orderData }) => {
         setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
         calcPayment();
-        console.log(orderData);
     }, [])
 
     // 포인트 계산
@@ -103,6 +102,7 @@ const OrderInfo = ({ orderData }) => {
         e.preventDefault();
         let orderDatas = [];
         let orderCode = createCode();
+        let basketCount = [];
         if (totalPay < 1000) {
             alert("1000원 이하는 결제가 불가능합니다.");
             return;
@@ -116,8 +116,9 @@ const OrderInfo = ({ orderData }) => {
                 order_pay: order[i].total_price, // 총 상품가격
                 order_count: order[i].product_count, //상품 갯수
                 option: order[i].option, // 옵션
-                basket_count: order[i].basket_count // 장바구니 전용
-            })
+
+            });
+            basketCount.push(order[i].basket_count); // 장바구니 전용
         }
 
         if (buyerName === "") {
@@ -154,6 +155,7 @@ const OrderInfo = ({ orderData }) => {
             order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
             order_data: orderDatas,
+            basket_count: basketCount,
             order_total_price: String(totalPay),
             buyer_name: buyerName, // 주문자 이름
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
