@@ -40,6 +40,13 @@ const requestOrder = async (data) => {
     try {
         const res = await axios.post("/order/ins_orders", data);
         handleConnectionError(res.data);
+        console.log(res.data);
+        if(res.data.error === "E23"){
+            alert("가격 정보가 다릅니다. \n error code : E23");
+            localStorage.removeItem('basket');
+            window.location.replace("/");
+        }
+        
     } catch (error) {
         handleApiError(error);
     }
