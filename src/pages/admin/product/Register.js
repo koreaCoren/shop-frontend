@@ -49,40 +49,40 @@ const Register = () => {
         e.preventDefault();
         const numberRegex = /^[0-9]+$/;
 
-        if (productName === "") {
-            alert("상품 이름 입력해주세요");
-            return;
-        } else if (cate01 === "선택해주세요" || cate01 === "") {
-            alert("카테고리 1번 선택해주세요");
-            return;
-        } else if (price === "") {
-            alert("상품 가격 입력해주세요");
-            return;
-        } else if (price < 0) {
-            alert("상품 가격이 0 보다 작을 수 없습니다");
-            return;
-        } else if (discount > 100) {
-            alert("할인률이 100 보다 클 수 없습니다");
-            return;
-        } else if (sell === "") {
-            alert("상품 수량 입력해주세요");
-            return;
-        } else if (stock === "") {
-            alert("상품 재고 입력해주세요");
-            return;
-        } else if (!numberRegex.test(price)) {
-            alert("상품 가격 숫자입력만 가능합니다");
-            return;
-        } else if (!numberRegex.test(discount)) {
-            alert("할인률 숫자입력만 가능합니다");
-            return;
-        } else if (!numberRegex.test(sell)) {
-            alert("판매 수량 숫자입력만 가능합니다");
-            return;
-        } else if (!numberRegex.test(stock)) {
-            alert("재고 숫자입력만 가능합니다");
-            return;
-        }
+        // if (productName === "") {
+        //     alert("상품 이름 입력해주세요");
+        //     return;
+        // } else if (cate01 === "선택해주세요" || cate01 === "") {
+        //     alert("카테고리 1번 선택해주세요");
+        //     return;
+        // } else if (price === "") {
+        //     alert("상품 가격 입력해주세요");
+        //     return;
+        // } else if (price < 0) {
+        //     alert("상품 가격이 0 보다 작을 수 없습니다");
+        //     return;
+        // } else if (discount > 100) {
+        //     alert("할인률이 100 보다 클 수 없습니다");
+        //     return;
+        // } else if (sell === "") {
+        //     alert("상품 수량 입력해주세요");
+        //     return;
+        // } else if (stock === "") {
+        //     alert("상품 재고 입력해주세요");
+        //     return;
+        // } else if (!numberRegex.test(price)) {
+        //     alert("상품 가격 숫자입력만 가능합니다");
+        //     return;
+        // } else if (!numberRegex.test(discount)) {
+        //     alert("할인률 숫자입력만 가능합니다");
+        //     return;
+        // } else if (!numberRegex.test(sell)) {
+        //     alert("판매 수량 숫자입력만 가능합니다");
+        //     return;
+        // } else if (!numberRegex.test(stock)) {
+        //     alert("재고 숫자입력만 가능합니다");
+        //     return;
+        // }
 
         // 에디터 실제로 이미지 있는지없는지 확인하고 없으면 지워줌
         let arr = imageCode;
