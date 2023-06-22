@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { deleteBasket, getBasket } from 'api/basket';
+
 import loginCheck from 'utils/loginCheck';
+import { comma } from 'utils/commaReplace';
+import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/product/basket"
-import { comma } from 'utils/commaReplace';
 
 import noImg from "assets/images/noImg.gif";
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
-    const [basketData, setBasketData] = useState(JSON.parse(localStorage.getItem("basket")));
+    const [basketData, setBasketData] = useState(null);
     const [checkData, setCheckData] = useState([]);
     const [reload, setReload] = useState(basketData === null ? 0 : basketData?.length);
 
@@ -40,22 +43,28 @@ const Basket = ({ setOrderData }) => {
     }
 
     // 장바구니 선택삭제
-    const deleteBasket = () => {
-        const arr = basketData;
+    const delBasket = () => {
+        const copy = basketData;
+        const delData = [];
         const confirm = window.confirm("정말로 삭제하시겠습니까?");
         if (confirm) {
-            for (let i = 0; i < arr.length; i++) {
+            for (let i = 0; i < copy.length; i++) {
                 for (let j = 0; j < checkData.length; j++) {
-                    if (checkData[j] === arr[i].basket_count) {
-                        arr.splice(i, 1);
+                    if (checkData[j] === copy[i].basket_count) {
+                        delData.push(copy[i].basket_count);
                     }
                 }
             }
-            localStorage.setItem("basket", JSON.stringify(arr));
-            setBasketData(arr);
-            setReload(basketData.length);
-            setCheckData([]);
+            // localStorage.setItem("basket", JSON.stringify(arr));
+            // setBasketData(arr);
+            // setReload(basketData.length);
+            // setCheckData([]);
         }
+        const data = {
+            user_id: sessionStorage.getItem("userId"),
+            basket_count: delData,
+        }
+        deleteBasket(data);
     }
 
     // 장바구니 선택 구매
@@ -104,71 +113,74 @@ const Basket = ({ setOrderData }) => {
         nav("/order/info");
     }
 
-    useEffect(() => { }, [reload]);
+    useEffect(() => {
+        getBasket({ user_id: sessionStorage.getItem("userId") }, setBasketData);
+    }, [reload]);
 
     return (
-        <Style.Basket>
-            <div className="wrap">
-                <Style.Title>장바구니</Style.Title>
-                <Style.Purchase>
-                    <ul className='title'>
-                        <li>
-                            <input type="checkbox"
-                                onChange={(e) => { allCheck(e.target.checked) }}
-                                checked={checkData.length === basketData?.length ? true : false}
-                            />
-                        </li>
-                        <li>상품정보<br />(옵션)</li>
-                        <li>수량</li>
-                        <li>할인율</li>
-                        <li>상품금액 <br />(할인적용)</li>
-                    </ul>
-                    {
-                        basketData === null || basketData?.length === 0
-                            ? <p>현재 장바구니에 담긴 상품이 없습니다.</p>
-                            : basketData.map((a, i) => {
-                                return (
-                                    <ul className="productInfo" key={i}>
-
-                                        <li>
-                                            {
-                                                a.goods_stock != 0
-                                                    ? <input type="checkbox"
-                                                        onChange={(e) => singCheck(e.target.checked, a.basket_count)}
-                                                        checked={checkData.includes(a.basket_count) ? true : false}
-                                                    />
-                                                    : <input type="checkbox" disabled />
-                                            }
-
-                                        </li>
-                                        <li>
-                                            <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
-                                            <div className="content">
-                                                <div className="title">{a.product_name} <br />{a.option === null ? "" : `(${a.option})`}</div>
+        basketData === null
+            ? <Loading />
+            : <Style.Basket>
+                <div className="wrap">
+                    <Style.Title>장바구니</Style.Title>
+                    <Style.Purchase>
+                        <ul className='title'>
+                            <li>
+                                <input type="checkbox"
+                                    onChange={(e) => { allCheck(e.target.checked) }}
+                                    checked={checkData.length === basketData?.length ? true : false}
+                                />
+                            </li>
+                            <li>상품정보<br />(옵션)</li>
+                            <li>수량</li>
+                            <li>할인율</li>
+                            <li>상품금액 <br />(할인적용)</li>
+                        </ul>
+                        {
+                            basketData === null || basketData?.length === 0
+                                ? <p>현재 장바구니에 담긴 상품이 없습니다.</p>
+                                : basketData.map((a, i) => {
+                                    return (
+                                        <ul className="productInfo" key={i}>
+                                            <li>
                                                 {
-                                                    a.goods_stock == 0
-                                                        ? <div className='stockZero'>재고 부족</div>
-                                                        : ""
+                                                    a.goods_stock != 0
+                                                        ? <input type="checkbox"
+                                                            onChange={(e) => singCheck(e.target.checked, a.basket_count)}
+                                                            checked={checkData.includes(a.basket_count) ? true : false}
+                                                        />
+                                                        : <input type="checkbox" disabled />
                                                 }
-                                            </div>
-                                        </li>
-                                        <li className='count'>
-                                            {a.product_count}개
-                                        </li>
-                                        <li>{a.sale}%</li>
-                                        <li>{comma(a.total_price)}원</li>
-                                    </ul>
-                                )
-                            })
-                    }
-                </Style.Purchase>
 
-                <Style.Button>
-                    <button onClick={deleteBasket}>선택삭제</button>
-                    <button onClick={basketOrder}>선택 구매하기</button>
-                </Style.Button>
-            </div>
-        </Style.Basket>
+                                            </li>
+                                            <li>
+                                                <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
+                                                <div className="content">
+                                                    <div className="title">{a.product_name} <br />{a.option_name === null ? "" : `(${a.option_name})`}</div>
+                                                    {
+                                                        a.goods_stock == 0
+                                                            ? <div className='stockZero'>재고 부족</div>
+                                                            : ""
+                                                    }
+                                                </div>
+                                            </li>
+                                            <li className='count'>
+                                                {a.product_count}개
+                                            </li>
+                                            <li>{a.sale}%</li>
+                                            <li>{comma(Math.ceil(a.price - (a.price * (a.sale * 0.01)) + Number(a.option_price)) * a.product_count)}원</li>
+                                        </ul>
+                                    )
+                                })
+                        }
+                    </Style.Purchase>
+
+                    <Style.Button>
+                        <button onClick={delBasket}>선택삭제</button>
+                        <button onClick={basketOrder}>선택 구매하기</button>
+                    </Style.Button>
+                </div>
+            </Style.Basket>
     );
 };
 

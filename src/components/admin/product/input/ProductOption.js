@@ -23,6 +23,7 @@ const ProductOption = ({ title, setProductOption, data }) => {
         }
         setOption(optionListArr);
         setOptionData(optionDataArr);
+        setProductOption(data);
     }
 
     const onChange = (e) => {
