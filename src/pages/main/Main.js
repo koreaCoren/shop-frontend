@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { getProduct } from 'api/product';
 import { getBoard } from 'api/board';
+import { addBasket } from 'api/basket';
 
 import { comma } from 'utils/commaReplace';
-import addBasket from 'utils/addBasket';
 import createCode from 'utils/createCode';
 
 import Loading from 'components/loding/Loading';
@@ -106,16 +106,11 @@ const Main = () => {
                                                         <ul>
                                                             <li onClick={() => {
                                                                 addBasket({
+                                                                    user_id: sessionStorage.getItem("userId"),
                                                                     product_code: a.goods_code,
-                                                                    product_name: a.goods_nm,
-                                                                    product_img: a.goods_img,
-                                                                    price: a.goods_price,
-                                                                    sale: a.goods_sale,
                                                                     product_count: 1,
                                                                     option: null,
                                                                     basket_count: createCode(),
-                                                                    goods_stock: a.goods_stock,
-                                                                    total_price: Math.ceil((a.goods_price - (a.goods_price * (a.goods_sale * 0.01))))
                                                                 }, 1)
                                                             }}><i className="fa-solid fa-basket-shopping"></i></li>
                                                         </ul>
@@ -189,85 +184,6 @@ const Main = () => {
                                 : <p style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>등록된 리뷰가 없습니다.</p>
                         }
 
-
-
-
-
-
-                        {/* <ul>
-                        <li>
-                            <a href="#">
-                                <img src={best} alt="" />
-                                <div className="content">
-                                    <div className="star">★★★★★</div>
-                                    <h4>포토리뷰는 앱 특성상 게시글이 반영되기까지 시간이
-                                        다소 소요됩니다.</h4>
-                                    <p>말굽버섯을 즙으로 먹어본 적이 없어서 많이 생경했지만, 성분이 좋다는
-                                        이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
-                                        패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
-                                    <div className="bar"></div>
-                                </div>
-                                <div className="productName">
-                                    <div><img src={best} alt="" /></div>
-                                    더 진한 말굽버섯 1Box
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src={best} alt="" />
-                                <div className="content">
-                                    <div className="star">★★★★★</div>
-                                    <h4>포토리뷰는 앱 특성상 게시글이 반영되기까지 시간이
-                                        다소 소요됩니다.</h4>
-                                    <p>말굽버섯을 즙으로 먹어본 적이 없어서 많이 생경했지만, 성분이 좋다는
-                                        이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
-                                        패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
-                                    <div className="bar"></div>
-                                </div>
-                                <div className="productName">
-                                    <div><img src={best} alt="" /></div>
-                                    더 진한 말굽버섯 1Box
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src={best} alt="" />
-                                <div className="content">
-                                    <div className="star">★★★★★</div>
-                                    <h4>포토리뷰는 앱 특성상 게시글이 반영되기까지 시간이
-                                        다소 소요됩니다.</h4>
-                                    <p>말굽버섯을 즙으로 먹어본 적이 없어서 많이 생경했지만, 성분이 좋다는
-                                        이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
-                                        패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
-                                    <div className="bar"></div>
-                                </div>
-                                <div className="productName">
-                                    <div><img src={best} alt="" /></div>
-                                    더 진한 말굽버섯 1Box
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src={best} alt="" />
-                                <div className="content">
-                                    <div className="star">★★★★★</div>
-                                    <h4>포토리뷰는 앱 특성상 게시글이 반영되기까지 시간이
-                                        다소 소요됩니다.</h4>
-                                    <p>말굽버섯을 즙으로 먹어본 적이 없어서 많이 생경했지만, 성분이 좋다는
-                                        이야기는 많이 들어서 마침 선물을 해 드릴 일이 있어서 처음 구매해봤습니다.
-                                        패키지도 고급지고 우선 받으시는 분이 좋아해주셔서 뿌듯했습니다.</p>
-                                    <div className="bar"></div>
-                                </div>
-                                <div className="productName">
-                                    <div><img src={best} alt="" /></div>
-                                    더 진한 말굽버섯 1Box
-                                </div>
-                            </a>
-                        </li>
-                    </ul> */}
                         <div className="button">
                             <a className="more" href="/community/review/all/1">리뷰 모두 보기</a>
                         </div>

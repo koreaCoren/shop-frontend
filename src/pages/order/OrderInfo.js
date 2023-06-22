@@ -49,6 +49,7 @@ const OrderInfo = ({ orderData }) => {
         setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
         calcPayment();
+        console.log(orderData);
     }, [])
 
     // 포인트 계산
@@ -115,6 +116,7 @@ const OrderInfo = ({ orderData }) => {
                 order_pay: order[i].total_price, // 총 상품가격
                 order_count: order[i].product_count, //상품 갯수
                 option: order[i].option, // 옵션
+                basket_count: order[i].basket_count // 장바구니 전용
             })
         }
 
@@ -215,7 +217,7 @@ const OrderInfo = ({ orderData }) => {
                                         <li>
                                             <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                             <div className="content">
-                                                <div className="title">{a.product_name} <br /> {a.option === null ? "" : `(${a.option})`}</div>
+                                                <div className="title">{a.product_name} <br /> {a.option_name === null ? "" : `(${a.option_name})`}</div>
                                             </div>
                                         </li>
                                         <li>{a.product_count}개</li>
