@@ -24,6 +24,12 @@ const menus = [
         subList: [],
         url: "delivery",
         icon: "fa-solid fa-truck",
+    },
+    {
+        mainTitle: "1:1 문의 관리",
+        subList: [],
+        url: "contact",
+        icon: "fa-solid fa-comment-dots",
     }
 ]
 

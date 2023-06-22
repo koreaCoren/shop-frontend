@@ -119,5 +119,5 @@ export {
     getAccumulateSell,
     getProductReivew,
     setProudctSorting,
-    setProudctManualSorting
+    setProudctManualSorting,
 };
