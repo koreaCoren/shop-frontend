@@ -10,6 +10,7 @@ import Loading from 'components/loding/Loading';
 import * as Style from "assets/styleComponent/product/basket"
 
 import noImg from "assets/images/noImg.gif";
+import { async } from 'q';
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
@@ -43,7 +44,7 @@ const Basket = ({ setOrderData }) => {
     }
 
     // 장바구니 선택삭제
-    const delBasket = () => {
+    const delBasket = async () => {
         const copy = basketData;
         const delData = [];
         const confirm = window.confirm("정말로 삭제하시겠습니까?");
@@ -55,16 +56,13 @@ const Basket = ({ setOrderData }) => {
                     }
                 }
             }
-            // localStorage.setItem("basket", JSON.stringify(arr));
-            // setBasketData(arr);
-            // setReload(basketData.length);
-            // setCheckData([]);
         }
         const data = {
             user_id: sessionStorage.getItem("userId"),
             basket_count: delData,
         }
-        deleteBasket(data);
+        await deleteBasket(data);
+        setReload(basketData.length);
     }
 
     // 장바구니 선택 구매
@@ -97,14 +95,15 @@ const Basket = ({ setOrderData }) => {
         for (let i = 0; i < selectData.length; i++) {
             data.push(
                 {
+                    basket_count: selectData[i].basket_count,
                     product_code: selectData[i].product_code,
                     product_name: selectData[i].product_name,
                     product_img: selectData[i].product_img,
                     price: selectData[i].price,
                     sale: selectData[i].sale,
                     product_count: selectData[i].product_count,
-                    option: selectData[i].option,
-                    total_price: selectData[i]?.total_price
+                    option_name: selectData[i].option_name,
+                    total_price: Math.ceil(selectData[i].price - (selectData[i].price * (selectData[i].sale * 0.01)) + Number(selectData[i].option_price)) * selectData[i].product_count
                 }
             )
         }
@@ -168,7 +167,7 @@ const Basket = ({ setOrderData }) => {
                                                 {a.product_count}개
                                             </li>
                                             <li>{a.sale}%</li>
-                                            <li>{comma(Math.ceil(a.price - (a.price * (a.sale * 0.01)) + Number(a.option_price)) * a.product_count)}원</li>
+                                            <li>{comma(Math.ceil(a.price - (a.price * (a.sale * 0.01)) + a.option_price) * a.product_count)}원</li>
                                         </ul>
                                     )
                                 })
