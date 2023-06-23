@@ -105,8 +105,6 @@ const Contact = () => {
         getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
     })
 
-    useEffect(() => { })
-
     const onChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
