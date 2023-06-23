@@ -15,6 +15,7 @@ const Contact = () => {
     const inputRef = useRef(null);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
+    const [checkData, setCheckData] = useState(null);
 
     // 슆+엔터 개행
     // 엔터 메시지 보내기
@@ -42,7 +43,9 @@ const Contact = () => {
         updateMessage(data);
         setSendMessage("");
         inputRef.current.focus();
-        scrollBottomStart();
+        setTimeout(() => {
+            scrollBottomStart();
+        }, 1500);
     }
 
     // 스크롤 하단 시작
@@ -99,11 +102,19 @@ const Contact = () => {
         return arr;
     }
 
-    // 메시지 가져오기
+    // 실시간 메시지 가져오기
     useEffect(() => {
-        scrollBottomStart();
-        getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
-    })
+        setInterval(() => {
+            getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+        }, 1000);
+    }, [])
+
+    // 스크롤 하단 이동
+    useEffect(() => {
+        setTimeout(() => {
+            scrollBottomStart();
+        }, 1000);
+    }, [])
 
     const onChange = (e) => {
         const name = e.target.name;
