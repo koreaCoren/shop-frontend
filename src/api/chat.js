@@ -5,9 +5,9 @@ import { handleConnectionError, handleApiError } from "./handleError";
 const updateMessage = async (data) => {
     try {
         const res = await axios.post("/chat/send_message", data);
-        // handleConnectionError(res.data);
+        handleConnectionError(res.data);
     } catch (error) {
-        // handleApiError(error);
+        handleApiError(error);
     }
 }
 
@@ -22,4 +22,26 @@ const getMessage = async (data, success) => {
     }
 }
 
-export { updateMessage, getMessage }
+// 관리자 채팅방 리스트 가져오기
+const getRoom = async (success) => {
+    try {
+        const res = await axios.get("/chat/sel_admin_room");
+        handleConnectionError(res.data);
+        success(res.data);
+    } catch (error) {
+        handleApiError(error);
+    }
+}
+
+// 관리자 채팅 리스트 가져오기
+const getAdminMessage = async (data, success) => {
+    try {
+        const res = await axios.post("/chat/sel_admin_content", data);
+        // handleConnectionError(res.data);
+        success(res.data);
+    } catch (error) {
+        // handleApiError(error);
+    }
+}
+
+export { updateMessage, getMessage, getRoom, getAdminMessage }

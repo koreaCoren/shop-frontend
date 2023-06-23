@@ -1,19 +1,17 @@
+
 import React, { useEffect, useRef, useState } from 'react';
-
-import { getMessage, updateMessage } from 'api/chat';
-
+import { getAdminMessage, updateMessage } from 'api/chat';
+import { useParams } from 'react-router-dom';
+import Top from 'components/admin/Top';
+import * as Style from 'assets/styleComponent/myPage/contact';
 import createCode from 'utils/createCode';
-
-import SubTitle from 'components/myPage/SubTitle';
 import Loading from 'components/loding/Loading';
 
-import * as Common from "assets/styleComponent/myPage/myPage";
-import * as Style from 'assets/styleComponent/myPage/contact';
-
-const Contact = () => {
+const Chat = () => {
+    const { CID } = useParams();
+    const [message, setMessage] = useState(null);
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
-    const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
 
@@ -43,7 +41,7 @@ const Contact = () => {
         await updateMessage(data);
         setSendMessage("");
         inputRef.current.focus();
-        await getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+        await getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
         setTimeout(() => {
             scrollBottomStart();
         }, 500);
@@ -104,7 +102,7 @@ const Contact = () => {
     }
 
     useEffect(() => {
-        getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+        getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
         setTimeout(() => {
             scrollBottomStart();
         }, 1000);
@@ -114,7 +112,7 @@ const Contact = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setResIndex(i => i + 1);
-            getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+            getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
         }, 1000 * 10);
 
         return () => {
@@ -145,8 +143,8 @@ const Contact = () => {
     return (
         message === null
             ? <Loading />
-            : <Common.InDiv>
-                <SubTitle h2={"고객 문의"} h3={"문의 주시면 빠른 시간내에 답변 해드리겠습니다."} clickText={<><i className="fa-solid fa-comment-dots"></i>문의하기</>} />
+            : <>
+                <Top title={"1:1 문의 관리"} isButton={false} />
                 <Style.ChatContainer>
                     <div className='dayGroup' ref={chatContentRef}>
                         {
@@ -159,7 +157,7 @@ const Contact = () => {
                                         {
                                             a.message.map((b, j) => {
                                                 return (
-                                                    <li key={j} className={b.user_id === "admin" ? "left" : "right"}>
+                                                    <li key={j} className={b.user_id !== "admin" ? "left" : "right"}>
                                                         <div>{formetTime(b.send_date)}</div>
                                                         <p>{b.content}</p>
                                                     </li>
@@ -176,8 +174,8 @@ const Contact = () => {
                         <button onClick={onSubmit}>전송</button>
                     </div>
                 </Style.ChatContainer>
-            </Common.InDiv >
+            </>
     );
 };
 
-export default Contact;
+export default Chat;

@@ -15,6 +15,7 @@ import Contact from 'pages/admin/contact/Contact';
 
 import styled from 'styled-components';
 import adminCheck from 'utils/adminCheck';
+import Chat from 'pages/admin/contact/Chat';
 
 const Admin = () => {
     const nav = useNavigate();
@@ -39,7 +40,8 @@ const Admin = () => {
                     <Route path='/order/:boardPage' element={<Order />} />
                     <Route path='/orderDetail/:orderCode' element={<OrderDetail />} />
                     <Route path='/delivery/*' element={<Delivery />} />
-                    <Route path='/contact/*' element={<Contact />} />
+                    <Route path='/contact' element={<Contact />} />
+                    <Route path='/contact/:CID' element={<Chat />} />
                 </Routes>
             </div>
         </Div>
