@@ -11,10 +11,10 @@ import Category from 'pages/admin/category/Category';
 import Order from 'pages/admin/order/Order';
 import Delivery from 'pages/admin/delivery/Delivery';
 import OrderDetail from 'pages/admin/order/OrderDetail';
+import Contact from 'pages/admin/contact/Contact';
 
 import styled from 'styled-components';
 import adminCheck from 'utils/adminCheck';
-import NotFoundPage from 'components/error/NotFoundPage';
 
 const Admin = () => {
     const nav = useNavigate();
@@ -39,6 +39,7 @@ const Admin = () => {
                     <Route path='/order/:boardPage' element={<Order />} />
                     <Route path='/orderDetail/:orderCode' element={<OrderDetail />} />
                     <Route path='/delivery/*' element={<Delivery />} />
+                    <Route path='/contact/*' element={<Contact />} />
                 </Routes>
             </div>
         </Div>

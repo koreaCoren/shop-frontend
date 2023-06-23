@@ -28,6 +28,7 @@ const getDetailBoard = async (data, success) => {
 const addBoard = async (data) => {
     try {
         const encryptedData = encrypt(JSON.stringify(data));
+        console.log(encryptedData);
         const res = await axios.post("/editor/ins_editor_data", { encryptedData });
         handleConnectionError(res.data);
         if (res.data.result === "success") {
@@ -44,7 +45,7 @@ const addBoard = async (data) => {
             alert("알 수 없는 에러로 등록실패 했습니다.");
         }
     } catch (error) {
-        // handleApiError(error);
+        handleApiError(error);
     }
 }
 

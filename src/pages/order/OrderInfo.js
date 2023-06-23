@@ -102,6 +102,7 @@ const OrderInfo = ({ orderData }) => {
         e.preventDefault();
         let orderDatas = [];
         let orderCode = createCode();
+        let basketCount = [];
         if (totalPay < 1000) {
             alert("1000원 이하는 결제가 불가능합니다.");
             return;
@@ -115,7 +116,9 @@ const OrderInfo = ({ orderData }) => {
                 order_pay: order[i].total_price, // 총 상품가격
                 order_count: order[i].product_count, //상품 갯수
                 option: order[i].option, // 옵션
-            })
+
+            });
+            basketCount.push(order[i].basket_count); // 장바구니 전용
         }
 
         if (buyerName === "") {
@@ -152,6 +155,7 @@ const OrderInfo = ({ orderData }) => {
             order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
             order_data: orderDatas,
+            basket_count: basketCount,
             order_total_price: String(totalPay),
             buyer_name: buyerName, // 주문자 이름
             buyer_addr: address + "\n" + buyerDetailAddress, // 주문자 주소
@@ -215,7 +219,7 @@ const OrderInfo = ({ orderData }) => {
                                         <li>
                                             <img src={a.product_img === "" ? noImg : a.product_img} alt="" />
                                             <div className="content">
-                                                <div className="title">{a.product_name} <br /> {a.option === null ? "" : `(${a.option})`}</div>
+                                                <div className="title">{a.product_name} <br /> {a.option_name === null ? "" : `(${a.option_name})`}</div>
                                             </div>
                                         </li>
                                         <li>{a.product_count}개</li>

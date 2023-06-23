@@ -3,17 +3,19 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { getProductReivew, getDetailProduct } from 'api/product';
+import { addBasket } from 'api/basket';
+
 import { comma } from 'utils/commaReplace';
-import Loading from 'components/loding/Loading';
+// import addBasket from 'utils/addBasket';
+import createCode from 'utils/createCode';
 import loginCheck from 'utils/loginCheck';
+import Loading from 'components/loding/Loading';
 
 import * as Style from "assets/styleComponent/product/detail"
-import addBasket from 'utils/addBasket';
 
 import noImg from "assets/images/noImg.gif";
 import { ReactComponent as Star } from 'assets/images/star.svg';
-import { getProductReivew, getDetailProduct } from 'api/product';
-import createCode from 'utils/createCode';
 
 const Detail = ({ setOrderData }) => {
     const nav = useNavigate();
@@ -122,20 +124,30 @@ const Detail = ({ setOrderData }) => {
 
     // 장바구니 담기
     const addBasketData = () => {
+        // const data = {
+        //     product_code: productCode,
+        //     product_name: productDetail.goods_data.goods_nm,
+        //     product_img: productDetail.goods_data.goods_img,
+        //     deliveryPay: deliveryPay,
+        //     price: productDetail.goods_data.goods_price,
+        //     sale: productDetail.goods_data.goods_sale,
+        //     option: optionValue.option_name,
+        //     product_count: count,
+        //     basket_count: createCode(),
+        //     goods_stock: productDetail.goods_data.goods_stock,
+        //     total_price: totalPrice
+        // }
+
+        // return data;
+
         const data = {
+            user_id: sessionStorage.getItem("userId"),
             product_code: productCode,
-            product_name: productDetail.goods_data.goods_nm,
-            product_img: productDetail.goods_data.goods_img,
-            deliveryPay: deliveryPay,
-            price: productDetail.goods_data.goods_price,
-            sale: productDetail.goods_data.goods_sale,
             option: optionValue.option_name,
             product_count: count,
             basket_count: createCode(),
-            goods_stock: productDetail.goods_data.goods_stock,
-            total_price: totalPrice
         }
-        return data;
+        addBasket(data);
     }
 
     // 옵션 변경
@@ -234,7 +246,7 @@ const Detail = ({ setOrderData }) => {
                                         : <Style.Button onClick={orderClick} color={"black"} to={`/order/info`}>바로구매하기</Style.Button>
                                     }
 
-                                    <Style.Button onClick={() => { addBasket(addBasketData(), count) }}>장바구니 담기</Style.Button>
+                                    <Style.Button onClick={addBasketData}>장바구니 담기</Style.Button>
                                 </Style.ButtonBox>
 
                             </div>
