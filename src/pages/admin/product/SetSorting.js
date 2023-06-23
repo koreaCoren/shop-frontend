@@ -10,7 +10,6 @@ import * as Common from "assets/styleComponent/admin/common"
 import * as Style from "assets/styleComponent/admin/product/sorting"
 
 const SetSorting = () => {
-    const nav = useNavigate();
     const [cate01, setCate01] = useState("");
     const [cate02, setCate02] = useState("");
     const [firstCategory, setFirstCategory] = useState([]);
