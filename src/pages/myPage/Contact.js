@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+import { getMessage, updateMessage } from 'api/chat';
+
+import createCode from 'utils/createCode';
+
 import SubTitle from 'components/myPage/SubTitle';
+import Loading from 'components/loding/Loading';
 
 import * as Common from "assets/styleComponent/myPage/myPage";
 import * as Style from 'assets/styleComponent/myPage/contact';
-import { getMessage, updateMessage } from 'api/chat';
 
 const Contact = () => {
     const chatContentRef = useRef(null);
@@ -24,10 +28,16 @@ const Contact = () => {
     }
 
     // 메시지 보내기
-    const onSubmit = (e) => {
+    const onSubmit = () => {
         const data = {
             user_id: sessionStorage.getItem("userId"),
-            message: sendMessage
+            content: sendMessage,
+            stat: "req"
+        }
+        if (message.length === 0) {
+            data.CID = createCode();
+        } else {
+            data.CID = message[0].CID;
         }
         updateMessage(data);
         setSendMessage("");
@@ -42,10 +52,57 @@ const Contact = () => {
         }
     }
 
+    // 시간 추출
+    const formetTime = (date) => {
+        const dateString = date;
+        const timeString = dateString.split(" ")[1];
+        const [hours, minutes] = timeString.split(":");
+        return hours + ":" + minutes;
+    }
+
+    // 백엔드에서 준 데이터 가공
+    const factoryData = () => {
+        const copy = message
+        const arr = [];
+        const groupedData = {};
+
+        // 날짜를 기준으로 데이터 배열을 그룹화
+        for (let i = 0; i < copy.length; i++) {
+            const item = copy[i];
+            const date = item.send_date.split(' ')[0]; // 시간 부분 제외하고 날짜만 추출
+
+            if (!groupedData[date]) {
+                groupedData[date] = [];
+            }
+
+            groupedData[date].push(item);
+        }
+
+        // 그룹화된 데이터를 날짜순으로 정렬
+        const sortedDates = Object.keys(groupedData).sort(function (a, b) {
+            const dateA = new Date(a);
+            const dateB = new Date(b);
+            return dateA - dateB;
+        });
+
+        // 정렬된 날짜 순서에 따라 데이터를 출력
+        for (let j = 0; j < sortedDates.length; j++) {
+            const sortedDate = sortedDates[j];
+            const sortedItems = groupedData[sortedDate];
+
+            arr.push({
+                days: sortedDate,
+                message: sortedItems
+            })
+        }
+        return arr
+    }
+
     // 메시지 가져오기
     useEffect(() => {
         scrollBottomStart();
-        // getMessage({user_id: sessionStorage.getItem("userId")},setMessage);
+        // getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+        getMessage({ user_id: "test_id" }, setMessage);
     }, [])
 
     const onChange = (e) => {
@@ -62,32 +119,40 @@ const Contact = () => {
     }
 
     return (
-        <Common.InDiv>
-            <SubTitle h2={"고객 문의"} h3={"문의 주시면 빠른 시간내에 답변 해드리겠습니다."} clickText={<><i className="fa-solid fa-comment-dots"></i>문의하기</>} />
-            <Style.ChatContainer>
-                <ul ref={chatContentRef}>
-                    <li className="day">
-                        <h2>2023년 06월 21일</h2>
-                    </li>
-                    <li className='right'>
-                        <div>14:12</div>
-                        <p>오른쪽!</p>
-                    </li>
-                    <li className='left'>
-                        <p>왼쪽</p>
-                        <div>14:12</div>
-                    </li>
-                    <li className='right'>
-                        <div>14:12</div>
-                        <p>오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!오른쪽!</p>
-                    </li>
-                </ul>
-                <div className="send" >
-                    <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
-                    <button onClick={onSubmit}>전송</button>
-                </div>
-            </Style.ChatContainer>
-        </Common.InDiv >
+        message === null
+            ? <Loading />
+            : <Common.InDiv>
+                <SubTitle h2={"고객 문의"} h3={"문의 주시면 빠른 시간내에 답변 해드리겠습니다."} clickText={<><i className="fa-solid fa-comment-dots"></i>문의하기</>} />
+                <Style.ChatContainer>
+                    <div className='dayGroup'>
+                        {
+                            factoryData().map((a, i) => {
+                                return (
+                                    <ul key={i}>
+                                        <li className='day'>
+                                            <h2>{a.days}</h2>
+                                        </li>
+                                        {
+                                            a.message.map((b, j) => {
+                                                return (
+                                                    <li key={j} className={b.user_id === "admin" ? "left" : "right"}>
+                                                        <div>{formetTime(b.send_date)}</div>
+                                                        <p>{b.content}</p>
+                                                    </li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                )
+                            })
+                        }
+                    </div>
+                    <div className="send" >
+                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
+                        <button onClick={onSubmit}>전송</button>
+                    </div>
+                </Style.ChatContainer>
+            </Common.InDiv >
     );
 };
 

@@ -11,9 +11,7 @@ export const ChatContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
-    ul{
-        display: flex;
-        flex-direction: column;
+    .dayGroup{
         overflow-y: scroll;
         height: 100%;
         ::-webkit-scrollbar {
@@ -26,6 +24,10 @@ export const ChatContainer = styled.div`
         ::-webkit-scrollbar-track {
             background: #eee;  
         }
+    }
+    ul{
+        display: flex;
+        flex-direction: column;
     }
     ul li{
         padding: 3px 10px;
@@ -72,6 +74,7 @@ export const ChatContainer = styled.div`
     ul li.left p{
         background-color: #eee;
         display: inline-block;
+        order: -1;
     }
     .send {
         position: relative;
