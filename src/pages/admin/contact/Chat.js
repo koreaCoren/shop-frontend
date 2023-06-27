@@ -14,6 +14,7 @@ import * as Common from "assets/styleComponent/admin/common";
 
 const Chat = () => {
     const { CID } = useParams();
+    const [isSubmit, setIsSubmit] = useState(false);
     const [message, setMessage] = useState(null);
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
@@ -36,24 +37,39 @@ const Chat = () => {
 
     // 메시지 보내기
     const onSubmit = async () => {
+        // 두번씩 메시지 보내는거 방지
+        if (isSubmit) {
+            return;
+        }
+
+        setIsSubmit(true);
+
         const replacedContent = sendMessage.replace(/\n/g, "<br>");
         const data = {
             user_id: sessionStorage.getItem("userId"),
             content: replacedContent,
             stat: "req"
         }
+
         if (message.length === 0) {
             data.CID = createCode();
         } else {
             data.CID = message[0].CID;
         }
+
         await updateMessage(data);
+
         setSendMessage("");
+
         inputRef.current.focus();
+
         await getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
+
         setTimeout(() => {
             scrollBottomStart();
         }, 500);
+
+        setIsSubmit(false);
     }
 
     // 스크롤 하단 시작

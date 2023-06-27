@@ -13,6 +13,7 @@ import * as Style from 'assets/styleComponent/myPage/contact';
 const Contact = () => {
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
+    const [isSubmit, setIsSubmit] = useState(false);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
@@ -32,24 +33,39 @@ const Contact = () => {
 
     // 메시지 보내기
     const onSubmit = async () => {
+        // 두번씩 메시지 보내는거 방지
+        if (isSubmit) {
+            return;
+        }
+
+        setIsSubmit(true);
+
         const replacedContent = sendMessage.replace(/\n/g, "<br>");
         const data = {
             user_id: sessionStorage.getItem("userId"),
             content: replacedContent,
             stat: "req"
         }
+
         if (message.length === 0) {
             data.CID = createCode();
         } else {
             data.CID = message[0].CID;
         }
+
         await updateMessage(data);
+
         setSendMessage("");
+
         inputRef.current.focus();
+
         await getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+
         setTimeout(() => {
             scrollBottomStart();
         }, 500);
+
+        setIsSubmit(false);
     }
 
     // 스크롤 하단 시작
@@ -67,6 +83,7 @@ const Contact = () => {
         } else {
             setIsNewMessage(true);
         }
+
         if (isNewMessage === true) {
             setNewMessage(opponentMessage());
         }
