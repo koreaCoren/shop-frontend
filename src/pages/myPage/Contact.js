@@ -30,9 +30,10 @@ const Contact = () => {
 
     // 메시지 보내기
     const onSubmit = async () => {
+        const replacedContent = sendMessage.replace(/\n/g, "<br>");
         const data = {
             user_id: sessionStorage.getItem("userId"),
-            content: sendMessage,
+            content: replacedContent,
             stat: "req"
         }
         if (message.length === 0) {
@@ -161,7 +162,7 @@ const Contact = () => {
                                                 return (
                                                     <li key={j} className={b.user_id === "admin" ? "left" : "right"}>
                                                         <div>{formetTime(b.send_date)}</div>
-                                                        <p>{b.content}</p>
+                                                        <div dangerouslySetInnerHTML={{ __html: b.content }}></div>
                                                     </li>
                                                 )
                                             })
@@ -172,7 +173,7 @@ const Contact = () => {
                         }
                     </div>
                     <div className="send" >
-                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
+                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyDown={onKeyPress} />
                         <button onClick={onSubmit}>전송</button>
                     </div>
                 </Style.ChatContainer>

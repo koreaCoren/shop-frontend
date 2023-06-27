@@ -54,7 +54,7 @@ const updateUser = async (data) => {
             window.location.replace("/myPage/info");
         } else {
             alert("수정이 완료되었습니다.");
-            window.location.replace("/myPage/info");
+            window.location.replace("/myPage/personalModify");
         }
     } catch (error) {
         handleApiError(error);
