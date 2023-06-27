@@ -30,8 +30,7 @@ const Contact = () => {
 
     // 메시지 보내기
     const onSubmit = async () => {
-        let msg = sendMessage;
-        const replacedContent = msg.replace(/\n/g, "<br>");
+        const replacedContent = sendMessage.replace(/\n/g, "<br>");
         const data = {
             user_id: sessionStorage.getItem("userId"),
             content: replacedContent,
