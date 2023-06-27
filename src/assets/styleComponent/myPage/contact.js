@@ -11,8 +11,10 @@ export const ChatContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
+    position: relative;
     .dayGroup{
         overflow-y: scroll;
+        overflow-x: hidden;
         height: 100%;
         ::-webkit-scrollbar {
             width: 5px; 
@@ -78,6 +80,20 @@ export const ChatContainer = styled.div`
         background-color: #eee;
         display: inline-block;
         order: -1;        
+    }
+    .newMessage{
+        position: absolute;
+        background-color: #7295ffa8;
+        color: #fff;
+        box-shadow: 2px 2px 2px #00000044;
+        display: inline-block;
+        transform: translateX(-50%);
+        left: 50%;
+        bottom: 50px;
+        padding: 10px 15px;
+        z-index: 10;
+        border-radius: 5px;
+        cursor: pointer;
     }
     .send {
         position: relative;

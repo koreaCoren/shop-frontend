@@ -24,7 +24,7 @@ const Contact = () => {
                     {
                         room.map((a, i) => {
                             return (
-                                <Common.Container>
+                                <Common.Container key={i}>
                                     <Style.ChatList to={a.CID}>
                                         <h2>{a.user_id}님의 문의 요청</h2>
                                         <h3>{a.cre_date}</h3>
