@@ -149,8 +149,8 @@ const OrderInfo = ({ orderData }) => {
 
         // 백엔드 전달용
         const data = {
-            mid: "", // 이니시스 mid
-            mKey: "", // 이니시스 mkey
+            mid: process.env.REACT_APP_MID, // 이니시스 mid
+            mKey: process.env.REACT_APP_SIGNKEY, // 이니시스 signkey
             gopaymethod: "0", // 결제방법
             order_code: orderCode, // 주문코드
             user_id: sessionStorage.getItem("userId"), // 유저 아이디
