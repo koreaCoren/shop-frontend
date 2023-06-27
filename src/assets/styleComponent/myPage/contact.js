@@ -65,19 +65,25 @@ export const ChatContainer = styled.div`
     ul li.right{
         align-items: end;        
         justify-content: end;
+        img{
+            max-width: 600px;
+        }
     }
     ul li.right p{
         background-color: #ffeb33;
-        display: inline-block;
+        display: inline-block;        
     }
     ul li.left{
         align-items: end;
         justify-content: start;
+        img{
+            max-width: 600px;
+        }
     }
     ul li.left p{
         background-color: #eee;
         display: inline-block;
-        order: -1;
+        order: -1;        
     }
     .send {
         position: relative;

@@ -28,9 +28,10 @@ const Chat = () => {
 
     // 메시지 보내기
     const onSubmit = async () => {
+        const replacedContent = sendMessage.replace(/\n/g, "<br>");
         const data = {
             user_id: sessionStorage.getItem("userId"),
-            content: sendMessage,
+            content: replacedContent,
             stat: "req"
         }
         if (message.length === 0) {

@@ -175,7 +175,7 @@ const OrderDetail = () => {
                         </li>
                         <li>
                             <div>적립 예정금</div>
-                            <div>{list ? Math.ceil(list[0].total_price / 100) : '0'} 원</div>
+                            <div>{list ? list[0].save_point : '0'} 원</div>
                         </li>
                     </ul>
                 </Style.ListDiv>
