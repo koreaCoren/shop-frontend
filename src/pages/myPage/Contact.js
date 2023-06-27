@@ -16,6 +16,8 @@ const Contact = () => {
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
+    const [newMessage, setNewMessage] = useState(0);
+    const [isNewMessage, setIsNewMessage] = useState(true);
 
     // 슆+엔터 개행
     // 엔터 메시지 보내기
@@ -54,7 +56,33 @@ const Contact = () => {
     const scrollBottomStart = () => {
         if (chatContentRef.current) {
             chatContentRef.current.scrollTop = chatContentRef.current.scrollHeight;
+            setIsNewMessage(true);
         }
+    }
+
+    // 메시지 오면 알림뜸
+    const newMessageCheck = () => {
+        if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
+            setIsNewMessage(false);
+        } else {
+            setIsNewMessage(true);
+        }
+        if (isNewMessage === true) {
+            setNewMessage(opponentMessage());
+        }
+    }
+
+    // 상대가 보낸 메시지 갯수
+    const opponentMessage = () => {
+        let messageLength = 0;
+
+        for (let i = 0; i < message.length; i++) {
+            if (message[i].user_id !== sessionStorage.getItem("userId")) {
+                messageLength++;
+            }
+        }
+
+        return messageLength;
     }
 
     // 시간 추출
@@ -149,7 +177,7 @@ const Contact = () => {
             : <Common.InDiv>
                 <SubTitle h2={"고객 문의"} h3={"문의 주시면 빠른 시간내에 답변 해드리겠습니다."} clickText={<><i className="fa-solid fa-comment-dots"></i>문의하기</>} />
                 <Style.ChatContainer>
-                    <div className='dayGroup' ref={chatContentRef}>
+                    <div className='dayGroup' ref={chatContentRef} onScroll={newMessageCheck}>
                         {
                             factoryData().map((a, i) => {
                                 return (
@@ -170,6 +198,11 @@ const Contact = () => {
                                     </ul>
                                 )
                             })
+                        }
+
+                        {
+                            opponentMessage() !== newMessage &&
+                            <span className='newMessage' onClick={scrollBottomStart}>새로운 메시지 도착</span>
                         }
                     </div>
                     <div className="send" >
