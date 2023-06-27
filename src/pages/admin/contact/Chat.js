@@ -1,11 +1,16 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { getAdminMessage, updateMessage } from 'api/chat';
 import { useParams } from 'react-router-dom';
-import Top from 'components/admin/Top';
-import * as Style from 'assets/styleComponent/myPage/contact';
+
+import { getAdminMessage, updateMessage } from 'api/chat';
+
 import createCode from 'utils/createCode';
+
+import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
+
+import * as Style from 'assets/styleComponent/myPage/contact';
+import * as Common from "assets/styleComponent/admin/common";
 
 const Chat = () => {
     const { CID } = useParams();
@@ -146,35 +151,37 @@ const Chat = () => {
             ? <Loading />
             : <>
                 <Top title={"1:1 문의 관리"} isButton={false} />
-                <Style.ChatContainer>
-                    <div className='dayGroup' ref={chatContentRef}>
-                        {
-                            factoryData().map((a, i) => {
-                                return (
-                                    <ul key={i}>
-                                        <li className='day'>
-                                            <h2>{a.days}</h2>
-                                        </li>
-                                        {
-                                            a.message.map((b, j) => {
-                                                return (
-                                                    <li key={j} className={b.user_id !== "admin" ? "left" : "right"}>
-                                                        <div>{formetTime(b.send_date)}</div>
-                                                        <p dangerouslySetInnerHTML={{ __html: b.content }}></p>
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="send" >
-                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
-                        <button onClick={onSubmit}>전송</button>
-                    </div>
-                </Style.ChatContainer>
+                <Common.Padding>
+                    <Style.ChatContainer style={{ backgroundColor: "#fff" }}>
+                        <div className='dayGroup' ref={chatContentRef}>
+                            {
+                                factoryData().map((a, i) => {
+                                    return (
+                                        <ul key={i}>
+                                            <li className='day'>
+                                                <h2>{a.days}</h2>
+                                            </li>
+                                            {
+                                                a.message.map((b, j) => {
+                                                    return (
+                                                        <li key={j} className={b.user_id !== "admin" ? "left" : "right"}>
+                                                            <div>{formetTime(b.send_date)}</div>
+                                                            <p dangerouslySetInnerHTML={{ __html: b.content }}></p>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    )
+                                })
+                            }
+                        </div>
+                        <div className="send" >
+                            <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
+                            <button onClick={onSubmit}>전송</button>
+                        </div>
+                    </Style.ChatContainer>
+                </Common.Padding>
             </>
     );
 };
