@@ -160,7 +160,7 @@ const Chat = () => {
                                                 return (
                                                     <li key={j} className={b.user_id !== "admin" ? "left" : "right"}>
                                                         <div>{formetTime(b.send_date)}</div>
-                                                        <div dangerouslySetInnerHTML={{ __html: b.content }}></div>
+                                                        <p dangerouslySetInnerHTML={{ __html: b.content }}></p>
                                                     </li>
                                                 )
                                             })
