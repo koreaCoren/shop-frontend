@@ -161,7 +161,7 @@ const Contact = () => {
                                                 return (
                                                     <li key={j} className={b.user_id === "admin" ? "left" : "right"}>
                                                         <div>{formetTime(b.send_date)}</div>
-                                                        <p>{b.content}</p>
+                                                        <p dangerouslySetInnerHTML={{ __html: b.content }}></p>
                                                     </li>
                                                 )
                                             })
