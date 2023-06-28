@@ -42,6 +42,7 @@ export const ChatContainer = styled.div`
         border-radius: 5px;
         box-shadow: 2px 2px 3px #00000022;
         max-width: 60%;
+        word-break: break-all;
         line-height: 1.2;
         text-align: left;
         img{
