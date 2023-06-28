@@ -110,7 +110,7 @@ const Chat = () => {
         let messageLength = 0;
 
         for (let i = 0; i < message.length; i++) {
-            if (message[i].user_id !== sessionStorage.getItem("userId")) {
+            if (message[i].stat === "req") {
                 messageLength++;
             }
         }
@@ -226,7 +226,7 @@ const Chat = () => {
                                             {
                                                 a.message.map((b, j) => {
                                                     return (
-                                                        <li key={j} className={b.user_id !== "admin" ? "left" : "right"}>
+                                                        <li key={j} className={b.stat !== "res" ? "left" : "right"}>
                                                             <div>{formetTime(b.send_date)}</div>
                                                             <p dangerouslySetInnerHTML={{ __html: b.content }}></p>
                                                         </li>
@@ -239,6 +239,8 @@ const Chat = () => {
                             }
 
                             {
+                                chatContentRef.current &&
+                                chatContentRef.current.scrollTop !== 0 &&
                                 opponentMessage() !== newMessage &&
                                 <span className='newMessage' onClick={scrollBottomStart}>새로운 메시지 도착</span>
                             }
