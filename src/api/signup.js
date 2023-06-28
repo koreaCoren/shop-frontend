@@ -8,7 +8,9 @@ const signup = async (data) => {
     try {
         const encryptedData = encrypt(JSON.stringify(data));
         const res = await axios.post("/user/ins_user", { encryptedData });
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data.id === false) {
             alert("중복된 아이디입니다.");
         } else if (res.data.email === false) {

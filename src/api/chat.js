@@ -5,7 +5,9 @@ import { handleConnectionError, handleApiError } from "./handleError";
 const updateMessage = async (data) => {
     try {
         const res = await axios.post("/chat/send_message", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
     } catch (error) {
         handleApiError(error);
     }
@@ -15,7 +17,9 @@ const updateMessage = async (data) => {
 const getMessage = async (data, success, setIsSend) => {
     try {
         const res = await axios.post("/chat/sel_content", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
         if (setIsSend !== undefined) {
             setIsSend(false);
@@ -29,7 +33,9 @@ const getMessage = async (data, success, setIsSend) => {
 const getRoom = async (success) => {
     try {
         const res = await axios.get("/chat/sel_admin_room");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -40,7 +46,9 @@ const getRoom = async (success) => {
 const getAdminMessage = async (data, success, setIsSend) => {
     try {
         const res = await axios.post("/chat/sel_admin_content", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
         if (setIsSend !== undefined) {
             setIsSend(false);
