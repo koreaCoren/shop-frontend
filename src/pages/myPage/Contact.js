@@ -213,7 +213,7 @@ const Contact = () => {
     }, [])
 
     useEffect(() => {
-        if (resIndex >= 500) {
+        if (resIndex >= 300) {
             window.location.reload();
         }
     }, [resIndex]);
