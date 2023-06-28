@@ -7,12 +7,12 @@ const getNotification = async (data, success, readCount) => {
         const res = await axios.post("/notification/NotifyToUser", data);
         let count = 0;
         handleConnectionError(res.data);
-        success(res.data);
         res.data.forEach(el => {
             if (el.check_yn === "N") {
                 count++;
             }
         });
+        success(res.data);
         readCount(count);
     } catch (error) {
         handleApiError(error);
