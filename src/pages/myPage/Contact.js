@@ -74,8 +74,6 @@ const Contact = () => {
             }
         }
 
-        await updateMessage(data);
-
         setSendMessage("");
 
         inputRef.current.focus();
