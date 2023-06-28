@@ -98,12 +98,39 @@ export const ChatContainer = styled.div`
     .send {
         position: relative;
     }
+    .send .images{
+        position: absolute;
+        width: 100%;
+        background-color: #66666644;
+        bottom: 100%;
+        padding: 10px;
+    }
+    .send .images img{
+        max-height: 70px;
+        max-width: 100px;
+    }
+    .send label{
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .send label i{
+        padding: 0px 10px;
+        font-size: 20px;
+        cursor: pointer;
+        color: #777;
+    }
+    .send label input{
+        display: none;
+        opacity: 0;
+    }
     .send textarea{
         width: 100%;
         border: 1px solid #ddd;
         height: 32px;
         border-radius: 5px;
-        padding: 8px 5px;
+        padding: 8px 5px 8px 40px;
     }
     .send button{
         position: absolute;

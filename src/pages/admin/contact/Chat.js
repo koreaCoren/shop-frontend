@@ -8,23 +8,25 @@ import createCode from 'utils/createCode';
 
 import Top from 'components/admin/Top';
 import Loading from 'components/loding/Loading';
+import ImageUpload from 'components/input/ImageUpload';
 
 import * as Style from 'assets/styleComponent/myPage/contact';
 import * as Common from "assets/styleComponent/admin/common";
 
 const Chat = () => {
     const { CID } = useParams();
-    const [isSubmit, setIsSubmit] = useState(false);
-    const [isBottom, setIsBottom] = useState(true);
-    const [isSend, setIsSend] = useState(true);
-    const [isReading, setIsReading] = useState(true);
     const [message, setMessage] = useState(null);
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
     const [newMessage, setNewMessage] = useState(0);
+    const [image, setImage] = useState("");
     const [isNewMessage, setIsNewMessage] = useState(true);
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [isBottom, setIsBottom] = useState(true);
+    const [isSend, setIsSend] = useState(true);
+    const [isReading, setIsReading] = useState(true);
 
     // 슆+엔터 개행
     // 엔터 메시지 보내기
@@ -46,7 +48,7 @@ const Chat = () => {
 
         setIsSubmit(true);
 
-        const replacedContent = sendMessage.replace(/\n/g, "<br>");
+        const replacedContent = sendMessage.replace(/\n/g, "<br>"); //개행 확인
 
         // 상대 아이디 가져오기
         let opponentUser = "";
@@ -69,7 +71,21 @@ const Chat = () => {
             data.CID = message[0].CID;
         }
 
-        await updateMessage(data);
+        // 이미지 체크
+        if (sendMessage !== "") {
+            await updateMessage(data);
+            if (image !== "") {
+                data.content = `<img src="${image}" alt="" />`
+                await updateMessage(data);
+                setImage("");
+            }
+        } else {
+            if (image !== "") {
+                data.content = `<img src="${image}" alt="" />`
+                await updateMessage(data);
+                setImage("");
+            }
+        }
 
         setSendMessage("");
 
@@ -267,7 +283,19 @@ const Chat = () => {
                             }
                         </div>
                         <div className="send" >
+                            {
+                                image !== "" &&
+                                <div className='images'>
+                                    <img src={image} alt="" />
+                                </div>
+                            }
                             <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
+                            <label>
+                                <span>
+                                    <i className="fa-solid fa-camera"></i>
+                                </span>
+                                <ImageUpload setImageData={setImage} />
+                            </label>
                             <button onClick={onSubmit}>전송</button>
                         </div>
                     </Style.ChatContainer>
