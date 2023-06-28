@@ -137,6 +137,8 @@ const OrderInfo = ({ orderData }) => {
 
         // 이니시스 전달용
         setPayData({
+            mid: process.env.REACT_APP_MID, // 이니시스 mid
+            mKey: process.env.REACT_APP_SIGNKEY, // 이니시스 signkey
             productName: orderData[0].product_name,
             buyerName: buyerName,
             buyerTel: Number(buyerTel),

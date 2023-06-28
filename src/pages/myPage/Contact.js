@@ -58,6 +58,14 @@ const Contact = () => {
             data.CID = message[0].CID;
         }
 
+        // 이미지 크기 확인   1326979 = 1메가
+        if (image !== "") {
+            if (image.length > 2653958) {
+                alert("이미지는 2메가 이하만 등록가능합니다.");
+                return;
+            }
+        }
+
         // 이미지 체크
         if (sendMessage !== "") {
             await updateMessage(data);
