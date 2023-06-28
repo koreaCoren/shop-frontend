@@ -75,11 +75,7 @@ const Chat = () => {
 
         inputRef.current.focus();
 
-        await getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
-
-        setTimeout(() => {
-            scrollBottomStart();
-        }, 500);
+        await getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage, setIsSend);
 
         setIsSubmit(false);
     }
@@ -175,6 +171,14 @@ const Chat = () => {
             setIsBottom(false);
         }
     })
+
+    // 채팅 보내면 바로 스크롤 하단으로
+    useEffect(() => {
+        if (isSend === false) {
+            setIsSend(true);
+            scrollBottomStart();
+        }
+    }, [isSend])
 
     // 실시간 통신
     useEffect(() => {

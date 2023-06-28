@@ -14,6 +14,7 @@ const Contact = () => {
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isSend, setIsSend] = useState(true);
     const [isBottom, setIsBottom] = useState(true);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
@@ -60,11 +61,7 @@ const Contact = () => {
 
         inputRef.current.focus();
 
-        await getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
-
-        setTimeout(() => {
-            scrollBottomStart();
-        }, 500);
+        await getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage, setIsSend);
 
         setIsSubmit(false);
     }
@@ -160,6 +157,14 @@ const Contact = () => {
             setIsBottom(false);
         }
     })
+
+    // 채팅 보내면 바로 스크롤 하단으로
+    useEffect(() => {
+        if (isSend === false) {
+            setIsSend(true);
+            scrollBottomStart();
+        }
+    }, [isSend])
 
     // 실시간 통신
     useEffect(() => {
