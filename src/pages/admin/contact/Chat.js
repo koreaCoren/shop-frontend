@@ -71,6 +71,14 @@ const Chat = () => {
             data.CID = message[0].CID;
         }
 
+        // 이미지 크기 확인   1326979 = 1메가
+        if (image !== "") {
+            if (image.length > 2653958) {
+                alert("이미지는 2메가 이하만 등록가능합니다.");
+                return;
+            }
+        }
+
         // 이미지 체크
         if (sendMessage !== "") {
             await updateMessage(data);
@@ -251,7 +259,7 @@ const Chat = () => {
             : <>
                 <Top title={"1:1 문의 관리"} isButton={false} />
                 <Common.Padding>
-                    <Style.ChatContainer style={{ backgroundColor: "#fff" }}>
+                    <Style.ChatContainer style={{ backgroundColor: "#fff", height: "90vh", minHeight: "500px" }}>
                         <div className='dayGroup' ref={chatContentRef} onScroll={newMessageCheck}>
                             {
                                 factoryData().map((a, i) => {

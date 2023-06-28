@@ -32,7 +32,6 @@ const getDetailBoard = async (data, success) => {
 const addBoard = async (data) => {
     try {
         const encryptedData = encrypt(JSON.stringify(data));
-        console.log(encryptedData);
         const res = await axios.post("/editor/ins_editor_data", { encryptedData });
         if (!handleConnectionError(res.data)) {
             return;
