@@ -37,10 +37,11 @@ const getRoom = async (success) => {
 const getAdminMessage = async (data, success) => {
     try {
         const res = await axios.post("/chat/sel_admin_content", data);
-        // handleConnectionError(res.data);
+        handleConnectionError(res.data);
         success(res.data);
+        console.log("api");
     } catch (error) {
-        // handleApiError(error);
+        handleApiError(error);
     }
 }
 

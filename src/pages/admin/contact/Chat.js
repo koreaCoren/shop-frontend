@@ -15,6 +15,8 @@ import * as Common from "assets/styleComponent/admin/common";
 const Chat = () => {
     const { CID } = useParams();
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isBottom, setIsBottom] = useState(true);
+    const [isSend, setIsSend] = useState(true);
     const [message, setMessage] = useState(null);
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
@@ -45,10 +47,20 @@ const Chat = () => {
         setIsSubmit(true);
 
         const replacedContent = sendMessage.replace(/\n/g, "<br>");
+
+        // 상대 아이디 가져오기
+        let opponentUser = "";
+        for (let i = 0; i < message.length; i++) {
+            if (message[i].user_id !== sessionStorage.getItem("userId")) {
+                opponentUser = message[i].user_id;
+                break;
+            }
+        }
+
         const data = {
-            user_id: sessionStorage.getItem("userId"),
+            user_id: opponentUser,
             content: replacedContent,
-            stat: "req"
+            stat: "res"
         }
 
         if (message.length === 0) {
@@ -155,10 +167,14 @@ const Chat = () => {
 
     useEffect(() => {
         getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
-        setTimeout(() => {
-            scrollBottomStart();
-        }, 1000);
     }, [])
+
+    useEffect(() => {
+        if (message !== null && isBottom === true) {
+            scrollBottomStart();
+            setIsBottom(false);
+        }
+    })
 
     // 실시간 통신
     useEffect(() => {

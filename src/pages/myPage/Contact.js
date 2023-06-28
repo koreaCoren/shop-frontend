@@ -14,6 +14,7 @@ const Contact = () => {
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
     const [isSubmit, setIsSubmit] = useState(false);
+    const [isBottom, setIsBottom] = useState(true);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
@@ -151,10 +152,14 @@ const Contact = () => {
 
     useEffect(() => {
         getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
-        setTimeout(() => {
-            scrollBottomStart();
-        }, 1000);
     }, [])
+
+    useEffect(() => {
+        if (message !== null && isBottom === true) {
+            scrollBottomStart();
+            setIsBottom(false);
+        }
+    })
 
     // 실시간 통신
     useEffect(() => {
