@@ -74,7 +74,8 @@ const Chat = () => {
         // 이미지 크기 확인   1326979 = 1메가
         if (image !== "") {
             if (image.length > 2653958) {
-                alert("이미지는 2메가 이하만 등록가능합니다.");
+                alert("이미지는 2메가 미만 등록가능합니다.");
+                setIsSubmit(false);
                 return;
             }
         }
@@ -85,16 +86,15 @@ const Chat = () => {
             if (image !== "") {
                 data.content = `<img src="${image}" alt="" />`
                 await updateMessage(data);
-                setImage("");
             }
         } else {
             if (image !== "") {
                 data.content = `<img src="${image}" alt="" />`
                 await updateMessage(data);
-                setImage("");
             }
         }
 
+        setImage("");
         setSendMessage("");
 
         inputRef.current.focus();
