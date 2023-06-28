@@ -12,11 +12,14 @@ const updateMessage = async (data) => {
 }
 
 // 메시지 가져오기
-const getMessage = async (data, success) => {
+const getMessage = async (data, success, setIsSend) => {
     try {
         const res = await axios.post("/chat/sel_content", data);
         handleConnectionError(res.data);
         success(res.data);
+        if (setIsSend !== undefined) {
+            setIsSend(false);
+        }
     } catch (error) {
         handleApiError(error);
     }
@@ -34,12 +37,14 @@ const getRoom = async (success) => {
 }
 
 // 관리자 채팅 리스트 가져오기
-const getAdminMessage = async (data, success) => {
+const getAdminMessage = async (data, success, setIsSend) => {
     try {
         const res = await axios.post("/chat/sel_admin_content", data);
         handleConnectionError(res.data);
         success(res.data);
-        console.log("api");
+        if (setIsSend !== undefined) {
+            setIsSend(false);
+        }
     } catch (error) {
         handleApiError(error);
     }
