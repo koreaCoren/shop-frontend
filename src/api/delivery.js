@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from "./handleError";
 const getDefaultSelect = async (success) => {
     try {
         const res = await axios.get("/delivery/sel_default_carrier");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -16,7 +18,9 @@ const getDefaultSelect = async (success) => {
 const setDefaultCarrier = async (data) => {
     try {
         const res = await axios.post("/delivery/default_carrier", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data.result === "fail") {
             alert("기존 배송지와 같습니다.");
         } else {
@@ -31,7 +35,9 @@ const setDefaultCarrier = async (data) => {
 const updateCarrier = async (data) => {
     try {
         const res = await axios.post("/delivery/upd_order_carrier", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("저장완료");
     } catch (error) {
         handleApiError(error);
@@ -42,7 +48,9 @@ const updateCarrier = async (data) => {
 const addInvoice = async (data) => {
     try {
         const res = await axios.post("/delivery/upd_order_delivery", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         res.data.result === "Success" ? alert("저장완료") : alert(res.data.result);
         window.location.reload();
     } catch (error) {
@@ -54,7 +62,9 @@ const addInvoice = async (data) => {
 const updateInvoice = async (data) => {
     try {
         const res = await axios.post("/delivery/upd_order_each_delivery", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("저장완료");
     } catch (error) {
         handleApiError(error);
@@ -65,7 +75,9 @@ const updateInvoice = async (data) => {
 const getUndefinedInvoice = async (success) => {
     try {
         const res = await axios.get("/delivery/sel_delivery_null");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res)
     } catch (error) {
         handleApiError(error);

@@ -6,6 +6,7 @@ import createCode from 'utils/createCode';
 
 import SubTitle from 'components/myPage/SubTitle';
 import Loading from 'components/loding/Loading';
+import ImageUpload from 'components/input/ImageUpload';
 
 import * as Common from "assets/styleComponent/myPage/myPage";
 import * as Style from 'assets/styleComponent/myPage/contact';
@@ -13,15 +14,16 @@ import * as Style from 'assets/styleComponent/myPage/contact';
 const Contact = () => {
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
-    const [isSubmit, setIsSubmit] = useState(false);
-    const [isSend, setIsSend] = useState(true);
-    const [isBottom, setIsBottom] = useState(true);
-    const [isReading, setIsReading] = useState(true);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
     const [newMessage, setNewMessage] = useState(0);
+    const [image, setImage] = useState("");
     const [isNewMessage, setIsNewMessage] = useState(true);
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [isSend, setIsSend] = useState(true);
+    const [isBottom, setIsBottom] = useState(true);
+    const [isReading, setIsReading] = useState(true);
 
     // 슆+엔터 개행
     // 엔터 메시지 보내기
@@ -56,7 +58,21 @@ const Contact = () => {
             data.CID = message[0].CID;
         }
 
-        await updateMessage(data);
+        // 이미지 체크
+        if (sendMessage !== "") {
+            await updateMessage(data);
+            if (image !== "") {
+                data.content = `<img src="${image}" alt="" />`
+                await updateMessage(data);
+                setImage("");
+            }
+        } else {
+            if (image !== "") {
+                data.content = `<img src="${image}" alt="" />`
+                await updateMessage(data);
+                setImage("");
+            }
+        }
 
         setSendMessage("");
 
@@ -197,7 +213,7 @@ const Contact = () => {
     }, [])
 
     useEffect(() => {
-        if (resIndex >= 500) {
+        if (resIndex >= 300) {
             window.location.reload();
         }
     }, [resIndex]);
@@ -253,7 +269,19 @@ const Contact = () => {
                         }
                     </div>
                     <div className="send" >
-                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyDown={onKeyPress} />
+                        {
+                            image !== "" &&
+                            <div className='images'>
+                                <img src={image} alt="" />
+                            </div>
+                        }
+                        <textarea name="message" value={sendMessage} onChange={onChange} ref={inputRef} onKeyPress={onKeyPress} />
+                        <label>
+                            <span>
+                                <i className="fa-solid fa-camera"></i>
+                            </span>
+                            <ImageUpload setImageData={setImage} />
+                        </label>
                         <button onClick={onSubmit}>전송</button>
                     </div>
                 </Style.ChatContainer>

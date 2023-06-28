@@ -8,7 +8,9 @@ const getProduct = async (data, success) => {
             data.sort_type = "none";
         }
         const res = await axios.post("/goods/sel_goods", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -19,7 +21,9 @@ const getProduct = async (data, success) => {
 const getDetailProduct = async (data, success) => {
     try {
         const res = await axios.post("/goods/detail_goods", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data.result);
     } catch (error) {
         handleApiError(error);
@@ -31,7 +35,9 @@ const deleteProduct = async (data) => {
     try {
         if (window.confirm("정말로 삭제 하시겠습니까?")) {
             const res = await axios.post("/goods/del_goods", data);
-            handleConnectionError(res.data);
+            if (!handleConnectionError(res.data)) {
+                return;
+            }
             window.location.reload();
         }
     } catch (error) {
@@ -43,7 +49,9 @@ const deleteProduct = async (data) => {
 const updateProduct = async (data) => {
     try {
         const res = await axios.post("/goods/upd_goods", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("수정완료");
         window.location.replace("/admin/product/1");
     } catch (error) {
@@ -55,7 +63,9 @@ const updateProduct = async (data) => {
 const getProductSaleStatus = async (success) => {
     try {
         const res = await axios.get("/data/sell_data_list");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -66,7 +76,9 @@ const getProductSaleStatus = async (success) => {
 const getAccumulateSell = async (success) => {
     try {
         const res = await axios.get("/data/cumulative_sales");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -77,7 +89,9 @@ const getAccumulateSell = async (success) => {
 const getProductReivew = async (data, success) => {
     try {
         const res = await axios.post("/board/sel_goods_review", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -88,7 +102,9 @@ const getProductReivew = async (data, success) => {
 const setProudctSorting = async (data) => {
     try {
         const res = await axios.post("/goods/sort_goods_upd", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data.result === "Success") {
             alert("저장 완료");
         } else {
@@ -103,7 +119,9 @@ const setProudctSorting = async (data) => {
 const setProudctManualSorting = async (data) => {
     try {
         const res = await axios.post("/goods/goods_rank_upd", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         return "ok";
     } catch (error) {
         handleApiError(error);

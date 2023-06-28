@@ -6,7 +6,9 @@ import { handleApiError, handleConnectionError } from "./handleError";
 const getOrder = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_orders", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data)
     } catch (error) {
         handleApiError(error);
@@ -17,7 +19,9 @@ const getOrder = async (data, success) => {
 const getOrderCode = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_user_code_orders", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -28,7 +32,9 @@ const getOrderCode = async (data, success) => {
 const getDetailOrder = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_code_orders", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -39,13 +45,9 @@ const getDetailOrder = async (data, success) => {
 const requestOrder = async (data) => {
     try {
         const res = await axios.post("/order/ins_orders", data);
-        handleConnectionError(res.data);
-        if (res.data.error === "E23") {
-            alert("가격 정보가 다릅니다. \n error code : E23");
-            localStorage.removeItem('basket');
-            window.location.replace("/");
+        if (!handleConnectionError(res.data)) {
+            return;
         }
-
     } catch (error) {
         handleApiError(error);
     }
@@ -55,7 +57,9 @@ const requestOrder = async (data) => {
 const recognizeOrder = async (data) => {
     try {
         const res = await axios.post("/order/recognize_order", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("구매 완료 처리되었습니다.");
         window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
     } catch (error) {
@@ -67,18 +71,16 @@ const recognizeOrder = async (data) => {
 const cancelOrder = async (data) => {
     try {
         const res = await axios.post("/order/cancel_order", data);
+        if (!handleConnectionError(res.data)) {
+            return
+        }
         if (data.cancelType === "requestAdmin") {
             alert("주문 취소 요청을 하였습니다.");
             window.location.reload();
         }
         else if (data.cancelType === "requestPg") {
-            if (res.data.result.error === "E21") {
-                alert("주문취소에 실패했습니다. 관리자에게 문의 부탁드립니다.");
-                window.location.reload();
-            } else {
-                alert("주문 취소 되었습니다.");
-                window.location.reload();
-            }
+            alert("주문 취소 되었습니다.");
+            window.location.reload();
         } else if (data.cancelType === "refusal") {
             alert("주문취소 요청을 거절하였습니다.");
             window.location.reload();
@@ -94,7 +96,9 @@ const cancelOrder = async (data) => {
 const returnOrder = async (data) => {
     try {
         const res = await axios.post("order/refund_order", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("환불 신청 완료");
         window.location.replace(`/myPage/orderDetail/${data.orderCode}`);
     } catch (error) {
@@ -106,7 +110,9 @@ const returnOrder = async (data) => {
 const recognizeRefund = async (data) => {
     try {
         const res = await axios.post("order/refund_complete", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("환불 처리 완료");
         window.location.reload();
     } catch (error) {
@@ -118,7 +124,9 @@ const recognizeRefund = async (data) => {
 const completeOrder = async (data, success) => {
     try {
         const res = await axios.post("/order/sel_ini_orders", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data[0].resultCode === "0000") {
             success(res.data[0]);
         } else {
@@ -134,7 +142,9 @@ const completeOrder = async (data, success) => {
 const getTotalOrderStatus = async (success) => {
     try {
         const res = await axios.get("/order/sel_dash");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -145,7 +155,9 @@ const getTotalOrderStatus = async (success) => {
 const downOrderList = async (success) => {
     try {
         const res = await axios.get("/order/admin_orders");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -156,7 +168,9 @@ const downOrderList = async (success) => {
 const getRefundDataList = async (success) => {
     try {
         const res = await axios.get("/order/get_refund_data");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -167,7 +181,9 @@ const getRefundDataList = async (success) => {
 const orderComplete = async (data) => {
     try {
         const res = await axios.post("/order/complete_orders", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         window.location.reload();
     } catch (error) {
         handleApiError(error);

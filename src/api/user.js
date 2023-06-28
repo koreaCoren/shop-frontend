@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from "./handleError";
 const getUserAccessCount = async (success) => {
     try {
         const res = await axios.get("/data/sel_user_count");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res);
     } catch (error) {
         handleApiError(error);
@@ -16,7 +18,9 @@ const getUserAccessCount = async (success) => {
 const updateUserAccessCount = async (data) => {
     try {
         const res = await axios.get("/data/user_count", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
     } catch (error) {
         handleApiError(error);
     }
@@ -26,7 +30,9 @@ const updateUserAccessCount = async (data) => {
 const getUserInfo = async (data) => {
     try {
         const res = await axios.post("/user/sel_user_data", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         data.result = res.data[0];
     } catch (error) {
         handleApiError(error);
@@ -37,7 +43,9 @@ const getUserInfo = async (data) => {
 const getUserList = async (data, success) => {
     try {
         const res = await axios.post("/user/sel_user_list", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -48,7 +56,9 @@ const getUserList = async (data, success) => {
 const updateUser = async (data) => {
     try {
         const res = await axios.post("/user/upd_user", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data.result[0] === 'fail') {
             alert("비밀번호가 틀렸습니다.");
             window.location.replace("/myPage/info");
@@ -66,7 +76,9 @@ const deleteUser = async (data) => {
     try {
         if (window.confirm("정말로 삭제하시겠습니까?")) {
             const res = await axios.post("/user/del_user", data);
-            handleConnectionError(res.data);
+            if (!handleConnectionError(res.data)) {
+                return;
+            }
             if (res.data === "success") {
                 alert("삭제완료");
                 window.location.reload();
@@ -83,7 +95,9 @@ const deleteUser = async (data) => {
 const getAddress = async (data, success) => {
     try {
         const res = await axios.post("/user/user_address", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -94,7 +108,9 @@ const getAddress = async (data, success) => {
 const addAddress = async (data, success) => {
     try {
         const res = await axios.post("/user/add_address", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
         alert("신규배송지가 추가되었습니다.");
         window.location.replace("/myPage/address");
@@ -107,7 +123,9 @@ const addAddress = async (data, success) => {
 const getDefaultAddress = async (data, success) => {
     try {
         const res = await axios.post("/delivery/address_list", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -118,7 +136,9 @@ const getDefaultAddress = async (data, success) => {
 const setDefaultAddress = async (data) => {
     try {
         const res = await axios.post("/user/set_default_address", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("기본 배송지로 설정되었습니다.");
         window.location.replace("/myPage/address");
     } catch (error) {
@@ -131,7 +151,9 @@ const deleteAddress = async (data) => {
     try {
         if (window.confirm("정말로 삭제 하시겠습니까?")) {
             const res = await axios.post("/user/del_address", data);
-            handleConnectionError(res.data);
+            if (!handleConnectionError(res.data)) {
+                return;
+            }
             alert("배송지가 삭제되었습니다.");
             window.location.replace("/myPage/address");
         }
@@ -144,7 +166,9 @@ const deleteAddress = async (data) => {
 const getBuyProduct = async (data, success) => {
     try {
         const res = await axios.post("/user/sel_user_review", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -155,7 +179,9 @@ const getBuyProduct = async (data, success) => {
 const passwordCheck = async (data, success) => {
     try {
         const res = await axios.post('/user/check_pw', data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data)
     } catch (error) {
         handleApiError(error);

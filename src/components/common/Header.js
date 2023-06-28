@@ -30,6 +30,11 @@ const Header = ({ user }) => {
         getNotification({ user_id: sessionStorage.getItem("userId") }, setNotification, setCheckNotification);
     }, [nav, isNotification])
 
+    // 알림 읽음 감지
+    useEffect(() => {
+        isNotification === true && updateNotification({ user_id: sessionStorage.getItem("userId") });
+    }, [nav])
+
     useEffect(() => {
         setIsMobileMenu(false);
         setIsMenuBox(false);
@@ -73,8 +78,8 @@ const Header = ({ user }) => {
                                                     notification.map((a, i) => {
                                                         return (
                                                             <li key={i} className={a.check_yn === "N" ? "" : "reading"}>
-                                                                <Link to={`/myPage/orderDetail/${a.orderCode}`}>
-                                                                    <p>{a.content}</p>
+                                                                <Link to={a.content === "message" ? `/myPage/contact` : `/myPage/orderDetail/${a.orderCode}`}>
+                                                                    <p>{a.content === "message" ? "새로운 메시지 도착" : a.content}</p>
                                                                     <div>{a.send_date}</div>
                                                                 </Link>
                                                             </li>
@@ -271,6 +276,9 @@ const Login = styled.div`
                     padding: 5px 0px;
                     border-bottom: 1px solid #ccc;
                     color: #000;
+                    a{
+                        width: 100%;
+                    }
                     p{
                         font-size: 12px;
                     }

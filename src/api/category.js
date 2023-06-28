@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from "./handleError";
 const getCategory = async (success) => {
     try {
         const res = await axios.get("/goods/sel_category");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -16,7 +18,9 @@ const getCategory = async (success) => {
 const addCategory = async (data) => {
     try {
         const res = await axios.post("/goods/ins_category", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("저장완료");
     } catch (error) {
         handleApiError(error);

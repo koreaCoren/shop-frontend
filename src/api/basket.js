@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from './handleError';
 const addBasket = async (data) => {
     try {
         const res = axios.post("/order/saveBasket", data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         alert("장바구니에 등록되었습니다.");
     } catch (error) {
         handleApiError(error);
@@ -16,7 +18,9 @@ const addBasket = async (data) => {
 const getBasket = async (data, success) => {
     try {
         const res = await axios.post('/order/findBasketByUserId', data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         success(res.data);
     } catch (error) {
         handleApiError(error);
@@ -27,7 +31,9 @@ const getBasket = async (data, success) => {
 const deleteBasket = async (data) => {
     try {
         const res = await axios.post('/order/deleteBasket', data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data !== "success") {
             alert("알 수 없는 에러로 실패 하였습니다.");
         }

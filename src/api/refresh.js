@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from "./handleError";
 const refresh = () => {
     try {
         const res = axios.post("/user/refresh_page");
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
     } catch (error) {
         handleApiError(error)
     }
