@@ -46,6 +46,7 @@ export const ChatContainer = styled.div`
         text-align: left;
         img{
             max-width: 100%;
+            max-height: 300px;
         }
     }
     ul li div{
