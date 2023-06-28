@@ -5,7 +5,9 @@ import { handleApiError, handleConnectionError } from './handleError';
 const login = async (data) => {
     try {
         const res = await axios.post('/user/sel_user', data);
-        handleConnectionError(res.data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
         if (res.data.loginCheck === 'success') {
             sessionStorage.setItem('token', res.data.token);
             return 'ok';
