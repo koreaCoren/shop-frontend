@@ -17,6 +17,7 @@ const Chat = () => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [isBottom, setIsBottom] = useState(true);
     const [isSend, setIsSend] = useState(true);
+    const [isReading, setIsReading] = useState(true);
     const [message, setMessage] = useState(null);
     const chatContentRef = useRef(null);
     const inputRef = useRef(null);
@@ -24,7 +25,6 @@ const Chat = () => {
     const [resIndex, setResIndex] = useState(0);
     const [newMessage, setNewMessage] = useState(0);
     const [isNewMessage, setIsNewMessage] = useState(true);
-
 
     // 슆+엔터 개행
     // 엔터 메시지 보내기
@@ -170,6 +170,13 @@ const Chat = () => {
             scrollBottomStart();
             setIsBottom(false);
         }
+
+        // 채팅중일때 메시지오면 바로 스크롤 하단으로 내리기
+        if (isReading) {
+            if (message !== null && opponentMessage() !== newMessage) {
+                scrollBottomStart();
+            }
+        }
     })
 
     // 채팅 보내면 바로 스크롤 하단으로
@@ -184,6 +191,16 @@ const Chat = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setResIndex(i => i + 1);
+
+            // 채팅중인지 아닌지 체크
+            if (chatContentRef.current) {
+                if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
+                    setIsReading(false);
+                } else {
+                    setIsReading(true);
+                }
+            }
+
             getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
         }, 1000 * 10);
 

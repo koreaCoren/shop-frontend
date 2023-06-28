@@ -16,6 +16,7 @@ const Contact = () => {
     const [isSubmit, setIsSubmit] = useState(false);
     const [isSend, setIsSend] = useState(true);
     const [isBottom, setIsBottom] = useState(true);
+    const [isReading, setIsReading] = useState(true);
     const [message, setMessage] = useState(null);
     const [sendMessage, setSendMessage] = useState("");
     const [resIndex, setResIndex] = useState(0);
@@ -156,6 +157,13 @@ const Contact = () => {
             scrollBottomStart();
             setIsBottom(false);
         }
+
+        // 채팅중일때 메시지오면 바로 스크롤 하단으로 내리기
+        if (isReading) {
+            if (message !== null && opponentMessage() !== newMessage) {
+                scrollBottomStart();
+            }
+        }
     })
 
     // 채팅 보내면 바로 스크롤 하단으로
@@ -170,6 +178,16 @@ const Contact = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setResIndex(i => i + 1);
+
+            // 채팅중인지 아닌지 체크
+            if (chatContentRef.current) {
+                if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
+                    setIsReading(false);
+                } else {
+                    setIsReading(true);
+                }
+            }
+
             getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
         }, 1000 * 10);
 
