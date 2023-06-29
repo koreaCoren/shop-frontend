@@ -167,7 +167,7 @@ const Basket = ({ setOrderData }) => {
                                                 {a.product_count}개
                                             </li>
                                             <li>{a.sale}%</li>
-                                            <li>{comma(Math.ceil(a.price - (a.price * (a.sale * 0.01)) + a.option_price) * a.product_count)}원</li>
+                                            <li>{comma(Math.ceil(a.price - (a.price * (a.sale * 0.01)) + Number(a.option_price)) * a.product_count)}원</li>
                                         </ul>
                                     )
                                 })
