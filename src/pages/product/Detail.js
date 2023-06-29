@@ -108,7 +108,7 @@ const Detail = ({ setOrderData }) => {
             deliveryPay: deliveryPay,
             price: productDetail.goods_data.goods_price,
             sale: productDetail.goods_data.goods_sale,
-            option: optionValue.option_name,
+            option_name: optionValue.option_name,
             product_count: count,
             total_price: totalPrice
         }
