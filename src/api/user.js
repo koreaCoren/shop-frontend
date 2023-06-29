@@ -188,6 +188,19 @@ const passwordCheck = async (data, success) => {
     }
 };
 
+// 유저 포인트
+const getUserPoint = async (data, success) => {
+    try {
+        const res = await axios.post("/user/findPointByUserId", data);
+        if (!handleConnectionError(res.data)) {
+            return;
+        }
+        success(res.data[0].user_point);
+    } catch (error) {
+        handleApiError(error)
+    }
+}
+
 export {
     getUserAccessCount,
     updateUserAccessCount,
@@ -201,5 +214,6 @@ export {
     setDefaultAddress,
     deleteAddress,
     getBuyProduct,
-    passwordCheck
+    passwordCheck,
+    getUserPoint
 };
