@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { requestOrder } from 'api/order.js'
-import { getDefaultAddress } from 'api/user.js'
-import { refresh } from 'api/refresh';
+import { getDefaultAddress, getUserPoint } from 'api/user.js'
 
 import createCode from 'utils/createCode';
 import { comma } from 'utils/commaReplace';
@@ -29,6 +28,7 @@ const OrderInfo = ({ orderData }) => {
     const [receiver, setReceiver] = useState("");
     const [zoneCode, setZoneCode] = useState("");
     const [payPoint, setPayPoint] = useState(0);
+    const [userPoint, setUserPoint] = useState(0);
     const [isPostOpen, setIsPostOpen] = useState(false);
     const [isPurchase, setIsPurchase] = useState(0);
     const [payData, setPayData] = useState({});
@@ -48,17 +48,19 @@ const OrderInfo = ({ orderData }) => {
         }
         setOrder([...orderData]);
         getDefaultAddress({ user_id: sessionStorage.getItem('userId') }, setUserAddr);
+        getUserPoint({ user_id: sessionStorage.getItem('userId') }, setUserPoint);
         calcPayment();
     }, [])
 
     // 포인트 계산
     useEffect(() => {
         if (userAddr !== undefined || userAddr !== "") {
-            (Number(userAddr.user_point) - payPoint) >= 0
+            (userPoint - payPoint) >= 0
                 ? setTotalPay(sumPay + deliveryPay - payPoint)
-                : setTotalPay(sumPay + deliveryPay - Number(userAddr.user_point));
+                : setTotalPay(sumPay + deliveryPay - userPoint);
         }
     }, [payPoint, userAddr])
+    console.log(userPoint);
 
     // 상품 총 가격 계산 및 특정 금액 이상이면 배달비 0원
     const calcPayment = () => {
@@ -166,7 +168,7 @@ const OrderInfo = ({ orderData }) => {
             // return_url: "http://localhost:3000/shop-backend/backend/order/ini_transaction", // 백엔드 리턴 url
             refund: "N", //환불여부
             receiver: receiver,
-            pay_point: payPoint >= userAddr.user_point ? userAddr.user_point : payPoint,
+            pay_point: payPoint >= userPoint ? userPoint : payPoint,
             save_point: Math.ceil(sumPay / 100)
         }
 
@@ -288,8 +290,8 @@ const OrderInfo = ({ orderData }) => {
                                 </div>
                                 <div>
                                     <span>보유 적립금 <span className='light'></span> </span>
-                                    <span>{(userAddr.user_point - payPoint) >= 0
-                                        ? comma(userAddr.user_point - payPoint)
+                                    <span>{(userPoint - payPoint) >= 0
+                                        ? comma(userPoint - payPoint)
                                         : 0}</span>
                                 </div>
                                 <div className='point'>
@@ -297,11 +299,11 @@ const OrderInfo = ({ orderData }) => {
                                     <input type="text"
                                         onChange={onChange}
                                         name='payPoint'
-                                        value={(payPoint < userAddr.user_point)
+                                        value={(payPoint < userPoint)
                                             ? payPoint > 0
                                                 ? payPoint
                                                 : 0
-                                            : userAddr.user_point} />
+                                            : userPoint} />
                                 </div>
                                 <div>
                                     <span>적립 예정금</span>
