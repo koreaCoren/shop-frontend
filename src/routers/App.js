@@ -54,9 +54,11 @@ function App() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        accessCheck();
         pageCheck();
-        tokenCheck(setUser);
+        if (!/.*error.*/.test(location.pathname)) {
+            accessCheck();
+            tokenCheck(setUser);
+        }
     }, [nav])
     return (
         <>
