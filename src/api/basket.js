@@ -4,7 +4,7 @@ import { handleApiError, handleConnectionError } from './handleError';
 // 장바구니 담기
 const addBasket = async (data) => {
     try {
-        const res = axios.post("/order/saveBasket", data);
+        const res = await axios.post("/order/saveBasket", data);
         if (!handleConnectionError(res.data)) {
             return;
         }

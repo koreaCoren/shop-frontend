@@ -93,7 +93,6 @@ const Header = ({ user }) => {
                                 : <ul className='userNav'>
                                     <li><Link to={"login"}>로그인</Link></li>
                                     <li><Link to={"loginRegister"}>회원가입</Link></li>
-                                    <li><Link to={"product/basket"}>장바구니</Link></li>
                                 </ul>
                         }
                     </div>
