@@ -23,13 +23,11 @@ import Order from "./Order";
 import Community from "./community/Community";
 
 import "assets/css/common/common.css";
-import { encrypt } from "utils/crypto";
-// import sim from "utils/simsim";
 
 function App() {
     const nav = useNavigate();
     const location = useLocation();
-    const [header, setHeader] = useState(true);
+    const [header, setHeader] = useState(false);
     const [user, setUser] = useState();
     const [orderData, setOrderData] = useState();
     const [cookies, setCookies] = useCookies();
@@ -45,7 +43,9 @@ function App() {
 
     // 어드민페이지, 에러페이지 들어오면 헤더 삭제
     const pageCheck = () => {
-        if (/.*admin.*/.test(location.pathname) || /.*error.*/.test(location.pathname)) {
+        if (/.*admin.*/.test(location.pathname)) {
+            setHeader(false);
+        } else if (/.*error.*/.test(location.pathname)) {
             setHeader(false);
         } else {
             setHeader(true);
@@ -53,11 +53,12 @@ function App() {
     }
 
     useEffect(() => {
-        // sim();
         window.scrollTo(0, 0);
-        accessCheck();
         pageCheck();
-        tokenCheck(setUser);
+        if (!/.*error.*/.test(location.pathname)) {
+            accessCheck();
+            tokenCheck(setUser);
+        }
     }, [nav])
     return (
         <>
