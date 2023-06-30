@@ -41,7 +41,7 @@ const MyPage = () => {
                     <Route path="/review" element={<Review />} />
                     <Route path="/reviewWrite/:productCode/:orderCode" element={<ReviewWrite />} />
                     <Route path="/personalModify" element={<PersonalModify setInfoData={setInfoData} infoData={infoData} />} />
-                    <Route path="/contact" element={<Contact  />} />
+                    <Route path="/contact" element={<Contact />} />
                 </Routes>
             </Style.Div>
         </main>

@@ -60,7 +60,6 @@ const OrderInfo = ({ orderData }) => {
                 : setTotalPay(sumPay + deliveryPay - userPoint);
         }
     }, [payPoint, userAddr])
-    console.log(userPoint);
 
     // 상품 총 가격 계산 및 특정 금액 이상이면 배달비 0원
     const calcPayment = () => {
