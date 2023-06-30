@@ -7,7 +7,6 @@ import { getProductReivew, getDetailProduct } from 'api/product';
 import { addBasket } from 'api/basket';
 
 import { comma } from 'utils/commaReplace';
-// import addBasket from 'utils/addBasket';
 import createCode from 'utils/createCode';
 import loginCheck from 'utils/loginCheck';
 import Loading from 'components/loding/Loading';
