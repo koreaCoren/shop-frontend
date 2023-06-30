@@ -10,7 +10,6 @@ import Loading from 'components/loding/Loading';
 import * as Style from "assets/styleComponent/product/basket"
 
 import noImg from "assets/images/noImg.gif";
-import { async } from 'q';
 
 const Basket = ({ setOrderData }) => {
     const nav = useNavigate();
