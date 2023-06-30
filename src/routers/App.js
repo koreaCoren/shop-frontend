@@ -3,8 +3,6 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import moment from 'moment/moment';
 
-import { UserInterface, OrderDataInterface } from 'interfaces/app';
-
 import { tokenCheck } from 'api/token';
 import { updateUserAccessCount } from 'api/user';
 
@@ -29,9 +27,9 @@ import 'assets/css/common/common.css';
 function App() {
     const nav = useNavigate();
     const location = useLocation();
-    const [header, setHeader] = useState<boolean>(false);
-    const [user, setUser] = useState<UserInterface | null>(null);
-    const [orderData, setOrderData] = useState<OrderDataInterface | null>(null);
+    const [header, setHeader] = useState(false);
+    const [user, setUser] = useState(null);
+    const [orderData, setOrderData] = useState(null);
     const [cookies, setCookies] = useCookies();
 
     // 방문자 체크
@@ -62,7 +60,6 @@ function App() {
             tokenCheck(setUser);
         }
     }, [nav]);
-    console.log(orderData);
 
     return (
         <>
