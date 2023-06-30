@@ -62,7 +62,7 @@ const Detail = ({ setOrderData }) => {
 
     // 상품 갯수별 금액 변경
     useEffect(() => {
-        setPrice(Math.ceil(productDetail?.goods_data.goods_price - (productDetail?.goods_data.goods_price * (productDetail?.goods_data.goods_sale * 0.01)) + Number(optionValue.option_price)));
+        setPrice(Math.ceil(Number(productDetail?.goods_data.goods_price) - Number(productDetail?.goods_data.goods_price * (productDetail?.goods_data.goods_sale * 0.01)) + Number(optionValue.option_price)));
         setTotalPrice(price * count);
     }, [optionValue, count, productDetail, price])
 
