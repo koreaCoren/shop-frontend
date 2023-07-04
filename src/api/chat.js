@@ -8,7 +8,6 @@ const updateMessage = async (data) => {
         if (!handleConnectionError(res.data)) {
             return;
         }
-        console.log();
     } catch (error) {
         handleApiError(error);
     }
