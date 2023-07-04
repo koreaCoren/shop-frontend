@@ -60,7 +60,6 @@ function App() {
             tokenCheck(setUser);
         }
     }, [nav]);
-    console.log(orderData);
 
     return (
         <>
