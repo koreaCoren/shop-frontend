@@ -123,22 +123,6 @@ const Detail = ({ setOrderData }) => {
 
     // 장바구니 담기
     const addBasketData = () => {
-        // const data = {
-        //     product_code: productCode,
-        //     product_name: productDetail.goods_data.goods_nm,
-        //     product_img: productDetail.goods_data.goods_img,
-        //     deliveryPay: deliveryPay,
-        //     price: productDetail.goods_data.goods_price,
-        //     sale: productDetail.goods_data.goods_sale,
-        //     option: optionValue.option_name,
-        //     product_count: count,
-        //     basket_count: createCode(),
-        //     goods_stock: productDetail.goods_data.goods_stock,
-        //     total_price: totalPrice
-        // }
-
-        // return data;
-
         const data = {
             user_id: sessionStorage.getItem("userId"),
             product_code: productCode,
@@ -146,6 +130,7 @@ const Detail = ({ setOrderData }) => {
             product_count: count,
             basket_count: createCode(),
         }
+
         addBasket(data);
     }
 

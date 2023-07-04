@@ -185,6 +185,7 @@ const Chat = () => {
         return arr;
     }
 
+    // 페이지 첫로딩때 대화내용 가져오기
     useEffect(() => {
         getAdminMessage({ user_id: sessionStorage.getItem("userId"), CID: CID }, setMessage);
     }, [])
@@ -238,7 +239,6 @@ const Chat = () => {
             window.location.reload();
         }
     }, [resIndex]);
-
 
     const onChange = (e) => {
         const name = e.target.name;
