@@ -89,7 +89,7 @@ const Chart = ({ data, day }) => {
             axisLeft={{
                 format: value =>
                     Number(value).toLocaleString('ru-RU', {
-                        minimumFractionDigits: 2,
+                        minimumFractionDigits: 0,
                     }),
             }}
 
