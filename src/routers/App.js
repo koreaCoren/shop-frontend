@@ -70,14 +70,8 @@ function App() {
                 <Route path="/myPage/*" element={<MyPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/loginRegister" element={<Register />} />
-                <Route
-                    path="/product/*"
-                    element={<Product setOrderData={setOrderData} />}
-                />
-                <Route
-                    path="/order/*"
-                    element={<Order orderData={orderData} />}
-                />
+                <Route path="/product/*" element={<Product setOrderData={setOrderData} />} />
+                <Route path="/order/*" element={<Order orderData={orderData} />} />
                 <Route path="/close" element={<Close />} />
                 <Route path="/community/*" element={<Community />} />
 

@@ -56,5 +56,5 @@
     "devDependencies": {
         "webpack-dev-server": "^4.11.1"
     },
-    "proxy": "http://lifehim.com"
+    "proxy": "https://lifehim.com"
 }
