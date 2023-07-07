@@ -16,7 +16,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
-    const [telll, setTell] = useState("");
+    const [tell, setTell] = useState("");
     const [eamil, setEmail] = useState("");
     // const [address, setAddress] = useState("");
 
@@ -35,7 +35,7 @@ const Register = () => {
         } else if (password === "") {
             alert("비밀번호 입력해주세요.");
             return;
-        } else if (telll === "") {
+        } else if (tell === "") {
             alert("전화번호 입력해주세요.");
             return;
         } else if (eamil === "") {
@@ -43,7 +43,7 @@ const Register = () => {
             return;
         }
 
-        if (!phoneRegex.test(telll)) {
+        if (!phoneRegex.test(tell)) {
             alert("전화번호 형식이 아닙니다.");
             return;
         } else if (!emailRegex.test(eamil)) {
@@ -55,7 +55,7 @@ const Register = () => {
             name: name,
             id: id,
             pw: password,
-            tell: telll,
+            tell: tell,
             email: eamil,
         };
 
