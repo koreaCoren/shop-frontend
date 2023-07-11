@@ -1,4 +1,3 @@
-/* eslint-disable no-fallthrough */
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +11,6 @@ import * as Style from "assets/styleComponent/login/login";
 
 const Register = () => {
     const nav = useNavigate();
-
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
