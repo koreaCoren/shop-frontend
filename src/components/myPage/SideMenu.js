@@ -8,7 +8,7 @@ const SideMenu = () => {
     const location = useLocation();
     const [url, setUrl] = useState(0);
     useEffect(() => {
-        const regexArr = [/.*order.*/, /.*address.*/, /.*review.*/, /.*personalModify.*/,/.*contact.*/]
+        const regexArr = [/.*order.*/, /.*address.*/, /.*review.*/, /.*personalModify.*/, /.*contact.*/, /.*deleteUser.*/]
         for (let i = 0; i < regexArr.length; i++) {
             if (regexArr[i].test(location.pathname)) {
                 setUrl(i);
@@ -23,6 +23,7 @@ const SideMenu = () => {
             <li className={url === 2 ? "on" : ""}><Link to="/myPage/review"><i className='fa-solid fa-star'></i><p>상품 후기</p></Link></li>
             <li className={url === 3 ? "on" : ""}><Link to="/myPage/personalModify"><i className='fa-solid fa-house'></i><p>정보 수정</p></Link></li>
             <li className={url === 4 ? "on" : ""}><Link to="/myPage/contact"><i className='fa-solid fa-comment-dots'></i><p>1 : 1 문의</p></Link></li>
+            <li className={url === 5 ? "on" : ""}><Link to="/myPage/deleteUser"><i className='fa-solid fa-comment-dots'></i><p>회원탈퇴</p></Link></li>
         </Ul>
     );
 };
