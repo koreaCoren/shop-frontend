@@ -40,7 +40,7 @@ const handleConnectionError = (res) => {
         handleTokenError("토큰값이 일치하지 않습니다 로그아웃 됩니다. \n error code : E05");
         return false;
     } else if (res.error === "E06") {
-        handleTokenError("다른 브라우저에서 로그인을 시도하여 로그아웃 됩니다. \n error code : E06");
+        handleTokenError("토큰 충돌 발생 \n error code : E06");
         return false;
     } else if (res.error === "E07") {
         handleTokenError("알 수 없는 에러으로 로그아웃 됩니다. \n error code : E07");

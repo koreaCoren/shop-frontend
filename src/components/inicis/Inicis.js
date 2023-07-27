@@ -18,8 +18,8 @@ const Inicis = ({ isPurchase, payData }) => {
     // })
 
     return (
-        // <ReactInicis payData={payData} isPurchase={isPurchase} />
-        <ReactInicis payData={payData} isPurchase={isPurchase} isTest />
+        <ReactInicis payData={payData} isPurchase={isPurchase} />
+        // <ReactInicis payData={payData} isPurchase={isPurchase} isTest />
     )
 };
 
