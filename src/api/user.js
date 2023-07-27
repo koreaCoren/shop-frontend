@@ -74,16 +74,33 @@ const updateUser = async (data) => {
 // 회원 삭제
 const deleteUser = async (data) => {
     try {
-        if (window.confirm("정말로 삭제하시겠습니까?")) {
-            const res = await axios.post("/user/del_user", data);
-            if (!handleConnectionError(res.data)) {
-                return;
+        if (data.deleteReqType === "user") {
+            if (window.confirm("정말로 탈퇴 하시겠습니까?")) {
+                const res = await axios.post("/user/del_user", data);
+                if (!handleConnectionError(res.data)) {
+                    return;
+                }
+                if (res.data === "success") {
+                    alert("탈퇴완료");
+                    sessionStorage.removeItem("token");
+                    sessionStorage.removeItem("userId");
+                    window.location.replace("/");
+                } else {
+                    alert("알수없는 이유로 에러발생");
+                }
             }
-            if (res.data === "success") {
-                alert("삭제완료");
-                window.location.reload();
-            } else {
-                alert("알수없는 이유로 에러발생");
+        } else {
+            if (window.confirm("정말로 삭제하시겠습니까?")) {
+                const res = await axios.post("/user/del_user", data);
+                if (!handleConnectionError(res.data)) {
+                    return;
+                }
+                if (res.data === "success") {
+                    alert("삭제완료");
+                    window.location.reload();
+                } else {
+                    alert("알수없는 이유로 에러발생");
+                }
             }
         }
     } catch (error) {
@@ -182,7 +199,11 @@ const passwordCheck = async (data, success) => {
         if (!handleConnectionError(res.data)) {
             return;
         }
-        success(res.data)
+        if (data.delete === "delete") {
+            deleteUser({ user_id: sessionStorage.getItem("userId"), deleteReqType: "user" });
+            return;
+        }
+        success(res.data);
     } catch (error) {
         handleApiError(error);
     }

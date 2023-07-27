@@ -31,7 +31,6 @@ function App() {
     const [user, setUser] = useState(null);
     const [orderData, setOrderData] = useState(null);
     const [cookies, setCookies] = useCookies();
-
     // 방문자 체크
     const accessCheck = async () => {
         const expires = moment().add('10', 'm').toDate();

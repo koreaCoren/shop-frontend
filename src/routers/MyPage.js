@@ -11,12 +11,13 @@ import Review from 'pages/myPage/Review';
 import ReviewWrite from 'pages/myPage/ReviewWrite';
 import PersonalModify from 'pages/myPage/PersonalModify';
 import Contact from 'pages/myPage/Contact';
+import DeleteUser from 'pages/myPage/DeleteUser';
+
 
 import Banner from 'components/myPage/Banner';
 import SideMenu from 'components/myPage/SideMenu';
 
 import * as Style from "assets/styleComponent/myPage/myPage"
-
 const MyPage = () => {
     const nav = useNavigate();
     const [infoData, setInfoData] = useState(null);
@@ -42,6 +43,7 @@ const MyPage = () => {
                     <Route path="/reviewWrite/:productCode/:orderCode" element={<ReviewWrite />} />
                     <Route path="/personalModify" element={<PersonalModify setInfoData={setInfoData} infoData={infoData} />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/deleteUser" element={<DeleteUser />} />
                 </Routes>
             </Style.Div>
         </main>

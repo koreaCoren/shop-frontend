@@ -12,8 +12,7 @@ import * as Common from "assets/styleComponent/myPage/myPage";
 import * as Style from "assets/styleComponent/myPage/info";
 
 
-const PersonalModify = ({ setInfoData }) => {
-    const nav = useNavigate();
+const DeleteUser = () => {
     const [password, setPassword] = useState("");
 
     // 비밀번호 확인
@@ -22,11 +21,10 @@ const PersonalModify = ({ setInfoData }) => {
         const data = {
             user_id: sessionStorage.getItem("userId"),
             user_pw: password,
+            delete: 'delete',
         };
 
-        await passwordCheck(data, setInfoData);
-
-        nav("/myPage/info");
+        await passwordCheck(data);
     };
 
     const onChange = (e) => {
@@ -43,7 +41,7 @@ const PersonalModify = ({ setInfoData }) => {
 
     return (
         <Common.InDiv>
-            <SubTitle h2={"개인 정보 수정"} h3={"회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인해주세요."} clickEvent={null} clickText={null} />
+            <SubTitle h2={"회원탈퇴"} h3={"회원탈퇴를 위해 비밀번호를 확인해주세요."} clickEvent={null} clickText={null} />
             {
                 <Style.Div>
                     <Style.Form onSubmit={onSubmit}>
@@ -51,7 +49,7 @@ const PersonalModify = ({ setInfoData }) => {
                             <div className='inputTitle'>비밀번호</div>
                             <div><LoginInput type="password" name='password' onChange={onChange}></LoginInput></div>
                         </div>
-                        <input type='submit' value='확인'></input>
+                        <input style={{ letterSpacing: '3px' }} type='submit' value='탈퇴하기'></input>
                     </Style.Form>
                 </Style.Div>
             }
@@ -60,4 +58,4 @@ const PersonalModify = ({ setInfoData }) => {
 };
 
 
-export default PersonalModify;
+export default DeleteUser;
