@@ -1,6 +1,8 @@
 # 라이프힘 쇼핑몰 프로젝트
 말굽 버섯을 파는 쇼핑몰 팀프로젝트입니다
 
+## 폴더 구조
+
 ## 설치
 ```
 npm install axios@1.2.0
@@ -53,15 +55,27 @@ npm install react-daum-postcode@3.1.1
 
 현재 useEffect로 몇초마다 채팅내역을 가져와서 나중에 웹페이지가 느려지는 현상 확인
 
-다음부터는 웹소켓을 이용할꺼 같음
+  useEffect(() => {
+        const interval = setInterval(() => {
+            setResIndex(i => i + 1);
 
-### 문제의 로직
-<p>
-  <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/b3b3bc73-dc0b-4af3-9aa1-1ea92b34c0e0" alt="CPT2401012339-1455x960" width="500" height="300">
-</p>
+            // 채팅중인지 아닌지 체크
+            if (chatContentRef.current) {
+                if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
+                    setIsReading(false);
+                } else {
+                    setIsReading(true);
+                }
+            }
+
+            getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+        }, 1000 * 10);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [])
 
 <p>
   <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/514e5b6c-db2d-4e69-b98e-f39a6c1c8956" alt="CPT2401012339-1455x960" width="500" height="300">
 </p>
-
-## 
