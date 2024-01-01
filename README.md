@@ -69,26 +69,26 @@ npm install react-daum-postcode@3.1.1
 </p>
 
 ```
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setResIndex(i => i + 1);
+useEffect(() => {
+    const interval = setInterval(() => {
+        setResIndex(i => i + 1);
 
-            // 채팅중인지 아닌지 체크
-            if (chatContentRef.current) {
-                if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
-                    setIsReading(false);
-                } else {
-                    setIsReading(true);
-                }
+        // 채팅중인지 아닌지 체크
+        if (chatContentRef.current) {
+            if (chatContentRef.current.scrollTop !== chatContentRef.current.scrollHeight - chatContentRef.current.clientHeight) {
+                setIsReading(false);
+            } else {
+                setIsReading(true);
             }
+        }
 
-            getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
-        }, 1000 * 10);
+        getMessage({ user_id: sessionStorage.getItem("userId") }, setMessage);
+    }, 1000 * 10);
 
-        return () => {
-            clearInterval(interval);
-        };
-    }, [])
+    return () => {
+        clearInterval(interval);
+    };
+}, [])
 ```
 
 현재 useEffect로 몇초마다 채팅내역을 가져와서 나중에 웹페이지가 느려지는 현상 확인
