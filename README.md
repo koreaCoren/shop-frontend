@@ -62,7 +62,7 @@ npm install react-daum-postcode@3.1.1
 
 장바구니 담은 상품에 고유번호를 발급하여 장바구니 백엔드에서 관리하는걸로 수정
 
-## 마에페이지 채팅문의
+### 마에페이지 채팅문의
 
 <p>
   <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/514e5b6c-db2d-4e69-b98e-f39a6c1c8956" alt="CPT2401012339-1455x960" width="500" height="300">
