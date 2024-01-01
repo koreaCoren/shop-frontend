@@ -39,8 +39,3 @@ npm install react-daum-postcode@3.1.1
   <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/916cb751-cbb3-4354-8593-655a30a8ecb1" alt="image" width="500" height="100">
 </p>
 
-## 로그인 토큰 체크 로직
-
-토근 체크 세션스토리지로만 관리하다 jwt방식으로 변경
-
-![image](https://github.com/koreaCoren/shop-frontend/assets/92096968/f9bdc3f9-8bb2-4510-b392-f5aa9924bf47)
