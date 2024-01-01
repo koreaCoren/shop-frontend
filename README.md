@@ -51,7 +51,17 @@ npm install react-daum-postcode@3.1.1
 
 ## 마에페이지 채팅문의
 
+현재 useEffect로 몇초마다 채팅내역을 가져와서 나중에 웹페이지가 느려지는 현상 확인
+
+다음부터는 웹소켓을 이용할꺼 같음
+
+### 문제의 로직
+<p>
+  <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/b3b3bc73-dc0b-4af3-9aa1-1ea92b34c0e0" alt="CPT2401012339-1455x960" width="500" height="300">
+</p>
+
 <p>
   <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/514e5b6c-db2d-4e69-b98e-f39a6c1c8956" alt="CPT2401012339-1455x960" width="500" height="300">
 </p>
 
+## 
