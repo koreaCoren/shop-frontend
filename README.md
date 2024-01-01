@@ -6,12 +6,12 @@
 ```
 src
 │
-├── api // 통신 api
-├── assets // 이미지, 스타일 컴포넌트
-├── components // 각종 컴포넌트
-├── pages // 뷰 페이지
-├── routers // 라우터
-└── utils // 유틸 함수
+├── api 통신 api
+├── assets 이미지, 스타일 컴포넌트
+├── components 각종 컴포넌트
+├── pages 뷰 페이지
+├── routers 라우터
+└── utils 유틸 함수
 ```
 
 ## 설치
@@ -68,6 +68,7 @@ npm install react-daum-postcode@3.1.1
   <img src="https://github.com/koreaCoren/shop-frontend/assets/92096968/514e5b6c-db2d-4e69-b98e-f39a6c1c8956" alt="CPT2401012339-1455x960" width="500" height="300">
 </p>
 
+```
     useEffect(() => {
         const interval = setInterval(() => {
             setResIndex(i => i + 1);
@@ -88,5 +89,6 @@ npm install react-daum-postcode@3.1.1
             clearInterval(interval);
         };
     }, [])
+```
 
 현재 useEffect로 몇초마다 채팅내역을 가져와서 나중에 웹페이지가 느려지는 현상 확인
