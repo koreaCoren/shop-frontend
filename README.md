@@ -55,7 +55,7 @@ npm install react-daum-postcode@3.1.1
 
 현재 useEffect로 몇초마다 채팅내역을 가져와서 나중에 웹페이지가 느려지는 현상 확인
 
-  useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setResIndex(i => i + 1);
 
