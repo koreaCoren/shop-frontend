@@ -30,6 +30,11 @@ npm install react-daum-postcode@3.1.1
 ## 사용 가이드
 
 로그인
-![image](https://github.com/koreaCoren/shop-frontend/assets/92096968/414415d8-d190-4f81-b201-88b6ac2e9b5c)
+![image](https://github.com/koreaCoren/shop-frontend/assets/92096968/a52d47ac-132e-4b59-9340-5c8df6f595a2)
+
+![image](https://github.com/koreaCoren/shop-frontend/assets/92096968/7d6bb498-73b0-4cf4-b153-747d870a5043)
+
+
+
 
 
