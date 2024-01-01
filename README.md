@@ -1,1 +1,21 @@
 # 라이프힘 쇼핑몰 프로젝트
+
+## 설치
+```
+npm install axios@1.2.0
+```
+```
+npm install react-router-dom@6.4.3
+```
+```
+npm install nivo/bar@0.80.0
+```
+```
+npm install nivo/line@0.80.0
+```
+```
+npm install nivo/pie@0.80.0
+```
+```
+npm install ckeditor/ckeditor5-build-classic
+```
